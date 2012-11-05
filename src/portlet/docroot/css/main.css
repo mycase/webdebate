@@ -1,0 +1,11 @@
+#mainfocus{padding:5px 5px;font-size:1.5em;text-align:center;}
+#mainfocustable{horizontal-align:right;vertical-align:centre;}
+tbody{background-color:#DDDDDD; padding:30px 30px;}
+.dontKnowStyle, .believeStyle, .dontBelieveStyle, .otherClass
+{padding:2px 3px;}
+.dontKnowStyle{color:black;}
+.believeStyle{color:green;}
+.dontBelieveStyle{color:red;}
+table{width:100%;border:3px solid black;padding:3px 3px;}
+th{border:2px solid black;background-color:yellow;color:black;}
+td{border:1px solid black;text-align:left;background-color:#EEEEEE;}

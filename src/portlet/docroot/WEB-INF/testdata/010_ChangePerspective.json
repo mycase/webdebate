@@ -1,0 +1,61 @@
+{
+  "theParameterMap": {
+    "theMap": {
+      "jspPage": [
+        "/changePerspective.jsp"
+      ],
+      "perspectiveId": [
+        "1"
+      ]
+    }
+  },
+  "theServletParameterMap": {
+    "theMap": {
+      "p_p_state": [
+        "normal"
+      ],
+      "_argumentation_WAR_argumentationportlet_perspectiveId": [
+        "1"
+      ],
+      "p_p_lifecycle": [
+        "1"
+      ],
+      "_argumentation_WAR_argumentationportlet_jspPage": [
+        "/changePerspective.jsp"
+      ],
+      "p_p_id": [
+        "argumentation_WAR_argumentationportlet"
+      ],
+      "p_l_id": [
+        "12131"
+      ],
+      "p_p_col_count": [
+        "1"
+      ],
+      "p_auth": [
+        "DyUFaY6I"
+      ],
+      "p_p_col_id": [
+        "column-1"
+      ],
+      "p_p_mode": [
+        "view"
+      ],
+      "p_v_l_s_g_id": [
+        "0"
+      ]
+    }
+  },
+  "theUser": {
+    "theEmailAddress": {
+      "theEmailString": "test_1@provider1.com"
+    },
+    "theContainerId": {
+      "theForeignId": "10243"
+    },
+    "theScreenName": {
+      "theScreenNameString": "testscreen_1"
+    },
+    "theId": 1
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "theRequest": {
+    "theParameterMap": {
+      "theMap": {
+        "jspPage": [
+          "/changePerspective.jsp"
+        ]
+      }
+    },
+    "theServletParameterMap": {
+      "theMap": {
+        "p_p_state": [
+          "normal"
+        ],
+        "_argumentation_WAR_argumentationportlet_jspPage": [
+          "/changePerspective.jsp"
+        ],
+        "p_p_lifecycle": [
+          "0"
+        ],
+        "p_p_id": [
+          "argumentation_WAR_argumentationportlet"
+        ],
+        "p_p_col_count": [
+          "1"
+        ],
+        "p_l_id": [
+          "12131"
+        ],
+        "p_p_col_id": [
+          "column-1"
+        ],
+        "p_p_mode": [
+          "view"
+        ],
+        "p_v_l_s_g_id": [
+          "0"
+        ]
+      }
+    },
+    "theUser": {
+      "theEmailAddress": {
+        "theEmailString": "test_1@provider1.com"
+      },
+      "theContainerId": {
+        "theForeignId": "10243"
+      },
+      "theScreenName": {
+        "theScreenNameString": "testscreen_1"
+      },
+      "theId": 1
+    }
+  },
+  "theUrlContainer": {
+    "theEditLinkUrl": null,
+    "theEditThesisUrl": null,
+    "theAddPremiseUrl": null,
+    "theAddOpinionUrl": null
+  },
+  "theStateInputMode": "SERVLET",
+  "theUpdateState": "NO",
+  "theErrorHandler": {
+    "theUserId": {
+      "theEmailAddress": {
+        "theEmailString": "test_1@provider1.com"
+      },
+      "theContainerId": {
+        "theForeignId": "10243"
+      },
+      "theScreenName": {
+        "theScreenNameString": "testscreen_1"
+      },
+      "theId": 1
+    }
+  }
+}

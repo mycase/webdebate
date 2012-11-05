@@ -1,0 +1,68 @@
+{
+  "theParameterMap": {
+    "theMap": {
+      "newThesisOpinion": [
+        "75"
+      ],
+      "jspPage": [
+        "/addThesis.jsp"
+      ],
+      "newThesisText": [
+        "bladi"
+      ]
+    }
+  },
+  "theServletParameterMap": {
+    "theMap": {
+      "p_p_state": [
+        "normal"
+      ],
+      "_argumentation_WAR_argumentationportlet_jspPage": [
+        "/addThesis.jsp"
+      ],
+      "p_p_lifecycle": [
+        "1"
+      ],
+      "_argumentation_WAR_argumentationportlet_newThesisOpinion": [
+        "75"
+      ],
+      "p_p_id": [
+        "argumentation_WAR_argumentationportlet"
+      ],
+      "_argumentation_WAR_argumentationportlet_newThesisText": [
+        "bladi"
+      ],
+      "p_l_id": [
+        "12131"
+      ],
+      "p_p_col_count": [
+        "1"
+      ],
+      "p_auth": [
+        "0WCeV5qh"
+      ],
+      "p_p_col_id": [
+        "column-1"
+      ],
+      "p_p_mode": [
+        "view"
+      ],
+      "p_v_l_s_g_id": [
+        "0"
+      ]
+    }
+  },
+  "theUser": {
+    "theEmailAddress": {
+      "theEmailString": "test@make-your-case.net"
+    },
+    "theContainerId": {
+      "theForeignId": "13302"
+    },
+    "theScreenName": {
+      "theScreenNameString": "testuser"
+    },
+    "theDefaultPerspective": null,
+    "theId": 2
+  }
+}

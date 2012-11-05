@@ -1,7 +1,8 @@
+*.class
 .project
 .classpath
 .settings*
-docroot/WEB-INF/classes*
-docroot/css/.sass-cache/*
+src/portlet/docroot/WEB-INF/classes*
+src/portlet/docroot/css/.sass-cache/*
 *~
 testdeployment.properties

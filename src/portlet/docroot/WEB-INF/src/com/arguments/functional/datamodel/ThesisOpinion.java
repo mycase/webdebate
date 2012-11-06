@@ -107,13 +107,13 @@ public class ThesisOpinion
     {
         if (believe())
         {
-            return "Believe(" + getMinus100To100() + "%)";
+            return "Believe(" + getPercentage() + "%)";
         }
         if (neutral())
         {
             return "Neutral";
         }
-        return "DontBelieve(" + getMinus100To100() + "%)";
+        return "DontBelieve(" + getPercentage() + "%)";
     }
     
     // ------------------------------------------------------------------------

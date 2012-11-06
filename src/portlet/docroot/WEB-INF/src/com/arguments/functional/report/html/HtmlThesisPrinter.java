@@ -209,7 +209,7 @@ public class HtmlThesisPrinter
 
         myText.append("<div id=\"mainfocus\" class=\"" + cssClassByOpinion(aThesis)
                 + "\">" + aThesis.getID() + " -- "
-                + aThesis.getSummary() + "</div>\n");
+                + aThesis.getSummary() + "("+aThesis.getOpinion().getPercentage()+"%)</div>\n");
         return myText;
     }
 
@@ -224,7 +224,7 @@ public class HtmlThesisPrinter
                 + toRelinkAnchor(aRelinkURL.getEditLinkUrl(), aPremise) + "</td>\n"                
                 );
         myText.append("  <td class=\"" + cssClassByOpinion(aPremise) + "\">"
-                + aPremise.getSummary() + ", ("+aPremise.getOpinion().getMinus100To100()+"%)</td>\n");
+                + aPremise.getSummary() + ", ("+aPremise.getOpinion().getPercentage()+"%)</td>\n");
         myText.append("  <td class=\"otherClass\">" + relevanceText(aPremise)
                 + "</td>\n");
         myText.append("  <td>" + aPremise.getOwner().getScreenName() + "</td>\n");

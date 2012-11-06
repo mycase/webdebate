@@ -401,7 +401,7 @@ public class ArgsStatefulRequest_Tester
     {
         ProtocolMap myRequestMap = new ProtocolMap();
         myRequestMap.put(ArgsRequestKey.NEW_THESIS_OPINION2,
-                 "" + anOpinion.getMinus100To100() );
+                 "" + anOpinion.getPercentage() );
 
         ArgumentsRequest myRequest = new ArgumentsRequest(
                 anArgUser, myRequestMap);

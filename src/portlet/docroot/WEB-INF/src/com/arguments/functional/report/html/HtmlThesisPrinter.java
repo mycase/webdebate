@@ -208,11 +208,17 @@ public class HtmlThesisPrinter
         StringBuffer myText = new StringBuffer();
 
         myText.append("<div id=\"mainfocus\" class=\"" + cssClassByOpinion(aThesis)
-                + "\">" + aThesis.getID() + " -- "
-                + aThesis.getSummary() + "("+aThesis.getOpinion().getPercentage()+"%)</div>\n");
+                + "\">" + getIDWithSummary(aThesis) + "</div>\n");
         return myText;
     }
 
+    // ------------------------------------------------------------------------
+    private static String getIDWithSummary(OpinionatedThesis aThesis)
+    {
+        return aThesis.getID() + " -- "
+                + aThesis.getSummary() + " ("+aThesis.getOpinion().getPercentage()+"%)";
+    }
+    
     // ------------------------------------------------------------------------
     private StringBuffer toTableRow(RelatedThesis aPremise, UrlContainer aRelinkURL)
     {
@@ -224,7 +230,7 @@ public class HtmlThesisPrinter
                 + toRelinkAnchor(aRelinkURL.getEditLinkUrl(), aPremise) + "</td>\n"                
                 );
         myText.append("  <td class=\"" + cssClassByOpinion(aPremise) + "\">"
-                + aPremise.getSummary() + ", ("+aPremise.getOpinion().getPercentage()+"%)</td>\n");
+                + getIDWithSummary(aPremise)+"</td>\n");
         myText.append("  <td class=\"otherClass\">" + relevanceText(aPremise)
                 + "</td>\n");
         myText.append("  <td>" + aPremise.getOwner().getScreenName() + "</td>\n");

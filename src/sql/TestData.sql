@@ -215,7 +215,7 @@ CREATE TABLE `User` (
 
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` VALUES (1,'test_1@provider1.com','10001','testscreen_1'),(2,'test_2@provider2.com','10002','testscreen_2'),(3,'test_3@provider3.com','-1','testscreen_3'),(4,'test_4@provider4.com','10004','testscreen_4'),(7,'test_7@provider7.com','10007','testscreen_7'),(53,'test_53@provider53.com','10053','testscreen_53'),(57,'new@new.com','-27','newbee');
+INSERT INTO `User` VALUES (1,'test_1@provider1.com','10001','testscreen1'),(2,'test_2@provider2.com','10002','testscreen2'),(3,'test_3@provider3.com','-1','testscreen3'),(4,'test_4@provider4.com','10004','testscreen4'),(7,'test_7@provider7.com','10007','testscreen7'),(53,'test_53@provider53.com','10053','testscreen53'),(57,'new@new.com','-27','newbee');
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -228,4 +228,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-11-04 17:57:31
+-- Dump completed on 2012-11-07 23:27:38

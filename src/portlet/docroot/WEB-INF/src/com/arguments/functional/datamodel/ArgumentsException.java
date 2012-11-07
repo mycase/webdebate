@@ -4,13 +4,13 @@ package com.arguments.functional.datamodel;
 public class ArgumentsException extends RuntimeException
 {
     // ------------------------------------------------------------------------
-    public ArgumentsException(Exception anException)
+    public ArgumentsException(Throwable anException)
     {
         super(anException);
     }
 
     // ------------------------------------------------------------------------
-    public ArgumentsException(String aMessage, Exception anException)
+    public ArgumentsException(String aMessage, Throwable anException)
     {
         super(aMessage, anException);
     }

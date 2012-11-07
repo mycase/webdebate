@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.arguments.application.liferay.LiferayErrorHandler;
@@ -26,6 +27,13 @@ import com.google.gson.InstanceCreator;
 public class PageModel_Tester
 {
 
+    // ------------------------------------------------------------------------
+    @Before
+    public void resetDB()
+    {
+        TheArgsStore.setDB(new ArgsSQLStore());
+    }
+    
     // ------------------------------------------------------------------------
     private class ErrorHandlerCreator implements
             InstanceCreator<ArgsErrorHandler>
@@ -57,17 +65,9 @@ public class PageModel_Tester
     public void directWebEntryNoDBConnection() throws FileNotFoundException
     {
         TheArgsStore.setDB(new ArgsTestDB(TheArgsStore.i()));
-        try
-        {
-            ArgsRequest2 myRequest = getRequest("001_Direct_Cgi_Focus.json");
-            ThesisFocusPageModel myPageModel = PageModelFactory.getThesisFocusPage(myRequest);
-            assertNotNull( myPageModel.theHtml);
-        }
-        finally
-        {
-            TheArgsStore.setDB(new ArgsSQLStore());
-        }
-        
+        ArgsRequest2 myRequest = getRequest("001_Direct_Cgi_Focus.json");
+        ThesisFocusPageModel myPageModel = PageModelFactory.getThesisFocusPage(myRequest);
+        assertNotNull( myPageModel.theHtml);
     }
 
     // ------------------------------------------------------------------------

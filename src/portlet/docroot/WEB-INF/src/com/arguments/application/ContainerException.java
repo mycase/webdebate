@@ -6,13 +6,13 @@ import com.arguments.functional.datamodel.ArgumentsException;
 public class ContainerException extends ArgumentsException
 {
     // ------------------------------------------------------------------------
-    public ContainerException(Exception anException)
+    public ContainerException(Throwable anException)
     {
         super(anException);
     }
 
     // ------------------------------------------------------------------------
-    public ContainerException(String aMessage, Exception anException)
+    public ContainerException(String aMessage, Throwable anException)
     {
         super(aMessage, anException);
     }

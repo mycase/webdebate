@@ -4,6 +4,8 @@ package com.arguments;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
+import com.arguments.application.ContainerException_Tester;
+import com.arguments.application.TheContainerBridge_Tester;
 import com.arguments.functional.datamodel.Perspective_Tester;
 import com.arguments.functional.datamodel.RelatedThesis_Tester;
 import com.arguments.functional.report.ThesisFocusData_Tester;
@@ -24,6 +26,9 @@ import com.arguments.support.TreeHandler_Tester;
  
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+    // application
+    TheContainerBridge_Tester.class,
+    ContainerException_Tester.class,
     // application/liferay
     // functional/report/html
     ThesisFocusPage_Tester.class,

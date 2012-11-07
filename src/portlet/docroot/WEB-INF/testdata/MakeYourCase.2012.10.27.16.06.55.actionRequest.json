@@ -54,13 +54,13 @@
   },
   "theUser": {
     "theEmailAddress": {
-      "theEmailString": "test@make-your-case.net"
+      "theEmailString": "test2@provider2.com"
     },
     "theContainerId": {
-      "theForeignId": "13302"
+      "theForeignId": "10002"
     },
     "theScreenName": {
-      "theScreenNameString": "testuser"
+      "theScreenNameString": "testscreen_2"
     },
     "theDefaultPerspective": null,
     "theId": 2

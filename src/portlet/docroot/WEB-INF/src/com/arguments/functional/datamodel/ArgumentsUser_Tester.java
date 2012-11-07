@@ -34,7 +34,7 @@ public class ArgumentsUser_Tester
     // ------------------------------------------------------------------------
     public static ScreenName getScreenName(int aTestUserId)
     {
-        return new ScreenName("testscreen_" + aTestUserId);
+        return new ScreenName("testscreen" + aTestUserId);
     }
 
     // ------------------------------------------------------------------------

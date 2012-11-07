@@ -32,11 +32,11 @@ public class TheArgsStore_Tester
     @Test
     public void defaultLiferayIdIsTestUser1()
     {
-        ForeignUserId myForeignId = new ForeignUserId("" + DEFAULT_LIFERAY_ID);
+        ForeignUserId myForeignId = new ForeignUserId("10004");
         ArgumentsUser myUser =
                 TheArgsStore.i().selectUserByForeignId(myForeignId);
         assertNotNull( myUser );
-        assertEquals("For id: " + myForeignId, ArgumentsUser_Tester.getMailAddress(1),
+        assertEquals("For id: " + myForeignId, ArgumentsUser_Tester.getMailAddress(4),
                 myUser.getEmailAddress());
     }
 

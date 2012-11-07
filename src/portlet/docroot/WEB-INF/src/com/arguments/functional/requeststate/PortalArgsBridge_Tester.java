@@ -5,8 +5,6 @@ package com.arguments.functional.requeststate;
 
 import static org.junit.Assert.*;
 
-import java.io.FileNotFoundException;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -30,9 +28,17 @@ public class PortalArgsBridge_Tester
 
     // ------------------------------------------------------------------------
     @Test
-    public void changePerspective() throws FileNotFoundException
+    public void changePerspective()
     {
         ArgsRequest myRequest = Macro_Tester.getRequest("010_ChangePerspective.json");
+        myRequest.execute();
+    }
+
+    // ------------------------------------------------------------------------
+    @Test
+    public void gotoThesis()
+    {
+        ArgsRequest myRequest = Macro_Tester.getRequest("MakeYourCase.2012.11.07.23.06.03.actionRequest.json");
         myRequest.execute();
     }
 

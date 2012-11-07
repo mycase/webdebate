@@ -3,6 +3,8 @@
  */
 package com.arguments.functional.command;
 
+import static org.junit.Assert.*;
+
 import com.arguments.functional.datamodel.ArgsState;
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.datamodel.PerspectiveId;
@@ -27,8 +29,8 @@ public class UpdateThesis implements Command
             ThesisText aModifiedThesisText,
             ThesisOpinion aModifiedOpinion)
     {
-        assert aModifiedThesisText != null;
-        assert aModifiedOpinion != null;
+        assertNotNull( aModifiedThesisText );
+        assertNotNull( aModifiedOpinion );
         
         theUser = aUser;
         theModifiedThesisText = aModifiedThesisText;
@@ -41,7 +43,7 @@ public class UpdateThesis implements Command
     {
         ThesisId mySId = aState.getThesisId();
         PerspectiveId myPerspective = aState.getPerspectiveId();
-        assert myPerspective.isWritable() : "Non writable: " + myPerspective;
+        assertTrue("Non writable: " + myPerspective, myPerspective.isWritable());
 
         TheArgsStore.i(theUser).setThesisInfo(
                 mySId, theModifiedThesisText,

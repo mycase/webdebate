@@ -3,6 +3,8 @@
  */
 package com.arguments.functional.command;
 
+import static org.junit.Assert.*;
+
 import com.arguments.functional.datamodel.ArgsState;
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.datamodel.PerspectiveId;
@@ -27,8 +29,8 @@ public class InsertThesis implements Command
             ArgumentsUser anAppUser,
             ThesisOpinion aThesisOpinion)
     {
-        assert aNewThesisText != null;
-        assert aThesisOpinion != null;
+        assertNotNull(aNewThesisText);
+        assertNotNull(aThesisOpinion);
         
         theNewThesisText = aNewThesisText;
         theAppUser = anAppUser;

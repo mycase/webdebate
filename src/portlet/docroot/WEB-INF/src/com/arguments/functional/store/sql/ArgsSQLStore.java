@@ -109,7 +109,7 @@ public class ArgsSQLStore implements ArgsStore
     {
         Thesis myThesis = selectThesisById(aThesisID);
         ArgumentsUserId myOwnerID = myThesis.getOwnerID();
-        assert myOwnerID != null;
+        assertNotNull(myOwnerID);
 
         PerspectiveId myPerspectiveId = getDefaultPerspective(myOwnerID);
         
@@ -167,7 +167,7 @@ public class ArgsSQLStore implements ArgsStore
         try
         {
             boolean myHasRow = myResult.next();
-            assert myHasRow;
+            assertTrue( myHasRow);
             myNrOfTheses = getInt(myResult, ArgsDB.NR_OF_THESES);
         } catch (SQLException anException)
         {
@@ -191,7 +191,7 @@ public class ArgsSQLStore implements ArgsStore
         try
         {
             boolean myHasRow = myResult.next();
-            assert myHasRow;
+            assertTrue( myHasRow);
             myNrOfOpinions = getInt(myResult, ArgsDB.NR_OF_OPINIONS);
         } catch (SQLException anException)
         {
@@ -227,12 +227,10 @@ public class ArgsSQLStore implements ArgsStore
         if (myAppUser == null)
             myAppUser = newAppUser(anEmailAddress, aForeignId, aScreenName);
 
-        assert myAppUser != null;
+        assertNotNull( myAppUser );
 
-        assert myAppUser.getEmailAddress().equals(anEmailAddress) : "Unequal emails: "
-            + myAppUser.getEmailAddress() + " != " + anEmailAddress;
-        assert myAppUser.getScreenName().equals(aScreenName) : "Unequal screen names: "
-            + myAppUser.getScreenName() + " != " + aScreenName;
+        assertEquals( myAppUser.getEmailAddress(), anEmailAddress);
+        assertEquals( myAppUser.getScreenName(), aScreenName);
         
         if (! myAppUser.getContainerId().equals(aForeignId))
                     updateUserSetForeignId(myAppUser, aForeignId);

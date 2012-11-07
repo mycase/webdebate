@@ -1,0 +1,62 @@
+{
+  "theParameterMap": {
+    "theMap": {
+      "jspPage": [
+        "/jsp/goto.jsp"
+      ],
+      "thesisId": [
+        "13"
+      ]
+    }
+  },
+  "theServletParameterMap": {
+    "theMap": {
+      "p_p_state": [
+        "normal"
+      ],
+      "p_p_lifecycle": [
+        "1"
+      ],
+      "p_p_id": [
+        "argumentation_WAR_portlet6101"
+      ],
+      "p_l_id": [
+        "12131"
+      ],
+      "p_p_col_count": [
+        "1"
+      ],
+      "p_auth": [
+        "uR6peicR"
+      ],
+      "p_p_col_id": [
+        "column-1"
+      ],
+      "_argumentation_WAR_portlet6101_jspPage": [
+        "/jsp/goto.jsp"
+      ],
+      "_argumentation_WAR_portlet6101_thesisId": [
+        "13"
+      ],
+      "p_p_mode": [
+        "view"
+      ],
+      "p_v_l_s_g_id": [
+        "0"
+      ]
+    }
+  },
+  "theUser": {
+    "theEmailAddress": {
+      "theEmailString": "test_1@provider1.com"
+    },
+    "theContainerId": {
+      "theForeignId": "13302"
+    },
+    "theScreenName": {
+      "theScreenNameString": "testscreen1"
+    },
+    "theDefaultPerspective": null,
+    "theId": 1
+  }
+}

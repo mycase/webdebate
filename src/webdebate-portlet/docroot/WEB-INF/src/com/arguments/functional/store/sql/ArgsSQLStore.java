@@ -144,13 +144,22 @@ public class ArgsSQLStore implements ArgsStore
 
     // ------------------------------------------------------------------------
     @Override
-    public List<OpinionatedThesis> getAllTheses()
+    public List<OpinionatedThesis> getAllTheses(Perspective aPerspective)
     {
         ArgsDB myQuery = ArgsQuery.SELECT_THESIS_ALL.ps();
         ResultSet myResult = myQuery.executeQuery();
 
-        List<OpinionatedThesis> myTheses = parseTheses(myResult);
-        return myTheses;
+        List<OpinionatedThesis> myNeutralTheses = parseNeutralTheses(myResult);
+        List<OpinionatedThesis> myOpinionatedTheses = new ArrayList<>();
+        
+        for (OpinionatedThesis myNeutralThesis: myNeutralTheses)
+        {
+            OpinionatedThesis myOpinionatedThesis =
+                    getOpinionatedThesis(myNeutralThesis, aPerspective);
+            myOpinionatedTheses.add(myOpinionatedThesis);
+        }
+        
+        return myOpinionatedTheses;
     }
 
     // ------------------------------------------------------------------------
@@ -1008,13 +1017,13 @@ public class ArgsSQLStore implements ArgsStore
     // ------------------------------------------------------------------------
     private static Thesis parseThesis(ResultSet aResultSet)
     {
-        List<OpinionatedThesis> myTheses = parseTheses(aResultSet);
+        List<OpinionatedThesis> myTheses = parseNeutralTheses(aResultSet);
         assert myTheses.size() == 1;
         return myTheses.get(0);
     }
 
     // ------------------------------------------------------------------------
-    private static List<OpinionatedThesis> parseTheses(ResultSet aResultSet)
+    private static List<OpinionatedThesis> parseNeutralTheses(ResultSet aResultSet)
     {
         List<OpinionatedThesis> myTheses = new ArrayList<>();
         try

@@ -52,7 +52,6 @@ public class ArgsTestDB implements ArgsStore
     @Override
     public ArgumentsUser selectUserById(ArgumentsUserId aUserId)
     {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -62,7 +61,6 @@ public class ArgsTestDB implements ArgsStore
     public OpinionatedThesis getThesis(ThesisId aThesisId,
             Perspective aPerspective)
     {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -71,7 +69,6 @@ public class ArgsTestDB implements ArgsStore
     @Override
     public Thesis selectThesisById(ThesisId aThesisId)
     {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -80,7 +77,6 @@ public class ArgsTestDB implements ArgsStore
     @Override
     public ThesisOpinion selectOwnerOpinion(ThesisId aThesisID)
     {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -90,16 +86,14 @@ public class ArgsTestDB implements ArgsStore
     public ThesisOpinion selectOpinionByThesisPerspective(ThesisId aThesisID,
             PerspectiveId aUserId)
     {
-        // TODO Auto-generated method stub
         return null;
     }
 
     
     // ------------------------------------------------------------------------
     @Override
-    public List<OpinionatedThesis> getAllTheses()
+    public List<OpinionatedThesis> getAllTheses(Perspective aPerspective)
     {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -108,7 +102,6 @@ public class ArgsTestDB implements ArgsStore
     @Override
     public long getNrOfTheses()
     {
-        // TODO Auto-generated method stub
         return 0;
     }
 
@@ -117,7 +110,6 @@ public class ArgsTestDB implements ArgsStore
     @Override
     public long getNrOfOpinions()
     {
-        // TODO Auto-generated method stub
         return 0;
     }
 
@@ -152,7 +144,6 @@ public class ArgsTestDB implements ArgsStore
     @Override
     public Relation selectRelationById(RelationId aRelationId)
     {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -161,7 +152,6 @@ public class ArgsTestDB implements ArgsStore
     @Override
     public Container<Thesis> selectPremiseTree(Thesis aThesis, int aDepth)
     {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -170,7 +160,6 @@ public class ArgsTestDB implements ArgsStore
     @Override
     public void deleteTestObjects()
     {
-        // TODO Auto-generated method stub
         
     }
 

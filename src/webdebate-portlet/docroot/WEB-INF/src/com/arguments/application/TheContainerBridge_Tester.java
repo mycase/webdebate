@@ -12,10 +12,10 @@ import org.junit.Test;
 public class TheContainerBridge_Tester
 {
     // ------------------------------------------------------------------------
+    @SuppressWarnings("unused")
     @Test
     public void testConstruct()
     {
         new TheContainerBridge();
     }
-    
 }

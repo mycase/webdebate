@@ -107,7 +107,6 @@ public class PortalArgsBridge_Tester
                     protected ProtocolMap getProtocolMap(
                             CgiParameterMap aParameterMap)
                     {
-                        // TODO Auto-generated method stub
                         return null;
                     }
                 };

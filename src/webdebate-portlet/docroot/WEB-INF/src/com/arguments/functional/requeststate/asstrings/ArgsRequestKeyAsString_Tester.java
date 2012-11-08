@@ -29,7 +29,6 @@ import com.arguments.functional.requeststate.ArgsStatefulRequest;
 import com.arguments.functional.requeststate.ArgumentsRequest;
 import com.arguments.functional.requeststate.ProtocolMap;
 import com.arguments.functional.store.TheArgsStore;
-import com.arguments.support.EmailAddress;
 
 public class ArgsRequestKeyAsString_Tester
 {

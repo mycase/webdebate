@@ -35,7 +35,7 @@ public interface ArgsStore
             PerspectiveId aUserId);
 
     // ------------------------------------------------------------------------
-    public abstract List<OpinionatedThesis> getAllTheses();
+    public abstract List<OpinionatedThesis> getAllTheses(Perspective aPerspective);
 
     // ------------------------------------------------------------------------
     public abstract long getNrOfTheses();

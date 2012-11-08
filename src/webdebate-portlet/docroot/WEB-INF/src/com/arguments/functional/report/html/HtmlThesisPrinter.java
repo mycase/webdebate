@@ -10,6 +10,7 @@ import com.arguments.functional.datamodel.RelatedThesis;
 import com.arguments.functional.datamodel.Thesis;
 import com.arguments.functional.datamodel.ThesisId;
 import com.arguments.functional.datamodel.ThesisOpinion;
+import com.arguments.functional.report.ListThesesData;
 import com.arguments.functional.report.ThesisFocusData;
 import com.arguments.functional.requeststate.ArgsRequestKey;
 import com.arguments.functional.requeststate.ProtocolMap;
@@ -245,9 +246,8 @@ public class HtmlThesisPrinter
         myText.append("  <td class=\"otherClass\"> "
                 + toFocusAnchor(aThesis.getID()) + "</td>\n");
         myText.append("  <td class=\"" + cssClassByOpinion(aThesis) + "\">"
-                + aThesis.getSummary() + "</td>\n");
-        myText.append("  <td class=\"" + cssClassByOpinion(aThesis) + "\">"
-                + aThesis.getOwner().getScreenName() + "</td>\n");
+                + getIDWithSummary(aThesis) + "</td>\n");
+        myText.append("  <td>" + aThesis.getOwner().getScreenName() + "</td>\n");
         myText.append("</tr>\n");
         return myText;
     }
@@ -284,10 +284,10 @@ public class HtmlThesisPrinter
      * @param aData
      * @return
      */
-    public String thesisListToInternalHtml(List<OpinionatedThesis> aData)
+    public String thesisListToInternalHtml(ListThesesData aData)
     {
         StringBuffer myText = new StringBuffer();
-
+        myText.append("Perspective: " + aData.getPerspective());
         myText.append("<h1> All theses </h1>\n");
         myText.append("<table>\n");
         myText.append("<tr>\n");
@@ -296,7 +296,7 @@ public class HtmlThesisPrinter
         myText.append("  <th class=\"otherClass\"> Owner </th>\n");
         myText.append("</tr>\n");
 
-        for (OpinionatedThesis myThesis : aData)
+        for (OpinionatedThesis myThesis : aData.getTheses())
         {
             myText.append(toTableRow(myThesis));
         }

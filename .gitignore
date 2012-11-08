@@ -2,7 +2,7 @@
 .project
 .classpath
 .settings*
-src/portlet/docroot/WEB-INF/classes*
-src/portlet/docroot/css/.sass-cache/*
+src/webdebate-portlet/docroot/WEB-INF/classes*
+src/webdebate-portlet/docroot/css/.sass-cache/*
 *~
 testdeployment.properties

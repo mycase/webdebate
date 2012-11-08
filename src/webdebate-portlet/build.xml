@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!DOCTYPE project>
 
-<project name="argumentation-portlet" basedir="." default="deploy">
+<project name="webdebate-portlet" basedir="." default="deploy">
 	<import file="build-uncommon-portlet.xml" />
 </project>

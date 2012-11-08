@@ -249,7 +249,7 @@ class ArgsDB
         SELECT_RELATION_BY_ID(SELECT, "*", FROM, Relation.t, WHERE, Relation.ID, "= ?"),
         SELECT_OPINIONS_BY_THESIS_ID1(SELECT, "*", FROM, Opinion.t, WHERE, Opinion.THESIS_ID, "= ?"), 
         SELECT_USER_BY_FOREIGN_ID(SELECT, "*", FROM, User.t, WHERE, User.CONTAINER_ID, "= ?"),
-        SELECT_USER_BY_EMAIL_FOREIGN_ID_SCREENNAME(
+        SELECT_USER_BY_EMAIL_OR_FOREIGN_ID_OR_SCREENNAME(
                 SELECT, "*", FROM, User.t, WHERE, User.EMAIL, "= ?", OR, User.CONTAINER_ID, "= ?", OR, User.SCREEN_NAME, "= ?"),
         SELECT_USER_BY_ID(SELECT, "*", FROM, User.t, WHERE, User.ID, "= ?"),
         SELECT_OPINION_BY_ID(SELECT, "*", FROM, Opinion.t, WHERE, Opinion.ID, "= ?"),
@@ -283,7 +283,9 @@ class ArgsDB
         UPDATE_THESIS(UPDATE, Thesis.t, SET, Thesis.SUMMARY, "= ?", WHERE, Thesis.ID, "=?", AND, Thesis.OWNER_ID, "= ?"),
         UPDATE_OPINION_BY_THESIS_PERSPECTIVE1(UPDATE, Opinion.t, SET, Opinion.LEVEL, "= ?", WHERE, Opinion.THESIS_ID, "= ?",
                 AND, Opinion.PERSPECTIVE_ID1, "= ?"),
-        UPDATE_USER_SET_FOREIGN_ID(UPDATE, User.t, SET, User.CONTAINER_ID, "= ?", WHERE, User.ID, "= ?"),
+                UPDATE_USER_SET_FOREIGN_ID(UPDATE, User.t, SET, User.CONTAINER_ID, "= ?", WHERE, User.ID, "= ?"),
+                UPDATE_USER_SET_SCREEN_NAME(UPDATE, User.t, SET, User.SCREEN_NAME, "= ?", WHERE, User.ID, "= ?"),
+                UPDATE_USER_SET_EMAIL(UPDATE, User.t, SET, User.EMAIL, "= ?", WHERE, User.ID, "= ?"),
         ; /* @formatter:on */
         private final String theText;
 

@@ -10,6 +10,7 @@ import java.lang.reflect.Type;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.arguments.Deployment;
 import com.arguments.application.liferay.LiferayErrorHandler;
 import com.arguments.functional.datamodel.ArgsErrorHandler;
 import com.arguments.functional.requeststate.ArgsRequest2;
@@ -192,8 +193,8 @@ public class PageModel_Tester
         .create();
 
         BufferedReader myReader = new BufferedReader(new FileReader(
-                "/opt/linux/i386/liferay/liferay-sdk/portlets/argumentation-portlet/"
-                        + "docroot/WEB-INF/testdata/" + aShortFileName));
+                Deployment.i().webinfPath + 
+                        "testdata/" + aShortFileName));
 
         ArgsRequest2 myRequest = myGson.fromJson(myReader, ArgsRequest2.class);
         return myRequest;

@@ -13,7 +13,7 @@
 		<header-portlet-javascript>/js/jquery.lavalamp.min.js</header-portlet-javascript>
 		<header-portlet-javascript>/js/init.js</header-portlet-javascript>
 		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
-		<css-class-wrapper>argumentation-portlet</css-class-wrapper>
+		<css-class-wrapper>webdebate-portlet</css-class-wrapper>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>

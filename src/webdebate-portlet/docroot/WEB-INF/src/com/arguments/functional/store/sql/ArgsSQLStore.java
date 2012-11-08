@@ -221,7 +221,7 @@ public class ArgsSQLStore implements ArgsStore
             ForeignUserId aForeignId, ScreenName aScreenName)
     {
         ArgumentsUser myAppUser = ArgsSQLStore
-                .selectUserByEmailForeignIdScreenName(
+                .selectUserByEmailORForeignIdORScreenName(
                     anEmailAddress, new ForeignUserId("" + aForeignId), aScreenName);
 
         if (myAppUser == null)
@@ -232,19 +232,56 @@ public class ArgsSQLStore implements ArgsStore
         assertEquals( myAppUser.getEmailAddress(), anEmailAddress);
         assertEquals( myAppUser.getScreenName(), aScreenName);
         
-        if (! myAppUser.getContainerId().equals(aForeignId))
+        if (myAppUser.getEmailAddress().equals(anEmailAddress)
+                && myAppUser.getScreenName().equals(aScreenName)
+                && ! myAppUser.getContainerId().equals(aForeignId))
                     updateUserSetForeignId(myAppUser, aForeignId);
 
+        if (myAppUser.getEmailAddress().equals(anEmailAddress)
+                && ! myAppUser.getScreenName().equals(aScreenName)
+                && myAppUser.getContainerId().equals(aForeignId))
+                    updateUserSetScreenName(myAppUser, aScreenName);
+
+        if (! myAppUser.getEmailAddress().equals(anEmailAddress)
+                && myAppUser.getScreenName().equals(aScreenName)
+                && myAppUser.getContainerId().equals(aForeignId))
+                    updateUserSetScreenName(myAppUser, aScreenName);
+
         ArgumentsUser myAppUser2 = ArgsSQLStore
-                .selectUserByEmailForeignIdScreenName(
+                .selectUserByEmailORForeignIdORScreenName(
                     anEmailAddress, aForeignId, aScreenName);
         
         assert myAppUser2.getContainerId().equals(aForeignId);
+        assert myAppUser2.getEmailAddress().equals(anEmailAddress);
+        assert myAppUser2.getScreenName().equals(aScreenName);
         
         return myAppUser2;
     }
 
     
+    
+    // ------------------------------------------------------------------------
+    private static void updateUserSetScreenName(ArgumentsUser aUser,
+            ScreenName aScreenName)
+    {
+        ArgsDB myQuery = ArgsQuery.UPDATE_USER_SET_SCREEN_NAME.ps();
+        myQuery.setScreenName(1, aScreenName);
+        myQuery.setUserId(2, aUser);
+        int myNrRows = myQuery.executeUpdate();
+        assert myNrRows == 1;
+    }
+
+    // ------------------------------------------------------------------------
+    private static void updateUserSetEmail(ArgumentsUser aUser,
+            EmailAddress anAddress)
+    {
+        ArgsDB myQuery = ArgsQuery.UPDATE_USER_SET_EMAIL.ps();
+        myQuery.setEmailAddress(1, anAddress);
+        myQuery.setUserId(2, aUser);
+        int myNrRows = myQuery.executeUpdate();
+        assert myNrRows == 1;
+    }
+
     // ------------------------------------------------------------------------
     @Override
     public void assureConnect()
@@ -640,12 +677,12 @@ public class ArgsSQLStore implements ArgsStore
     }
 
     // ------------------------------------------------------------------------
-    private static ArgumentsUser selectUserByEmailForeignIdScreenName(
+    private static ArgumentsUser selectUserByEmailORForeignIdORScreenName(
             EmailAddress anEmailAddress,
             ForeignUserId aUserId,
             ScreenName aScreenName)
     {
-        ArgsDB myQuery = ArgsQuery.SELECT_USER_BY_EMAIL_FOREIGN_ID_SCREENNAME.ps();
+        ArgsDB myQuery = ArgsQuery.SELECT_USER_BY_EMAIL_OR_FOREIGN_ID_OR_SCREENNAME.ps();
         myQuery.setEmailAddress(1, anEmailAddress);
         myQuery.setForeignUserId(2, aUserId);
         myQuery.setScreenName(3, aScreenName);

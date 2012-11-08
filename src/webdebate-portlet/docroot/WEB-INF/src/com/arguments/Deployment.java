@@ -62,7 +62,7 @@ public class Deployment
         
         ArrayList<String> myPropertyLocations = new ArrayList<String>()
                 {{
-                    add(webappPath + "../webapps-conf/arguments.deployment.properties");
+                    add(webappPath + "webapps-conf/arguments.deployment.properties");
                     add(myClassRootPath + "com/arguments/testdeployment.properties");
                 }};
         

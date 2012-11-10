@@ -87,7 +87,7 @@ public class Deployment
                 }
             }
 
-            assertNotNull(myPropertiesStream);
+            assertNotNull("Didn't find deployment properties file.", myPropertiesStream);
             
             System.out.println("Found aruments properties at " + myLocation);
             

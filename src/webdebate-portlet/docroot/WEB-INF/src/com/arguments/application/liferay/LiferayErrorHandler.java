@@ -3,6 +3,8 @@
  */
 package com.arguments.application.liferay;
 
+import static org.junit.Assert.*;
+
 import javax.portlet.RenderRequest;
 
 import com.arguments.functional.datamodel.ArgsErrorHandler;
@@ -15,12 +17,13 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
  */
 public class LiferayErrorHandler implements ArgsErrorHandler
 {
-    private RenderRequest theRequest;
+    private final RenderRequest theRequest;
     private final ArgumentsUserId theUserId;
 
     // ------------------------------------------------------------------------
     public LiferayErrorHandler(RenderRequest aRequest, ArgumentsUserId aUserId)
     {
+        assertNotNull(aRequest);
         theRequest = aRequest;
         theUserId = aUserId;
     }
@@ -31,6 +34,7 @@ public class LiferayErrorHandler implements ArgsErrorHandler
     {
         String myErrorId = LiferayArgsBridge.MAKE_YOUR_CASE_EXC_KEY;
         anException.printStackTrace(System.err);
+        assertNotNull(myErrorId);
         SessionErrors.add(theRequest, myErrorId);
         String myError = "";
         if (theUserId.equals(ArgumentsUserId.ONE))

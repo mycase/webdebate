@@ -121,7 +121,7 @@ public class ArgsSQLStore implements ArgsStore
     public ThesisOpinion selectOpinionByThesisPerspective(
             ThesisId aThesisID, PerspectiveId aPerspectiveId)
     {
-        ArgsDB myQuery = ArgsQuery.SELECT_OPINION_BY_THESIS_PERSPECTIVE_ID.ps();
+        ArgsDB myQuery = ArgsQuery.SELECT_OPINION_BY_THESIS_PERSPECTIVE_ID1.ps();
         myQuery.setThesisId(1, aThesisID);
         myQuery.setPerspectiveId(2, aPerspectiveId);
         ResultSet myResult = myQuery.executeQuery();
@@ -388,9 +388,22 @@ public class ArgsSQLStore implements ArgsStore
     public List<PerspectiveThesisOpinion> getOpinionsForThesisId(ThesisId aThesisId)
     {
         ArgsDB myQuery =
-                ArgsQuery.SELECT_OPINIONS_BY_THESIS_ID1.ps();
+                ArgsQuery.SELECT_GIVEN_OPINIONS_BY_THESIS_ID.ps();
 
         myQuery.setThesisId(1, aThesisId);
+        
+        return staticSelectThesisOpinion(myQuery);
+    }
+
+    // ------------------------------------------------------------------------
+    @Override
+    public List<PerspectiveThesisOpinion> selectAllOpinionsByThesis(ThesisId aThesisId)
+    {
+        ArgsDB myQuery =
+                ArgsQuery.SELECT_ALL_OPINIONS_BY_THESIS_ID.ps();
+        myQuery.setThesisId(1, aThesisId);
+        myQuery.setLevel(2, 0.5);
+        myQuery.setThesisId(3, aThesisId);
         
         return staticSelectThesisOpinion(myQuery);
     }

@@ -2,6 +2,7 @@ package com.arguments.functional.report.html;
 
 import static org.junit.Assert.*;
 
+import java.util.Collection;
 import java.util.List;
 import com.arguments.functional.datamodel.OpinionatedThesis;
 import com.arguments.functional.datamodel.OwnedPerspective;
@@ -95,7 +96,7 @@ public class HtmlThesisPrinter
     }
 
     // ------------------------------------------------------------------------
-    private String getPerspectivesTable(List<PerspectiveThesisOpinion> anOpinions)
+    private String getPerspectivesTable(Collection<PerspectiveThesisOpinion> anOpinions)
     {
         StringBuffer myText = new StringBuffer();
         myText.append("<table>\n");

@@ -6,12 +6,10 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import com.arguments.Deployment;
-import com.arguments.application.liferay.LiferayErrorHandler;
 import com.arguments.functional.datamodel.ArgsErrorHandler;
 import com.arguments.functional.requeststate.ArgsRequest2;
 import com.arguments.functional.store.TheArgsStore;
@@ -41,7 +39,13 @@ public class PageModel_Tester
     {
         public ArgsErrorHandler createInstance(Type type)
         {
-            return new LiferayErrorHandler(null, null);
+            return new ArgsErrorHandler(){
+
+                @Override
+                public String handle(Throwable anException)
+                {
+                    throw new AssertionError(anException);
+                }};
         }
     }
 

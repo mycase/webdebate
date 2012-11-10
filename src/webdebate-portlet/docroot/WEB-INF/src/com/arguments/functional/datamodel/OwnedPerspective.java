@@ -48,6 +48,8 @@ public class OwnedPerspective extends Perspective
     @Override
     public String toString()
     {
+        if (theOwnerId.getLongId() == 0)
+            return theName.toString();
         return theName + "(" + getOwner().getScreenName()+ ")";
     }
 

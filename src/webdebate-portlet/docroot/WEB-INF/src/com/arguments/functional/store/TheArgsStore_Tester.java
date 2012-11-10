@@ -6,7 +6,6 @@ import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.arguments.Deployment;
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.datamodel.ArgumentsUserId;
 import com.arguments.functional.datamodel.ArgumentsUser_Tester;
@@ -19,8 +18,6 @@ import com.arguments.support.ScreenName;
 
 public class TheArgsStore_Tester
 {
-    private static final String DEFAULT_LIFERAY_ID = Deployment.i().foreignAdminId;
-
     // ------------------------------------------------------------------------
     @Before
     public void setUp()

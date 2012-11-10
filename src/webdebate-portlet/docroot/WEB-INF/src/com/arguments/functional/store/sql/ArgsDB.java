@@ -194,6 +194,9 @@ class ArgsDB
     final static String FROM = "FROM";
     final static String AND = "AND";
     final static String OR = "OR";
+    final static String ON = "ON";
+    final static String IF = "IF";
+    final static String LEFT_JOIN = "LEFT JOIN";
     final static String SET = "SET";
     final static String AS = "AS";
     final static String LOCK_TABLE = "LOCK TABLE";
@@ -201,7 +204,9 @@ class ArgsDB
     final static DBColumn NR_OF_OPINIONS = new DBColumn("NrOfOpinions");
     final static DBColumn NR_OF_THESES = new DBColumn("NrOfTheses");
     final static DBColumn COUNT = new DBColumn("count");
+    final static DBColumn LEVEL_ = new DBColumn("Level");
     final static DBColumn RELATION_ID = new DBColumn("RelationID");
+    final static DBColumn PERSPECTIVE_ID = new DBColumn("PerspectiveID");
     final static DBColumn OWNER_ID_ = new DBColumn("OwnerID");
 
     public enum ArgsQuery
@@ -247,14 +252,23 @@ class ArgsDB
         		FROM, commas(Thesis.t, Relation.t),
         		WHERE, Thesis.ID.f, "=", Relation.THESIS_1_ID, AND, Relation.THESIS_2_ID, "= ?"),
         SELECT_RELATION_BY_ID(SELECT, "*", FROM, Relation.t, WHERE, Relation.ID, "= ?"),
-        SELECT_OPINIONS_BY_THESIS_ID1(SELECT, "*", FROM, Opinion.t, WHERE, Opinion.THESIS_ID, "= ?"), 
+        SELECT_GIVEN_OPINIONS_BY_THESIS_ID(SELECT, "*", FROM, Opinion.t, WHERE, Opinion.THESIS_ID, "= ?"), 
         SELECT_USER_BY_FOREIGN_ID(SELECT, "*", FROM, User.t, WHERE, User.CONTAINER_ID, "= ?"),
         SELECT_USER_BY_EMAIL_OR_FOREIGN_ID_OR_SCREENNAME(
                 SELECT, "*", FROM, User.t, WHERE, User.EMAIL, "= ?", OR, User.CONTAINER_ID, "= ?", OR, User.SCREEN_NAME, "= ?"),
         SELECT_USER_BY_ID(SELECT, "*", FROM, User.t, WHERE, User.ID, "= ?"),
         SELECT_OPINION_BY_ID(SELECT, "*", FROM, Opinion.t, WHERE, Opinion.ID, "= ?"),
-        SELECT_OPINION_BY_THESIS_PERSPECTIVE_ID(SELECT, "*", FROM, Opinion.t, WHERE, Opinion.THESIS_ID, "= ?",
+        SELECT_OPINION_BY_THESIS_PERSPECTIVE_ID1(SELECT, "*", FROM, Opinion.t, WHERE, Opinion.THESIS_ID, "= ?",
                 AND, Opinion.PERSPECTIVE_ID1, "= ?"),
+        SELECT_ALL_OPINIONS_BY_THESIS_ID(SELECT,
+                "0", AS, Opinion.ID, ",",
+                "?", AS, Opinion.THESIS_ID, ",",
+                Perspective.ID.c.getLongName(), AS, Opinion.PERSPECTIVE_ID1, ",",
+                "IF(",Opinion.LEVEL, "is null, ?, ", Opinion.LEVEL, ")", AS, Opinion.LEVEL,
+                FROM, Perspective.t, LEFT_JOIN, Opinion.t,
+                ON, Perspective.ID.c.getLongName(), "=", Opinion.PERSPECTIVE_ID1,
+                AND, Opinion.THESIS_ID ," = ?",
+                AND, Perspective.TYPE, " = 1"),
         SELECT_PERSPECTIVE_BY_NAME(SELECT, "*", FROM, Perspective.t, WHERE, Perspective.NAME , " = ? "),
         SELECT_PERSPECTIVE_BY_NAME_USERID1(SELECT, "*", FROM, Perspective.t, WHERE, Perspective.NAME , " = ? ", AND,
                 Perspective.OWNER_ID, " = ?"),
@@ -558,5 +572,12 @@ class ArgsDB
     private String errorInfo()
     {
         return theFixedQuery.getText() + "\n, with these arguments:\n" + theSqlArgumentMap;
+    }
+
+    
+    // ------------------------------------------------------------------------
+    public void setLevel(int aI, double aD)
+    {
+        setDouble(aI, aD);
     }
 }

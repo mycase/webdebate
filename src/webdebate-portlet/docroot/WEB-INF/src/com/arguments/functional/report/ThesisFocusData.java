@@ -1,8 +1,10 @@
 package com.arguments.functional.report;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.TreeSet;
 
 import com.arguments.functional.datamodel.OpinionatedThesis;
 import com.arguments.functional.datamodel.Perspective;
@@ -122,10 +124,11 @@ public class ThesisFocusData
     }
     
     // ------------------------------------------------------------------------
-    public List<PerspectiveThesisOpinion> getDifferentPerspectives()
+    public Collection<PerspectiveThesisOpinion> getDifferentPerspectives()
     {
         List<PerspectiveThesisOpinion> myOpinions =
-                TheArgsStore.i().getOpinionsForThesisId(theThesisId);
-        return myOpinions;
+                TheArgsStore.i().selectAllOpinionsByThesis(theThesisId);
+        
+        return new TreeSet<>(myOpinions);
     }
 }

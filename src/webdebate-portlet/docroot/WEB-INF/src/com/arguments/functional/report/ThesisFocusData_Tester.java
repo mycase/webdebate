@@ -3,8 +3,7 @@
  */
 package com.arguments.functional.report;
 
-import java.util.List;
-
+import java.util.Collection;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -45,11 +44,9 @@ public class ThesisFocusData_Tester
         
         Perspective myPers1 = myUser1.getDefaultPerspective();
         ThesisFocusData myData = new ThesisFocusData(myThesisId, myPers1);
-        List<PerspectiveThesisOpinion> myOpTheses = myData.getDifferentPerspectives();
+        Collection<PerspectiveThesisOpinion> myOpTheses = myData.getDifferentPerspectives();
         assertNotNull(myOpTheses);
-        assertEquals(2, myOpTheses.size());
-        PerspectiveThesisOpinion myOpinion = myOpTheses.get(0);
-        assertNotNull(myOpinion.getPerspectiveId());
+        assertEquals(7, myOpTheses.size());
     }
     
     // ------------------------------------------------------------------------

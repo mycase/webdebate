@@ -246,4 +246,15 @@ public class ArgsTestDB implements ArgsStore
         return null;
     }
 
+    
+    // ------------------------------------------------------------------------
+    /* (non-Javadoc)
+     * @see com.arguments.functional.datamodel.ArgsStore#selectAllOpinionsByThesis(com.arguments.functional.datamodel.ThesisId)
+     */
+    @Override
+    public List<PerspectiveThesisOpinion> selectAllOpinionsByThesis(
+            ThesisId aThesisID)
+    {
+        return null;
+    }
 }

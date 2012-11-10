@@ -126,7 +126,6 @@ public class ThesisOpinion
         Double myProbability = Integer.parseInt(aThesisOpinion)/100.0;
         return new ThesisOpinion(myProbability);
     }
-
     
     // ------------------------------------------------------------------------
     public static ThesisOpinion minusOneToOne(double aNewMinusOneToOne)

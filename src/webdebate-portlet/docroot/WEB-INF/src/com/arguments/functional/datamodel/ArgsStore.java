@@ -95,4 +95,7 @@ public interface ArgsStore
     
     // ------------------------------------------------------------------------
     public abstract PerspectiveId getThesisOwnerPerspective();
+    
+    // ------------------------------------------------------------------------
+    public List<PerspectiveThesisOpinion> selectAllOpinionsByThesis(ThesisId aThesisID);
 }

@@ -36,9 +36,7 @@
 <li class="current">
  <a href="<%= myAddThesisURL %>">New</a></li>
 <li>
- <a href="<%= myGotoThesisURL %>">Goto</a></li>
-<li>
- <a href="<%= myThesisFocusURL %>">Focus</a></li>
+ <a href="<%= myThesisFocusURL %>">Focus Thesis</a></li>
 <li>
  <a href="<%= myHelpURL %>">Help</a></li>
 </ul>

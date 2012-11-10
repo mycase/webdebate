@@ -72,9 +72,7 @@
 <li>
  <a href="<%= myGotoThesisURL %>">Goto</a></li>
 <li>
- <a href="<%= myChangePerspectiveURL %>">Change perspective</a></li>
-<li>
- <a href="<%= myAllThesesURL %>">Search</a></li>
+ <a href="<%= myAllThesesURL %>">All Theses</a></li>
 <li>
  <a href="<%= myHelpURL %>">Help</a></li>
 </ul>

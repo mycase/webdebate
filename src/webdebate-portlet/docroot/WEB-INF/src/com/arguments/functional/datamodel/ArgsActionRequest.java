@@ -54,8 +54,8 @@ public class ArgsActionRequest extends ArgsRequest
         ProtocolMap myProtocolMap = TheContainerBridge.i().getProtocolMap(
                 myParameterMap);
 
-        Command myArgRequest = RequestParser.getCommand(myAppUser,
-                myProtocolMap);
+        Command myCommand = 
+                RequestParser.getCommand(myAppUser, myProtocolMap);
 
         if (getUpdateState() == UpdateState.YES)
         {
@@ -66,7 +66,7 @@ public class ArgsActionRequest extends ArgsRequest
             }
         }
         ArgsState myArgsState = PortalArgsBridge.getState(myAppUser);
-        myStateCommand = new ArgsStatefulCommand(myArgRequest, myArgsState);
+        myStateCommand = new ArgsStatefulCommand(myCommand, myArgsState);
 
         // Not here, which is where you would want it
         ArgsState myState = myStateCommand.execute();

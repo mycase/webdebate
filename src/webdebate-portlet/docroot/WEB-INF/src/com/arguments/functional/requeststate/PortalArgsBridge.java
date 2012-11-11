@@ -57,6 +57,36 @@ public abstract class PortalArgsBridge
     }
 
     // ------------------------------------------------------------------------
+    public ArgsStatefulRequest3 storeStateGetArgumentsRequest3(
+            ArgsRequest2 aRequest2)
+    {
+        assureConnect();
+        final ArgumentsUser myAppUser = aRequest2.getRequest().getAppUser();
+        final ArgsRequest myRequest = aRequest2.getRequest();
+        
+        final CgiParameterMap myParameterMap = myRequest
+                .getCgiParameterMap(aRequest2.getStateInputMode());
+
+        assertNotSame(myParameterMap, null);
+        ProtocolMap myProtocolMap =  getProtocolMap(myParameterMap);
+
+        ArgsRequest3 myArgRequest = new ArgsRequest3(myAppUser,
+                aRequest2.getUrlContainer(), myProtocolMap);
+
+        if (aRequest2.getUpdateState() == UpdateState.YES)
+        {
+            StateChange myStateChange = myArgRequest
+                    .getStateChange();
+            if (myStateChange.hasChange())
+            {
+                myStateChange.mergeAndStore(myAppUser);
+            }
+        }
+        ArgsState myArgsState = getState(myAppUser);
+        return new ArgsStatefulRequest3(myArgRequest, myArgsState);
+    }
+
+    // ------------------------------------------------------------------------
     protected static ArgsState getState(ArgumentsUser aUser)
     {
         return TheArgsStore.i().selectState(aUser);

@@ -27,7 +27,7 @@ public class ThesisFocusPage
     
     // ------------------------------------------------------------------------
     public static String getHtmlBody(
-            ArgsStatefulRequest aRequest,
+            ArgsStatefulRequest3 aRequest,
             ProtocolMap aProtocolMap)
     {
         final ThesisFocusPage theThesisFocusPage =
@@ -47,7 +47,7 @@ public class ThesisFocusPage
 
     // ------------------------------------------------------------------------
     public static String getInternalHtml(
-            ArgsStatefulRequest aRequest,
+            ArgsStatefulRequest3 aRequest,
             ProtocolMap aProtocolMap)
     {
         final ThesisFocusPage theThesisFocusPage =

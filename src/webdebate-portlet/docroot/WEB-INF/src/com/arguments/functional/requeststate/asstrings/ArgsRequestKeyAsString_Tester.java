@@ -24,8 +24,10 @@ import com.arguments.functional.report.html.HtmlThesisPrinter;
 import com.arguments.functional.report.html.ListThesesPage;
 import com.arguments.functional.report.html.ThesisFocusPage;
 import com.arguments.functional.report.html.UrlContainer;
+import com.arguments.functional.requeststate.ArgsRequest3;
 import com.arguments.functional.requeststate.ArgsRequestKey;
 import com.arguments.functional.requeststate.ArgsStatefulRequest;
+import com.arguments.functional.requeststate.ArgsStatefulRequest3;
 import com.arguments.functional.requeststate.ArgumentsRequest;
 import com.arguments.functional.requeststate.ProtocolMap;
 import com.arguments.functional.store.TheArgsStore;
@@ -73,10 +75,10 @@ public class ArgsRequestKeyAsString_Tester
         ArgumentsUser myAppUser = TheArgsStore.i()
                 .selectUserById(ArgumentsUserId.TEST2);
 
-        ArgumentsRequest myRequest1 = new ArgumentsRequest(
+        ArgsRequest3 myRequest1 = new ArgsRequest3(
                 myAppUser, new UrlContainer(), new ProtocolMap());
 
-        ArgsStatefulRequest myRequest = new ArgsStatefulRequest(myRequest1,
+        ArgsStatefulRequest3 myRequest = new ArgsStatefulRequest3(myRequest1,
                 new ArgsState(ThesisId.Da13, RelationId.BONE, PerspectiveId.getThesisOwner()));
         String myHtml = ThesisFocusPage.getHtmlBody(myRequest,
                 ArgsRequestKeyAsString.getProtocolMap());
@@ -131,11 +133,11 @@ public class ArgsRequestKeyAsString_Tester
         ArgumentsUser myAppUser = TheArgsStore.i()
                 .selectUserById(ArgumentsUserId.TEST2);
 
-        ArgumentsRequest myRequest1 = new ArgumentsRequest(
+        ArgsRequest3 myRequest1 = new ArgsRequest3(
                 myAppUser,
                 new ProtocolMap());
 
-        ArgsStatefulRequest myRequest = new ArgsStatefulRequest(myRequest1,
+        ArgsStatefulRequest3 myRequest = new ArgsStatefulRequest3(myRequest1,
                 new ArgsState(ThesisId.Da13, RelationId.BONE, PerspectiveId.getThesisOwner()));
         String myHtml = ListThesesPage.getInternalHtml(
                 myRequest, ArgsRequestKeyAsString.getProtocolMap());

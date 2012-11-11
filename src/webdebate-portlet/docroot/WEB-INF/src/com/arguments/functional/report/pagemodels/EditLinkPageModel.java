@@ -5,7 +5,7 @@ package com.arguments.functional.report.pagemodels;
 
 import com.arguments.functional.datamodel.Relation;
 import com.arguments.functional.requeststate.ArgsRequestKey;
-import com.arguments.functional.requeststate.ArgsStatefulRequest;
+import com.arguments.functional.requeststate.ArgsStatefulRequest3;
 import com.arguments.functional.requeststate.ProtocolMap;
 
 /**
@@ -33,7 +33,7 @@ public class EditLinkPageModel
     
     // ------------------------------------------------------------------------
     public EditLinkPageModel(
-            ArgsStatefulRequest aRequest,
+            ArgsStatefulRequest3 aRequest,
             ProtocolMap aTheprotocolmap)
     {
         Relation myLink = aRequest.getActiveLink();

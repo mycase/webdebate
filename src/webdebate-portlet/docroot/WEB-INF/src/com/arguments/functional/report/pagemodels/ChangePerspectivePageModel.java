@@ -7,7 +7,7 @@ import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.datamodel.Perspective;
 import com.arguments.functional.datamodel.PerspectiveId;
 import com.arguments.functional.requeststate.ArgsRequestKey;
-import com.arguments.functional.requeststate.ArgsStatefulRequest;
+import com.arguments.functional.requeststate.ArgsStatefulRequest3;
 import com.arguments.functional.requeststate.ProtocolMap;
 
 /**
@@ -22,7 +22,7 @@ public class ChangePerspectivePageModel
     
     // ------------------------------------------------------------------------
     public ChangePerspectivePageModel(
-            ArgsStatefulRequest aRequest,
+            ArgsStatefulRequest3 aRequest,
             ProtocolMap aTheprotocolmap)
     {
         String myPerspectiveIdText = aRequest.getPerspectiveIdText();

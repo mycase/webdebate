@@ -5,7 +5,7 @@ package com.arguments.functional.report.pagemodels;
 
 import com.arguments.functional.datamodel.ArgsErrorHandler;
 import com.arguments.functional.report.html.UrlContainer;
-import com.arguments.functional.requeststate.ArgsStatefulRequest;
+import com.arguments.functional.requeststate.ArgsStatefulRequest3;
 import com.arguments.functional.requeststate.ProtocolMap;
 
 /**
@@ -24,7 +24,7 @@ public abstract class PageRenderer
     
     // ------------------------------------------------------------------------
     public String catchHtml(
-            ArgsStatefulRequest aRequest,
+            ArgsStatefulRequest3 aRequest,
             ProtocolMap aProtocolmap,
             UrlContainer aUrlContainer
             )
@@ -41,7 +41,7 @@ public abstract class PageRenderer
     
     // ------------------------------------------------------------------------
     protected abstract String noCatchHtml(
-            ArgsStatefulRequest aRequest,
+            ArgsStatefulRequest3 aRequest,
             ProtocolMap aProtocolmap,
             UrlContainer aAnUrlContainer);
 }

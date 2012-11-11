@@ -8,7 +8,7 @@ import com.arguments.functional.datamodel.Relation;
 import com.arguments.functional.datamodel.Relevance;
 import com.arguments.functional.datamodel.ThesisOpinion;
 import com.arguments.functional.requeststate.ArgsRequestKey;
-import com.arguments.functional.requeststate.ArgsStatefulRequest;
+import com.arguments.functional.requeststate.ArgsStatefulRequest3;
 import com.arguments.functional.requeststate.ProtocolMap;
 import com.arguments.functional.requeststate.asstrings.ArgsRequestKeyAsString;
 
@@ -36,7 +36,7 @@ public class AddPremisePageModel
     
     // ------------------------------------------------------------------------
     public AddPremisePageModel(
-            ArgsStatefulRequest myStatefulRequest,
+            ArgsStatefulRequest3 myStatefulRequest,
             ProtocolMap aProtocolmap)
     {
         this(myStatefulRequest.getActiveThesis(), aProtocolmap);

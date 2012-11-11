@@ -16,7 +16,7 @@ import com.arguments.support.Logger;
  */
 public class ArgsRequest3
 {
-    protected final ProtocolMap theRequestMap;
+    private final ProtocolMap theRequestMap;
     private final ArgumentsUser theUser;
     private final UrlContainer theUrlContainer;
     private final StateChange theStateChange;

@@ -6,7 +6,7 @@ package com.arguments.functional.report.pagemodels;
 import com.arguments.functional.datamodel.OpinionatedThesis;
 import com.arguments.functional.datamodel.ThesisOpinion;
 import com.arguments.functional.requeststate.ArgsRequestKey;
-import com.arguments.functional.requeststate.ArgsStatefulRequest;
+import com.arguments.functional.requeststate.ArgsStatefulRequest3;
 import com.arguments.functional.requeststate.ProtocolMap;
 
 /**
@@ -22,7 +22,7 @@ public class AddOpinionPageModel
     
     // ------------------------------------------------------------------------
     public AddOpinionPageModel(
-            ArgsStatefulRequest aStatefulRequest,
+            ArgsStatefulRequest3 aStatefulRequest,
             ProtocolMap aTheprotocolmap)
     {
         theFormName =aTheprotocolmap.get(ArgsRequestKey.NEW_THESIS_OPINION2);

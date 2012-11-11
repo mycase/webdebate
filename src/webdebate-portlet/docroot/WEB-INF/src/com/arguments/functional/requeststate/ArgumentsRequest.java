@@ -7,8 +7,7 @@ import com.arguments.functional.report.html.UrlContainer;
 
 public class ArgumentsRequest extends ArgsRequest3
 {
-    private final RequestParser theParser;
-    private Command myCommand;
+    private Command theCommand;
     
     // ------------------------------------------------------------------------
     public ArgumentsRequest(
@@ -25,13 +24,14 @@ public class ArgumentsRequest extends ArgsRequest3
             ProtocolMap aProtocolMap)
     {
         super(anAppUser, aUrlContainer, aProtocolMap);
-        theParser = new RequestParser(getUser(), theRequestMap);
+        RequestParser theParser =
+                new RequestParser(getUser(), aProtocolMap);
+        theCommand = theParser.parseCommand();
     }
 
     // ------------------------------------------------------------------------
     void execute(ArgsState aState)
     {
-        myCommand = theParser.parseCommand();
-        myCommand.execute(aState);
+        theCommand.execute(aState);
     }
 }

@@ -116,11 +116,11 @@ public class ArgsRequestKeyAsString_Tester
         ArgsStatefulRequest myRequest = new ArgsStatefulRequest(myRequest1,
                 new ArgsState(ThesisId.ONE, RelationId.BONE, myAppUser.getDefaultPerspective()));
         myRequest.execute();
-        String myHtml = ThesisFocusPage.getHtmlBody(
-                myRequest, ArgsRequestKeyAsString.getProtocolMap());
+        //String myHtml = ThesisFocusPage.getHtmlBody(
+        //        myRequest, ArgsRequestKeyAsString.getProtocolMap());
         // System.out.println(myWebPage.getHtml());
 
-        tidyParse(myHtml);
+        // tidyParse(myHtml);
     }
 
     // ------------------------------------------------------------------------

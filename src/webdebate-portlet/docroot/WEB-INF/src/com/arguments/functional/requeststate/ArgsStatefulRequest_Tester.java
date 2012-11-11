@@ -261,11 +261,11 @@ public class ArgsStatefulRequest_Tester
                 new String[]{"0"});
         ServletParameterMap mySParameterMap2 = new ServletParameterMap();
         
-        ArgsActionRequest myRequest2 =
-                new ArgsActionRequest(myPParameterMap2, mySParameterMap2, myUser2);
-
         try
         {
+            ArgsActionRequest myRequest2 =
+                new ArgsActionRequest(myPParameterMap2, mySParameterMap2, myUser2);
+
             myRequest2.execute();
         }
         catch (PerspectiveNotOwnedException anException)

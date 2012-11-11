@@ -29,15 +29,15 @@ public abstract class PortalArgsBridge
     }
 
     // ------------------------------------------------------------------------
-    public ArgsStatefulCommand storeStateGetArgumentsRequest(
-            ArgsActionRequest aRequest2)
+    private ArgsStatefulCommand storeStateGetArgumentsRequest(
+            ArgsActionRequest aRequest)
     {
         assureConnect();
-        final ArgumentsUser myAppUser = aRequest2.getAppUser();
-        final ArgsRequest myRequest = aRequest2;
+        final ArgumentsUser myAppUser = aRequest.getAppUser();
+        final ArgsRequest myRequest = aRequest;
         
         final CgiParameterMap myParameterMap = myRequest
-                .getCgiParameterMap(aRequest2.getStateInputMode());
+                .getCgiParameterMap(aRequest.getStateInputMode());
 
         assertNotSame(myParameterMap, null);
         ProtocolMap myProtocolMap =  getProtocolMap(myParameterMap);
@@ -45,7 +45,7 @@ public abstract class PortalArgsBridge
         Command myArgRequest =
                 RequestParser.getCommand(myAppUser, myProtocolMap);
         
-        if (aRequest2.getUpdateState() == UpdateState.YES)
+        if (aRequest.getUpdateState() == UpdateState.YES)
         {
             StateChange myStateChange = 
                     new StateChange(myProtocolMap);
@@ -90,16 +90,16 @@ public abstract class PortalArgsBridge
     }
 
     // ------------------------------------------------------------------------
-    protected static ArgsState getState(ArgumentsUser aUser)
+    public static ArgsState getState(ArgumentsUser aUser)
     {
         return TheArgsStore.i().selectState(aUser);
     }
 
     // ------------------------------------------------------------------------
-    protected abstract ProtocolMap getProtocolMap(CgiParameterMap aParameterMap);
+    public abstract ProtocolMap getProtocolMap(CgiParameterMap aParameterMap);
 
     // ------------------------------------------------------------------------
-    protected static void assureConnect()
+    public static void assureConnect()
     {
         TheArgsStore.i().assureConnect();
     }

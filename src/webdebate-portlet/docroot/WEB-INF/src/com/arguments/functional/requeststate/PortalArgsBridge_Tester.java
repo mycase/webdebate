@@ -104,7 +104,7 @@ public class PortalArgsBridge_Tester
                 new PortalArgsBridge(){
 
                     @Override
-                    protected ProtocolMap getProtocolMap(
+                    public ProtocolMap getProtocolMap(
                             CgiParameterMap aParameterMap)
                     {
                         return null;

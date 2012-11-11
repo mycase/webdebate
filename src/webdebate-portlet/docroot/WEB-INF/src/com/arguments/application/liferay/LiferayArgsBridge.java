@@ -74,7 +74,7 @@ public class LiferayArgsBridge extends JavaxArgsBridge
 
     // ------------------------------------------------------------------------
     @Override
-    protected ProtocolMap getProtocolMap(CgiParameterMap aParameterMap)
+    public ProtocolMap getProtocolMap(CgiParameterMap aParameterMap)
     {
         assertNotSame(aParameterMap, null);
         return LiferayArgsRequestKey.getProtocolMap(aParameterMap);

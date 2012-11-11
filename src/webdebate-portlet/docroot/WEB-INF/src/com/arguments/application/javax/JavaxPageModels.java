@@ -19,7 +19,7 @@ import com.arguments.functional.report.pagemodels.GotoThesisPageModel;
 import com.arguments.functional.report.pagemodels.ListThesesPageModel;
 import com.arguments.functional.report.pagemodels.PageModelFactory;
 import com.arguments.functional.report.pagemodels.ThesisFocusPageModel;
-import com.arguments.functional.requeststate.ArgsRequest2;
+import com.arguments.functional.requeststate.ArgsRenderRequest;
 import com.arguments.functional.requeststate.ProtocolMap;
 import com.arguments.functional.requeststate.PortalArgsBridge.CgiSource;
 import com.arguments.functional.requeststate.PortalArgsBridge.UpdateState;
@@ -38,7 +38,7 @@ public class JavaxPageModels
     public static AddOpinionPageModel getAddOpinionPage(
             RenderRequest aRenderRequest)
     {
-        ArgsRequest2 myRequest = getRequest(aRenderRequest);
+        ArgsRenderRequest myRequest = getRequest(aRenderRequest);
         return PageModelFactory.getAddOpinionPage(myRequest);
     }
 
@@ -46,7 +46,7 @@ public class JavaxPageModels
     public static AddPremisePageModel getAddPremisePage(
             RenderRequest aRenderRequest)
     {
-        ArgsRequest2 myRequest = getRequest(aRenderRequest);
+        ArgsRenderRequest myRequest = getRequest(aRenderRequest);
         return PageModelFactory.getAddPremisePage(myRequest);
     }
 
@@ -54,7 +54,7 @@ public class JavaxPageModels
     public static AddThesisPageModel getAddThesisPage(
             RenderRequest aRenderRequest)
     {
-        ArgsRequest2 myRequest = getRequest(aRenderRequest);
+        ArgsRenderRequest myRequest = getRequest(aRenderRequest);
         return PageModelFactory.getAddThesisPage(myRequest);
     }
 
@@ -62,7 +62,7 @@ public class JavaxPageModels
     public static ChangePerspectivePageModel getChangePerspectivePage(
             RenderRequest aRenderRequest)
     {
-        ArgsRequest2 myRequest = getRequest(aRenderRequest);
+        ArgsRenderRequest myRequest = getRequest(aRenderRequest);
         return PageModelFactory.getChangePerspectivePage(myRequest);
     }
 
@@ -70,7 +70,7 @@ public class JavaxPageModels
     public static EditThesisPageModel getEditThesisPage(
             RenderRequest aRenderRequest)
     {
-        ArgsRequest2 myRequest = getRequest(aRenderRequest);
+        ArgsRenderRequest myRequest = getRequest(aRenderRequest);
         return PageModelFactory.getEditThesisPage(myRequest);
     }
 
@@ -78,7 +78,7 @@ public class JavaxPageModels
     public static GotoThesisPageModel getGotoThesisPage(
             RenderRequest aRenderRequest)
     {
-        ArgsRequest2 myRequest = getRequest(aRenderRequest);
+        ArgsRenderRequest myRequest = getRequest(aRenderRequest);
         return PageModelFactory.getGotoThesisPage(myRequest);
     }
     
@@ -86,7 +86,7 @@ public class JavaxPageModels
     public static ListThesesPageModel getListThesesPage(
             RenderRequest aRenderRequest)
     {
-        ArgsRequest2 myRequest = getRequest(aRenderRequest);
+        ArgsRenderRequest myRequest = getRequest(aRenderRequest);
         return PageModelFactory.getListThesesPage(myRequest);
     }
 
@@ -94,7 +94,7 @@ public class JavaxPageModels
     public static ThesisFocusPageModel getThesisFocusPage(
             RenderRequest aRenderRequest, UrlContainer aUrlContainer)
     {
-        ArgsRequest2 myRequest =
+        ArgsRenderRequest myRequest =
                 getRequest(aRenderRequest, aUrlContainer);
         return PageModelFactory.getThesisFocusPage(myRequest);
     }
@@ -103,20 +103,20 @@ public class JavaxPageModels
     public static EditLinkPageModel getEditLinkPage(
             RenderRequest aRenderRequest)
     {
-        ArgsRequest2 myRequest = getRequest(aRenderRequest);
+        ArgsRenderRequest myRequest = getRequest(aRenderRequest);
         return PageModelFactory.getEditLinkPage(myRequest);
     }
 
     // ------------------------------------------------------------------------
     // private
     // ------------------------------------------------------------------------
-    private static ArgsRequest2 getRequest(RenderRequest aRequest)
+    private static ArgsRenderRequest getRequest(RenderRequest aRequest)
     {
         return getRequest3(aRequest, new UrlContainer(), UpdateState.NO);
     }
 
     // ------------------------------------------------------------------------
-    private static ArgsRequest2 getRequest(
+    private static ArgsRenderRequest getRequest(
             RenderRequest aRequest, UrlContainer aUrlContainer)
     {
         // Viewing the focus page should set the state.
@@ -125,7 +125,7 @@ public class JavaxPageModels
     
     // TODO: Do the branching by page outside of the javax package. 
     // ------------------------------------------------------------------------
-    private static ArgsRequest2 getRequest3(
+    private static ArgsRenderRequest getRequest3(
             RenderRequest aRequest,
             UrlContainer aUrlContainer,
             UpdateState anUpdateState)
@@ -137,8 +137,8 @@ public class JavaxPageModels
                 TheContainerBridge.i().newErrorHandler(
                         aRequest, myArgsRequest.getAppUser());
         
-        final ArgsRequest2 myRequest =
-                new ArgsRequest2(
+        final ArgsRenderRequest myRequest =
+                new ArgsRenderRequest(
                         myArgsRequest, aUrlContainer,
                         CgiSource.SERVLET, anUpdateState, myErrorHandler);
         

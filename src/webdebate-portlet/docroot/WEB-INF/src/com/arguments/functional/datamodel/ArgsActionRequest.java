@@ -7,7 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import com.arguments.application.TheContainerBridge;
 import com.arguments.functional.report.html.UrlContainer;
-import com.arguments.functional.requeststate.ArgsRequest2;
+import com.arguments.functional.requeststate.ArgsRenderRequest;
 import com.arguments.functional.requeststate.ArgsStatefulCommand;
 import com.arguments.functional.requeststate.StateChange;
 import com.arguments.functional.requeststate.PortalArgsBridge.CgiSource;

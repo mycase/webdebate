@@ -60,7 +60,7 @@ public abstract class PortalArgsBridge
 
     // ------------------------------------------------------------------------
     public ArgsStatefulRequest3 storeStateGetArgumentsRequest3(
-            ArgsRequest2 aRequest2)
+            ArgsRenderRequest aRequest2)
     {
         assureConnect();
         final ArgumentsUser myAppUser = aRequest2.getRequest().getAppUser();

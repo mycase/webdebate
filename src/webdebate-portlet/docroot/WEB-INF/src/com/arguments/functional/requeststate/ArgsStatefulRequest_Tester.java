@@ -239,7 +239,7 @@ public class ArgsStatefulRequest_Tester
         CgiSource mySource = CgiSource.SERVLET;
         UpdateState myUpdateState = UpdateState.YES;
         
-        ArgsRequest2 myRequest = new ArgsRequest2(myRequest0, myContainer, mySource, myUpdateState);
+        ArgsRenderRequest myRequest = new ArgsRenderRequest(myRequest0, myContainer, mySource, myUpdateState);
         PageModelFactory.getThesisFocusPage(myRequest);
         
         //User2 takes User1's perspective

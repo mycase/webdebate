@@ -28,7 +28,7 @@ public abstract class PortalArgsBridge
     }
 
     // ------------------------------------------------------------------------
-    public ArgsStatefulRequest storeStateGetArgumentsRequest(
+    public ArgsStatefulCommand storeStateGetArgumentsRequest(
             ArgsRequest2 aRequest2)
     {
         assureConnect();
@@ -54,7 +54,7 @@ public abstract class PortalArgsBridge
             }
         }
         ArgsState myArgsState = getState(myAppUser);
-        return new ArgsStatefulRequest(myArgRequest, myArgsState);
+        return new ArgsStatefulCommand(myArgRequest, myArgsState);
     }
 
     // ------------------------------------------------------------------------

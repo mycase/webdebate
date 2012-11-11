@@ -85,7 +85,7 @@ public class ArgsRequest2
     public void execute()
     {
         // This method performs a state update twice. First here:
-        ArgsStatefulRequest myArgsRequest =
+        ArgsStatefulCommand myArgsRequest =
                 TheContainerBridge.i().storeStateGetArgumentsRequest(this);
         // Not here, which is where you would want it
         ArgsState myState = myArgsRequest.execute();

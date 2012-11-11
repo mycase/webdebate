@@ -10,23 +10,22 @@ import com.arguments.functional.datamodel.ArgsState;
  * @author mirleau
  *
  */
-public class ArgsStatefulRequest // extends ArgsStatefulRequest3
+public class ArgsStatefulCommand
 {
-    private final Command theRequest;
+    private final Command theCommand;
     private final ArgsState theState;
     
     // ------------------------------------------------------------------------
-    public ArgsStatefulRequest(Command aRequest, ArgsState aState)
+    public ArgsStatefulCommand(Command aRequest, ArgsState aState)
     {
-        //super(aRequest, aState);
         theState = aState;
-        theRequest = aRequest;
+        theCommand = aRequest;
     }
 
     // ------------------------------------------------------------------------
     public ArgsState execute()
     {
-        theRequest.execute(theState);
+        theCommand.execute(theState);
         return theState;
     }
 }

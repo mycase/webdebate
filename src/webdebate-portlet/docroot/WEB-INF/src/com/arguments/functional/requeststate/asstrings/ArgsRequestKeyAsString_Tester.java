@@ -27,7 +27,7 @@ import com.arguments.functional.report.html.ThesisFocusPage;
 import com.arguments.functional.report.html.UrlContainer;
 import com.arguments.functional.requeststate.ArgsRequest3;
 import com.arguments.functional.requeststate.ArgsRequestKey;
-import com.arguments.functional.requeststate.ArgsStatefulRequest;
+import com.arguments.functional.requeststate.ArgsStatefulCommand;
 import com.arguments.functional.requeststate.ArgsStatefulRequest3;
 import com.arguments.functional.requeststate.ProtocolMap;
 import com.arguments.functional.requeststate.RequestParser;
@@ -114,7 +114,7 @@ public class ArgsRequestKeyAsString_Tester
                 myAppUser,
                 myRequestMap);
 
-        ArgsStatefulRequest myRequest = new ArgsStatefulRequest(myRequest1,
+        ArgsStatefulCommand myRequest = new ArgsStatefulCommand(myRequest1,
                 new ArgsState(ThesisId.ONE, RelationId.BONE, myAppUser.getDefaultPerspective()));
         myRequest.execute();
         //String myHtml = ThesisFocusPage.getHtmlBody(

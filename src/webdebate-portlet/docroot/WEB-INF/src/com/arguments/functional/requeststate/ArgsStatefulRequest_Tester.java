@@ -77,7 +77,7 @@ public class ArgsStatefulRequest_Tester
                 myThesisId, new ThesisOwnerPerspective());
         assertEquals(ThesisOpinion.BELIEVE_FALSE, myThesis.getOpinion());
         
-        ArgsStatefulRequest myRequest =
+        ArgsStatefulCommand myRequest =
                 getThesisModificationCommand(myThesisId, myAppUser);
 
         myRequest.execute();
@@ -99,7 +99,7 @@ public class ArgsStatefulRequest_Tester
         ThesisId myThesisId = insertThesis();
 
         ArgumentsUser myAppUser = ArgumentsUser_Tester.getTestUser2();
-        ArgsStatefulRequest myRequest = getIllegalModificationCommand(
+        ArgsStatefulCommand myRequest = getIllegalModificationCommand(
                 myThesisId, myAppUser);
 
         try
@@ -135,7 +135,7 @@ public class ArgsStatefulRequest_Tester
         int myIfTrueRelevance = 99;
         int myIfFalseRelevance = 88;
 
-        ArgsStatefulRequest myRequest = getLinkModificationCommand(
+        ArgsStatefulCommand myRequest = getLinkModificationCommand(
                 myThesis2Id, myRelationId,
                 myIfTrueRelevance, myIfFalseRelevance);
 
@@ -170,7 +170,7 @@ public class ArgsStatefulRequest_Tester
         ArgsState myState1 = TheArgsStore.i().selectState(myUser1);
         assertEquals(myPerspectiveId1, myState1.getPerspectiveId());
 
-        ArgsStatefulRequest myRequest =
+        ArgsStatefulCommand myRequest =
                 getUpdatePerspectiveRequest(myPerspectiveId0);
         
         ArgsState myState = myRequest.execute();
@@ -281,7 +281,7 @@ public class ArgsStatefulRequest_Tester
      */
     public static ThesisId insertThesis(Integer anOpinion)
     {
-        ArgsStatefulRequest myRequest = getInsertThesisCommand(
+        ArgsStatefulCommand myRequest = getInsertThesisCommand(
                 anOpinion);
 
         long myNrOfThesesBefore = TheArgsStore.i().getNrOfTheses();
@@ -309,7 +309,7 @@ public class ArgsStatefulRequest_Tester
             
         ThesisId myThesisId = insertThesis();
 
-        ArgsStatefulRequest myRequest =
+        ArgsStatefulCommand myRequest =
                 getInsertOpinionCommand(
                         myThesisId,
                         ThesisOpinion.BELIEVE_TRUE,
@@ -355,7 +355,7 @@ public class ArgsStatefulRequest_Tester
     }
 
     // ------------------------------------------------------------------------
-    private static ArgsStatefulRequest getUpdatePerspectiveRequest(
+    private static ArgsStatefulCommand getUpdatePerspectiveRequest(
             PerspectiveId aPerspectiveId)
     {
         ArgumentsUser myAppUser = ArgumentsUser_Tester.getTestUser2();
@@ -367,12 +367,12 @@ public class ArgsStatefulRequest_Tester
         Command myRequest1 = RequestParser.getCommand(
                 myAppUser, myRequestMap);
 
-        return new ArgsStatefulRequest(myRequest1,
+        return new ArgsStatefulCommand(myRequest1,
                 new ArgsState(ThesisId.ONE, RelationId.BONE, PerspectiveId.getThesisOwner()));
     }
     
     // ------------------------------------------------------------------------
-    private static ArgsStatefulRequest getInsertThesisCommand(Integer anOpinion)
+    private static ArgsStatefulCommand getInsertThesisCommand(Integer anOpinion)
     {
         ArgumentsUser myAppUser = ArgumentsUser_Tester.getTestUser2();
 
@@ -387,13 +387,13 @@ public class ArgsStatefulRequest_Tester
         Command myRequest = RequestParser.getCommand(
                 myAppUser, myRequestMap);
 
-        return new ArgsStatefulRequest(myRequest,
+        return new ArgsStatefulCommand(myRequest,
                 new ArgsState(ThesisId.ONE, RelationId.BONE,
                         myAppUser.getDefaultPerspective()));
     }
 
     // ------------------------------------------------------------------------
-    private static ArgsStatefulRequest getInsertOpinionCommand(
+    private static ArgsStatefulCommand getInsertOpinionCommand(
             ThesisId aThesisId,
             ThesisOpinion anOpinion, 
             ArgumentsUser anArgUser)
@@ -405,13 +405,13 @@ public class ArgsStatefulRequest_Tester
         Command myRequest = RequestParser.getCommand(
                 anArgUser, myRequestMap);
 
-        return new ArgsStatefulRequest(myRequest,
+        return new ArgsStatefulCommand(myRequest,
                 new ArgsState(aThesisId, RelationId.BONE,
                         anArgUser.getDefaultPerspective()));
     }
 
     // ------------------------------------------------------------------------
-    private static ArgsStatefulRequest getIllegalModificationCommand(
+    private static ArgsStatefulCommand getIllegalModificationCommand(
             ThesisId myThesisId, ArgumentsUser myOwner)
     {
         OpinionatedThesis myThesis = TheArgsStore.i().getThesis(
@@ -426,7 +426,7 @@ public class ArgsStatefulRequest_Tester
     }
 
     // ------------------------------------------------------------------------
-    private static ArgsStatefulRequest getThesisModificationCommand(
+    private static ArgsStatefulCommand getThesisModificationCommand(
             ThesisId myThesisId, ArgumentsUser myModifier)
     {
         ProtocolMap myRequestMap = new ProtocolMap();
@@ -438,13 +438,13 @@ public class ArgsStatefulRequest_Tester
         Command myRequest = RequestParser.getCommand(
                 myModifier, myRequestMap);
 
-        return new ArgsStatefulRequest(myRequest,
+        return new ArgsStatefulCommand(myRequest,
                 new ArgsState(myThesisId, RelationId.BONE,
                         myModifier.getDefaultPerspective()));
     }
 
     // ------------------------------------------------------------------------
-    private static ArgsStatefulRequest getLinkModificationCommand(
+    private static ArgsStatefulCommand getLinkModificationCommand(
             ThesisId myThesis2Id, RelationId myRelationId,
             int myIfTrueRelevance, int myIfFalseRelevance)
     {
@@ -471,7 +471,7 @@ public class ArgsStatefulRequest_Tester
         Command myRequest1 = RequestParser.getCommand(
                 myAppUser, myRequestMap);
 
-        return new ArgsStatefulRequest(myRequest1,
+        return new ArgsStatefulCommand(myRequest1,
                 new ArgsState(myThesis2Id, RelationId.BONE, PerspectiveId.getThesisOwner()));
     }
 
@@ -507,7 +507,7 @@ public class ArgsStatefulRequest_Tester
         Command myRequest1 = RequestParser.getCommand(
                 myAppUser, myRequestMap);
 
-        ArgsStatefulRequest myRequest = new ArgsStatefulRequest(myRequest1,
+        ArgsStatefulCommand myRequest = new ArgsStatefulCommand(myRequest1,
                 new ArgsState(aThesis2Id, RelationId.BONE,
                         myAppUser.getDefaultPerspective()));
 

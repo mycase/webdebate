@@ -5,7 +5,7 @@ import com.arguments.functional.datamodel.ArgsState;
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.report.html.UrlContainer;
 
-public class ArgumentsRequest extends ArgsRequest3
+public class ArgumentsRequest
 {
     private final Command theCommand;
     
@@ -23,7 +23,6 @@ public class ArgumentsRequest extends ArgsRequest3
             UrlContainer aUrlContainer,
             ProtocolMap aProtocolMap)
     {
-        super(anAppUser, aUrlContainer, aProtocolMap);
         RequestParser theParser =
                 new RequestParser(anAppUser, aProtocolMap);
         

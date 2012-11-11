@@ -43,10 +43,11 @@ public abstract class PortalArgsBridge
         ArgumentsRequest myArgRequest = new ArgumentsRequest(myAppUser,
                 aRequest2.getUrlContainer(), myProtocolMap);
 
+        
         if (aRequest2.getUpdateState() == UpdateState.YES)
         {
-            StateChange myStateChange = myArgRequest
-                    .getStateChange();
+            StateChange myStateChange = 
+                    new StateChange(myProtocolMap);
             if (myStateChange.hasChange())
             {
                 myStateChange.mergeAndStore(myAppUser);

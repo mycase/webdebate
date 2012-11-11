@@ -29,8 +29,12 @@ public class ArgsRequest2
     }
     
     // ------------------------------------------------------------------------
-    public ArgsRequest2(ArgsRequest aRequest, UrlContainer aUrlContainer,
-            CgiSource aStateInputMode, UpdateState aUpdateState, ArgsErrorHandler anErrorHandler)
+    public ArgsRequest2(
+            ArgsRequest aRequest,
+            UrlContainer aUrlContainer,
+            CgiSource aStateInputMode,
+            UpdateState aUpdateState,
+            ArgsErrorHandler anErrorHandler)
     {
         theRequest = aRequest;
         theUrlContainer = aUrlContainer;

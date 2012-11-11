@@ -3,6 +3,7 @@ package com.arguments.functional.requeststate;
 import static org.junit.Assert.*;
 
 import com.arguments.functional.command.Command;
+import com.arguments.functional.datamodel.ArgsActionRequest;
 import com.arguments.functional.datamodel.ArgsRequest;
 import com.arguments.functional.datamodel.ArgsState;
 import com.arguments.functional.datamodel.ArgumentsUser;
@@ -29,11 +30,11 @@ public abstract class PortalArgsBridge
 
     // ------------------------------------------------------------------------
     public ArgsStatefulCommand storeStateGetArgumentsRequest(
-            ArgsRequest2 aRequest2)
+            ArgsActionRequest aRequest2)
     {
         assureConnect();
-        final ArgumentsUser myAppUser = aRequest2.getRequest().getAppUser();
-        final ArgsRequest myRequest = aRequest2.getRequest();
+        final ArgumentsUser myAppUser = aRequest2.getAppUser();
+        final ArgsRequest myRequest = aRequest2;
         
         final CgiParameterMap myParameterMap = myRequest
                 .getCgiParameterMap(aRequest2.getStateInputMode());

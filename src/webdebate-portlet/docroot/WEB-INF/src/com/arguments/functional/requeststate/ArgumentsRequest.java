@@ -5,30 +5,15 @@ import com.arguments.functional.datamodel.ArgumentsUser;
 
 public class ArgumentsRequest
 {
-    private final Command theCommand;
-    
-    // ------------------------------------------------------------------------
-    private ArgumentsRequest(
-            ArgumentsUser anAppUser,
-            ProtocolMap aProtocolMap)
-    {
-        RequestParser theParser =
-                new RequestParser(anAppUser, aProtocolMap);
-        
-        theCommand = theParser.parseCommand();
-    }
-
     // ------------------------------------------------------------------------
     public static Command getRequest(
             ArgumentsUser anAppUser,
             ProtocolMap aProtocolMap)
     {
-        return new ArgumentsRequest(anAppUser, aProtocolMap).getCommand();
-    }
-    
-    // ------------------------------------------------------------------------
-    Command getCommand()
-    {
+        RequestParser myParser =
+                new RequestParser(anAppUser, aProtocolMap);
+        
+        Command theCommand = myParser.parseCommand();
         return theCommand;
     }
 }

@@ -40,9 +40,7 @@ public abstract class PortalArgsBridge
         assertNotSame(myParameterMap, null);
         ProtocolMap myProtocolMap =  getProtocolMap(myParameterMap);
 
-        ArgumentsRequest myArgRequest = new ArgumentsRequest(myAppUser,
-                aRequest2.getUrlContainer(), myProtocolMap);
-
+        ArgumentsRequest myArgRequest = new ArgumentsRequest(myAppUser, myProtocolMap);
         
         if (aRequest2.getUpdateState() == UpdateState.YES)
         {

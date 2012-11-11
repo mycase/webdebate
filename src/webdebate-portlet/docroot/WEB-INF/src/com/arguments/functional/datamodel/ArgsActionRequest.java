@@ -25,8 +25,6 @@ import com.arguments.support.ServletParameterMap;
  */
 public class ArgsActionRequest extends ArgsRequest
 {
-    private final static CgiSource theStateInputMode = CgiSource.PORTLET;
-    private final static UpdateState theUpdateState = UpdateState.YES;
     private ArgsStatefulCommand myStateCommand;
 
     // ------------------------------------------------------------------------
@@ -44,7 +42,7 @@ public class ArgsActionRequest extends ArgsRequest
         // This method performs a state update twice. First here:
         PortalArgsBridge.assureConnect();
 
-        final CgiParameterMap myParameterMap = getCgiParameterMap(getStateInputMode());
+        final CgiParameterMap myParameterMap = getCgiParameterMap(CgiSource.PORTLET);
 
         assertNotNull(myParameterMap);
         ProtocolMap myProtocolMap = TheContainerBridge.i().getProtocolMap(
@@ -67,17 +65,5 @@ public class ArgsActionRequest extends ArgsRequest
         assertTrue(myStateString.hasChange());
         // Then a second time here:
         myStateString.mergeAndStore(getAppUser());
-    }
-
-    // ------------------------------------------------------------------------
-    private CgiSource getStateInputMode()
-    {
-        return theStateInputMode;
-    }
-
-    // ------------------------------------------------------------------------
-    private UpdateState getUpdateState()
-    {
-        return theUpdateState;
     }
 }

@@ -363,7 +363,7 @@ public class ArgsStatefulRequest_Tester
         myRequestMap.put(ArgsRequestKey.PERSPECTIVE_ID,
                 "" + aPerspectiveId.getIdString() );
 
-        ArgumentsRequest myRequest1 = new ArgumentsRequest(
+        ArgumentsRequest myRequest1 = ArgumentsRequest.getRequest(
                 myAppUser, myRequestMap);
 
         return new ArgsStatefulRequest(myRequest1,
@@ -383,7 +383,7 @@ public class ArgsStatefulRequest_Tester
         myRequestMap.put(ArgsRequestKey.NEW_THESIS_OPINION,
                  "" + anOpinion );
 
-        ArgumentsRequest myRequest = new ArgumentsRequest(
+        ArgumentsRequest myRequest = ArgumentsRequest.getRequest(
                 myAppUser, myRequestMap);
 
         return new ArgsStatefulRequest(myRequest,
@@ -401,7 +401,7 @@ public class ArgsStatefulRequest_Tester
         myRequestMap.put(ArgsRequestKey.NEW_THESIS_OPINION2,
                  "" + anOpinion.getPercentage() );
 
-        ArgumentsRequest myRequest = new ArgumentsRequest(
+        ArgumentsRequest myRequest = ArgumentsRequest.getRequest(
                 anArgUser, myRequestMap);
 
         return new ArgsStatefulRequest(myRequest,
@@ -434,7 +434,7 @@ public class ArgsStatefulRequest_Tester
         myRequestMap.put(ArgsRequestKey.THESIS_OPINION,
                 "" + ThesisOpinion.TRUE_I );
 
-        ArgumentsRequest myRequest = new ArgumentsRequest(
+        ArgumentsRequest myRequest = ArgumentsRequest.getRequest(
                 myModifier, myRequestMap);
 
         return new ArgsStatefulRequest(myRequest,
@@ -467,7 +467,7 @@ public class ArgsStatefulRequest_Tester
         for (String myString:myRequestMap.values())
             assert !myString.startsWith("com");
 
-        ArgumentsRequest myRequest1 = new ArgumentsRequest(
+        ArgumentsRequest myRequest1 = ArgumentsRequest.getRequest(
                 myAppUser, myRequestMap);
 
         return new ArgsStatefulRequest(myRequest1,
@@ -503,7 +503,7 @@ public class ArgsStatefulRequest_Tester
         myRequestMap.put(ArgsRequestKey.PREMISE_OPINION,
                 "" + myPremiseProbability );
 
-        ArgumentsRequest myRequest1 = new ArgumentsRequest(
+        ArgumentsRequest myRequest1 = ArgumentsRequest.getRequest(
                 myAppUser, myRequestMap);
 
         ArgsStatefulRequest myRequest = new ArgsStatefulRequest(myRequest1,

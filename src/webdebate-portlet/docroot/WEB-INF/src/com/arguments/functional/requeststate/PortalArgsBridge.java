@@ -41,7 +41,7 @@ public abstract class PortalArgsBridge
         ProtocolMap myProtocolMap =  getProtocolMap(myParameterMap);
 
         ArgumentsRequest myArgRequest =
-                new ArgumentsRequest(myAppUser, myProtocolMap);
+                ArgumentsRequest.getRequest(myAppUser, myProtocolMap);
         
         
         

@@ -109,7 +109,7 @@ public class ArgsRequestKeyAsString_Tester
         myRequestMap.put(ArgsRequestKey.PREMISE_OPINION,
                 "" + ThesisOpinion.NEUTRAL_I);
 
-        ArgumentsRequest myRequest1 = new ArgumentsRequest(
+        ArgumentsRequest myRequest1 = ArgumentsRequest.getRequest(
                 myAppUser,
                 myRequestMap);
 

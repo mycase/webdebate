@@ -8,7 +8,7 @@ public class ArgumentsRequest
     private final Command theCommand;
     
     // ------------------------------------------------------------------------
-    public ArgumentsRequest(
+    private ArgumentsRequest(
             ArgumentsUser anAppUser,
             ProtocolMap aProtocolMap)
     {
@@ -18,6 +18,14 @@ public class ArgumentsRequest
         theCommand = theParser.parseCommand();
     }
 
+    // ------------------------------------------------------------------------
+    public static ArgumentsRequest getRequest(
+            ArgumentsUser anAppUser,
+            ProtocolMap aProtocolMap)
+    {
+        return new ArgumentsRequest(anAppUser, aProtocolMap);
+    }
+    
     // ------------------------------------------------------------------------
     Command getCommand()
     {

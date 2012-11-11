@@ -31,7 +31,7 @@ public class RequestParser
     private final ProtocolMap theRequestMap;
 
     // ------------------------------------------------------------------------
-    public static Command getRequest(
+    public static Command getCommand(
             ArgumentsUser anAppUser,
             ProtocolMap aProtocolMap)
     {
@@ -42,7 +42,7 @@ public class RequestParser
         return theCommand;
     }
     // ------------------------------------------------------------------------
-    public RequestParser(
+    private RequestParser(
             ArgumentsUser anAppUser,
             ProtocolMap aRequestMap)
     {
@@ -51,7 +51,7 @@ public class RequestParser
     }
     
     // ------------------------------------------------------------------------
-    public Command parseCommand()
+    private Command parseCommand()
     {
         if (isPresent(ArgsRequestKey.THESIS_ID))
             return getChangeThesis();

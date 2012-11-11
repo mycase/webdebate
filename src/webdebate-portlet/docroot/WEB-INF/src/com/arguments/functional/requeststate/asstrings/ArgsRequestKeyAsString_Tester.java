@@ -110,7 +110,7 @@ public class ArgsRequestKeyAsString_Tester
         myRequestMap.put(ArgsRequestKey.PREMISE_OPINION,
                 "" + ThesisOpinion.NEUTRAL_I);
 
-        Command myRequest1 = RequestParser.getRequest(
+        Command myRequest1 = RequestParser.getCommand(
                 myAppUser,
                 myRequestMap);
 

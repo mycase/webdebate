@@ -364,7 +364,7 @@ public class ArgsStatefulRequest_Tester
         myRequestMap.put(ArgsRequestKey.PERSPECTIVE_ID,
                 "" + aPerspectiveId.getIdString() );
 
-        Command myRequest1 = RequestParser.getRequest(
+        Command myRequest1 = RequestParser.getCommand(
                 myAppUser, myRequestMap);
 
         return new ArgsStatefulRequest(myRequest1,
@@ -384,7 +384,7 @@ public class ArgsStatefulRequest_Tester
         myRequestMap.put(ArgsRequestKey.NEW_THESIS_OPINION,
                  "" + anOpinion );
 
-        Command myRequest = RequestParser.getRequest(
+        Command myRequest = RequestParser.getCommand(
                 myAppUser, myRequestMap);
 
         return new ArgsStatefulRequest(myRequest,
@@ -402,7 +402,7 @@ public class ArgsStatefulRequest_Tester
         myRequestMap.put(ArgsRequestKey.NEW_THESIS_OPINION2,
                  "" + anOpinion.getPercentage() );
 
-        Command myRequest = RequestParser.getRequest(
+        Command myRequest = RequestParser.getCommand(
                 anArgUser, myRequestMap);
 
         return new ArgsStatefulRequest(myRequest,
@@ -435,7 +435,7 @@ public class ArgsStatefulRequest_Tester
         myRequestMap.put(ArgsRequestKey.THESIS_OPINION,
                 "" + ThesisOpinion.TRUE_I );
 
-        Command myRequest = RequestParser.getRequest(
+        Command myRequest = RequestParser.getCommand(
                 myModifier, myRequestMap);
 
         return new ArgsStatefulRequest(myRequest,
@@ -468,7 +468,7 @@ public class ArgsStatefulRequest_Tester
         for (String myString:myRequestMap.values())
             assert !myString.startsWith("com");
 
-        Command myRequest1 = RequestParser.getRequest(
+        Command myRequest1 = RequestParser.getCommand(
                 myAppUser, myRequestMap);
 
         return new ArgsStatefulRequest(myRequest1,
@@ -504,7 +504,7 @@ public class ArgsStatefulRequest_Tester
         myRequestMap.put(ArgsRequestKey.PREMISE_OPINION,
                 "" + myPremiseProbability );
 
-        Command myRequest1 = RequestParser.getRequest(
+        Command myRequest1 = RequestParser.getCommand(
                 myAppUser, myRequestMap);
 
         ArgsStatefulRequest myRequest = new ArgsStatefulRequest(myRequest1,

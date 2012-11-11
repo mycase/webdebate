@@ -66,12 +66,6 @@ public class ArgsRequest2
     }
 
     // ------------------------------------------------------------------------
-    public ArgumentsUser getAppUser()
-    {
-        return theRequest.getAppUser();
-    }
-    
-    // ------------------------------------------------------------------------
     public ArgsErrorHandler getErrorHandler()
     {
         return theErrorHandler;

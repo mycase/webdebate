@@ -1,9 +1,13 @@
 package com.arguments.functional.datamodel;
 
 import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertTrue;
 
+import com.arguments.application.TheContainerBridge;
 import com.arguments.functional.report.html.UrlContainer;
-import com.arguments.functional.requeststate.ArgsRequest4;
+import com.arguments.functional.requeststate.ArgsRequest2;
+import com.arguments.functional.requeststate.ArgsStatefulCommand;
+import com.arguments.functional.requeststate.StateChange;
 import com.arguments.functional.requeststate.PortalArgsBridge.CgiSource;
 import com.arguments.functional.requeststate.PortalArgsBridge.UpdateState;
 import com.arguments.support.CgiParameterMap;
@@ -50,18 +54,6 @@ public class ArgsRequest
     }
 
     // ------------------------------------------------------------------------
-    public ServletParameterMap getServletParameterMap()
-    {
-        return theServletParameterMap;
-    }
-
-    // ------------------------------------------------------------------------
-    public PortletParameterMap getParameterMap()
-    {
-        return theParameterMap;
-    }
-
-    // ------------------------------------------------------------------------
     public ArgumentsUser getAppUser()
     {
         return theUser;
@@ -71,9 +63,23 @@ public class ArgsRequest
     public void execute()
     {
         Logger.log("\n======= NEW REQUEST ===========\n");
-        ArgsRequest4 myRequest2 = new ArgsRequest4(
-                this, new UrlContainer(), CgiSource.PORTLET,
-                UpdateState.YES);
-        myRequest2.execute();
+        
+        ArgsRequest myRequest = this;
+        UrlContainer myUrlContainer = new UrlContainer();
+        CgiSource myStateInputMode = CgiSource.PORTLET;
+        UpdateState myUpdateState = UpdateState.YES;
+        
+        ArgsRequest2 myAR2 = new ArgsRequest2(
+                myRequest, myUrlContainer,
+                myStateInputMode, myUpdateState, null);
+        // This method performs a state update twice. First here:
+        ArgsStatefulCommand myArgsRequest =
+                TheContainerBridge.i().storeStateGetArgumentsRequest(myAR2);
+        // Not here, which is where you would want it
+        ArgsState myState = myArgsRequest.execute();
+        StateChange myStateString = myState.getStateString();
+        assertTrue(myStateString.hasChange());
+        // Then a second time here:
+        myStateString.mergeAndStore(myRequest.getAppUser());
     }    
 }

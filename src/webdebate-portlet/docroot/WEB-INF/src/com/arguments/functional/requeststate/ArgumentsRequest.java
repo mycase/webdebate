@@ -27,10 +27,11 @@ public class ArgumentsRequest extends ArgsRequest3
     // ------------------------------------------------------------------------
     void execute(ArgsState aState)
     {
+        Command myCommand;
         RequestParser myParser =
                 new RequestParser(getUser(), theRequestMap);
         
-        Command myCommand = myParser.parseCommand();
+        myCommand = myParser.parseCommand();
         myCommand.execute(aState);
     }
 }

@@ -45,7 +45,6 @@ public class ArgsActionRequest extends ArgsRequest
 
         // This method performs a state update twice. First here:
         PortalArgsBridge.assureConnect();
-        final ArgumentsUser myAppUser = getAppUser();
 
         final CgiParameterMap myParameterMap = 
                 getCgiParameterMap(getStateInputMode());
@@ -55,17 +54,17 @@ public class ArgsActionRequest extends ArgsRequest
                 myParameterMap);
 
         Command myCommand = 
-                RequestParser.getCommand(myAppUser, myProtocolMap);
+                RequestParser.getCommand(getAppUser(), myProtocolMap);
 
         if (getUpdateState() == UpdateState.YES)
         {
             StateChange myStateChange = new StateChange(myProtocolMap);
             if (myStateChange.hasChange())
             {
-                myStateChange.mergeAndStore(myAppUser);
+                myStateChange.mergeAndStore(getAppUser());
             }
         }
-        ArgsState myArgsState = PortalArgsBridge.getState(myAppUser);
+        ArgsState myArgsState = PortalArgsBridge.getState(getAppUser());
         myStateCommand = new ArgsStatefulCommand(myCommand, myArgsState);
 
         // Not here, which is where you would want it
@@ -77,13 +76,13 @@ public class ArgsActionRequest extends ArgsRequest
     }
 
     // ------------------------------------------------------------------------
-    public CgiSource getStateInputMode()
+    private CgiSource getStateInputMode()
     {
         return theStateInputMode;
     }
 
     // ------------------------------------------------------------------------
-    public UpdateState getUpdateState()
+    private UpdateState getUpdateState()
     {
         return theUpdateState;
     }

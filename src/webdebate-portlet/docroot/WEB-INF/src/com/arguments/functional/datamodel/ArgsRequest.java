@@ -20,6 +20,9 @@ import com.arguments.support.ServletParameterMap;
  *
  */
 
+// Not so clear what the difference is between this class and
+// ArgsStatefulCommand
+
 public class ArgsRequest
 {
     private final PortletParameterMap theParameterMap;

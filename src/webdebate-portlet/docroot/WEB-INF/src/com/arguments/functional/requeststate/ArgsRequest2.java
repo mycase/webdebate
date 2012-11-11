@@ -5,7 +5,6 @@ package com.arguments.functional.requeststate;
 
 import com.arguments.functional.datamodel.ArgsErrorHandler;
 import com.arguments.functional.datamodel.ArgsRequest;
-import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.report.html.UrlContainer;
 import com.arguments.functional.requeststate.PortalArgsBridge.CgiSource;
 import com.arguments.functional.requeststate.PortalArgsBridge.UpdateState;

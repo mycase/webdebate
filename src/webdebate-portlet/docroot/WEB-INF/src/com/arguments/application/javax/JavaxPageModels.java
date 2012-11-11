@@ -132,8 +132,8 @@ public class JavaxPageModels
         Logger.log("\nRender call");
         ArgsRequest myArgsRequest = TheContainerBridge.i().newArgsRequest(aRequest);
         final ArgsErrorHandler myErrorHandler =
-                TheContainerBridge.i().newErrorHandler(aRequest, myArgsRequest.getAppUser());
-
+                TheContainerBridge.i().newErrorHandler(
+                        aRequest, myArgsRequest.getAppUser());
         
         ArgsRequest2 myRequest = new ArgsRequest2(
                         myArgsRequest, aUrlContainer,

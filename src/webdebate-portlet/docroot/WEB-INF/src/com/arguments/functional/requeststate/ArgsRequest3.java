@@ -42,6 +42,14 @@ public class ArgsRequest3
     }
     
     // ------------------------------------------------------------------------
+    public ArgsRequest3(
+            ArgumentsUser anAppUser,
+            ProtocolMap aMap)
+    {
+        this(anAppUser, new UrlContainer(), aMap);
+    }
+
+    // ------------------------------------------------------------------------
     RelationId getRelationId()
     {
         return theRelationId;

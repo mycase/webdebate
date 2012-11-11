@@ -10,6 +10,7 @@ import com.arguments.functional.datamodel.Perspective;
 import com.arguments.functional.datamodel.ThesisId;
 import com.arguments.functional.report.ThesisFocusData;
 import com.arguments.functional.requeststate.ArgsStatefulRequest;
+import com.arguments.functional.requeststate.ArgsStatefulRequest3;
 import com.arguments.functional.requeststate.ProtocolMap;
 import com.arguments.functional.store.TheArgsStore;
 
@@ -22,7 +23,7 @@ public class ThesisFocusPage
     private final ArgumentsUser theAppUser;
     private final Perspective thePerspective;
     private final ThesisId theThesisId;
-    private final ArgsStatefulRequest theRequest;
+    private final ArgsStatefulRequest3 theRequest;
     
     // ------------------------------------------------------------------------
     public static String getHtmlBody(
@@ -36,7 +37,7 @@ public class ThesisFocusPage
     }
 
     // ------------------------------------------------------------------------
-    static ThesisFocusData getData(ArgsStatefulRequest aRequest)
+    static ThesisFocusData getData(ArgsStatefulRequest3 aRequest)
     {
         final ThesisFocusPage theThesisFocusPage =
                 new ThesisFocusPage(aRequest);
@@ -59,7 +60,7 @@ public class ThesisFocusPage
     /**
      * @param aRequest
      */
-    private ThesisFocusPage(ArgsStatefulRequest aRequest)
+    private ThesisFocusPage(ArgsStatefulRequest3 aRequest)
     {
         theAppUser = aRequest.getUser();
         theThesisId = aRequest.getState().getThesisId();

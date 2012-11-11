@@ -69,21 +69,22 @@ public abstract class PortalArgsBridge
                 .getCgiParameterMap(aRequest2.getStateInputMode());
 
         assertNotSame(myParameterMap, null);
-        ProtocolMap myProtocolMap =  getProtocolMap(myParameterMap);
-
-        ArgsRequest3 myArgRequest = new ArgsRequest3(myAppUser,
-                aRequest2.getUrlContainer(), myProtocolMap);
+        final ProtocolMap myProtocolMap =  getProtocolMap(myParameterMap);
 
         if (aRequest2.getUpdateState() == UpdateState.YES)
         {
-            StateChange myStateChange = myArgRequest
-                    .getStateChange();
+            StateChange myStateChange =
+                    new StateChange(myProtocolMap);
             if (myStateChange.hasChange())
             {
                 myStateChange.mergeAndStore(myAppUser);
             }
         }
         ArgsState myArgsState = getState(myAppUser);
+
+        ArgsRequest3 myArgRequest = new ArgsRequest3(myAppUser,
+                aRequest2.getUrlContainer(), myProtocolMap);
+
         return new ArgsStatefulRequest3(myArgRequest, myArgsState);
     }
 

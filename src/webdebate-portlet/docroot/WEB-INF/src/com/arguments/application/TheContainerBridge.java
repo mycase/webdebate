@@ -19,6 +19,4 @@ public class TheContainerBridge
     {
         return theInstance;
     }
-    
-
 }

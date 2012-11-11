@@ -6,6 +6,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import com.arguments.application.liferay.LiferayArgsRequestKey;
+import com.arguments.functional.command.Command;
 import com.arguments.functional.datamodel.ArgsRequest;
 import com.arguments.functional.datamodel.ArgsState;
 import com.arguments.functional.datamodel.ArgumentsUser;
@@ -363,7 +364,7 @@ public class ArgsStatefulRequest_Tester
         myRequestMap.put(ArgsRequestKey.PERSPECTIVE_ID,
                 "" + aPerspectiveId.getIdString() );
 
-        ArgumentsRequest myRequest1 = ArgumentsRequest.getRequest(
+        Command myRequest1 = ArgumentsRequest.getRequest(
                 myAppUser, myRequestMap);
 
         return new ArgsStatefulRequest(myRequest1,
@@ -383,7 +384,7 @@ public class ArgsStatefulRequest_Tester
         myRequestMap.put(ArgsRequestKey.NEW_THESIS_OPINION,
                  "" + anOpinion );
 
-        ArgumentsRequest myRequest = ArgumentsRequest.getRequest(
+        Command myRequest = ArgumentsRequest.getRequest(
                 myAppUser, myRequestMap);
 
         return new ArgsStatefulRequest(myRequest,
@@ -401,7 +402,7 @@ public class ArgsStatefulRequest_Tester
         myRequestMap.put(ArgsRequestKey.NEW_THESIS_OPINION2,
                  "" + anOpinion.getPercentage() );
 
-        ArgumentsRequest myRequest = ArgumentsRequest.getRequest(
+        Command myRequest = ArgumentsRequest.getRequest(
                 anArgUser, myRequestMap);
 
         return new ArgsStatefulRequest(myRequest,
@@ -434,7 +435,7 @@ public class ArgsStatefulRequest_Tester
         myRequestMap.put(ArgsRequestKey.THESIS_OPINION,
                 "" + ThesisOpinion.TRUE_I );
 
-        ArgumentsRequest myRequest = ArgumentsRequest.getRequest(
+        Command myRequest = ArgumentsRequest.getRequest(
                 myModifier, myRequestMap);
 
         return new ArgsStatefulRequest(myRequest,
@@ -467,7 +468,7 @@ public class ArgsStatefulRequest_Tester
         for (String myString:myRequestMap.values())
             assert !myString.startsWith("com");
 
-        ArgumentsRequest myRequest1 = ArgumentsRequest.getRequest(
+        Command myRequest1 = ArgumentsRequest.getRequest(
                 myAppUser, myRequestMap);
 
         return new ArgsStatefulRequest(myRequest1,
@@ -503,7 +504,7 @@ public class ArgsStatefulRequest_Tester
         myRequestMap.put(ArgsRequestKey.PREMISE_OPINION,
                 "" + myPremiseProbability );
 
-        ArgumentsRequest myRequest1 = ArgumentsRequest.getRequest(
+        Command myRequest1 = ArgumentsRequest.getRequest(
                 myAppUser, myRequestMap);
 
         ArgsStatefulRequest myRequest = new ArgsStatefulRequest(myRequest1,

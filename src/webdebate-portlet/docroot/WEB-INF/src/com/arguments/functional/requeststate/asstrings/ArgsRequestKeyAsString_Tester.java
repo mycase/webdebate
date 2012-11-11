@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.w3c.tidy.Tidy;
 
+import com.arguments.functional.command.Command;
 import com.arguments.functional.datamodel.ArgsState;
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.datamodel.ArgumentsUserId;
@@ -109,7 +110,7 @@ public class ArgsRequestKeyAsString_Tester
         myRequestMap.put(ArgsRequestKey.PREMISE_OPINION,
                 "" + ThesisOpinion.NEUTRAL_I);
 
-        ArgumentsRequest myRequest1 = ArgumentsRequest.getRequest(
+        Command myRequest1 = ArgumentsRequest.getRequest(
                 myAppUser,
                 myRequestMap);
 

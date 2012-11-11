@@ -3,6 +3,7 @@
  */
 package com.arguments.functional.requeststate;
 
+import com.arguments.functional.command.Command;
 import com.arguments.functional.datamodel.ArgsState;
 
 /**
@@ -11,11 +12,11 @@ import com.arguments.functional.datamodel.ArgsState;
  */
 public class ArgsStatefulRequest // extends ArgsStatefulRequest3
 {
-    private final ArgumentsRequest theRequest;
+    private final Command theRequest;
     private final ArgsState theState;
     
     // ------------------------------------------------------------------------
-    public ArgsStatefulRequest(ArgumentsRequest aRequest, ArgsState aState)
+    public ArgsStatefulRequest(Command aRequest, ArgsState aState)
     {
         //super(aRequest, aState);
         theState = aState;
@@ -25,7 +26,7 @@ public class ArgsStatefulRequest // extends ArgsStatefulRequest3
     // ------------------------------------------------------------------------
     public ArgsState execute()
     {
-        theRequest.getCommand().execute(theState);
+        theRequest.execute(theState);
         return theState;
     }
 }

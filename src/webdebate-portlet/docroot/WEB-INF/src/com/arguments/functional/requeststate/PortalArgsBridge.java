@@ -2,6 +2,7 @@ package com.arguments.functional.requeststate;
 
 import static org.junit.Assert.*;
 
+import com.arguments.functional.command.Command;
 import com.arguments.functional.datamodel.ArgsRequest;
 import com.arguments.functional.datamodel.ArgsState;
 import com.arguments.functional.datamodel.ArgumentsUser;
@@ -40,7 +41,7 @@ public abstract class PortalArgsBridge
         assertNotSame(myParameterMap, null);
         ProtocolMap myProtocolMap =  getProtocolMap(myParameterMap);
 
-        ArgumentsRequest myArgRequest =
+        Command myArgRequest =
                 ArgumentsRequest.getRequest(myAppUser, myProtocolMap);
         
         

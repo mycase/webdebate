@@ -19,11 +19,11 @@ public class ArgumentsRequest
     }
 
     // ------------------------------------------------------------------------
-    public static ArgumentsRequest getRequest(
+    public static Command getRequest(
             ArgumentsUser anAppUser,
             ProtocolMap aProtocolMap)
     {
-        return new ArgumentsRequest(anAppUser, aProtocolMap);
+        return new ArgumentsRequest(anAppUser, aProtocolMap).getCommand();
     }
     
     // ------------------------------------------------------------------------

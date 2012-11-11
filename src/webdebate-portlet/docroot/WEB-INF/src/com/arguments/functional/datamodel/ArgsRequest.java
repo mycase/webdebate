@@ -64,22 +64,21 @@ public class ArgsRequest
     {
         Logger.log("\n======= NEW REQUEST ===========\n");
         
-        ArgsRequest myRequest = this;
         UrlContainer myUrlContainer = new UrlContainer();
         CgiSource myStateInputMode = CgiSource.PORTLET;
         UpdateState myUpdateState = UpdateState.YES;
         
         ArgsRequest2 myAR2 = new ArgsRequest2(
-                myRequest, myUrlContainer,
+                this, myUrlContainer,
                 myStateInputMode, myUpdateState, null);
         // This method performs a state update twice. First here:
-        ArgsStatefulCommand myArgsRequest =
+        ArgsStatefulCommand myStateCommand =
                 TheContainerBridge.i().storeStateGetArgumentsRequest(myAR2);
         // Not here, which is where you would want it
-        ArgsState myState = myArgsRequest.execute();
+        ArgsState myState = myStateCommand.execute();
         StateChange myStateString = myState.getStateString();
         assertTrue(myStateString.hasChange());
         // Then a second time here:
-        myStateString.mergeAndStore(myRequest.getAppUser());
+        myStateString.mergeAndStore(getAppUser());
     }    
 }

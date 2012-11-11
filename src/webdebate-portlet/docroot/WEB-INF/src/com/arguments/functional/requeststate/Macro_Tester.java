@@ -10,7 +10,7 @@ import java.io.FileReader;
 import org.junit.Test;
 
 import com.arguments.Deployment;
-import com.arguments.functional.datamodel.ArgsRequest;
+import com.arguments.functional.datamodel.ArgsActionRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -43,7 +43,7 @@ public class Macro_Tester
     */
     
     // ------------------------------------------------------------------------
-    static ArgsRequest getRequest(String aShortFileName)
+    static ArgsActionRequest getRequest(String aShortFileName)
     {
         Gson myGson = new GsonBuilder().create();
 
@@ -60,7 +60,7 @@ public class Macro_Tester
         
         BufferedReader myReader = new BufferedReader(myFileReader);
 
-        ArgsRequest myRequest = myGson.fromJson(myReader, ArgsRequest.class);
+        ArgsActionRequest myRequest = myGson.fromJson(myReader, ArgsActionRequest.class);
         return myRequest;
     }
 }

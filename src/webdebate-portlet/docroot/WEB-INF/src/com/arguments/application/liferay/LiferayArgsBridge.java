@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.arguments.application.ContainerException;
 import com.arguments.application.javax.JavaxArgsBridge;
+import com.arguments.functional.datamodel.ArgsActionRequest;
 import com.arguments.functional.datamodel.ArgsErrorHandler;
-import com.arguments.functional.datamodel.ArgsRequest;
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.datamodel.ForeignUserId;
 import com.arguments.functional.report.PerspectiveNotOwnedException;
@@ -51,7 +51,7 @@ public class LiferayArgsBridge extends JavaxArgsBridge
 
         try
         {
-            ArgsRequest myRequest = newArgsRequest(anActionRequest);
+            ArgsActionRequest myRequest = newArgsActionRequest(anActionRequest);
             Logger.logAction(myRequest);
             myRequest.execute();
         }

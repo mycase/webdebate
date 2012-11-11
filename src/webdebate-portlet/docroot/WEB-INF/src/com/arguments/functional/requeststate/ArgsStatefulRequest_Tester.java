@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 
 import com.arguments.application.liferay.LiferayArgsRequestKey;
 import com.arguments.functional.command.Command;
+import com.arguments.functional.datamodel.ArgsActionRequest;
 import com.arguments.functional.datamodel.ArgsRequest;
 import com.arguments.functional.datamodel.ArgsState;
 import com.arguments.functional.datamodel.ArgumentsUser;
@@ -249,8 +250,8 @@ public class ArgsStatefulRequest_Tester
                 new String[]{myPerspectiveId1.getIdString()});
         ServletParameterMap mySParameterMap1 = new ServletParameterMap();
         
-        ArgsRequest myRequest1 =
-                new ArgsRequest(myPParameterMap1, mySParameterMap1, myUser2);
+        ArgsActionRequest myRequest1 =
+                new ArgsActionRequest(myPParameterMap1, mySParameterMap1, myUser2);
         myRequest1.execute();
         
         //User2 tries to write his own opinion
@@ -260,8 +261,8 @@ public class ArgsStatefulRequest_Tester
                 new String[]{"0"});
         ServletParameterMap mySParameterMap2 = new ServletParameterMap();
         
-        ArgsRequest myRequest2 =
-                new ArgsRequest(myPParameterMap2, mySParameterMap2, myUser2);
+        ArgsActionRequest myRequest2 =
+                new ArgsActionRequest(myPParameterMap2, mySParameterMap2, myUser2);
 
         try
         {

@@ -6,6 +6,7 @@ import javax.portlet.RenderRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import com.arguments.application.TheContainerBridge;
+import com.arguments.functional.datamodel.ArgsActionRequest;
 import com.arguments.functional.datamodel.ArgsErrorHandler;
 import com.arguments.functional.datamodel.ArgsRequest;
 import com.arguments.functional.datamodel.ArgumentsUser;
@@ -29,6 +30,21 @@ public abstract class JavaxArgsBridge extends PortalArgsBridge
         ArgumentsUser myUser = TheContainerBridge.i().getAppUser(aRequest);
 
         return new ArgsRequest(
+                myParameterMap, myServletParameterMap, myUser);
+    }
+    
+    // ------------------------------------------------------------------------
+    public ArgsActionRequest newArgsActionRequest(PortletRequest aRequest)
+    {
+        PortletParameterMap myParameterMap =
+                new PortletParameterMap(aRequest.getParameterMap());
+        ServletParameterMap myServletParameterMap = new ServletParameterMap(
+            TheContainerBridge.i().
+                getOriginalServletRequest(aRequest).getParameterMap());
+        TheArgsStore.i().assureConnect();
+        ArgumentsUser myUser = TheContainerBridge.i().getAppUser(aRequest);
+
+        return new ArgsActionRequest(
                 myParameterMap, myServletParameterMap, myUser);
     }
     

@@ -25,8 +25,8 @@ import com.arguments.support.ServletParameterMap;
  */
 public class ArgsActionRequest extends ArgsRequest
 {
-    private final CgiSource theStateInputMode;
-    private final UpdateState theUpdateState;
+    private final static CgiSource theStateInputMode = CgiSource.PORTLET;
+    private final static UpdateState theUpdateState = UpdateState.YES;
     private ArgsStatefulCommand myStateCommand;
 
     // ------------------------------------------------------------------------
@@ -34,8 +34,6 @@ public class ArgsActionRequest extends ArgsRequest
             ServletParameterMap aServletParameterMap, ArgumentsUser aUser)
     {
         super(aParameterMap, aServletParameterMap, aUser);
-        theStateInputMode = CgiSource.PORTLET;
-        theUpdateState = UpdateState.YES;
     }
 
     // ------------------------------------------------------------------------
@@ -46,23 +44,19 @@ public class ArgsActionRequest extends ArgsRequest
         // This method performs a state update twice. First here:
         PortalArgsBridge.assureConnect();
 
-        final CgiParameterMap myParameterMap = 
-                getCgiParameterMap(getStateInputMode());
+        final CgiParameterMap myParameterMap = getCgiParameterMap(getStateInputMode());
 
         assertNotNull(myParameterMap);
         ProtocolMap myProtocolMap = TheContainerBridge.i().getProtocolMap(
                 myParameterMap);
 
-        Command myCommand = 
-                RequestParser.getCommand(getAppUser(), myProtocolMap);
+        Command myCommand = RequestParser.getCommand(getAppUser(),
+                myProtocolMap);
 
-        if (getUpdateState() == UpdateState.YES)
+        StateChange myStateChange = new StateChange(myProtocolMap);
+        if (myStateChange.hasChange())
         {
-            StateChange myStateChange = new StateChange(myProtocolMap);
-            if (myStateChange.hasChange())
-            {
-                myStateChange.mergeAndStore(getAppUser());
-            }
+            myStateChange.mergeAndStore(getAppUser());
         }
         ArgsState myArgsState = PortalArgsBridge.getState(getAppUser());
         myStateCommand = new ArgsStatefulCommand(myCommand, myArgsState);

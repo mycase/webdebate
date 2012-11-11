@@ -29,8 +29,8 @@ import com.arguments.functional.requeststate.ArgsRequest3;
 import com.arguments.functional.requeststate.ArgsRequestKey;
 import com.arguments.functional.requeststate.ArgsStatefulRequest;
 import com.arguments.functional.requeststate.ArgsStatefulRequest3;
-import com.arguments.functional.requeststate.ArgumentsRequest;
 import com.arguments.functional.requeststate.ProtocolMap;
+import com.arguments.functional.requeststate.RequestParser;
 import com.arguments.functional.store.TheArgsStore;
 
 public class ArgsRequestKeyAsString_Tester
@@ -110,7 +110,7 @@ public class ArgsRequestKeyAsString_Tester
         myRequestMap.put(ArgsRequestKey.PREMISE_OPINION,
                 "" + ThesisOpinion.NEUTRAL_I);
 
-        Command myRequest1 = ArgumentsRequest.getRequest(
+        Command myRequest1 = RequestParser.getRequest(
                 myAppUser,
                 myRequestMap);
 

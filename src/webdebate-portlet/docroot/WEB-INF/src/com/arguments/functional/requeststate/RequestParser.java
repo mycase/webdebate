@@ -31,6 +31,17 @@ public class RequestParser
     private final ProtocolMap theRequestMap;
 
     // ------------------------------------------------------------------------
+    public static Command getRequest(
+            ArgumentsUser anAppUser,
+            ProtocolMap aProtocolMap)
+    {
+        RequestParser myParser =
+                new RequestParser(anAppUser, aProtocolMap);
+        
+        Command theCommand = myParser.parseCommand();
+        return theCommand;
+    }
+    // ------------------------------------------------------------------------
     public RequestParser(
             ArgumentsUser anAppUser,
             ProtocolMap aRequestMap)

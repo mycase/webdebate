@@ -1,7 +1,6 @@
 package com.arguments.functional.requeststate;
 
 import com.arguments.functional.command.Command;
-import com.arguments.functional.datamodel.ArgsState;
 import com.arguments.functional.datamodel.ArgumentsUser;
 
 public class ArgumentsRequest
@@ -20,8 +19,8 @@ public class ArgumentsRequest
     }
 
     // ------------------------------------------------------------------------
-    void execute(ArgsState aState)
+    Command getCommand()
     {
-        theCommand.execute(aState);
+        return theCommand;
     }
 }

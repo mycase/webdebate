@@ -25,7 +25,7 @@ public class ArgsStatefulRequest // extends ArgsStatefulRequest3
     // ------------------------------------------------------------------------
     public ArgsState execute()
     {
-        theRequest.execute(theState);
+        theRequest.getCommand().execute(theState);
         return theState;
     }
 }

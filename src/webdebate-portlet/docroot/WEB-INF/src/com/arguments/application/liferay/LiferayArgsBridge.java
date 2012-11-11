@@ -42,7 +42,13 @@ public class LiferayArgsBridge extends JavaxArgsBridge
     // ------------------------------------------------------------------------
     @Override
     public void processAction(ActionRequest anActionRequest)
+    // Concerns:
+    //   1. Get rid of javax.ActionRequest
+    //   2. Extract user & error handlers from portal
+    //   3. Execute request.
     {
+        Logger.log("\nprocessAction");
+
         try
         {
             ArgsRequest myRequest = newArgsRequest(anActionRequest);

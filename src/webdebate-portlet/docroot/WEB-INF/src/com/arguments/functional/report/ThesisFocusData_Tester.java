@@ -40,7 +40,7 @@ public class ThesisFocusData_Tester
         ThesisId myThesisId = ArgsStatefulRequest_Tester.insertOpinion();
 
         ArgsReadOnlyState myState = myUser1.getState(); 
-        assert myState.getThesisId().equals(myThesisId);
+        assertEquals( myState.getThesisId(), myThesisId);
         
         Perspective myPers1 = myUser1.getDefaultPerspective();
         ThesisFocusData myData = new ThesisFocusData(myThesisId, myPers1);

@@ -100,6 +100,7 @@ public class ArgsRequestKeyAsString_Tester
         ArgsState myState = TheArgsStore.i().selectState(myAppUser);
         assertNotSame( myState.getPerspectiveId(), PerspectiveId.getThesisOwner());
         assertEquals(ArgumentsUser_Tester.getMailAddress(2), myAppUser.getEmailAddress());
+        
         ProtocolMap myRequestMap = new ProtocolMap();
         myRequestMap.put(ArgsRequestKey.PREMISE_TEXT,
                 "This premise is true.");
@@ -110,18 +111,13 @@ public class ArgsRequestKeyAsString_Tester
         myRequestMap.put(ArgsRequestKey.PREMISE_OPINION,
                 "" + ThesisOpinion.NEUTRAL_I);
 
-        Command myRequest1 = RequestParser.getCommand(
+        Command myCommand = RequestParser.getCommand(
                 myAppUser,
                 myRequestMap);
 
-        ArgsStatefulCommand myRequest = new ArgsStatefulCommand(myRequest1,
+        ArgsStatefulCommand myStateCommand = new ArgsStatefulCommand(myCommand,
                 new ArgsState(ThesisId.ONE, RelationId.BONE, myAppUser.getDefaultPerspective()));
-        myRequest.execute();
-        //String myHtml = ThesisFocusPage.getHtmlBody(
-        //        myRequest, ArgsRequestKeyAsString.getProtocolMap());
-        // System.out.println(myWebPage.getHtml());
-
-        // tidyParse(myHtml);
+        myStateCommand.execute();
     }
 
     // ------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 package com.arguments.application.liferay;
 
-import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.*;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletRequest;
@@ -76,7 +76,7 @@ public class LiferayArgsBridge extends JavaxArgsBridge
     @Override
     public ProtocolMap getProtocolMap(CgiParameterMap aParameterMap)
     {
-        assertNotSame(aParameterMap, null);
+        assertNotNull(aParameterMap);
         return LiferayArgsRequestKey.getProtocolMap(aParameterMap);
     }
     

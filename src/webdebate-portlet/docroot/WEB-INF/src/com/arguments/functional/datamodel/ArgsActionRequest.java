@@ -13,7 +13,6 @@ import com.arguments.functional.requeststate.ProtocolMap;
 import com.arguments.functional.requeststate.RequestParser;
 import com.arguments.functional.requeststate.StateChange;
 import com.arguments.functional.requeststate.PortalArgsBridge.CgiSource;
-import com.arguments.functional.requeststate.PortalArgsBridge.UpdateState;
 import com.arguments.support.CgiParameterMap;
 import com.arguments.support.Logger;
 import com.arguments.support.PortletParameterMap;
@@ -26,7 +25,8 @@ import com.arguments.support.ServletParameterMap;
 public class ArgsActionRequest extends ArgsRequest
 {
     private ArgsStatefulCommand myStateCommand;
-
+    private CgiParameterMap myParameterMap;
+    
     // ------------------------------------------------------------------------
     public ArgsActionRequest(PortletParameterMap aParameterMap,
             ServletParameterMap aServletParameterMap, ArgumentsUser aUser)
@@ -40,23 +40,25 @@ public class ArgsActionRequest extends ArgsRequest
         Logger.log("\n======= NEW REQUEST ===========\n");
 
         // This method performs a state update twice. First here:
-        PortalArgsBridge.assureConnect();
 
-        final CgiParameterMap myParameterMap = getCgiParameterMap(CgiSource.PORTLET);
+        PortalArgsBridge.assureConnect();
+        // These lines cannot be lifted to the Constructor because
+        // macro testcases will not set their values as fields.
+        myParameterMap = getCgiParameterMap(CgiSource.PORTLET);
 
         assertNotNull(myParameterMap);
-        ProtocolMap myProtocolMap = TheContainerBridge.i().getProtocolMap(
+        final ProtocolMap myProtocolMap = TheContainerBridge.i().getProtocolMap(
                 myParameterMap);
 
-        Command myCommand = RequestParser.getCommand(getAppUser(),
+        final Command myCommand = RequestParser.getCommand(getAppUser(),
                 myProtocolMap);
 
-        StateChange myStateChange = new StateChange(myProtocolMap);
+        final StateChange myStateChange = new StateChange(myProtocolMap);
         if (myStateChange.hasChange())
         {
             myStateChange.mergeAndStore(getAppUser());
         }
-        ArgsState myArgsState = PortalArgsBridge.getState(getAppUser());
+        final ArgsState myArgsState = PortalArgsBridge.getState(getAppUser());
         myStateCommand = new ArgsStatefulCommand(myCommand, myArgsState);
 
         // Not here, which is where you would want it

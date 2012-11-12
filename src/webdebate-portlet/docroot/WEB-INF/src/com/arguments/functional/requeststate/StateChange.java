@@ -43,7 +43,7 @@ public class StateChange
     public StateChange(ProtocolMap aRequestMap)
     {
         this(
-            ThesisId.parse(aRequestMap.get(ArgsRequestKey.THESIS_ID)),
+            null, // ThesisId.parse(aRequestMap.get(ArgsRequestKey.THESIS_ID)),
             null,
             PerspectiveId.parsePerspectiveId(aRequestMap.get(ArgsRequestKey.NEW_PERSPECTIVE_ID))
             );

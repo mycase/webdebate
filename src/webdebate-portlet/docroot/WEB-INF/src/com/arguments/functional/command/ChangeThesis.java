@@ -24,6 +24,6 @@ public class ChangeThesis implements Command
         @Override
         public void execute(ArgsState aState)
         {
-            // nothing here at the moment, because of seperate cgi2state channel.
+            aState.setThesisId(theFocusThesisId);
         }
 }

@@ -90,38 +90,6 @@ public class ArgsRequestKeyAsString_Tester
 
     // ------------------------------------------------------------------------
     /**
-     * Tests the insertion of a premise
-     */
-    @Test
-    public void test2()
-    {
-        ArgumentsUser myAppUser = TheArgsStore.i()
-                .selectUserById(ArgumentsUserId.TEST2);
-        ArgsState myState = TheArgsStore.i().selectState(myAppUser);
-        assertNotSame( myState.getPerspectiveId(), PerspectiveId.getThesisOwner());
-        assertEquals(ArgumentsUser_Tester.getMailAddress(2), myAppUser.getEmailAddress());
-        
-        ProtocolMap myRequestMap = new ProtocolMap();
-        myRequestMap.put(ArgsRequestKey.PREMISE_TEXT,
-                "This premise is true.");
-        myRequestMap.put(ArgsRequestKey.PREMISE_IF_TRUE_WEIGHT,
-                "0" );
-        myRequestMap.put(ArgsRequestKey.PREMISE_IF_FALSE_WEIGHT,
-                 "10" );
-        myRequestMap.put(ArgsRequestKey.PREMISE_OPINION,
-                "" + ThesisOpinion.NEUTRAL_I);
-
-        Command myCommand = RequestParser.getCommand(
-                myAppUser,
-                myRequestMap);
-
-        ArgsStatefulCommand myStateCommand = new ArgsStatefulCommand(myCommand,
-                new ArgsState(ThesisId.ONE, RelationId.BONE, myAppUser.getDefaultPerspective()));
-        myStateCommand.execute();
-    }
-
-    // ------------------------------------------------------------------------
-    /**
      * Tests the rendering of a thesis focus page.
      */
     @Test

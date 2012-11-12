@@ -22,6 +22,14 @@ import com.arguments.support.ServletParameterMap;
  * @author mirleau
  * 
  */
+// Two concerns:
+//   1. To take over from foreign requests as soon
+//   as possible, and provide an entry point for
+//   testcases that simulate foreign requests, like Macro_Tester.
+//   2. To execute state changes.
+// TODO: Separate these two concerns by moving state change functionality
+//   to ArgsStatefulCommand
+
 public class ArgsActionRequest extends ArgsRequest
 {
     private ArgsStatefulCommand myStateCommand;

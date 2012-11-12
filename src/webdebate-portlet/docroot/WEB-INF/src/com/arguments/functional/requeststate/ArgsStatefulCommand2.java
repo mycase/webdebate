@@ -26,6 +26,8 @@ public class ArgsStatefulCommand2
     }
     
     // ------------------------------------------------------------------------
+    // This method would be clearer if there would be no writing in the argument
+    // variable myArgsState during theCommand.execute().
     public void execute()
     {
         final ArgsState myArgsState = PortalArgsBridge.getState(theAppUser);

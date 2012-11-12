@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 
 import com.arguments.application.TheContainerBridge;
 import com.arguments.functional.command.Command;
-import com.arguments.functional.requeststate.ArgsStatefulCommand;
+import com.arguments.functional.requeststate.ArgsStatefulCommand2;
 import com.arguments.functional.requeststate.PortalArgsBridge;
 import com.arguments.functional.requeststate.ProtocolMap;
 import com.arguments.functional.requeststate.RequestParser;
@@ -32,9 +32,6 @@ import com.arguments.support.ServletParameterMap;
 
 public class ArgsActionRequest extends ArgsRequest
 {
-    private ArgsStatefulCommand myStateCommand;
-    private CgiParameterMap myParameterMap;
-    
     // ------------------------------------------------------------------------
     public ArgsActionRequest(PortletParameterMap aParameterMap,
             ServletParameterMap aServletParameterMap, ArgumentsUser aUser)
@@ -47,12 +44,10 @@ public class ArgsActionRequest extends ArgsRequest
     {
         Logger.log("\n======= NEW REQUEST ===========\n");
 
-        // This method performs a state update twice. First here:
-
         PortalArgsBridge.assureConnect();
         // These lines cannot be lifted to the Constructor because
         // macro testcases will not set their values as fields.
-        myParameterMap = getCgiParameterMap(CgiSource.PORTLET);
+        CgiParameterMap myParameterMap = getCgiParameterMap(CgiSource.PORTLET);
 
         assertNotNull(myParameterMap);
         final ProtocolMap myProtocolMap = TheContainerBridge.i().getProtocolMap(
@@ -62,18 +57,11 @@ public class ArgsActionRequest extends ArgsRequest
                 myProtocolMap);
 
         final StateChange myStateChange = new StateChange(myProtocolMap);
-        if (myStateChange.hasChange())
-        {
-            myStateChange.mergeAndStore(getAppUser());
-        }
-        final ArgsState myArgsState = PortalArgsBridge.getState(getAppUser());
-        myStateCommand = new ArgsStatefulCommand(myCommand, myArgsState);
 
-        // Not here, which is where you would want it
-        ArgsState myState = myStateCommand.execute();
-        StateChange myStateString = myState.getStateString();
-        assertTrue(myStateString.hasChange());
-        // Then a second time here:
-        myStateString.mergeAndStore(getAppUser());
+        ArgsStatefulCommand2 myCommand2 = new ArgsStatefulCommand2(
+                myCommand, getAppUser(), myStateChange);
+        
+        myCommand2.execute();
+        
     }
 }

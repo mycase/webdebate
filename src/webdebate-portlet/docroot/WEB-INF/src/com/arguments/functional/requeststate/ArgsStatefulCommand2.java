@@ -15,35 +15,34 @@ import com.arguments.functional.datamodel.ArgumentsUser;
  */
 public class ArgsStatefulCommand2
 {
-    private final Command myCommand;
+    private final Command theCommand;
     private final ArgumentsUser theAppUser;
-    private final StateChange myStateChange;
+    private final StateChange theStateChange;
 
     // ------------------------------------------------------------------------
     public ArgsStatefulCommand2(Command aCommand, ArgumentsUser aAppUser,
             StateChange aStateChange)
     {
-        myCommand = aCommand;
+        theCommand = aCommand;
         theAppUser = aAppUser;
-        myStateChange = aStateChange;
+        theStateChange = aStateChange;
     }
     
     // ------------------------------------------------------------------------
     public void execute()
     {
         // This method performs a state update twice. First here:
-        if (myStateChange.hasChange())
+        if (theStateChange.hasChange())
         {
-            myStateChange.mergeAndStore(theAppUser);
+            theStateChange.mergeAndStore(theAppUser);
         }
         final ArgsState myArgsState = PortalArgsBridge.getState(theAppUser);
-        ArgsStatefulCommand myStateCommand = new ArgsStatefulCommand(myCommand, myArgsState);
 
         // Not here, which is where you would want it
-        ArgsState myState = myStateCommand.execute();
-        StateChange myStateString = myState.getStateString();
-        assertTrue(myStateString.hasChange());
+        theCommand.execute(myArgsState);
+        StateChange myStateChange = myArgsState.getStateChange();
+        assertTrue(myStateChange.hasChange());
         // Then a second time here:
-        myStateString.mergeAndStore(theAppUser);
+        myStateChange.mergeAndStore(theAppUser);
     }
 }

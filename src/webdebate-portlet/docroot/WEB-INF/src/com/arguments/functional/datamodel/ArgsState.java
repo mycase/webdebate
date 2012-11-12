@@ -61,7 +61,7 @@ public class ArgsState
     /**
      * @return
      */
-    public StateChange getStateString()
+    public StateChange getStateChange()
     {
         return new StateChange(theThesisId, theRelationId, thePerspectiveId);
     }

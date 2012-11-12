@@ -41,6 +41,23 @@ public class RequestParser
         Command theCommand = myParser.parseCommand();
         return theCommand;
     }
+
+    // ------------------------------------------------------------------------
+    public static ArgsStatefulCommand2 getStatefulCommand(
+            ArgumentsUser anAppUser,
+            ProtocolMap aProtocolMap)
+    {
+        final Command myCommand1 =
+                RequestParser.getCommand(anAppUser, aProtocolMap);
+
+        final StateChange myStateChange = new StateChange(aProtocolMap);
+
+        ArgsStatefulCommand2 myCommand2 = new ArgsStatefulCommand2(
+                myCommand1, anAppUser, myStateChange);
+
+        return myCommand2;
+    }
+
     // ------------------------------------------------------------------------
     private RequestParser(
             ArgumentsUser anAppUser,

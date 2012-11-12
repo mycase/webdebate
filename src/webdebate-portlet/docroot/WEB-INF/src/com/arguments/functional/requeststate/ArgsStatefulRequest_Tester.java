@@ -207,7 +207,7 @@ public class ArgsStatefulRequest_Tester
                 getUpdatePerspectiveRequest(myPerspectiveId0);
         
         ArgsState myState = myRequest.execute();
-        StateChange aStateString = myState.getStateString();
+        StateChange aStateString = myState.getStateChange();
         assertNotSame(null, aStateString);
         ArgsState myState1_1 = TheArgsStore.i().selectState(myUser1);
             

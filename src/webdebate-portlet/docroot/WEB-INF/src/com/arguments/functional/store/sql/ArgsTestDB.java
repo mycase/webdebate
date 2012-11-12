@@ -116,7 +116,7 @@ public class ArgsTestDB implements ArgsStore
     
     // ------------------------------------------------------------------------
     @Override
-    public ArgsState selectState(ArgumentsUser aUser)
+    public ArgsState selectState(ArgumentsUserId aUser)
     {
         ifNotConnectedThrowError();
         return theStore.selectState(aUser);

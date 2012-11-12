@@ -44,7 +44,7 @@ public interface ArgsStore
     public abstract long getNrOfOpinions();
 
     // ------------------------------------------------------------------------
-    public abstract ArgsState selectState(ArgumentsUser aUser);
+    public abstract ArgsState selectState(ArgumentsUserId aUser);
 
     // ------------------------------------------------------------------------
     public abstract void assureConnect();

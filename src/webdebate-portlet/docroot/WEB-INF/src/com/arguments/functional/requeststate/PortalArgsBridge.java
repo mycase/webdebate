@@ -6,6 +6,7 @@ import com.arguments.functional.datamodel.ArgsReadOnlyState;
 import com.arguments.functional.datamodel.ArgsRequest;
 import com.arguments.functional.datamodel.ArgsState;
 import com.arguments.functional.datamodel.ArgumentsUser;
+import com.arguments.functional.datamodel.ArgumentsUserId;
 import com.arguments.functional.store.TheArgsStore;
 import com.arguments.support.CgiParameterMap;
 
@@ -59,7 +60,7 @@ public abstract class PortalArgsBridge
     }
 
     // ------------------------------------------------------------------------
-    public static ArgsState getState(ArgumentsUser aUser)
+    public static ArgsState getState(ArgumentsUserId aUser)
     {
         return TheArgsStore.i().selectState(aUser);
     }

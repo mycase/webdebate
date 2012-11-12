@@ -213,7 +213,7 @@ public class ArgsSQLStore implements ArgsStore
 
     // ------------------------------------------------------------------------
     @Override
-    public ArgsState selectState(ArgumentsUser aUser)
+    public ArgsState selectState(ArgumentsUserId aUser)
     {
         ArgsState myState = selectStateNull(aUser);
         if (myState == null)
@@ -479,7 +479,7 @@ public class ArgsSQLStore implements ArgsStore
     }
 
     // ------------------------------------------------------------------------
-    protected static void insertState(ArgsReadOnlyState aState, ArgumentsUser aUser)
+    protected static void insertState(ArgsReadOnlyState aState, ArgumentsUserId aUser)
     {
         assert ! aState.getPerspectiveId().equals(PerspectiveId.VOLATILE);
         int myNrRows = ArgsQuery.INSERT_STATE1.ps().
@@ -563,7 +563,7 @@ public class ArgsSQLStore implements ArgsStore
     }
 
     // ------------------------------------------------------------------------
-    private static ArgsState selectStateNull(ArgumentsUser aUser)
+    private static ArgsState selectStateNull(ArgumentsUserId aUser)
     {
         ArgsDB myQuery = ArgsQuery.SELECT_STATE_BY_USERID.ps();
         myQuery.setUserId(1, aUser);
@@ -1136,7 +1136,7 @@ public class ArgsSQLStore implements ArgsStore
     }
 
     // ------------------------------------------------------------------------
-    private ArgsState createDefaultState(ArgumentsUser aUser)
+    private ArgsState createDefaultState(ArgumentsUserId aUser)
     {
         PerspectiveId myPerspective = getDefaultPerspective(aUser);
         assert myPerspective.isWritable();

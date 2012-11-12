@@ -9,6 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.arguments.functional.datamodel.ArgsActionRequest;
+import com.arguments.functional.datamodel.ArgumentsUserId;
+import com.arguments.functional.datamodel.ThesisId;
 import com.arguments.functional.report.PerspectiveNotOwnedException;
 import com.arguments.functional.store.TheArgsStore;
 import com.arguments.support.CgiParameterMap;
@@ -41,9 +43,15 @@ public class PortalArgsBridge_Tester
         ArgsActionRequest myRequest1 =
                 Macro_Tester.getRequest("MakeYourCase.2012.11.07.23.06.03.actionRequest.json");
         myRequest1.execute();
-        //ArgsActionRequest myRequest2 =
-        //        Macro_Tester.getRequest("MakeYourCase.2012.11.12.23.06.03.actionRequest.json");
-        //myRequest2.execute();
+        assertEquals(
+                PortalArgsBridge.getState(ArgumentsUserId.ONE).getThesisId(),
+                ThesisId.Da13);
+        ArgsActionRequest myRequest2 =
+                Macro_Tester.getRequest("MakeYourCase.2012.11.12.23.06.03.actionRequest.json");
+        myRequest2.execute();
+        assertEquals(
+                PortalArgsBridge.getState(ArgumentsUserId.ONE).getThesisId(),
+                ThesisId.ONE);
     }
 
     // ------------------------------------------------------------------------

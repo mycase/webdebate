@@ -24,7 +24,6 @@ public class ChangeThesis implements Command
         @Override
         public void execute(ArgsState aState)
         {
-            assert (theFocusThesisId.equals(aState.getThesisId()));
             // nothing here at the moment, because of seperate cgi2state channel.
         }
 }

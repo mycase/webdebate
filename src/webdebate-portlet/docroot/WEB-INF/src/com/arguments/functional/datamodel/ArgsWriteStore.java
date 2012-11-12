@@ -10,7 +10,7 @@ package com.arguments.functional.datamodel;
 public interface ArgsWriteStore extends ArgsStore
 {
     // ------------------------------------------------------------------------
-    public abstract void updateState(ArgsState aState);
+    public abstract void updateState(ArgsReadOnlyState aState);
 
     // ------------------------------------------------------------------------
     public abstract ThesisId addThesis(

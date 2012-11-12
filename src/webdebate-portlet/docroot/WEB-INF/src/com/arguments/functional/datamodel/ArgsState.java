@@ -11,7 +11,7 @@ import com.arguments.support.Logger;
  * @author mirleau
  *
  */
-public class ArgsState
+public class ArgsState implements ArgsReadOnlyState
 {
     private ThesisId theThesisId;
     private RelationId theRelationId;
@@ -35,6 +35,7 @@ public class ArgsState
     /**
      * @return theThesisId
      */
+    @Override
     public ThesisId getThesisId()
     {
         return theThesisId;
@@ -61,12 +62,14 @@ public class ArgsState
     /**
      * @return
      */
+    @Override
     public StateChange getStateChange()
     {
         return new StateChange(theThesisId, theRelationId, thePerspectiveId);
     }
     
     // ------------------------------------------------------------------------
+    @Override
     public RelationId getLinkId()
     {
         return theRelationId;
@@ -74,6 +77,7 @@ public class ArgsState
 
     
     // ------------------------------------------------------------------------
+    @Override
     public Perspective getPerspective()
     {
         assert thePerspectiveId != null;
@@ -90,6 +94,7 @@ public class ArgsState
     }
     
     // ------------------------------------------------------------------------
+    @Override
     public PerspectiveId getPerspectiveId()
     {
         return thePerspectiveId;

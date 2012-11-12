@@ -3,7 +3,7 @@
  */
 package com.arguments.functional.requeststate;
 
-import com.arguments.functional.datamodel.ArgsState;
+import com.arguments.functional.datamodel.ArgsReadOnlyState;
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.datamodel.OpinionatedThesis;
 import com.arguments.functional.datamodel.Perspective;
@@ -20,10 +20,10 @@ import com.arguments.functional.store.TheArgsStore;
 public class ArgsStatefulRequest3
 {
     private final ArgsRequest3 theRequest;
-    private final ArgsState theState;
+    private final ArgsReadOnlyState theState;
     
     // ------------------------------------------------------------------------
-    public ArgsStatefulRequest3(ArgsRequest3 aRequest, ArgsState aState)
+    public ArgsStatefulRequest3(ArgsRequest3 aRequest, ArgsReadOnlyState aState)
     {
         theRequest = aRequest;
         theState = aState;
@@ -31,7 +31,7 @@ public class ArgsStatefulRequest3
     }
 
     // ------------------------------------------------------------------------
-    public ArgsState getState()
+    public ArgsReadOnlyState getState()
     {
         return theState;
     }
@@ -75,7 +75,7 @@ public class ArgsStatefulRequest3
     public String getPerspectiveIdText()
     {
         ArgumentsUser myUser = getUser();
-        ArgsState myState = getState();
+        ArgsReadOnlyState myState = getState();
         Perspective myPerspective = myState.getPerspective();
         return myPerspective.getIdString();
     }

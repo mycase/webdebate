@@ -5,7 +5,7 @@ package com.arguments.functional.store.sql;
 
 import static org.junit.Assert.*;
 
-import com.arguments.functional.datamodel.ArgsState;
+import com.arguments.functional.datamodel.ArgsReadOnlyState;
 import com.arguments.functional.datamodel.ArgsWriteStore;
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.datamodel.Perspective;
@@ -36,7 +36,7 @@ public class SecureArgsSQLStore extends ArgsSQLStore implements ArgsWriteStore
         assert aLoginUser != null;
         theLoginUser = aLoginUser;
         
-        ArgsState myState = selectState(theLoginUser);
+        ArgsReadOnlyState myState = selectState(theLoginUser);
         PerspectiveId myPID = myState.getPerspectiveId();
         theWritePerspective = getPerspective(myPID);
         // Can't call checkCanWrite here, because some writes are OK, like
@@ -45,7 +45,7 @@ public class SecureArgsSQLStore extends ArgsSQLStore implements ArgsWriteStore
 
     // ------------------------------------------------------------------------
     @Override
-    public void updateState(ArgsState aState)
+    public void updateState(ArgsReadOnlyState aState)
     {
         Logger.log("Update state");
         ArgsDB myQuery = ArgsQuery.UPDATE_STATE1.ps();

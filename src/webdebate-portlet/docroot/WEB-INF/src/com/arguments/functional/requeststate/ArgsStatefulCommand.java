@@ -4,6 +4,7 @@
 package com.arguments.functional.requeststate;
 
 import com.arguments.functional.command.Command;
+import com.arguments.functional.datamodel.ArgsReadOnlyState;
 import com.arguments.functional.datamodel.ArgsState;
 
 /**
@@ -23,7 +24,7 @@ public class ArgsStatefulCommand
     }
 
     // ------------------------------------------------------------------------
-    public ArgsState execute()
+    public ArgsReadOnlyState execute()
     {
         theCommand.execute(theState);
         return theState;

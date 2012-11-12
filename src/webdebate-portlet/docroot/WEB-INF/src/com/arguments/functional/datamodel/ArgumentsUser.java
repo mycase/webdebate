@@ -76,7 +76,7 @@ public class ArgumentsUser extends ArgumentsUserId
 
     
     // ------------------------------------------------------------------------
-    public ArgsState getState()
+    public ArgsReadOnlyState getState()
     {
         return TheArgsStore.i().selectState(this);
     }

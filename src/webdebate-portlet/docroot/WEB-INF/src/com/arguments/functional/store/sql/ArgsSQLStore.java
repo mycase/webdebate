@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.arguments.functional.datamodel.ArgsReadOnlyState;
 import com.arguments.functional.datamodel.ArgsState;
 import com.arguments.functional.datamodel.ArgsStore;
 import com.arguments.functional.datamodel.ArgumentsException;
@@ -478,7 +479,7 @@ public class ArgsSQLStore implements ArgsStore
     }
 
     // ------------------------------------------------------------------------
-    protected static void insertState(ArgsState aState, ArgumentsUser aUser)
+    protected static void insertState(ArgsReadOnlyState aState, ArgumentsUser aUser)
     {
         assert ! aState.getPerspectiveId().equals(PerspectiveId.VOLATILE);
         int myNrRows = ArgsQuery.INSERT_STATE1.ps().

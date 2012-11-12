@@ -8,6 +8,7 @@ import static org.junit.Assert.*;
 import com.arguments.application.liferay.LiferayArgsRequestKey;
 import com.arguments.functional.command.Command;
 import com.arguments.functional.datamodel.ArgsActionRequest;
+import com.arguments.functional.datamodel.ArgsReadOnlyState;
 import com.arguments.functional.datamodel.ArgsRequest;
 import com.arguments.functional.datamodel.ArgsState;
 import com.arguments.functional.datamodel.ArgumentsUser;
@@ -49,7 +50,7 @@ public class ArgsStatefulRequest_Tester
     public void insertedThesisLeavesStateThesis()
     {
         ThesisId myThesisId = insertThesis();
-        ArgsState myState = TheArgsStore.i().selectState(
+        ArgsReadOnlyState myState = TheArgsStore.i().selectState(
                 ArgumentsUser_Tester.getTestUser2());
         assertEquals( myThesisId, myState.getThesisId());
     }
@@ -133,7 +134,7 @@ public class ArgsStatefulRequest_Tester
     {
         ArgumentsUser myAppUser = TheArgsStore.i()
                 .selectUserById(ArgumentsUserId.TEST2);
-        ArgsState myState = TheArgsStore.i().selectState(myAppUser);
+        ArgsReadOnlyState myState = TheArgsStore.i().selectState(myAppUser);
         assertNotSame( myState.getPerspectiveId(), PerspectiveId.getThesisOwner());
         assertEquals(ArgumentsUser_Tester.getMailAddress(2), myAppUser.getEmailAddress());
         
@@ -200,13 +201,13 @@ public class ArgsStatefulRequest_Tester
         PerspectiveId myPerspectiveId1 = myUser1.getDefaultPerspective();
         PerspectiveId myPerspectiveId2 = myUser2.getDefaultPerspective();
         
-        ArgsState myState1 = TheArgsStore.i().selectState(myUser1);
+        ArgsReadOnlyState myState1 = TheArgsStore.i().selectState(myUser1);
         assertEquals(myPerspectiveId1, myState1.getPerspectiveId());
 
         ArgsStatefulCommand myRequest =
                 getUpdatePerspectiveRequest(myPerspectiveId0);
         
-        ArgsState myState = myRequest.execute();
+        ArgsReadOnlyState myState = myRequest.execute();
         StateChange aStateString = myState.getStateChange();
         assertNotSame(null, aStateString);
         ArgsState myState1_1 = TheArgsStore.i().selectState(myUser1);
@@ -214,7 +215,7 @@ public class ArgsStatefulRequest_Tester
         myState1_1.mergeStateChange(aStateString);
         TheArgsStore.i(myUser1).updateState(myState1_1);
         
-        ArgsState myState2 = TheArgsStore.i().selectState(ArgumentsUser_Tester.getTestUser7());
+        ArgsReadOnlyState myState2 = TheArgsStore.i().selectState(ArgumentsUser_Tester.getTestUser7());
         PerspectiveId myOutPerspectiveId2 = myState2.getPerspectiveId();
         assert myOutPerspectiveId2.equals(myPerspectiveId2);
         
@@ -319,7 +320,7 @@ public class ArgsStatefulRequest_Tester
 
         long myNrOfThesesBefore = TheArgsStore.i().getNrOfTheses();
         long myNrOfOpinionsBefore = TheArgsStore.i().getNrOfOpinions();
-        ArgsState myState = myRequest.execute();
+        ArgsReadOnlyState myState = myRequest.execute();
         assert myState.getPerspectiveId().isWritable();
         TheArgsStore.i(ArgumentsUser_Tester.getTestUser2()).updateState(myState);
         long myNrOfThesesAfter = TheArgsStore.i().getNrOfTheses();

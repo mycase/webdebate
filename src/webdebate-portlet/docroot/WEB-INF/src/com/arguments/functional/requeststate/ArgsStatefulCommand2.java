@@ -40,7 +40,7 @@ public class ArgsStatefulCommand2
 
         // Not here, which is where you would want it
         theCommand.execute(myArgsState);
-        StateChange myStateChange = myArgsState.getStateChange();
+        StateChange myStateChange = myArgsState.getStateChange(); // copy
         assertTrue(myStateChange.hasChange());
         // Then a second time here:
         myStateChange.mergeAndStore(theAppUser);

@@ -5,6 +5,7 @@ package com.arguments.functional.command;
 
 import static org.junit.Assert.*;
 
+import com.arguments.functional.datamodel.ArgsReadOnlyState;
 import com.arguments.functional.datamodel.ArgsState;
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.datamodel.PerspectiveId;
@@ -41,7 +42,7 @@ public class InsertThesis implements Command
     @Override
     public void execute(ArgsState aState)
     {
-        ArgsState myState = theAppUser.getState();
+        ArgsReadOnlyState myState = theAppUser.getState();
         assert aState.getPerspectiveId().isWritable();
         
         PerspectiveId myPerspective = myState.getPerspectiveId();

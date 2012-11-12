@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import com.arguments.functional.command.Command;
 import com.arguments.functional.datamodel.ArgsActionRequest;
+import com.arguments.functional.datamodel.ArgsReadOnlyState;
 import com.arguments.functional.datamodel.ArgsRequest;
 import com.arguments.functional.datamodel.ArgsState;
 import com.arguments.functional.datamodel.ArgumentsUser;
@@ -51,7 +52,7 @@ public abstract class PortalArgsBridge
                 myStateChange.mergeAndStore(myAppUser);
             }
         }
-        ArgsState myArgsState = getState(myAppUser);
+        ArgsReadOnlyState myArgsState = getState(myAppUser);
 
         ArgsRequest3 myArgRequest = new ArgsRequest3(myAppUser,
                 aRequest2.getUrlContainer(), myProtocolMap);

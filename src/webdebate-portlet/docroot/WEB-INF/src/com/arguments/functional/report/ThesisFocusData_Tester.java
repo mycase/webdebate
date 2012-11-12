@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import com.arguments.functional.datamodel.ArgsState;
+import com.arguments.functional.datamodel.ArgsReadOnlyState;
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.datamodel.Perspective;
 import com.arguments.functional.datamodel.PerspectiveThesisOpinion;
@@ -39,7 +39,7 @@ public class ThesisFocusData_Tester
         // User 1 focusses on this thesis.
         ThesisId myThesisId = ArgsStatefulRequest_Tester.insertOpinion();
 
-        ArgsState myState = myUser1.getState(); 
+        ArgsReadOnlyState myState = myUser1.getState(); 
         assert myState.getThesisId().equals(myThesisId);
         
         Perspective myPers1 = myUser1.getDefaultPerspective();

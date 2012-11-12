@@ -48,12 +48,10 @@ public class RequestParser
             ProtocolMap aProtocolMap)
     {
         final Command myCommand1 =
-                RequestParser.getCommand(anAppUser, aProtocolMap);
-
-        final StateChange myStateChange = new StateChange(aProtocolMap);
+                getCommand(anAppUser, aProtocolMap);
 
         ArgsStatefulCommand2 myCommand2 = new ArgsStatefulCommand2(
-                myCommand1, anAppUser, myStateChange);
+                myCommand1, anAppUser);
 
         return myCommand2;
     }

@@ -43,9 +43,9 @@ public class StateChange
     public StateChange(ProtocolMap aRequestMap)
     {
         this(
-            null, // ThesisId.parse(aRequestMap.get(ArgsRequestKey.THESIS_ID)),
+            ThesisId.parse(aRequestMap.get(ArgsRequestKey.THESIS_ID)),
             null,
-            PerspectiveId.parsePerspectiveId(aRequestMap.get(ArgsRequestKey.NEW_PERSPECTIVE_ID))
+            PerspectiveId.parsePerspectiveId(aRequestMap.get(ArgsRequestKey.PERSPECTIVE_ID))
             );
     }
 

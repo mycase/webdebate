@@ -161,7 +161,7 @@ public class HtmlThesisPrinter
     private String toPerspectiveAnchor(OwnedPerspective aPerspective)
     {
         return "<a href=\"focus?"+
-                theProtocolMap.get(ArgsRequestKey.NEW_PERSPECTIVE_ID)+"="
+                theProtocolMap.get(ArgsRequestKey.PERSPECTIVE_ID)+"="
                 + aPerspective.getIdString() + "\"> "+aPerspective+"</a>";
     }
 

@@ -12,18 +12,19 @@ import com.arguments.functional.datamodel.ThesisId;
  */
 public class ChangeThesis implements Command
 {
-        private ThesisId theForcusThesisId;
+        private ThesisId theFocusThesisId;
     
         // ------------------------------------------------------------------------
         public ChangeThesis(ThesisId anId)
         {
-            theForcusThesisId = anId;
+            theFocusThesisId = anId;
         }
     
         // ------------------------------------------------------------------------
         @Override
         public void execute(ArgsState aState)
         {
+            assert (theFocusThesisId.equals(aState.getThesisId()));
             // nothing here at the moment, because of seperate cgi2state channel.
         }
 }

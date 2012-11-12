@@ -11,26 +11,20 @@ import org.junit.Before;
 import org.junit.Test;
 import org.w3c.tidy.Tidy;
 
-import com.arguments.functional.command.Command;
 import com.arguments.functional.datamodel.ArgsState;
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.datamodel.ArgumentsUserId;
-import com.arguments.functional.datamodel.ArgumentsUser_Tester;
 import com.arguments.functional.datamodel.PerspectiveId;
 import com.arguments.functional.datamodel.RelationId;
 import com.arguments.functional.datamodel.Thesis;
 import com.arguments.functional.datamodel.ThesisId;
-import com.arguments.functional.datamodel.ThesisOpinion;
 import com.arguments.functional.report.html.HtmlThesisPrinter;
 import com.arguments.functional.report.html.ListThesesPage;
 import com.arguments.functional.report.html.ThesisFocusPage;
 import com.arguments.functional.report.html.UrlContainer;
 import com.arguments.functional.requeststate.ArgsRequest3;
-import com.arguments.functional.requeststate.ArgsRequestKey;
-import com.arguments.functional.requeststate.ArgsStatefulCommand;
 import com.arguments.functional.requeststate.ArgsStatefulRequest3;
 import com.arguments.functional.requeststate.ProtocolMap;
-import com.arguments.functional.requeststate.RequestParser;
 import com.arguments.functional.store.TheArgsStore;
 
 public class ArgsRequestKeyAsString_Tester

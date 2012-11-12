@@ -38,8 +38,12 @@ public class PortalArgsBridge_Tester
     @Test
     public void gotoThesis()
     {
-        ArgsActionRequest myRequest = Macro_Tester.getRequest("MakeYourCase.2012.11.07.23.06.03.actionRequest.json");
-        myRequest.execute();
+        ArgsActionRequest myRequest1 =
+                Macro_Tester.getRequest("MakeYourCase.2012.11.07.23.06.03.actionRequest.json");
+        myRequest1.execute();
+        //ArgsActionRequest myRequest2 =
+        //        Macro_Tester.getRequest("MakeYourCase.2012.11.12.23.06.03.actionRequest.json");
+        //myRequest2.execute();
     }
 
     // ------------------------------------------------------------------------

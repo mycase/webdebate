@@ -2,8 +2,6 @@ package com.arguments.functional.requeststate;
 
 import static org.junit.Assert.*;
 
-import com.arguments.functional.command.Command;
-import com.arguments.functional.datamodel.ArgsActionRequest;
 import com.arguments.functional.datamodel.ArgsReadOnlyState;
 import com.arguments.functional.datamodel.ArgsRequest;
 import com.arguments.functional.datamodel.ArgsState;

@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import com.arguments.Deployment;
 import com.arguments.functional.datamodel.ArgsErrorHandler;
+import com.arguments.functional.datamodel.ArgumentsException;
 import com.arguments.functional.requeststate.ArgsRenderRequest;
 import com.arguments.functional.store.TheArgsStore;
 import com.arguments.functional.store.sql.ArgsSQLStore;
@@ -54,6 +55,22 @@ public class PageModel_Tester
     public void testCoverer()
     {
         assertNotSame(new PageModelFactory(), null);
+    }
+    
+    // ------------------------------------------------------------------------
+    @Test // (expected = AssertionError.class)
+    public void testErrorHandler()
+    {
+        ArgsErrorHandler myA = new ErrorHandlerCreator().createInstance(null);
+        Exception myE = new ArgumentsException("test");
+        try
+        {
+            myA.handle(myE);
+        }
+        catch(AssertionError anException)
+        {
+            return; // expected
+        }
     }
     
     // ------------------------------------------------------------------------

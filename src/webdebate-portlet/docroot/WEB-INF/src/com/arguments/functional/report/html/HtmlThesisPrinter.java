@@ -196,10 +196,12 @@ public class HtmlThesisPrinter
     }
 
     // ------------------------------------------------------------------------
-    private static String cssClassByOpinion(ThesisOpinion myOpinion)
+    private static String cssClassByOpinion(ThesisOpinion aOpinion)
     {
-        if (myOpinion.believe()) return "believeStyle";
-        if (myOpinion.neutral()) return "dontKnowStyle";
+        if (aOpinion.believe())
+            return "believeStyle";
+        if (aOpinion.neutral())
+            return "dontKnowStyle";
         return "dontBelieveStyle";
     }
 

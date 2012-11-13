@@ -30,19 +30,19 @@ public abstract class PortalArgsBridge
 
     // ------------------------------------------------------------------------
     public ArgsStatefulRequest3 storeStateGetArgumentsRequest3(
-            ArgsRenderRequest aRequest2)
+            ArgsRenderRequest aRequest)
     {
         assureConnect();
-        final ArgumentsUser myAppUser = aRequest2.getRequest().getAppUser();
-        final ArgsRequest myRequest = aRequest2.getRequest();
+        final ArgsRequest myRequest = aRequest.getRequest();
+        final ArgumentsUser myAppUser = myRequest.getAppUser();
         
         final CgiParameterMap myParameterMap = myRequest
-                .getCgiParameterMap(aRequest2.getStateInputMode());
+                .getCgiParameterMap(aRequest.getStateInputMode());
 
-        assertNotSame(myParameterMap, null);
+        assertNotNull(myParameterMap);
         final ProtocolMap myProtocolMap =  getProtocolMap(myParameterMap);
 
-        if (aRequest2.getUpdateState() == UpdateState.YES)
+        if (aRequest.getUpdateState() == UpdateState.YES)
         {
             StateChange myStateChange =
                     new StateChange(myProtocolMap);
@@ -53,8 +53,9 @@ public abstract class PortalArgsBridge
         }
         ArgsReadOnlyState myArgsState = getState(myAppUser);
 
+        // How is ArgsRequest3 different from ArgsRenderRequest?
         ArgsRequest3 myArgRequest = new ArgsRequest3(myAppUser,
-                aRequest2.getUrlContainer(), myProtocolMap);
+                aRequest.getUrlContainer(), myProtocolMap);
 
         return new ArgsStatefulRequest3(myArgRequest, myArgsState);
     }

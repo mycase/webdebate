@@ -34,6 +34,8 @@ public abstract class PortalArgsBridge
     {
         assureConnect();
         final ArgsRequest myRequest = aRequest.getRequest();
+        // PortletParameterMap, ServletParameterMap, ArgumentsUser
+        
         final ArgumentsUser myAppUser = myRequest.getAppUser();
         
         final CgiParameterMap myParameterMap = myRequest

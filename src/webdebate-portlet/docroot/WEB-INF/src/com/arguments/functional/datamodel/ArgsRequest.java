@@ -1,6 +1,6 @@
 package com.arguments.functional.datamodel;
 
-import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.*;
 import com.arguments.functional.requeststate.PortalArgsBridge.CgiSource;
 import com.arguments.support.CgiParameterMap;
 import com.arguments.support.PortletParameterMap;
@@ -26,21 +26,20 @@ public class ArgsRequest
             ServletParameterMap aServletParameterMap,
             ArgumentsUser aUser)
     {
-        // TODO: Not test covered.
         theParameterMap = aParameterMap;
         theServletParameterMap = aServletParameterMap;
         theUser = aUser;
-        assertNotSame(theServletParameterMap, null);
-        assertNotSame(theParameterMap, null);
+        assertNotNull(theServletParameterMap);
+        assertNotNull(theParameterMap);
+        assertNotNull(theUser);
     }
-
     
     // ------------------------------------------------------------------------
     public ArgsRequest(ArgsRequest aRequest)
     {
-        theParameterMap = aRequest.theParameterMap;
-        theServletParameterMap = aRequest.theServletParameterMap;
-        theUser = aRequest.theUser;
+        this(aRequest.theParameterMap,
+             aRequest.theServletParameterMap,
+             aRequest.theUser);
     }
 
     // ------------------------------------------------------------------------
@@ -48,11 +47,12 @@ public class ArgsRequest
     {
         if (aSource == CgiSource.SERVLET)
         {
-            assertNotSame(theServletParameterMap, null);
+            assertNotNull(theServletParameterMap);
             return theServletParameterMap;
         }
-        assert theParameterMap != null;
-        assertNotSame(theParameterMap, null);        
+
+        assertNotNull( theParameterMap );
+        assertNotNull(theParameterMap);        
         return theParameterMap;
     }
 

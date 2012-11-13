@@ -6,8 +6,6 @@ package com.arguments.application.javax;
 import javax.portlet.RenderRequest;
 
 import com.arguments.application.TheContainerBridge;
-import com.arguments.functional.datamodel.ArgsErrorHandler;
-import com.arguments.functional.datamodel.ArgsRequest;
 import com.arguments.functional.report.html.UrlContainer;
 import com.arguments.functional.report.pagemodels.AddOpinionPageModel;
 import com.arguments.functional.report.pagemodels.AddPremisePageModel;
@@ -21,9 +19,7 @@ import com.arguments.functional.report.pagemodels.PageModelFactory;
 import com.arguments.functional.report.pagemodels.ThesisFocusPageModel;
 import com.arguments.functional.requeststate.ArgsRenderRequest;
 import com.arguments.functional.requeststate.ProtocolMap;
-import com.arguments.functional.requeststate.PortalArgsBridge.CgiSource;
 import com.arguments.functional.requeststate.PortalArgsBridge.UpdateState;
-import com.arguments.support.Logger;
 
 /**
  * @author mirleau
@@ -123,26 +119,13 @@ public class JavaxPageModels
         return getRequest3(aRequest, aUrlContainer, UpdateState.YES);
     }
     
-    // TODO: Do the branching by page outside of the javax package. 
+    // TODO: Do the above branching by page outside of the javax package. 
     // ------------------------------------------------------------------------
     private static ArgsRenderRequest getRequest3(
             RenderRequest aRequest,
             UrlContainer aUrlContainer,
             UpdateState anUpdateState)
     {
-        Logger.log("\nRender call");
-        final ArgsRequest myArgsRequest =
-                TheContainerBridge.i().newArgsRequest(aRequest);
-        final ArgsErrorHandler myErrorHandler =
-                TheContainerBridge.i().newErrorHandler(
-                        aRequest, myArgsRequest.getAppUser());
-        
-        final ArgsRenderRequest myRequest =
-                new ArgsRenderRequest(
-                        myArgsRequest, aUrlContainer,
-                        CgiSource.SERVLET, anUpdateState, myErrorHandler);
-        
-        Logger.logRender(myRequest);
-        return myRequest;
+        return JavaxArgsBridge.getRenderRequest(aRequest, aUrlContainer, anUpdateState);
     }
 }

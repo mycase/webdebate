@@ -27,6 +27,12 @@ import com.arguments.support.ServletParameterMap;
 public class ArgsActionRequest extends ArgsRequest
 {
     // ------------------------------------------------------------------------
+    public ArgsActionRequest(ArgsRequest aRequest)
+    {
+        super(aRequest);
+    }
+            
+    // ------------------------------------------------------------------------
     public ArgsActionRequest(
             PortletParameterMap aParameterMap,
             ServletParameterMap aServletParameterMap,

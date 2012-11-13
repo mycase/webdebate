@@ -10,9 +10,12 @@ import com.arguments.functional.datamodel.ArgsActionRequest;
 import com.arguments.functional.datamodel.ArgsErrorHandler;
 import com.arguments.functional.datamodel.ArgsRequest;
 import com.arguments.functional.datamodel.ArgumentsUser;
+import com.arguments.functional.report.html.UrlContainer;
+import com.arguments.functional.requeststate.ArgsRenderRequest;
 import com.arguments.functional.requeststate.PortalArgsBridge;
 import com.arguments.functional.requeststate.ProtocolMap;
 import com.arguments.functional.store.TheArgsStore;
+import com.arguments.support.Logger;
 import com.arguments.support.PortletParameterMap;
 import com.arguments.support.ServletParameterMap;
 
@@ -36,16 +39,29 @@ public abstract class JavaxArgsBridge extends PortalArgsBridge
     // ------------------------------------------------------------------------
     public ArgsActionRequest newArgsActionRequest(PortletRequest aRequest)
     {
-        PortletParameterMap myParameterMap =
-                new PortletParameterMap(aRequest.getParameterMap());
-        ServletParameterMap myServletParameterMap = new ServletParameterMap(
-            TheContainerBridge.i().
-                getOriginalServletRequest(aRequest).getParameterMap());
-        TheArgsStore.i().assureConnect();
-        ArgumentsUser myUser = TheContainerBridge.i().getAppUser(aRequest);
-
-        return new ArgsActionRequest(
-                myParameterMap, myServletParameterMap, myUser);
+        return new ArgsActionRequest(newArgsRequest(aRequest));
+    }
+    
+    // ------------------------------------------------------------------------
+    public static ArgsRenderRequest getRenderRequest(
+            RenderRequest aRequest,
+            UrlContainer aUrlContainer,
+            UpdateState anUpdateState)
+    {
+        Logger.log("\nJavaxArgsBridge.getRenderRequest()");
+        final ArgsRequest myArgsRequest =
+                TheContainerBridge.i().newArgsRequest(aRequest);
+        final ArgsErrorHandler myErrorHandler =
+                TheContainerBridge.i().newErrorHandler(
+                        aRequest, myArgsRequest.getAppUser());
+        
+        final ArgsRenderRequest myRequest =
+                new ArgsRenderRequest(
+                        myArgsRequest, aUrlContainer,
+                        CgiSource.SERVLET, anUpdateState, myErrorHandler);
+        
+        Logger.logRender(myRequest);
+        return myRequest;
     }
     
     // ------------------------------------------------------------------------

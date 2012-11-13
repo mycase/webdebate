@@ -34,6 +34,15 @@ public class ArgsRequest
         assertNotSame(theParameterMap, null);
     }
 
+    
+    // ------------------------------------------------------------------------
+    public ArgsRequest(ArgsRequest aRequest)
+    {
+        theParameterMap = aRequest.theParameterMap;
+        theServletParameterMap = aRequest.theServletParameterMap;
+        theUser = aRequest.theUser;
+    }
+
     // ------------------------------------------------------------------------
     public CgiParameterMap getCgiParameterMap(CgiSource aSource)
     {

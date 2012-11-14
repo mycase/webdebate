@@ -13,7 +13,7 @@ import com.arguments.functional.datamodel.RelatedThesis;
 import com.arguments.functional.datamodel.RelationId;
 import com.arguments.functional.datamodel.ThesisId;
 import com.arguments.functional.report.ThesisFocusData;
-import com.arguments.functional.requeststate.ArgsRequest3;
+import com.arguments.functional.requeststate.ArgsRenderDirective;
 import com.arguments.functional.requeststate.ArgsStatefulRequest3;
 import com.arguments.functional.requeststate.ProtocolMap;
 import com.arguments.functional.store.TheArgsStore;
@@ -36,7 +36,7 @@ public class ThesisFocusPage_Tester
         ArgumentsUser myAppUser = TheArgsStore.i()
                 .selectUserById(ArgumentsUserId.TEST2);
 
-        ArgsRequest3 myRequest1 = new ArgsRequest3(
+        ArgsRenderDirective myRequest1 = new ArgsRenderDirective(
                 myAppUser, new ProtocolMap());
 
         ArgsStatefulRequest3 myRequest = new ArgsStatefulRequest3(myRequest1,

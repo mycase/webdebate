@@ -12,7 +12,7 @@ import com.arguments.functional.requeststate.PortalArgsBridge.UpdateState;
 /**
  * @author  mirleau
  */
-public class ArgsRenderRequest
+public class ArgsJspRenderRequest
 {
     private final ArgsRequest theRequest;
     private final UrlContainer theUrlContainer;
@@ -22,14 +22,14 @@ public class ArgsRenderRequest
 
     
     // ------------------------------------------------------------------------
-    public ArgsRenderRequest(ArgsRequest aRequest, UrlContainer aUrlContainer,
+    public ArgsJspRenderRequest(ArgsRequest aRequest, UrlContainer aUrlContainer,
             CgiSource aStateInputMode, UpdateState aUpdateState)
     {
         this(aRequest, aUrlContainer, aStateInputMode, aUpdateState, null);
     }
     
     // ------------------------------------------------------------------------
-    public ArgsRenderRequest(
+    public ArgsJspRenderRequest(
             ArgsRequest aRequest,
             UrlContainer aUrlContainer,
             CgiSource aStateInputMode,

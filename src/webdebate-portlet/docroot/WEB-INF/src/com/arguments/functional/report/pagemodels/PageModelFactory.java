@@ -4,7 +4,7 @@
 package com.arguments.functional.report.pagemodels;
 
 import com.arguments.application.TheContainerBridge;
-import com.arguments.functional.requeststate.ArgsRenderRequest;
+import com.arguments.functional.requeststate.ArgsJspRenderRequest;
 import com.arguments.functional.requeststate.ArgsStatefulRequest3;
 import com.arguments.functional.requeststate.ProtocolMap;
 
@@ -19,7 +19,7 @@ public class PageModelFactory
 
     // ------------------------------------------------------------------------
     public static AddOpinionPageModel getAddOpinionPage(
-            ArgsRenderRequest aRenderRequest)
+            ArgsJspRenderRequest aRenderRequest)
     {
         ArgsStatefulRequest3 myRequest = storeGet(aRenderRequest);
 
@@ -28,7 +28,7 @@ public class PageModelFactory
 
     // ------------------------------------------------------------------------
     public static AddPremisePageModel getAddPremisePage(
-            ArgsRenderRequest aRenderRequest)
+            ArgsJspRenderRequest aRenderRequest)
     {
         ArgsStatefulRequest3 myRequest = storeGet(aRenderRequest);
         
@@ -37,7 +37,7 @@ public class PageModelFactory
 
     // ------------------------------------------------------------------------
     public static AddThesisPageModel getAddThesisPage(
-            ArgsRenderRequest aRenderRequest)
+            ArgsJspRenderRequest aRenderRequest)
     {
         storeGet(aRenderRequest);
         return new AddThesisPageModel(theProtocolMap);
@@ -45,7 +45,7 @@ public class PageModelFactory
 
     // ------------------------------------------------------------------------
     public static ChangePerspectivePageModel getChangePerspectivePage(
-            ArgsRenderRequest aRenderRequest)
+            ArgsJspRenderRequest aRenderRequest)
     {
         ArgsStatefulRequest3 myRequest = storeGet(aRenderRequest);
 
@@ -54,7 +54,7 @@ public class PageModelFactory
 
     // ------------------------------------------------------------------------
     public static EditThesisPageModel getEditThesisPage(
-            ArgsRenderRequest aRenderRequest)
+            ArgsJspRenderRequest aRenderRequest)
     {
         ArgsStatefulRequest3 myRequest = storeGet(aRenderRequest);
         return new EditThesisPageModel(myRequest, theProtocolMap);
@@ -62,7 +62,7 @@ public class PageModelFactory
 
     // ------------------------------------------------------------------------
     public static GotoThesisPageModel getGotoThesisPage(
-            ArgsRenderRequest aRenderRequest)
+            ArgsJspRenderRequest aRenderRequest)
     {
         storeGet(aRenderRequest);
         return new GotoThesisPageModel(theProtocolMap);
@@ -70,7 +70,7 @@ public class PageModelFactory
     
     // ------------------------------------------------------------------------
     public static ListThesesPageModel getListThesesPage(
-            ArgsRenderRequest aRenderRequest)
+            ArgsJspRenderRequest aRenderRequest)
     {
         ArgsStatefulRequest3 myRequest = storeGet(aRenderRequest);
 
@@ -79,7 +79,7 @@ public class PageModelFactory
 
     // ------------------------------------------------------------------------
     public static ThesisFocusPageModel getThesisFocusPage(
-            ArgsRenderRequest aRenderRequest)
+            ArgsJspRenderRequest aRenderRequest)
     {
         ArgsStatefulRequest3 myRequest = storeGet(aRenderRequest);
 
@@ -88,7 +88,7 @@ public class PageModelFactory
 
     // ------------------------------------------------------------------------
     public static EditLinkPageModel getEditLinkPage(
-            ArgsRenderRequest aRenderRequest)
+            ArgsJspRenderRequest aRenderRequest)
     {
         ArgsStatefulRequest3 myRequest = storeGet(aRenderRequest);
 
@@ -98,7 +98,7 @@ public class PageModelFactory
     // ------------------------------------------------------------------------
     // private
     // ------------------------------------------------------------------------
-    protected static ArgsStatefulRequest3 storeGet(ArgsRenderRequest aRequest2)
+    protected static ArgsStatefulRequest3 storeGet(ArgsJspRenderRequest aRequest2)
     {
         return TheContainerBridge.i().storeStateGetArgumentsRequest3(aRequest2);
     }

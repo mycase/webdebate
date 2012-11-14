@@ -262,7 +262,7 @@ public class ArgsStatefulRequest_Tester
 
         PortletParameterMap myPParameterMap0 = new PortletParameterMap();
         ServletParameterMap mySParameterMap0 = new ServletParameterMap();
-        myPParameterMap0.put(LiferayArgsRequestKey.s(ArgsRequestKey.THESIS_ID),
+        mySParameterMap0.put(LiferayArgsRequestKey.s(ArgsRequestKey.THESIS_ID),
                 new String[]{"" + myThesisId});
         
         ArgsRequest myRequest0 =
@@ -272,7 +272,7 @@ public class ArgsStatefulRequest_Tester
         CgiSource mySource = CgiSource.SERVLET;
         UpdateState myUpdateState = UpdateState.YES;
         
-        ArgsRenderRequest myRequest = new ArgsRenderRequest(myRequest0, myContainer, mySource, myUpdateState);
+        ArgsJspRenderRequest myRequest = new ArgsJspRenderRequest(myRequest0, myContainer, mySource, myUpdateState);
         PageModelFactory.getThesisFocusPage(myRequest);
         
         //User2 takes User1's perspective

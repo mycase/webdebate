@@ -12,7 +12,7 @@ import org.junit.Test;
 import com.arguments.Deployment;
 import com.arguments.functional.datamodel.ArgsErrorHandler;
 import com.arguments.functional.datamodel.ArgumentsException;
-import com.arguments.functional.requeststate.ArgsRenderRequest;
+import com.arguments.functional.requeststate.ArgsJspRenderRequest;
 import com.arguments.functional.store.TheArgsStore;
 import com.arguments.functional.store.sql.ArgsSQLStore;
 import com.arguments.functional.store.sql.ArgsTestDB;
@@ -77,7 +77,7 @@ public class PageModel_Tester
     @Test
     public void directWebEntry() throws FileNotFoundException
     {
-        ArgsRenderRequest myRequest = getRequest("001_Direct_Cgi_Focus.json");
+        ArgsJspRenderRequest myRequest = getRequest("001_Direct_Cgi_Focus.json");
         ThesisFocusPageModel myPageModel = PageModelFactory.getThesisFocusPage(myRequest);
         assertNotNull( myPageModel.theHtml);
     }
@@ -87,7 +87,7 @@ public class PageModel_Tester
     public void directWebEntryNoDBConnection() throws FileNotFoundException
     {
         TheArgsStore.setDB(new ArgsTestDB(TheArgsStore.i()));
-        ArgsRenderRequest myRequest = getRequest("001_Direct_Cgi_Focus.json");
+        ArgsJspRenderRequest myRequest = getRequest("001_Direct_Cgi_Focus.json");
         ThesisFocusPageModel myPageModel = PageModelFactory.getThesisFocusPage(myRequest);
         assertNotNull( myPageModel.theHtml);
     }
@@ -96,7 +96,7 @@ public class PageModel_Tester
     @Test
     public void addPremise() throws FileNotFoundException
     {
-        ArgsRenderRequest myRequest = getRequest("002_Add_Premise.json");
+        ArgsJspRenderRequest myRequest = getRequest("002_Add_Premise.json");
         AddPremisePageModel myPageModel = PageModelFactory.getAddPremisePage(myRequest);
         assertNotNull(myPageModel.theIfFalseRelevanceFormLabel);
         assertNotNull(myPageModel.theIfFalseRelevanceFormName);
@@ -117,7 +117,7 @@ public class PageModel_Tester
     @Test
     public void editLink() throws FileNotFoundException
     {
-        ArgsRenderRequest myRequest = getRequest("003_Edit_Link.json");
+        ArgsJspRenderRequest myRequest = getRequest("003_Edit_Link.json");
         EditLinkPageModel myPageModel = PageModelFactory.getEditLinkPage(myRequest);
         assertNotNull( myPageModel.theIfFalseRelevanceFormLabel);
         assertNotNull( myPageModel.theIfFalseRelevanceFormName);
@@ -139,7 +139,7 @@ public class PageModel_Tester
     @Test
     public void listTheses() throws FileNotFoundException
     {
-        ArgsRenderRequest myRequest = getRequest("004_List_Theses.json");
+        ArgsJspRenderRequest myRequest = getRequest("004_List_Theses.json");
         ListThesesPageModel myPageModel = PageModelFactory.getListThesesPage(myRequest);
         assertNotNull( myPageModel.theHtml);
     }
@@ -148,7 +148,7 @@ public class PageModel_Tester
     @Test
     public void gotoThesis() throws FileNotFoundException
     {
-        ArgsRenderRequest myRequest = getRequest("005_Goto_Thesis.json");
+        ArgsJspRenderRequest myRequest = getRequest("005_Goto_Thesis.json");
         GotoThesisPageModel myPageModel = PageModelFactory.getGotoThesisPage(myRequest);
         assertNotNull( myPageModel.theThesisIdFormName);
     }
@@ -157,7 +157,7 @@ public class PageModel_Tester
     @Test
     public void editThesis() throws FileNotFoundException
     {
-        ArgsRenderRequest myRequest = getRequest("006_Edit_Thesis.json");
+        ArgsJspRenderRequest myRequest = getRequest("006_Edit_Thesis.json");
         EditThesisPageModel myPageModel = PageModelFactory.getEditThesisPage(myRequest);
         assertNotNull( myPageModel.theThesisOpinionFormLabel);
         assertNotNull( myPageModel.theThesisOpinionFormName);
@@ -170,7 +170,7 @@ public class PageModel_Tester
     @Test
     public void changePerspective() throws FileNotFoundException
     {
-        ArgsRenderRequest myRequest = getRequest("007_Change_Perspective.json");
+        ArgsJspRenderRequest myRequest = getRequest("007_Change_Perspective.json");
         ChangePerspectivePageModel myPageModel = PageModelFactory.getChangePerspectivePage(myRequest);
         assertNotNull(myPageModel.thePerspectiveIdFormLabel);
         assertNotNull(myPageModel.thePerspectiveIdFormName);
@@ -182,7 +182,7 @@ public class PageModel_Tester
     @Test
     public void newThesis() throws FileNotFoundException
     {
-        ArgsRenderRequest myRequest = getRequest("008_New_Thesis.json");
+        ArgsJspRenderRequest myRequest = getRequest("008_New_Thesis.json");
         AddThesisPageModel myPageModel = PageModelFactory.getAddThesisPage(myRequest);
         assertNotNull( myPageModel.theThesisOpinionFormLabel);
         assertNotNull( myPageModel.theThesisOpinionFormName);
@@ -194,7 +194,7 @@ public class PageModel_Tester
     @Test
     public void newOpinion() throws FileNotFoundException
     {
-        ArgsRenderRequest myRequest = getRequest("009_Add_Opinion.json");
+        ArgsJspRenderRequest myRequest = getRequest("009_Add_Opinion.json");
         AddOpinionPageModel myPageModel = PageModelFactory.getAddOpinionPage(myRequest);
         assertNotNull( myPageModel.theFormLabel);
         assertNotNull( myPageModel.theFormName);
@@ -205,7 +205,7 @@ public class PageModel_Tester
     // ------------------------------------------------------------------------
     // private
     // ------------------------------------------------------------------------
-    public static ArgsRenderRequest getRequest(String aShortFileName)
+    public static ArgsJspRenderRequest getRequest(String aShortFileName)
             throws FileNotFoundException
     {
         Gson myGson = new GsonBuilder()
@@ -217,7 +217,7 @@ public class PageModel_Tester
                 Deployment.i().webinfPath + 
                         "testdata/" + aShortFileName));
 
-        ArgsRenderRequest myRequest = myGson.fromJson(myReader, ArgsRenderRequest.class);
+        ArgsJspRenderRequest myRequest = myGson.fromJson(myReader, ArgsJspRenderRequest.class);
         return myRequest;
     }
 }

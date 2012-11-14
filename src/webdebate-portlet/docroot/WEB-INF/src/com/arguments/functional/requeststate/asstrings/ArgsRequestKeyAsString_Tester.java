@@ -22,7 +22,7 @@ import com.arguments.functional.report.html.HtmlThesisPrinter;
 import com.arguments.functional.report.html.ListThesesPage;
 import com.arguments.functional.report.html.ThesisFocusPage;
 import com.arguments.functional.report.html.UrlContainer;
-import com.arguments.functional.requeststate.ArgsRequest3;
+import com.arguments.functional.requeststate.ArgsRenderDirective;
 import com.arguments.functional.requeststate.ArgsStatefulRequest3;
 import com.arguments.functional.requeststate.ProtocolMap;
 import com.arguments.functional.store.TheArgsStore;
@@ -70,7 +70,7 @@ public class ArgsRequestKeyAsString_Tester
         ArgumentsUser myAppUser = TheArgsStore.i()
                 .selectUserById(ArgumentsUserId.TEST2);
 
-        ArgsRequest3 myRequest1 = new ArgsRequest3(
+        ArgsRenderDirective myRequest1 = new ArgsRenderDirective(
                 myAppUser, new UrlContainer(), new ProtocolMap());
 
         ArgsStatefulRequest3 myRequest = new ArgsStatefulRequest3(myRequest1,
@@ -92,7 +92,7 @@ public class ArgsRequestKeyAsString_Tester
         ArgumentsUser myAppUser = TheArgsStore.i()
                 .selectUserById(ArgumentsUserId.TEST2);
 
-        ArgsRequest3 myRequest1 = new ArgsRequest3(
+        ArgsRenderDirective myRequest1 = new ArgsRenderDirective(
                 myAppUser,
                 new ProtocolMap());
 

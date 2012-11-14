@@ -14,14 +14,14 @@ import com.arguments.support.Logger;
  * @author mirleau
  *
  */
-public class ArgsRequest3
+public class ArgsRenderDirective
 {
     private final ArgumentsUser theUser;
     private final UrlContainer theUrlContainer;
     private final RelationId theRelationId;
 
     // ------------------------------------------------------------------------
-    public ArgsRequest3(
+    public ArgsRenderDirective(
             ArgumentsUser anAppUser,
             UrlContainer aUrlContainer,
             ProtocolMap aProtocolMap)
@@ -37,7 +37,7 @@ public class ArgsRequest3
     }
     
     // ------------------------------------------------------------------------
-    public ArgsRequest3(
+    public ArgsRenderDirective(
             ArgumentsUser anAppUser,
             ProtocolMap aMap)
     {

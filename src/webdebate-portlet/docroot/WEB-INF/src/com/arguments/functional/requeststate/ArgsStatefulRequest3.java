@@ -11,6 +11,7 @@ import com.arguments.functional.datamodel.Relation;
 import com.arguments.functional.datamodel.RelationId;
 import com.arguments.functional.datamodel.ThesisId;
 import com.arguments.functional.report.html.UrlContainer;
+import com.arguments.functional.requeststate.PortalArgsBridge.UpdateState;
 import com.arguments.functional.store.TheArgsStore;
 
 /**
@@ -19,15 +20,32 @@ import com.arguments.functional.store.TheArgsStore;
  */
 public class ArgsStatefulRequest3
 {
-    private final ArgsRequest3 theRequest;
+    private final ArgsRenderDirective theRequest;
     private final ArgsReadOnlyState theState;
     
     // ------------------------------------------------------------------------
-    public ArgsStatefulRequest3(ArgsRequest3 aRequest, ArgsReadOnlyState aState)
+    public ArgsStatefulRequest3(ArgsRenderDirective aRequest, ArgsReadOnlyState aState)
     {
         theRequest = aRequest;
         theState = aState;
         // assert theState.getPerspectiveId().isWritable();
+    }
+
+    
+    // ------------------------------------------------------------------------
+    public ArgsStatefulRequest3(
+            StateChange myStateChange,
+            ArgsRenderDirective aRequest)
+    {
+        theRequest = aRequest;
+        // this should probably best be part of an execute method:
+        if (myStateChange.hasChange())
+        {
+            myStateChange.mergeAndStore(aRequest.getUser());
+        }
+
+        theState =
+                TheArgsStore.i().selectState(aRequest.getUser());
     }
 
     // ------------------------------------------------------------------------

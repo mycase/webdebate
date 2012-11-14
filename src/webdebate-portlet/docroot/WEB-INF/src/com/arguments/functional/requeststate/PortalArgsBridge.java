@@ -7,8 +7,6 @@ import com.arguments.functional.datamodel.ArgsRequest;
 import com.arguments.functional.datamodel.ArgsState;
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.datamodel.ArgumentsUserId;
-import com.arguments.functional.datamodel.RelationId;
-import com.arguments.functional.report.html.UrlContainer;
 import com.arguments.functional.store.TheArgsStore;
 import com.arguments.support.CgiParameterMap;
 
@@ -32,33 +30,44 @@ public abstract class PortalArgsBridge
 
     // ------------------------------------------------------------------------
     public ArgsStatefulRequest3 storeStateGetArgumentsRequest3(
-            ArgsRenderRequest aRequest)
+            ArgsJspRenderRequest aJspRequest)
     {
         assureConnect();
-        final ArgsRequest myRequest = aRequest.getRequest();
+        // ArgsRequest contains data that is simplest (least error prone)
+        //  to extract from a javax.RenderRequest.
+        // ArgsJspRenderRequest extends this with information encoded in
+        //   the target jsp page (which itself is addressed via the
+        //   source jsp page).
+
+        final ArgsRequest myRequest = aJspRequest.getRequest();
         // PortletParameterMap, ServletParameterMap, ArgumentsUser
         
         final ArgumentsUser myAppUser = myRequest.getAppUser();
         
-        final ProtocolMap myProtocolMap = getProtocolMap(myRequest, aRequest.getStateInputMode());
+        // Depending on the jsp target, we either get the servlet
+        // or the portlet parameter map:
+        final ProtocolMap myProtocolMap = getProtocolMap(
+                myRequest, aJspRequest.getStateInputMode());
 
-        if (aRequest.getUpdateState() == UpdateState.YES)
-        {
-            StateChange myStateChange =
-                    new StateChange(myProtocolMap);
-            if (myStateChange.hasChange())
-            {
-                myStateChange.mergeAndStore(myAppUser);
-            }
-        }
-        ArgsReadOnlyState myArgsState = getState(myAppUser);
+        // From that protocolmap, we extract the actual information
+        // needed, being a possible state change, and
+        // non-state changing directives like the linkid in case
+        // a link needs to be edited:
+        
+        StateChange myStateChange =
+                new StateChange(myProtocolMap);
 
-        ArgsRequest3 myArgRequest = new ArgsRequest3(myAppUser,
-                aRequest.getUrlContainer(), myProtocolMap);
+        assertEquals(myStateChange.hasChange(),
+                aJspRequest.getUpdateState() == UpdateState.YES);
+        
+        ArgsRenderDirective myRenderDirective =
+                new ArgsRenderDirective(myAppUser,
+                aJspRequest.getUrlContainer(), myProtocolMap);
         // User, Urls, ChangeRelationId
 
-        return new ArgsStatefulRequest3(myArgRequest, myArgsState);
-        // ArgsReq3 + State
+        return new ArgsStatefulRequest3(
+                myStateChange,
+                myRenderDirective);
     }
     
     // ------------------------------------------------------------------------

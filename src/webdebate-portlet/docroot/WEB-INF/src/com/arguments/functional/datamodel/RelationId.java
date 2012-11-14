@@ -34,7 +34,7 @@ public class RelationId
     }
     
     // ------------------------------------------------------------------------
-    public static RelationId getRelationId(String aLinkIdText)
+    public static RelationId parseRelationId(String aLinkIdText)
     {
         if (aLinkIdText == null) return null;
         try
@@ -43,7 +43,7 @@ public class RelationId
         }
         catch(NumberFormatException anException)
         {
-            throw new AssertionError(
+            throw new ArgumentsException(
                     "Invalid relation id string: " + aLinkIdText, anException);
         }
     }

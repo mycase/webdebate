@@ -16,11 +16,9 @@ import com.arguments.support.Logger;
  */
 public class ArgsRequest3
 {
-    private final ProtocolMap theRequestMap;
     private final ArgumentsUser theUser;
     private final UrlContainer theUrlContainer;
     private final RelationId theRelationId;
-    
 
     // ------------------------------------------------------------------------
     public ArgsRequest3(
@@ -30,13 +28,12 @@ public class ArgsRequest3
     {
         assertNotNull(aUrlContainer);
         
-        theRequestMap = aProtocolMap;
         theUser = anAppUser;
         theUrlContainer = aUrlContainer;
         
-        Logger.log("New arguments request: " + theRequestMap + "\nUser: " + theUser);
+        Logger.log("New arguments request: " + aProtocolMap + "\nUser: " + theUser);
         
-        theRelationId = RelationId.getRelationId(theRequestMap.get(ArgsRequestKey.RELATION_ID));
+        theRelationId = RelationId.parseRelationId(aProtocolMap.get(ArgsRequestKey.RELATION_ID));
     }
     
     // ------------------------------------------------------------------------

@@ -7,6 +7,8 @@ import com.arguments.functional.datamodel.ArgsRequest;
 import com.arguments.functional.datamodel.ArgsState;
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.datamodel.ArgumentsUserId;
+import com.arguments.functional.datamodel.RelationId;
+import com.arguments.functional.report.html.UrlContainer;
 import com.arguments.functional.store.TheArgsStore;
 import com.arguments.support.CgiParameterMap;
 
@@ -38,11 +40,7 @@ public abstract class PortalArgsBridge
         
         final ArgumentsUser myAppUser = myRequest.getAppUser();
         
-        final CgiParameterMap myParameterMap = myRequest
-                .getCgiParameterMap(aRequest.getStateInputMode());
-
-        assertNotNull(myParameterMap);
-        final ProtocolMap myProtocolMap =  getProtocolMap(myParameterMap);
+        final ProtocolMap myProtocolMap = getProtocolMap(myRequest, aRequest.getStateInputMode());
 
         if (aRequest.getUpdateState() == UpdateState.YES)
         {
@@ -55,11 +53,24 @@ public abstract class PortalArgsBridge
         }
         ArgsReadOnlyState myArgsState = getState(myAppUser);
 
-        // How is ArgsRequest3 different from ArgsRenderRequest?
         ArgsRequest3 myArgRequest = new ArgsRequest3(myAppUser,
                 aRequest.getUrlContainer(), myProtocolMap);
+        // User, Urls, ChangeRelationId
 
         return new ArgsStatefulRequest3(myArgRequest, myArgsState);
+        // ArgsReq3 + State
+    }
+    
+    // ------------------------------------------------------------------------
+    private ProtocolMap getProtocolMap(ArgsRequest aRequest,
+            final CgiSource aCgiSource)
+    {
+        final CgiParameterMap myParameterMap = aRequest
+                .getCgiParameterMap(aCgiSource);
+
+        assertNotNull(myParameterMap);
+        final ProtocolMap myProtocolMap =  getProtocolMap(myParameterMap);
+        return myProtocolMap;
     }
 
     // ------------------------------------------------------------------------

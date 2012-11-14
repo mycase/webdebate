@@ -161,7 +161,7 @@ public class RequestParser
         String myNewLinkTargetId = getParameter(ArgsRequestKey.NEW_LINK_TARGET_ID);
 
         assertNotNull( myNewIfFalsePercentageRelevanceText );
-        RelationId myLinkId = RelationId.getRelationId(myLinkIdText);
+        RelationId myLinkId = RelationId.parseRelationId(myLinkIdText);
         Relevance myNewIfTrueRelevance =
                 Relevance.parseRelevance(myNewIfTruePercentageRelevanceText);
         Relevance myNewIfFalseRelevance =

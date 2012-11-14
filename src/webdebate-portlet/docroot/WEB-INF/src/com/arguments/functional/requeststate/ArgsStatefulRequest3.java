@@ -43,7 +43,7 @@ public class ArgsStatefulRequest3
     }
 
     // ------------------------------------------------------------------------
-    public RelationId getRelationId()
+    private RelationId getRelationId()
     {
         return theRequest.getRelationId();
     }
@@ -74,7 +74,6 @@ public class ArgsStatefulRequest3
     // ------------------------------------------------------------------------
     public String getPerspectiveIdText()
     {
-        ArgumentsUser myUser = getUser();
         ArgsReadOnlyState myState = getState();
         Perspective myPerspective = myState.getPerspective();
         return myPerspective.getIdString();

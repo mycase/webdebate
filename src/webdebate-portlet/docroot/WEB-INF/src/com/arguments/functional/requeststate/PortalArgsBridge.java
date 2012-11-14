@@ -65,9 +65,16 @@ public abstract class PortalArgsBridge
                 aJspRequest.getUrlContainer(), myProtocolMap);
         // User, Urls, ChangeRelationId
 
+        // this should probably best be part of an execute method:
+        if (myStateChange.hasChange())
+        {
+            myStateChange.mergeAndStore(myAppUser);
+        }
+        
+        ArgsReadOnlyState myStateAfter = 
+                TheArgsStore.i().selectState(myAppUser);
         return new ArgsStatefulRequest3(
-                myStateChange,
-                myRenderDirective);
+                myRenderDirective, myStateAfter);
     }
     
     // ------------------------------------------------------------------------

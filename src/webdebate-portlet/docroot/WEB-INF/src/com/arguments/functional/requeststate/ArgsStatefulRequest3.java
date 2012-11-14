@@ -31,23 +31,6 @@ public class ArgsStatefulRequest3
         // assert theState.getPerspectiveId().isWritable();
     }
 
-    
-    // ------------------------------------------------------------------------
-    public ArgsStatefulRequest3(
-            StateChange myStateChange,
-            ArgsRenderDirective aRequest)
-    {
-        theRequest = aRequest;
-        // this should probably best be part of an execute method:
-        if (myStateChange.hasChange())
-        {
-            myStateChange.mergeAndStore(aRequest.getUser());
-        }
-
-        theState =
-                TheArgsStore.i().selectState(aRequest.getUser());
-    }
-
     // ------------------------------------------------------------------------
     public ArgsReadOnlyState getState()
     {

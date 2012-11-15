@@ -38,7 +38,6 @@ public class Logger
     // ------------------------------------------------------------------------
     public static void logAlways(String aString)
     {
-        if (LOG)
             theOut.println(aString);
     }
 

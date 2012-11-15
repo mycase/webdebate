@@ -301,7 +301,7 @@ public class ArgsSQLStore implements ArgsStore
             try
             {
                 ArgsQuery.MAX_USER_ID.ps().executeQuery();
-                Logger.logAlways("Assured Connect");
+                Logger.log("Assured Connect");
                 return;
             } catch (ArgsSQLStoreException anException)
             {

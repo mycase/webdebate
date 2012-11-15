@@ -66,7 +66,6 @@ public class Deployment
 
         try
         {
-            
             InputStream myPropertiesStream = null;
             String myLocation = null;
             while(myPropertiesStream == null && !myPropertyLocations.isEmpty())
@@ -75,7 +74,7 @@ public class Deployment
                 File myPropertiesFile = new File(myLocation);
                 if (!myPropertiesFile.exists())
                 {
-                    System.out.println("Didn't find arguments properties at " + myLocation);
+                    Logger.logAlways("Didn't find arguments properties at " + myLocation);
                 }
                 else
                 {

@@ -11,7 +11,6 @@ import com.arguments.functional.datamodel.Relation;
 import com.arguments.functional.datamodel.RelationId;
 import com.arguments.functional.datamodel.ThesisId;
 import com.arguments.functional.report.html.UrlContainer;
-import com.arguments.functional.requeststate.PortalArgsBridge.UpdateState;
 import com.arguments.functional.store.TheArgsStore;
 
 /**

@@ -107,7 +107,7 @@ public class HtmlThesisPrinter
         
         for (PerspectiveThesisOpinion myOpinion : anOpinions)
         {
-            myText.append(toTableRow(myOpinion, theUrlContainer));
+            myText.append(toTableRow(myOpinion));
         }
         myText.append("</table>\n");
         return myText.toString();
@@ -257,7 +257,7 @@ public class HtmlThesisPrinter
 
     // ------------------------------------------------------------------------
     private StringBuffer toTableRow(
-            PerspectiveThesisOpinion anOpinion, UrlContainer aUrlContainer)
+            PerspectiveThesisOpinion anOpinion)
     {
         StringBuffer myText = new StringBuffer("<tr>\n");
         myText.append("  <td class=\"otherClass\"> "

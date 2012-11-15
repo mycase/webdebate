@@ -28,8 +28,6 @@ public class Deployment
     public final String dbDriver;
     public final String dbUserName;
     public final String dbPassword;
-    public final String foreignTestId = "0";
-    public final String foreignAdminId = "10001";
     
     public final String webappPath;
     public final String webinfPath;

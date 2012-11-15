@@ -32,11 +32,13 @@ public class Deployment
     
     public final String theWebinfPath;
     
+    // ------------------------------------------------------------------------
     public static Deployment i()
     {
         return theInstance;
     }
 
+    // ------------------------------------------------------------------------
     public Deployment()
     {
         final URL myClassRoot = Deployment.class.getResource("/");
@@ -59,15 +61,28 @@ public class Deployment
                     add(myClassRootPath + "com/arguments/testdeployment.properties");
                 }};
         
+        Properties myDeploymentProperties = getProperties(myPropertyLocations);
+
+        theDbUrl = myDeploymentProperties.getProperty("dbUrl");
+        theDbName = myDeploymentProperties.getProperty("dbName");
+        theDbDriver = myDeploymentProperties.getProperty("dbDriver");
+        theDbUserName = myDeploymentProperties.getProperty("dbUserName");
+        theDbPassword = myDeploymentProperties.getProperty("dbPassword");
+        assertNotNull(theDbUrl);
+    }
+    
+    // ------------------------------------------------------------------------
+    private static Properties getProperties(ArrayList<String> aPropertyLocations)
+    {
         Properties myDeploymentProperties = new Properties();
 
         try
         {
             InputStream myPropertiesStream = null;
             String myLocation = null;
-            while(myPropertiesStream == null && !myPropertyLocations.isEmpty())
+            while(myPropertiesStream == null && !aPropertyLocations.isEmpty())
             {
-                myLocation = myPropertyLocations.remove(0);
+                myLocation = aPropertyLocations.remove(0);
                 File myPropertiesFile = new File(myLocation);
                 if (!myPropertiesFile.exists())
                 {
@@ -88,12 +103,6 @@ public class Deployment
         {
             throw new ArgumentsException(anException);
         }
-
-        theDbUrl = myDeploymentProperties.getProperty("dbUrl");
-        theDbName = myDeploymentProperties.getProperty("dbName");
-        theDbDriver = myDeploymentProperties.getProperty("dbDriver");
-        theDbUserName = myDeploymentProperties.getProperty("dbUserName");
-        theDbPassword = myDeploymentProperties.getProperty("dbPassword");
-        assertNotNull(theDbUrl);
+        return myDeploymentProperties;
     }
 }

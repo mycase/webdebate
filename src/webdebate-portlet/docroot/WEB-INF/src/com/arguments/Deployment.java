@@ -30,9 +30,8 @@ public class Deployment
     public final String theDbUserName;
     public final String theDbPassword;
     
-    public final String theWebappPath;
     public final String theWebinfPath;
-
+    
     public static Deployment i()
     {
         return theInstance;
@@ -46,19 +45,17 @@ public class Deployment
         // From eclipse: /mnt/bigspace/opt/linux/i386/liferay/liferay-sdk/portlets/argumentation-portlet/docroot/WEB-INF/classes/
         // From tomcat: /mnt/bigspace/opt/linux/i386/liferay/liferay-portal-6.1.0-ce-ga1.2/tomcat-7.0.23/webapps/argumentation-portlet/WEB-INF/classes/
 
-        File myWebinfFile = new File(myClassRootPath).getParentFile();
-
         File myWebappFile = new File(myClassRootPath).
                 getParentFile().getParentFile().getParentFile().getParentFile();
+        File myWebinfFile = new File(myClassRootPath).getParentFile();
         
-        
-        theWebappPath = myWebappFile.getAbsolutePath()+"/"; 
-        Logger.logAlways("Webapp path: " + theWebappPath);
+        final String myWebappPath = myWebappFile.getAbsolutePath()+"/"; 
+        Logger.logAlways("Webapp path: " + myWebappPath);
         theWebinfPath = myWebinfFile.getAbsolutePath()+"/";
         
         ArrayList<String> myPropertyLocations = new ArrayList<String>()
                 {{
-                    add(theWebappPath + "webapps-conf/arguments.deployment.properties");
+                    add(myWebappPath + "webapps-conf/arguments.deployment.properties");
                     add(myClassRootPath + "com/arguments/testdeployment.properties");
                 }};
         

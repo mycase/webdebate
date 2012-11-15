@@ -50,7 +50,7 @@ public class Macro_Tester
         FileReader myFileReader;
         try
         {
-            myFileReader = new FileReader(Deployment.i().webinfPath +
+            myFileReader = new FileReader(Deployment.i().theWebinfPath +
                     "testdata/" + aShortFileName);
         }
         catch (FileNotFoundException anException)

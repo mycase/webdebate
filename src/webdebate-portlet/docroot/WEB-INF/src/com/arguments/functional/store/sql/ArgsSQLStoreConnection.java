@@ -57,11 +57,11 @@ class ArgsSQLStoreConnection
     // ------------------------------------------------------------------------
     private static Connection newConnection() throws ArgsSQLStoreException
     {
-        String myDbUrl = Deployment.i().dbUrl;
-        String myDbName = Deployment.i().dbName;
-        String myDriver = Deployment.i().dbDriver;
-        String myUserName = Deployment.i().dbUserName;
-        String myPassword = Deployment.i().dbPassword;
+        String myDbUrl = Deployment.i().theDbUrl;
+        String myDbName = Deployment.i().theDbName;
+        String myDriver = Deployment.i().theDbDriver;
+        String myUserName = Deployment.i().theDbUserName;
+        String myPassword = Deployment.i().theDbPassword;
 
         Connection myConnection = null;
         try

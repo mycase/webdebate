@@ -214,7 +214,7 @@ public class PageModel_Tester
         .create();
 
         BufferedReader myReader = new BufferedReader(new FileReader(
-                Deployment.i().webinfPath + 
+                Deployment.i().theWebinfPath + 
                         "testdata/" + aShortFileName));
 
         ArgsJspRenderRequest myRequest = myGson.fromJson(myReader, ArgsJspRenderRequest.class);

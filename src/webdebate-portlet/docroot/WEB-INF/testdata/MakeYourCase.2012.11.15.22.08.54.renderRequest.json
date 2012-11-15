@@ -1,0 +1,78 @@
+{
+  "theRequest": {
+    "theParameterMap": {
+      "theMap": {
+        "jspPage": [
+          "/jsp/thesisFocus.jsp"
+        ]
+      }
+    },
+    "theServletParameterMap": {
+      "theMap": {
+        "p_p_state": [
+          "normal"
+        ],
+        "p_p_lifecycle": [
+          "0"
+        ],
+        "p_p_id": [
+          "argumentation_WAR_webdebateportlet"
+        ],
+        "p_p_col_count": [
+          "1"
+        ],
+        "p_l_id": [
+          "12131"
+        ],
+        "_argumentation_WAR_webdebateportlet_jspPage": [
+          "/jsp/thesisFocus.jsp"
+        ],
+        "p_p_col_id": [
+          "column-1"
+        ],
+        "p_p_mode": [
+          "view"
+        ],
+        "p_v_l_s_g_id": [
+          "0"
+        ]
+      }
+    },
+    "theUser": {
+      "theEmailAddress": {
+        "theEmailString": "mirleau@bluewin.ch"
+      },
+      "theContainerId": {
+        "theForeignId": "10243"
+      },
+      "theScreenName": {
+        "theScreenNameString": "mirleau"
+      },
+      "theDefaultPerspective": null,
+      "theId": 1
+    }
+  },
+  "theUrlContainer": {
+    "theEditLinkUrl": "http://www.myc.net:8080/focus?p_p_id\u003dargumentation_WAR_webdebateportlet\u0026p_p_lifecycle\u003d0\u0026p_p_state\u003dnormal\u0026p_p_mode\u003dview\u0026p_p_col_id\u003dcolumn-1\u0026p_p_col_count\u003d1\u0026_argumentation_WAR_webdebateportlet_jspPage\u003d%2Fjsp%2FeditLink.jsp",
+    "theEditThesisUrl": "http://www.myc.net:8080/focus?p_p_id\u003dargumentation_WAR_webdebateportlet\u0026p_p_lifecycle\u003d0\u0026p_p_state\u003dnormal\u0026p_p_mode\u003dview\u0026p_p_col_id\u003dcolumn-1\u0026p_p_col_count\u003d1\u0026_argumentation_WAR_webdebateportlet_jspPage\u003d%2Fjsp%2FeditThesis.jsp",
+    "theAddPremiseUrl": "http://www.myc.net:8080/focus?p_p_id\u003dargumentation_WAR_webdebateportlet\u0026p_p_lifecycle\u003d0\u0026p_p_state\u003dnormal\u0026p_p_mode\u003dview\u0026p_p_col_id\u003dcolumn-1\u0026p_p_col_count\u003d1\u0026_argumentation_WAR_webdebateportlet_jspPage\u003d%2Fjsp%2FaddPremise.jsp",
+    "theAddOpinionUrl": "http://www.myc.net:8080/focus?p_p_id\u003dargumentation_WAR_webdebateportlet\u0026p_p_lifecycle\u003d0\u0026p_p_state\u003dnormal\u0026p_p_mode\u003dview\u0026p_p_col_id\u003dcolumn-1\u0026p_p_col_count\u003d1\u0026_argumentation_WAR_webdebateportlet_jspPage\u003d%2Fjsp%2FaddOpinion.jsp"
+  },
+  "theStateInputMode": "SERVLET",
+  "theUpdateState": "YES",
+  "theErrorHandler": {
+    "theUserId": {
+      "theEmailAddress": {
+        "theEmailString": "mirleau@bluewin.ch"
+      },
+      "theContainerId": {
+        "theForeignId": "10243"
+      },
+      "theScreenName": {
+        "theScreenNameString": "mirleau"
+      },
+      "theDefaultPerspective": null,
+      "theId": 1
+    }
+  }
+}

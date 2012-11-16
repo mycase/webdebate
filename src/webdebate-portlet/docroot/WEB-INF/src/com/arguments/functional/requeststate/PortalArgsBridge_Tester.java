@@ -5,6 +5,9 @@ package com.arguments.functional.requeststate;
 
 import static org.junit.Assert.*;
 
+import java.util.Map;
+import java.util.HashMap;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -115,6 +118,7 @@ public class PortalArgsBridge_Tester
     {
         ArgsJspRenderRequest myRequest =
                 Macro_Tester.getRenderRequest("MakeYourCase.2012.11.15.22.08.54.renderRequest.json");
+        
         PageModelFactory.getThesisFocusPage(myRequest);
     }
 

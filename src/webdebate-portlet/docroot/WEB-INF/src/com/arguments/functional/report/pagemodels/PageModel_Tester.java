@@ -6,13 +6,18 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import com.arguments.Deployment;
 import com.arguments.functional.datamodel.ArgsErrorHandler;
+import com.arguments.functional.datamodel.ArgsRequest;
 import com.arguments.functional.datamodel.ArgumentsException;
 import com.arguments.functional.requeststate.ArgsJspRenderRequest;
+import com.arguments.functional.requeststate.ArgsRequestKey;
 import com.arguments.functional.store.TheArgsStore;
 import com.arguments.functional.store.sql.ArgsSQLStore;
 import com.arguments.functional.store.sql.ArgsTestDB;
@@ -80,6 +85,25 @@ public class PageModel_Tester
         ArgsJspRenderRequest myRequest = getRequest("001_Direct_Cgi_Focus.json");
         ThesisFocusPageModel myPageModel = PageModelFactory.getThesisFocusPage(myRequest);
         assertNotNull( myPageModel.theHtml);
+    }
+
+    // ------------------------------------------------------------------------
+    @Test
+    public void secondPerspective()
+    {
+
+        Map<ArgsRequestKey, String> myMap = new HashMap<ArgsRequestKey, String>()
+                {{
+                  put(ArgsRequestKey.PERSPECTIVE2_ID, "gogo");
+                }};
+
+                /*
+        ArgsRequest myR = new ArgsRequest(myR);
+        ArgsJspRenderRequest myRequest =
+                new ArgsJspRenderRequest(myR, null, null, null);
+        ThesisFocusPageModel myPageModel = PageModelFactory.getThesisFocusPage(myRequest);
+        assertNotNull( myPageModel.theHtml);
+        */
     }
 
     // ------------------------------------------------------------------------

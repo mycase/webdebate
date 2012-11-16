@@ -84,6 +84,28 @@ public class ArgsRequestKeyAsString_Tester
 
     // ------------------------------------------------------------------------
     /**
+     * Tests the rendering of a thesis focus comparison pagel
+     */
+    @Test
+    public void test2()
+    {
+        ArgumentsUser myAppUser = TheArgsStore.i()
+                .selectUserById(ArgumentsUserId.TEST2);
+
+        ArgsRenderDirective myRequest1 = new ArgsRenderDirective(
+                myAppUser, new UrlContainer(), new ProtocolMap());
+
+        ArgsStatefulRequest3 myRequest = new ArgsStatefulRequest3(myRequest1,
+                new ArgsState(ThesisId.Da13, RelationId.BONE, PerspectiveId.getThesisOwner()));
+        String myHtml = ThesisFocusPage.getHtmlBody(myRequest,
+                ArgsRequestKeyAsString.getProtocolMap());
+        // System.out.println(myWebPage.getHtml());
+
+        tidyParse(myHtml);
+    }
+
+    // ------------------------------------------------------------------------
+    /**
      * Tests the rendering of a thesis focus page.
      */
     @Test

@@ -20,7 +20,6 @@ public class ArgsJspRenderRequest
     private final UpdateState theUpdateState;
     private final ArgsErrorHandler theErrorHandler;
 
-    
     // ------------------------------------------------------------------------
     public ArgsJspRenderRequest(ArgsRequest aRequest, UrlContainer aUrlContainer,
             CgiSource aStateInputMode, UpdateState aUpdateState)

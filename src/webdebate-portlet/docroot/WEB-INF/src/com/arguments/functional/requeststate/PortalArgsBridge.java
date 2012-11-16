@@ -57,16 +57,14 @@ public abstract class PortalArgsBridge
         StateChange myStateChange =
                 new StateChange(myProtocolMap);
 
-        assertEquals(myStateChange.hasChange(),
-                aJspRequest.getUpdateState() == UpdateState.YES);
-        
         ArgsRenderDirective myRenderDirective =
                 new ArgsRenderDirective(myAppUser,
                 aJspRequest.getUrlContainer(), myProtocolMap);
         // User, Urls, ChangeRelationId
 
         // this should probably best be part of an execute method:
-        if (myStateChange.hasChange())
+        if (aJspRequest.getUpdateState() == UpdateState.YES &&
+                myStateChange.hasChange())
         {
             myStateChange.mergeAndStore(myAppUser);
         }

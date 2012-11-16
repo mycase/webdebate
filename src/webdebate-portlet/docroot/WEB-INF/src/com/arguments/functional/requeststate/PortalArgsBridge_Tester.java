@@ -12,6 +12,7 @@ import com.arguments.functional.datamodel.ArgsActionRequest;
 import com.arguments.functional.datamodel.ArgumentsUserId;
 import com.arguments.functional.datamodel.ThesisId;
 import com.arguments.functional.report.PerspectiveNotOwnedException;
+import com.arguments.functional.report.pagemodels.PageModelFactory;
 import com.arguments.functional.store.TheArgsStore;
 import com.arguments.support.CgiParameterMap;
 
@@ -106,6 +107,15 @@ public class PortalArgsBridge_Tester
         throw new AssertionError("Expected exception not thrown");
         // This corrupts the database, fix as follows:
         // delete from Opinions where StatementID in (select ID from Statements where Owner = 2);
+    }
+
+    // ------------------------------------------------------------------------
+    @Test
+    public void testMenuClickToFocus()
+    {
+        ArgsJspRenderRequest myRequest =
+                Macro_Tester.getRenderRequest("MakeYourCase.2012.11.15.22.08.54.renderRequest.json");
+        PageModelFactory.getThesisFocusPage(myRequest);
     }
 
     // ------------------------------------------------------------------------

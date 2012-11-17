@@ -347,8 +347,8 @@ public class ArgsSQLStore implements ArgsStore
         Container<Thesis> myReturnValue = new Container<>(aThesis);
         if (aDepth == 0)
             return myReturnValue;
-        List<RelatedThesis<OpinionatedThesis>> myPremises = ArgsSQLStore.getPremises(aThesis.getID());
-        for (RelatedThesis<OpinionatedThesis> myPremise : myPremises)
+        List<RelatedThesis<Thesis>> myPremises = ArgsSQLStore.getPremises(aThesis.getID());
+        for (RelatedThesis<Thesis> myPremise : myPremises)
             myReturnValue.add(selectPremiseTree(myPremise.getThesis(), aDepth - 1));
         return myReturnValue;
     }
@@ -817,7 +817,7 @@ public class ArgsSQLStore implements ArgsStore
                 myThesis1ID, myThesis2ID,
                 myIfTrueRelevance, myIfFalseRelevance, ArgumentsUserId.BOGUS);
         return new RelatedThesis<>(
-                new OpinionatedThesis(myThesis1ID, mySummary, myOpinion, myOwnerID),
+                new OpinionatedThesis(myThesis1ID, mySummary, myOpinion, aPerspective, myOwnerID),
                 myRelation);
     }
     
@@ -839,7 +839,7 @@ public class ArgsSQLStore implements ArgsStore
                 myThesis1ID, myThesis2ID, myIfTrueRelevance, myIfFalseRelevance,
                 ArgumentsUserId.BOGUS);
         return new RelatedThesis<>(
-                new OpinionatedThesis(myThesis2ID, mySummary, myOpinion, myOwnerID),
+                new OpinionatedThesis(myThesis2ID, mySummary, myOpinion, aPerspective, myOwnerID),
                 myRelation);
     }
 
@@ -943,9 +943,9 @@ public class ArgsSQLStore implements ArgsStore
     }
 
     // ------------------------------------------------------------------------
-    private static List<RelatedThesis<OpinionatedThesis>> getPremises(ThesisId aThesisId)
+    private static List<RelatedThesis<Thesis>> getPremises(ThesisId aThesisId)
     {
-        List<RelatedThesis<OpinionatedThesis>> myReturnValue = new ArrayList<>();
+        List<RelatedThesis<Thesis>> myReturnValue = new ArrayList<>();
         ArgsDB myQuery = ArgsQuery.SELECT_PREMISE.ps();
         myQuery.setThesisId(1, aThesisId);
         ResultSet myPremiseResult = myQuery.executeQuery();
@@ -964,8 +964,8 @@ public class ArgsSQLStore implements ArgsStore
                 Relation myRelation = new Relation(myRelationID,
                         myThesis1ID, myThesis2ID,
                         myIfTrueRelevance, myIfFalseRelevance, ArgumentsUserId.BOGUS);
-                RelatedThesis<OpinionatedThesis> myPremise = new RelatedThesis<>(
-                        new OpinionatedThesis(myThesis1ID, mySummary, ThesisOpinion.BELIEVE_FALSE, myOwnerID),
+                RelatedThesis<Thesis> myPremise = new RelatedThesis<>(
+                        new Thesis(myThesis1ID, mySummary, myOwnerID),
                         myRelation);
                 myReturnValue.add(myPremise);
             }
@@ -1019,7 +1019,7 @@ public class ArgsSQLStore implements ArgsStore
                 ArgumentsUserId myOwnerID = getUserId(aResultSet, ArgsDB.Thesis.OWNER_ID.c);
                 assert mySourceID != null;
                 myThesis = new OpinionatedThesis(mySourceID, mySummary,
-                        myOpinion, myOwnerID);
+                        myOpinion, aPerspective, myOwnerID);
             }
         } catch (SQLException anException)
         {

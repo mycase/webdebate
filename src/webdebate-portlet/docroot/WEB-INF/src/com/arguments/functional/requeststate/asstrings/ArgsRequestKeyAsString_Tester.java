@@ -127,20 +127,6 @@ public class ArgsRequestKeyAsString_Tester
     }
 
     // ------------------------------------------------------------------------
-    /**
-     * Tests the insertion and modification of a premise
-     */
-    @Test
-    public void test11()
-    {
-        Thesis myThesis = TheArgsStore.i().selectThesisById(ThesisId.ONE);
-        HtmlThesisPrinter myPrinter = new HtmlThesisPrinter(
-                new UrlContainer(), ArgsRequestKeyAsString.getProtocolMap());
-        String myHtml = myPrinter.getThesisTreeString(myThesis);
-        theOut.println(myHtml);
-    }
-
-    // ------------------------------------------------------------------------
     private void tidyParse(String aHtml)
     {
         Tidy myTidy = new Tidy();

@@ -9,6 +9,7 @@ import com.arguments.application.TheContainerBridge_Tester;
 import com.arguments.functional.datamodel.Perspective_Tester;
 import com.arguments.functional.datamodel.RelatedThesis_Tester;
 import com.arguments.functional.report.ThesisFocusData_Tester;
+import com.arguments.functional.report.html.HtmlThesisPrinter_Tester;
 import com.arguments.functional.report.html.ThesisFocusPage_Tester;
 import com.arguments.functional.report.pagemodels.AddPremisePageModel_Tester;
 import com.arguments.functional.report.pagemodels.PageModel_Tester;
@@ -32,6 +33,7 @@ import com.arguments.support.TreeHandler_Tester;
     // application/liferay
     // functional/report/html
     ThesisFocusPage_Tester.class,
+    HtmlThesisPrinter_Tester.class,
     // functional/report/pagemodels
     AddPremisePageModel_Tester.class,
     PageModel_Tester.class,

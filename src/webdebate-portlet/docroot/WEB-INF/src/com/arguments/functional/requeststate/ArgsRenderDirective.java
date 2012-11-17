@@ -35,7 +35,7 @@ public class ArgsRenderDirective
         Logger.log("New arguments request: " + aProtocolMap + "\nUser: " + theUser);
         
         theRelationId = RelationId.parseRelationId(aProtocolMap.get(ArgsRequestKey.RELATION_ID));
-        thePerspective2Id = RelationId.parseRelationId(aProtocolMap.get(ArgsRequestKey.PERSPECTIVE2_ID_));
+        thePerspective2Id = RelationId.parseRelationId(aProtocolMap.get(ArgsRequestKey.PERSPECTIVE2_ID));
     }
     
     // ------------------------------------------------------------------------

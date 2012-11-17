@@ -330,7 +330,7 @@ public class ArgsStatefulRequest_Tester
             PerspectiveId aPerspectiveId)
     {
         ServletParameterMap mySParameterMap0 = new ServletParameterMap();
-        mySParameterMap0.put(LiferayArgsRequestKey.s(ArgsRequestKey.PERSPECTIVE2_ID_),
+        mySParameterMap0.put(LiferayArgsRequestKey.s(ArgsRequestKey.PERSPECTIVE2_ID),
                 new String[] { "" + aPerspectiveId });
 
         return getServletRenderRequest(aUser, mySParameterMap0);

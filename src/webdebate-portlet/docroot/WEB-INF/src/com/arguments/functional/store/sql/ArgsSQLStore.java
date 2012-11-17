@@ -446,7 +446,7 @@ public class ArgsSQLStore implements ArgsStore
             while (myDeductionResult.next())
             {
                 RelatedThesis myPremise = getRelatedThesis2(myDeductionResult, aPerspective);
-                myReturnValue.addDeduction(myPremise);
+                myReturnValue.addConclusion(myPremise);
             }
         }
         catch (SQLException anException)

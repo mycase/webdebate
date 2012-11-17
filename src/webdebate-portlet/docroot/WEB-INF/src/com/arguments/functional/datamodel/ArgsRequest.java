@@ -16,7 +16,7 @@ import com.arguments.support.ServletParameterMap;
 
 public class ArgsRequest
 {
-    private final PortletParameterMap theParameterMap;
+    private final PortletParameterMap theParameterMap; // TODO thePortletParameterMap
     private final ServletParameterMap theServletParameterMap;
     private final ArgumentsUser theUser;
     

@@ -96,6 +96,27 @@ public class HtmlThesisPrinter
     }
 
     // ------------------------------------------------------------------------
+    String getThesisTreeString(Thesis aThesis)
+    {
+        Container<Thesis> myThesisTree =
+                TheArgsStore.i().selectPremiseTree(aThesis, 2);
+        
+        Renderer<Thesis> myRenderer = new Renderer<Thesis>()
+                {
+
+                    @Override
+                    public String render(Thesis aThesis1)
+                    {
+                        return toFocusAnchor(aThesis1);
+                    }};
+                    
+        IndentHtmlPrinter<Thesis> myPrinter =
+                new IndentHtmlPrinter<>(myRenderer);
+        myPrinter.traverse(myThesisTree);
+        return myPrinter.getOutput();
+    }
+    
+    // ------------------------------------------------------------------------
     private String getPerspectivesTable(Collection<PerspectiveThesisOpinion> anOpinions)
     {
         StringBuffer myText = new StringBuffer();
@@ -134,27 +155,6 @@ public class HtmlThesisPrinter
         }
         myText.append("</table>\n");
         return myText.toString();
-    }
-    
-    // ------------------------------------------------------------------------
-    public String getThesisTreeString(Thesis aThesis)
-    {
-        Container<Thesis> myThesisTree =
-                TheArgsStore.i().selectPremiseTree(aThesis, 2);
-        
-        Renderer<Thesis> myRenderer = new Renderer<Thesis>()
-                {
-
-                    @Override
-                    public String render(Thesis aThesis1)
-                    {
-                        return toFocusAnchor(aThesis1);
-                    }};
-                    
-        IndentHtmlPrinter<Thesis> myPrinter =
-                new IndentHtmlPrinter<>(myRenderer);
-        myPrinter.traverse(myThesisTree);
-        return myPrinter.getOutput();
     }
     
     // ------------------------------------------------------------------------

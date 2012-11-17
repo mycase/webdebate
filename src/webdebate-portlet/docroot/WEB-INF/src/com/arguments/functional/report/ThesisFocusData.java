@@ -1,5 +1,7 @@
 package com.arguments.functional.report;
 
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -19,7 +21,7 @@ public class ThesisFocusData
     private final ThesisId theThesisId;
     private OpinionatedThesis theMainThesis;
     private final List<RelatedThesis> thePremises = new ArrayList<>();
-    private List<RelatedThesis> theDeductions = new ArrayList<>();
+    private List<RelatedThesis> theConclusions = new ArrayList<>();
     private final Perspective thePerspective;
     private boolean theMainThesisOwned;
     private boolean thePerspectiveOwned;
@@ -32,15 +34,9 @@ public class ThesisFocusData
     }
 
     // ------------------------------------------------------------------------
-    public ThesisId getThesisId()
-    {
-        return theThesisId;
-    }
-
-    // ------------------------------------------------------------------------
     public void setMainThesis(OpinionatedThesis aThesis)
     {
-        assert aThesis != null;
+        assertNotNull( aThesis );
         theMainThesis = aThesis;
     }
 
@@ -51,9 +47,9 @@ public class ThesisFocusData
     }
 
     // ------------------------------------------------------------------------
-    public void addDeduction(RelatedThesis aPremise)
+    public void addConclusion(RelatedThesis aPremise)
     {
-        theDeductions.add(aPremise);
+        theConclusions.add(aPremise);
     }
 
     // ------------------------------------------------------------------------
@@ -65,20 +61,20 @@ public class ThesisFocusData
     // ------------------------------------------------------------------------
     public void check()
     {
-        assert theMainThesis != null;
+        assertNotNull( theMainThesis );
     }
 
     // ------------------------------------------------------------------------
     public OpinionatedThesis getMainThesis()
     {
-        assert theMainThesis != null;
+        assertNotNull( theMainThesis );
         return theMainThesis;
     }
 
     // ------------------------------------------------------------------------
     public List<RelatedThesis> getDeductions()
     {
-        return theDeductions;
+        return theConclusions;
     }
     
     // ------------------------------------------------------------------------

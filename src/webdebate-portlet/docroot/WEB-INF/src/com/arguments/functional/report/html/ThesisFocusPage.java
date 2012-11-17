@@ -22,7 +22,7 @@ public class ThesisFocusPage
     private final ArgumentsUser theAppUser;
     private final Perspective thePerspective;
     private final ThesisId theThesisId;
-    private final ArgsStatefulRequest3 theRequest;
+    private final UrlContainer theUrlContainer;
     
     // ------------------------------------------------------------------------
     public static String getHtmlBody(
@@ -56,14 +56,11 @@ public class ThesisFocusPage
     }
 
     // ------------------------------------------------------------------------
-    /**
-     * @param aRequest
-     */
     private ThesisFocusPage(ArgsStatefulRequest3 aRequest)
     {
         theAppUser = aRequest.getUser();
         theThesisId = aRequest.getState().getThesisId();
-        theRequest = aRequest;
+        theUrlContainer = aRequest.getUrlContainer();
         thePerspective = aRequest.getState().getPerspective();
     }
 
@@ -72,7 +69,7 @@ public class ThesisFocusPage
     {
         ThesisFocusData myThesisFocusData = getData();
         HtmlThesisPrinter myPrinter = new HtmlThesisPrinter(
-                theRequest.getUrlContainer(), aProtocolMap);
+                theUrlContainer, aProtocolMap);
         return myPrinter.focusPageToHtmlPage(myThesisFocusData);
     }
 
@@ -81,7 +78,7 @@ public class ThesisFocusPage
     {
         ThesisFocusData myData = getData();
         HtmlThesisPrinter myPrinter = new HtmlThesisPrinter(
-                theRequest.getUrlContainer(), aProtocol);
+                theUrlContainer, aProtocol);
         return myPrinter.focusPageToInternalHtml(myData);
     }
 

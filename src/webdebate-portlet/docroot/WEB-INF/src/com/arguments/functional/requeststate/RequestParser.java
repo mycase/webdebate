@@ -27,8 +27,8 @@ import com.arguments.functional.datamodel.ThesisText;
  */
 public class RequestParser
 {
-    private final ArgumentsUser theAppUser;
-    private final ProtocolMap theRequestMap;
+    private final ArgumentsUser theUser;
+    private final ProtocolMap theProtocolMap;
 
     // ------------------------------------------------------------------------
     public static Command getCommand(
@@ -61,8 +61,8 @@ public class RequestParser
             ArgumentsUser anAppUser,
             ProtocolMap aRequestMap)
     {
-        theAppUser = anAppUser;
-        theRequestMap = aRequestMap;
+        theUser = anAppUser;
+        theProtocolMap = aRequestMap;
     }
     
     // ------------------------------------------------------------------------
@@ -89,7 +89,7 @@ public class RequestParser
         if (isPresent(ArgsRequestKey.PERSPECTIVE_ID))
             return getUpdatePerspective();
 
-        throw new AssertionError("Unknown mapconfiguration: " + theRequestMap.keySet());
+        throw new AssertionError("Unknown mapconfiguration: " + theProtocolMap.keySet());
     }
     
     // ------------------------------------------------------------------------
@@ -112,7 +112,7 @@ public class RequestParser
         assertNotNull( myThesisOpinion);
 
         return new UpdateThesis(
-                theAppUser, myNewThesisText,
+                theUser, myNewThesisText,
                 ThesisOpinion.parseOpinion(myThesisOpinion));
     }
     
@@ -124,7 +124,7 @@ public class RequestParser
         assertNotNull( myThesisOpinion );
 
         return new InsertOpinion(
-                theAppUser,
+                theUser,
                 ThesisOpinion.parseOpinion(myThesisOpinion));
     }
     
@@ -147,7 +147,7 @@ public class RequestParser
 
         return new InsertThesis(
                 new ThesisText(myNewThesisText),
-                theAppUser, ThesisOpinion.parseOpinion(myThesisOpinion));
+                theUser, ThesisOpinion.parseOpinion(myThesisOpinion));
     }
     
     // ------------------------------------------------------------------------
@@ -169,7 +169,7 @@ public class RequestParser
         ThesisId myNewTargetId = ThesisId.parse(myNewLinkTargetId);
 
         return new UpdateLink(
-                theAppUser, myLinkId, myNewIfTrueRelevance,
+                theUser, myLinkId, myNewIfTrueRelevance,
                 myNewIfFalseRelevance, myNewTargetId);
     }
 
@@ -192,14 +192,14 @@ public class RequestParser
         Relevance myIfFalsePremiseRelevance = Relevance.parseRelevance(myIfFalsePremiseRelevanceString);
         ThesisOpinion myPremiseOpinion = ThesisOpinion.parseOpinion(myPremiseOpinionString);
 
-        return new InsertPremise(myPremiseText, myIfTruePremiseRelevance, myIfFalsePremiseRelevance, theAppUser,
+        return new InsertPremise(myPremiseText, myIfTruePremiseRelevance, myIfFalsePremiseRelevance, theUser,
                 myPremiseOpinion);
     }
 
     // ------------------------------------------------------------------------
     private boolean isPresent(ArgsRequestKey aKey)
     {
-        return theRequestMap.keySet().contains(aKey);
+        return theProtocolMap.keySet().contains(aKey);
     }
     
     // ------------------------------------------------------------------------
@@ -211,7 +211,7 @@ public class RequestParser
     // ------------------------------------------------------------------------
     private String getParameter(ArgsRequestKey aKey)
     {
-        String myUnsafeText = theRequestMap.get(aKey);
+        String myUnsafeText = theProtocolMap.get(aKey);
         if(myUnsafeText == null) return null;
         String myReturnValue = getSafeText(myUnsafeText);
         return myReturnValue;

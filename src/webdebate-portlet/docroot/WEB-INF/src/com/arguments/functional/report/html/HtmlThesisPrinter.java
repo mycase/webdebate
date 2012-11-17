@@ -24,18 +24,18 @@ public class HtmlThesisPrinter
 {
     
     private final UrlContainer theUrlContainer;
-    private final ProtocolMap theProtocolMap;
+    private final ProtocolMap theProtocol;
     
     // ------------------------------------------------------------------------
     /**
      * @param aUser
      */
-    public HtmlThesisPrinter(UrlContainer aUrlContainer, ProtocolMap aProtocolMap)
+    public HtmlThesisPrinter(UrlContainer aUrlContainer, ProtocolMap aProtocol)
     {
         assertNotNull(aUrlContainer);
         
         theUrlContainer = aUrlContainer;
-        theProtocolMap = aProtocolMap;
+        theProtocol = aProtocol;
     }
 
     // ------------------------------------------------------------------------
@@ -161,7 +161,7 @@ public class HtmlThesisPrinter
     private String toPerspectiveAnchor(OwnedPerspective aPerspective)
     {
         return "<a href=\"focus?"+
-                theProtocolMap.get(ArgsRequestKey.PERSPECTIVE_ID)+"="
+                theProtocol.get(ArgsRequestKey.PERSPECTIVE_ID)+"="
                 + aPerspective.getIdString() + "\"> "+aPerspective+"</a>";
     }
 
@@ -169,7 +169,7 @@ public class HtmlThesisPrinter
     private String toFocusAnchor(ThesisId aThesisID)
     {
         return "<a href=\"focus?"+
-                theProtocolMap.get(ArgsRequestKey.THESIS_ID)+"="
+                theProtocol.get(ArgsRequestKey.THESIS_ID)+"="
                 + aThesisID + "\"> focus</a>";
     }
 
@@ -177,7 +177,7 @@ public class HtmlThesisPrinter
     private String toFocusAnchor(Thesis aThesis)
     {
         return "<a href=\"focus?"+
-                theProtocolMap.get(ArgsRequestKey.THESIS_ID)+"=" +
+                theProtocol.get(ArgsRequestKey.THESIS_ID)+"=" +
                 aThesis.getID() + "\">"+aThesis.getSummary()+"</a>";
     }
 
@@ -185,7 +185,7 @@ public class HtmlThesisPrinter
     private String toRelinkAnchor(String aRelinkURL, RelatedThesis aPremise)
     {
         return "<a href=\"" + aRelinkURL + "&" +
-                theProtocolMap.get(ArgsRequestKey.RELATION_ID) +"=" + aPremise.getRelation().getID() + "\"> relink</a>";
+                theProtocol.get(ArgsRequestKey.RELATION_ID) +"=" + aPremise.getRelation().getID() + "\"> relink</a>";
     }
 
     // ------------------------------------------------------------------------

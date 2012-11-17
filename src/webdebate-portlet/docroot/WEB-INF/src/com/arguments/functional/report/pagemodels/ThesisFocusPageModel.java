@@ -20,18 +20,19 @@ public class ThesisFocusPageModel extends PageRenderer
     // ------------------------------------------------------------------------
     public ThesisFocusPageModel(
             ArgsStatefulRequest3 aRequest,
-            ProtocolMap aTheprotocolmap,
+            ProtocolMap aProtocol,
             ArgsErrorHandler anErrorHandler)
     {
         super(anErrorHandler);
-        theHtml = catchHtml(aRequest, aTheprotocolmap, null);
+        theHtml = catchHtml(aRequest, aProtocol, null);
     }
 
     // ------------------------------------------------------------------------
     protected String noCatchHtml(
-            ArgsStatefulRequest3 aRequest, ProtocolMap aProtocolMap,
+            ArgsStatefulRequest3 aRequest,
+            ProtocolMap aProtocol,
             UrlContainer aUrlContainer)
     {
-        return ThesisFocusPage.getInternalHtml(aRequest, aProtocolMap);
+        return ThesisFocusPage.getInternalHtml(aRequest, aProtocol);
     }
 }

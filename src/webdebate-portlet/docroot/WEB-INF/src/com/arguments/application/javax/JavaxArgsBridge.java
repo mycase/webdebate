@@ -22,35 +22,20 @@ import com.arguments.support.ServletParameterMap;
 public abstract class JavaxArgsBridge extends PortalArgsBridge
 {
     // ------------------------------------------------------------------------
-    public ArgsRequest newArgsRequest(PortletRequest aRequest)
-    {
-        PortletParameterMap myParameterMap =
-                new PortletParameterMap(aRequest.getParameterMap());
-        ServletParameterMap myServletParameterMap = new ServletParameterMap(
-            TheContainerBridge.i().
-                getOriginalServletRequest(aRequest).getParameterMap());
-        TheArgsStore.i().assureConnect();
-        ArgumentsUser myUser = TheContainerBridge.i().getAppUser(aRequest);
-
-        return new ArgsRequest(
-                myParameterMap, myServletParameterMap, myUser);
-    }
-    
-    // ------------------------------------------------------------------------
-    public ArgsActionRequest newArgsActionRequest(PortletRequest aRequest)
+    public ArgsActionRequest getArgsActionRequest(PortletRequest aRequest)
     {
         return new ArgsActionRequest(newArgsRequest(aRequest));
     }
     
     // ------------------------------------------------------------------------
-    public static ArgsJspRenderRequest getRenderRequest(
+    public static ArgsJspRenderRequest getArgsRenderRequest(
             RenderRequest aRequest,
             UrlContainer aUrlContainer,
-            UpdateState anUpdateState)
+            UpdateStateFlag anUpdateState)
     {
         Logger.log("\nJavaxArgsBridge.getRenderRequest()");
         final ArgsRequest myArgsRequest =
-                TheContainerBridge.i().newArgsRequest(aRequest);
+                newArgsRequest(aRequest);
         final ArgsErrorHandler myErrorHandler =
                 TheContainerBridge.i().newErrorHandler(
                         aRequest, myArgsRequest.getAppUser());
@@ -80,4 +65,20 @@ public abstract class JavaxArgsBridge extends PortalArgsBridge
     
     // ------------------------------------------------------------------------
     public abstract ProtocolMap getProtocolMap();
+
+    // ------------------------------------------------------------------------
+    private static ArgsRequest newArgsRequest(PortletRequest aRequest)
+    {
+        PortletParameterMap myParameterMap =
+                new PortletParameterMap(aRequest.getParameterMap());
+        ServletParameterMap myServletParameterMap = new ServletParameterMap(
+            TheContainerBridge.i().
+                getOriginalServletRequest(aRequest).getParameterMap());
+        TheArgsStore.i().assureConnect();
+        ArgumentsUser myUser = TheContainerBridge.i().getAppUser(aRequest);
+
+        return new ArgsRequest(
+                myParameterMap, myServletParameterMap, myUser);
+    }
+    
 }

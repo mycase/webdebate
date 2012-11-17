@@ -51,8 +51,7 @@ public class ArgsRequest
             return theServletParameterMap;
         }
 
-        assertNotNull( theParameterMap );
-        assertNotNull(theParameterMap);        
+        assertNotNull(theParameterMap); // Seperate check for deserialized objects
         return theParameterMap;
     }
 

@@ -77,11 +77,11 @@ public class ThesisFocusPage
     }
 
     // ------------------------------------------------------------------------
-    private String getInternalHtml(ProtocolMap aProtocolMap)
+    private String getInternalHtml(ProtocolMap aProtocol)
     {
         ThesisFocusData myData = getData();
         HtmlThesisPrinter myPrinter = new HtmlThesisPrinter(
-                theRequest.getUrlContainer(), aProtocolMap);
+                theRequest.getUrlContainer(), aProtocol);
         return myPrinter.focusPageToInternalHtml(myData);
     }
 

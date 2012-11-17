@@ -13,15 +13,9 @@ public interface ArgsReadOnlyState
 {
 
     // ------------------------------------------------------------------------
-    /**
-     * @return theThesisId
-     */
     public abstract ThesisId getThesisId();
 
     // ------------------------------------------------------------------------
-    /**
-     * @return
-     */
     public abstract StateChange getStateChange();
 
     // ------------------------------------------------------------------------

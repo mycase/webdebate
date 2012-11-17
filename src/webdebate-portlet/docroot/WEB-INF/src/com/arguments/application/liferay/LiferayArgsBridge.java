@@ -51,8 +51,7 @@ public class LiferayArgsBridge extends JavaxArgsBridge
 
         try
         {
-            ArgsActionRequest myRequest =
-                    newArgsActionRequest(anActionRequest);
+            ArgsActionRequest myRequest = getArgsActionRequest(anActionRequest);
             Logger.logAction(myRequest);
             myRequest.execute();
         }

@@ -16,6 +16,9 @@ public class PerspectiveId
     public static final PerspectiveId VOLATILE = new PerspectiveId(-3L);
     private static PerspectiveId THESIS_OWNER2 = null;
     public static final PerspectiveId READER1 = new PerspectiveId(-1L);
+    public static final PerspectiveId P1 = new PerspectiveId(1L);
+    public static final PerspectiveId P3 = new PerspectiveId(3L);
+    public static final PerspectiveId P4 = new PerspectiveId(4L);
     
     // ------------------------------------------------------------------------
     public PerspectiveId(Long anID)

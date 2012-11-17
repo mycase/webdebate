@@ -19,6 +19,7 @@ public class ArgsRenderDirective
     private final ArgumentsUser theUser;
     private final UrlContainer theUrlContainer;
     private final RelationId theRelationId;
+    private final RelationId thePerspective2Id;
 
     // ------------------------------------------------------------------------
     public ArgsRenderDirective(
@@ -34,6 +35,7 @@ public class ArgsRenderDirective
         Logger.log("New arguments request: " + aProtocolMap + "\nUser: " + theUser);
         
         theRelationId = RelationId.parseRelationId(aProtocolMap.get(ArgsRequestKey.RELATION_ID));
+        thePerspective2Id = RelationId.parseRelationId(aProtocolMap.get(ArgsRequestKey.PERSPECTIVE2_ID_));
     }
     
     // ------------------------------------------------------------------------
@@ -48,6 +50,12 @@ public class ArgsRenderDirective
     RelationId getRelationId()
     {
         return theRelationId;
+    }
+    
+    // ------------------------------------------------------------------------
+    RelationId getPerspective2Id()
+    {
+        return thePerspective2Id;
     }
     
     // ------------------------------------------------------------------------

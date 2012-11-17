@@ -3,11 +3,12 @@
  */
 package com.arguments.functional.requeststate;
 
+import com.arguments.application.TheContainerBridge;
 import com.arguments.functional.datamodel.ArgsErrorHandler;
 import com.arguments.functional.datamodel.ArgsRequest;
 import com.arguments.functional.report.html.UrlContainer;
 import com.arguments.functional.requeststate.PortalArgsBridge.CgiSource;
-import com.arguments.functional.requeststate.PortalArgsBridge.UpdateState;
+import com.arguments.functional.requeststate.PortalArgsBridge.UpdateStateFlag;
 
 /**
  * @author  mirleau
@@ -16,13 +17,13 @@ public class ArgsJspRenderRequest
 {
     private final ArgsRequest theRequest;
     private final UrlContainer theUrlContainer;
-    private final CgiSource theStateInputMode;
-    private final UpdateState theUpdateState;
+    private final CgiSource theCgiSource;
+    private final UpdateStateFlag theUpdateStateFlag;
     private final ArgsErrorHandler theErrorHandler;
 
     // ------------------------------------------------------------------------
     public ArgsJspRenderRequest(ArgsRequest aRequest, UrlContainer aUrlContainer,
-            CgiSource aStateInputMode, UpdateState aUpdateState)
+            CgiSource aStateInputMode, UpdateStateFlag aUpdateState)
     {
         this(aRequest, aUrlContainer, aStateInputMode, aUpdateState, null);
     }
@@ -32,16 +33,21 @@ public class ArgsJspRenderRequest
             ArgsRequest aRequest,
             UrlContainer aUrlContainer,
             CgiSource aStateInputMode,
-            UpdateState aUpdateState,
+            UpdateStateFlag aUpdateState,
             ArgsErrorHandler anErrorHandler)
     {
         theRequest = aRequest;
         theUrlContainer = aUrlContainer;
-        theStateInputMode = aStateInputMode;
-        theUpdateState = aUpdateState;
+        theCgiSource = aStateInputMode;
+        theUpdateStateFlag = aUpdateState;
         theErrorHandler = anErrorHandler;
     }
 
+    // ------------------------------------------------------------------------
+    public ArgsStatefulRequest3 storeGet()
+    {
+        return TheContainerBridge.i().storeStateGetArgumentsRequest3(this);
+    }
     
     // ------------------------------------------------------------------------
     public ArgsRequest getRequest()
@@ -58,13 +64,13 @@ public class ArgsJspRenderRequest
     // ------------------------------------------------------------------------
     public CgiSource getStateInputMode()
     {
-        return theStateInputMode;
+        return theCgiSource;
     }
 
     // ------------------------------------------------------------------------
-    public UpdateState getUpdateState()
+    public UpdateStateFlag getUpdateState()
     {
-        return theUpdateState;
+        return theUpdateStateFlag;
     }
 
     // ------------------------------------------------------------------------

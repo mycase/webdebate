@@ -23,7 +23,7 @@ public abstract class PortalArgsBridge
     }
 
     // ------------------------------------------------------------------------
-    public enum UpdateState
+    public enum UpdateStateFlag
     {
         YES, NO;
     }
@@ -63,7 +63,7 @@ public abstract class PortalArgsBridge
         // User, Urls, ChangeRelationId
 
         // this should probably best be part of an execute method:
-        if (aJspRequest.getUpdateState() == UpdateState.YES &&
+        if (aJspRequest.getUpdateState() == UpdateStateFlag.YES &&
                 myStateChange.hasChange())
         {
             myStateChange.mergeAndStore(myAppUser);

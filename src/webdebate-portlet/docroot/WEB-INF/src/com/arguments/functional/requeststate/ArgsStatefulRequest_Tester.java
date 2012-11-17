@@ -1,9 +1,6 @@
 package com.arguments.functional.requeststate;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -34,7 +31,7 @@ import com.arguments.functional.report.ThesisNotOwnedException;
 import com.arguments.functional.report.html.UrlContainer;
 import com.arguments.functional.report.pagemodels.PageModelFactory;
 import com.arguments.functional.requeststate.PortalArgsBridge.CgiSource;
-import com.arguments.functional.requeststate.PortalArgsBridge.UpdateState;
+import com.arguments.functional.requeststate.PortalArgsBridge.UpdateStateFlag;
 import com.arguments.functional.store.TheArgsStore;
 import com.arguments.support.PortletParameterMap;
 import com.arguments.support.ServletParameterMap;
@@ -256,21 +253,9 @@ public class ArgsStatefulRequest_Tester
         ThesisId myThesisId = insertThesis();
 
         // User2 focuses on User1's thesis
+        ArgsJspRenderRequest myRequest = getThesisRenderRequest(myUser2,
+                myThesisId);
 
-        PortletParameterMap myPParameterMap0 = new PortletParameterMap();
-        ServletParameterMap mySParameterMap0 = new ServletParameterMap();
-        mySParameterMap0.put(LiferayArgsRequestKey.s(ArgsRequestKey.THESIS_ID),
-                new String[] { "" + myThesisId });
-
-        ArgsRequest myRequest0 = new ArgsRequest(myPParameterMap0,
-                mySParameterMap0, myUser2);
-
-        UrlContainer myContainer = new UrlContainer();
-        CgiSource mySource = CgiSource.SERVLET;
-        UpdateState myUpdateState = UpdateState.YES;
-
-        ArgsJspRenderRequest myRequest = new ArgsJspRenderRequest(myRequest0,
-                myContainer, mySource, myUpdateState);
         PageModelFactory.getThesisFocusPage(myRequest);
 
         // User2 takes User1's perspective
@@ -306,6 +291,68 @@ public class ArgsStatefulRequest_Tester
         }
 
         throw new AssertionError("Expected exception not thrown");
+    }
+
+    // ------------------------------------------------------------------------
+    @Test
+    public void testSecondPerspective()
+    {
+        ArgumentsUser myUser1 = ArgumentsUser_Tester.getTestUser2();
+        ArgumentsUser myUser2 = ArgumentsUser_Tester.getTestUser7();
+
+        // User1 owns a thesis
+        ThesisId myThesisId = insertThesis();
+        PerspectiveId myPerspectiveId = PerspectiveId.P4;
+
+        // User2 focuses on User1's thesis
+        ArgsJspRenderRequest myRequest = getPerspective2RenderRequest(myUser2,
+                myPerspectiveId);
+
+        PageModelFactory.getThesisFocusPage(myRequest);
+    }
+    
+    // ------------------------------------------------------------------------
+    private static ArgsJspRenderRequest getThesisRenderRequest(
+            ArgumentsUser aUser,
+            ThesisId aThesisId)
+    {
+        ServletParameterMap mySParameterMap0 = new ServletParameterMap();
+        mySParameterMap0.put(LiferayArgsRequestKey.s(ArgsRequestKey.THESIS_ID),
+                new String[] { "" + aThesisId });
+
+        return getServletRenderRequest(aUser, mySParameterMap0);
+    }
+
+    
+    // ------------------------------------------------------------------------
+    private static ArgsJspRenderRequest getPerspective2RenderRequest(
+            ArgumentsUser aUser,
+            PerspectiveId aPerspectiveId)
+    {
+        ServletParameterMap mySParameterMap0 = new ServletParameterMap();
+        mySParameterMap0.put(LiferayArgsRequestKey.s(ArgsRequestKey.PERSPECTIVE2_ID_),
+                new String[] { "" + aPerspectiveId });
+
+        return getServletRenderRequest(aUser, mySParameterMap0);
+    }
+
+    
+    // ------------------------------------------------------------------------
+    private static ArgsJspRenderRequest getServletRenderRequest(ArgumentsUser aUser,
+            ServletParameterMap aSParameterMap0)
+    {
+        PortletParameterMap myPParameterMap0 = new PortletParameterMap();
+
+        ArgsRequest myRequest0 = new ArgsRequest(myPParameterMap0,
+                aSParameterMap0, aUser);
+
+        UrlContainer myContainer = new UrlContainer();
+        CgiSource mySource = CgiSource.SERVLET;
+        UpdateStateFlag myUpdateState = UpdateStateFlag.YES;
+
+        ArgsJspRenderRequest myRequest = new ArgsJspRenderRequest(myRequest0,
+                myContainer, mySource, myUpdateState);
+        return myRequest;
     }
 
     // ------------------------------------------------------------------------
@@ -378,26 +425,6 @@ public class ArgsStatefulRequest_Tester
         assert myCountAfter == myCountBefore;
 
         return myThesisId;
-    }
-
-    // ------------------------------------------------------------------------
-    @Test
-    public void secondPerspective()
-    {
-
-        ArgumentsUser myAppUser = ArgumentsUser_Tester.getTestUser2();
-
-        ProtocolMap myRequestMap = new ProtocolMap();
-        myRequestMap.put(ArgsRequestKey.PERSPECTIVE2_ID_,
-                PerspectiveId.READER1.getIdString());
-
-        /*
-         * ArgsRequest myR = new ArgsRequest(myR); ArgsJspRenderRequest
-         * myRequest = new ArgsJspRenderRequest(myR, null, null, null);
-         * ThesisFocusPageModel myPageModel =
-         * PageModelFactory.getThesisFocusPage(myRequest); assertNotNull(
-         * myPageModel.theHtml);
-         */
     }
 
     // ------------------------------------------------------------------------

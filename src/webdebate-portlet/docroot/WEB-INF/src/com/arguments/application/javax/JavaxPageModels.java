@@ -19,7 +19,7 @@ import com.arguments.functional.report.pagemodels.PageModelFactory;
 import com.arguments.functional.report.pagemodels.ThesisFocusPageModel;
 import com.arguments.functional.requeststate.ArgsJspRenderRequest;
 import com.arguments.functional.requeststate.ProtocolMap;
-import com.arguments.functional.requeststate.PortalArgsBridge.UpdateState;
+import com.arguments.functional.requeststate.PortalArgsBridge.UpdateStateFlag;
 
 /**
  * @author mirleau
@@ -108,7 +108,7 @@ public class JavaxPageModels
     // ------------------------------------------------------------------------
     private static ArgsJspRenderRequest getRequest(RenderRequest aRequest)
     {
-        return getRequest3(aRequest, new UrlContainer(), UpdateState.NO);
+        return getRequest3(aRequest, new UrlContainer(), UpdateStateFlag.NO);
     }
 
     // ------------------------------------------------------------------------
@@ -116,7 +116,7 @@ public class JavaxPageModels
             RenderRequest aRequest, UrlContainer aUrlContainer)
     {
         // Viewing the focus page should set the state.
-        return getRequest3(aRequest, aUrlContainer, UpdateState.YES);
+        return getRequest3(aRequest, aUrlContainer, UpdateStateFlag.YES);
     }
     
     // TODO: Do the above branching by page outside of the javax package. 
@@ -124,8 +124,8 @@ public class JavaxPageModels
     private static ArgsJspRenderRequest getRequest3(
             RenderRequest aRequest,
             UrlContainer aUrlContainer,
-            UpdateState anUpdateState)
+            UpdateStateFlag anUpdateState)
     {
-        return JavaxArgsBridge.getRenderRequest(aRequest, aUrlContainer, anUpdateState);
+        return JavaxArgsBridge.getArgsRenderRequest(aRequest, aUrlContainer, anUpdateState);
     }
 }

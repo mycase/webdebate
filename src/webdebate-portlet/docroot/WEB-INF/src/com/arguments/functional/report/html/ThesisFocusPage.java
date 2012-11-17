@@ -5,6 +5,9 @@ package com.arguments.functional.report.html;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.datamodel.Perspective;
 import com.arguments.functional.datamodel.PerspectiveId;
@@ -21,10 +24,9 @@ import com.arguments.functional.store.TheArgsStore;
 public class ThesisFocusPage
 {
     private final ArgumentsUser theAppUser;
-    private final Perspective thePerspective;
+    private final List<Perspective> thePerspectives = new ArrayList<>();
     private final ThesisId theThesisId;
     private final UrlContainer theUrlContainer;
-    private final PerspectiveId thePerspective2Id;
     
     // ------------------------------------------------------------------------
     public static String getHtmlBody(
@@ -63,8 +65,10 @@ public class ThesisFocusPage
         theAppUser = aRequest.getUser();
         theThesisId = aRequest.getState().getThesisId();
         theUrlContainer = aRequest.getUrlContainer();
-        thePerspective = aRequest.getState().getPerspective();
-        thePerspective2Id = aRequest.getPerspective2Id();
+        thePerspectives.add(aRequest.getState().getPerspective());
+        PerspectiveId myPId2 = aRequest.getPerspective2Id();
+        if (myPId2 != null)
+            thePerspectives.add(TheArgsStore.i().getPerspective(myPId2));
     }
 
     // ------------------------------------------------------------------------
@@ -90,6 +94,6 @@ public class ThesisFocusPage
     {
         assertNotNull(theThesisId);
         return TheArgsStore.i().getThesisFocusData(
-                theThesisId, theAppUser, thePerspective, thePerspective2Id);
+                theThesisId, theAppUser, thePerspectives);
     }
 }

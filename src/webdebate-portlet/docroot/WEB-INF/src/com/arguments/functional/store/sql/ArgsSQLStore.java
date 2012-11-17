@@ -414,20 +414,21 @@ public class ArgsSQLStore implements ArgsStore
     public ThesisFocusData getThesisFocusData(
             ThesisId aMainThesisId,
             ArgumentsUserId aUserId,
-            Perspective aPerspective, PerspectiveId aPerspective2Id)
+            List<Perspective> aPerspectives)
     {
-        assert aPerspective != null;
+        Perspective myPerspective = aPerspectives.get(0);
+        assert myPerspective != null;
         
         ThesisFocusData myReturnValue =
-                new ThesisFocusData(aMainThesisId, aPerspective);
+                new ThesisFocusData(aMainThesisId, myPerspective);
 
         try
         {
             OpinionatedThesis myThesis =
-                    getOpinionatedThesis(aMainThesisId, aPerspective);
+                    getOpinionatedThesis(aMainThesisId, myPerspective);
             myReturnValue.setMainThesis(myThesis);
             myReturnValue.setMainThesisOwned(myThesis.getOwnerID().equals(aUserId));
-            ArgumentsUserId myPerspectiveOwner = aPerspective.getOwner();
+            ArgumentsUserId myPerspectiveOwner = myPerspective.getOwner();
             assertNotNull(aUserId);
             myReturnValue.setPerspectiveOwned(aUserId.equals(myPerspectiveOwner));
             ArgsDB myQuery = ArgsQuery.SELECT_PREMISE.ps();
@@ -435,7 +436,7 @@ public class ArgsSQLStore implements ArgsStore
             ResultSet myPremiseResult = myQuery.executeQuery();
             while (myPremiseResult.next())
             {
-                RelatedThesis<OpinionatedThesis> myPremise = getRelatedThesis(myPremiseResult, aPerspective);
+                RelatedThesis<OpinionatedThesis> myPremise = getRelatedThesis(myPremiseResult, myPerspective);
                 myReturnValue.addPremise(myPremise);
             }
             
@@ -445,7 +446,7 @@ public class ArgsSQLStore implements ArgsStore
 
             while (myDeductionResult.next())
             {
-                RelatedThesis<OpinionatedThesis> myPremise = getRelatedThesis2(myDeductionResult, aPerspective);
+                RelatedThesis<OpinionatedThesis> myPremise = getRelatedThesis2(myDeductionResult, myPerspective);
                 myReturnValue.addConclusion(myPremise);
             }
         }

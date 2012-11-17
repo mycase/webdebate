@@ -85,9 +85,6 @@ public class ArgsState implements ArgsReadOnlyState
         if(thePerspectiveId.equals(PerspectiveId.getThesisOwner()))
             //throw new AssertionError("Deprecated PerspectiveId: " + thePerspectiveId);
             return new ThesisOwnerPerspective();
-        if(thePerspectiveId.equals(PerspectiveId.READER1))
-            throw new AssertionError("Deprecated PerspectiveId: " + thePerspectiveId);
-            //return new ReaderPerspective(aUser);
         if(thePerspectiveId.equals(PerspectiveId.VOLATILE))
             throw new AssertionError("Deprecated PerspectiveId: " + thePerspectiveId);
         return TheArgsStore.i().getPerspective(thePerspectiveId);

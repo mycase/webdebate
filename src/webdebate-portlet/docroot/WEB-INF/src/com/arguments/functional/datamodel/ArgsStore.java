@@ -72,7 +72,7 @@ public interface ArgsStore
     // ------------------------------------------------------------------------
     public abstract ThesisFocusData getThesisFocusData(
             ThesisId aMainThesisId, ArgumentsUserId aUserId,
-            Perspective aPerspective, PerspectiveId aPerspective2Id);
+            List<Perspective> aPerspectives);
 
     // ------------------------------------------------------------------------
     public abstract ArgumentsUser selectUserByForeignId(ForeignUserId aUserId);

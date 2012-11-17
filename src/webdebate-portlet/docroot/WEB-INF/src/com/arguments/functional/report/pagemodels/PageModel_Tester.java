@@ -89,25 +89,6 @@ public class PageModel_Tester
 
     // ------------------------------------------------------------------------
     @Test
-    public void secondPerspective()
-    {
-
-        Map<ArgsRequestKey, String> myMap = new HashMap<ArgsRequestKey, String>()
-                {{
-                  put(ArgsRequestKey.PERSPECTIVE2_ID, "gogo");
-                }};
-
-                /*
-        ArgsRequest myR = new ArgsRequest(myR);
-        ArgsJspRenderRequest myRequest =
-                new ArgsJspRenderRequest(myR, null, null, null);
-        ThesisFocusPageModel myPageModel = PageModelFactory.getThesisFocusPage(myRequest);
-        assertNotNull( myPageModel.theHtml);
-        */
-    }
-
-    // ------------------------------------------------------------------------
-    @Test
     public void directWebEntryNoDBConnection() throws FileNotFoundException
     {
         TheArgsStore.setDB(new ArgsTestDB(TheArgsStore.i()));

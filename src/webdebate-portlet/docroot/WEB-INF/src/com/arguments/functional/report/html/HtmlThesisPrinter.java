@@ -278,7 +278,7 @@ public class HtmlThesisPrinter
         myText.append(aPremise.getIfFalseRelevance());
         myText.append(", Implied:" + 
                 RelatedThesis.getImpliedBelief(
-                        aPremise.getOpinion(), aPremise.getRelation()));
+                        aPremise.getThesis().getOpinion(), aPremise.getRelation()));
         return myText;
     }
 

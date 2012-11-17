@@ -31,10 +31,10 @@ public class ArgumentStrengthComparator implements Comparator<RelatedThesis>
     public int compare(RelatedThesis aO1, RelatedThesis aO2)
     {
         ThesisOpinion myImplied1 =
-                RelatedThesis.getImpliedBelief(aO1.getOpinion(), aO1.getRelation());
+                RelatedThesis.getImpliedBelief(aO1.getThesis().getOpinion(), aO1.getRelation());
         
         ThesisOpinion myImplied2 =
-                RelatedThesis.getImpliedBelief(aO2.getOpinion(), aO2.getRelation());
+                RelatedThesis.getImpliedBelief(aO2.getThesis().getOpinion(), aO2.getRelation());
 
         int myTargetSign = (int) Math.signum(theTargetOpinion.getMinusOneToOne()) ;
         if (myTargetSign == 0) myTargetSign = 1;

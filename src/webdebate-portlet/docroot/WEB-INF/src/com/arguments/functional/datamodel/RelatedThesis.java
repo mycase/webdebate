@@ -7,17 +7,6 @@ public class RelatedThesis
     private final OpinionatedThesis theThesis;
 
     // ------------------------------------------------------------------------
-    private RelatedThesis(
-            ThesisId aThesisID,
-            ThesisText aSummary,
-            ThesisOpinion aOpinion,
-            Relation aRelation,
-            ArgumentsUserId anOwnerID)
-    {
-        this(new OpinionatedThesis(aThesisID, aSummary, aOpinion, anOwnerID), aRelation);
-    }
-
-    // ------------------------------------------------------------------------
     public RelatedThesis(
             OpinionatedThesis aThesis,
             Relation aRelation)
@@ -73,11 +62,5 @@ public class RelatedThesis
     public ArgumentsUser getOwner()
     {
         return theThesis.getOwner();
-    }
-
-    // ------------------------------------------------------------------------
-    public ThesisOpinion getOpinion()
-    {
-        return theThesis.getOpinion();
     }
 }

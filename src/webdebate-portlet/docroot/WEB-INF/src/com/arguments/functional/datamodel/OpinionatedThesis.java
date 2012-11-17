@@ -1,30 +1,38 @@
 package com.arguments.functional.datamodel;
 
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class OpinionatedThesis extends Thesis
 {
-    private final ThesisOpinion theOpinion;
-    private final Perspective thePerspective;
+    private final List<ThesisOpinion> theOpinions = new ArrayList<>();
+    private final List<Perspective> thePerspectives = new ArrayList<>();
 
     // ------------------------------------------------------------------------
     public OpinionatedThesis(ThesisId aThesisID, ThesisText aSummary,
-            ThesisOpinion aOpinion, Perspective aPerspective, ArgumentsUserId anOwnerID)
+            ThesisOpinion aOpinion, Perspective aPerspective,
+            ArgumentsUserId anOwnerID)
     {
         super(aThesisID, aSummary, anOwnerID);
-        theOpinion = aOpinion;
-        thePerspective = aPerspective;
-  }
+        add(aPerspective, aOpinion);
+    }
+
+    // ------------------------------------------------------------------------
+    public void add(Perspective aPerspective, ThesisOpinion aOpinion)
+    {
+        theOpinions.add(aOpinion);
+        thePerspectives.add(aPerspective);
+    }
 
     // ------------------------------------------------------------------------
     public ThesisOpinion getOpinion()
     {
-        return theOpinion;
+        return theOpinions.get(0);
     }
 
     // ------------------------------------------------------------------------
     public Perspective getPerspective()
     {
-        return thePerspective;
+        return thePerspectives.get(0);
     }
 }

@@ -14,7 +14,15 @@ public class RelatedThesis
             Relation aRelation,
             ArgumentsUserId anOwnerID)
     {
-        theThesis = new OpinionatedThesis(aThesisID, aSummary, aOpinion, anOwnerID);
+        this(new OpinionatedThesis(aThesisID, aSummary, aOpinion, anOwnerID), aRelation);
+    }
+
+    // ------------------------------------------------------------------------
+    public RelatedThesis(
+            OpinionatedThesis aThesis,
+            Relation aRelation)
+    {
+        theThesis = aThesis;
         theRelation = aRelation;
     }
 

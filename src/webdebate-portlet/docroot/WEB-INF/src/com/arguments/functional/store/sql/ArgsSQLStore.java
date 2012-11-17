@@ -817,8 +817,8 @@ public class ArgsSQLStore implements ArgsStore
                 myThesis1ID, myThesis2ID,
                 myIfTrueRelevance, myIfFalseRelevance, ArgumentsUserId.BOGUS);
         return new RelatedThesis(
-                myThesis1ID, mySummary, myOpinion, myRelation,
-                myOwnerID);
+                new OpinionatedThesis(myThesis1ID, mySummary, myOpinion, myOwnerID),
+                myRelation);
     }
     
     // ------------------------------------------------------------------------
@@ -839,8 +839,8 @@ public class ArgsSQLStore implements ArgsStore
                 myThesis1ID, myThesis2ID, myIfTrueRelevance, myIfFalseRelevance,
                 ArgumentsUserId.BOGUS);
         return new RelatedThesis(
-                myThesis2ID, mySummary, myOpinion, myRelation,
-                myOwnerID);
+                new OpinionatedThesis(myThesis2ID, mySummary, myOpinion, myOwnerID),
+                myRelation);
     }
 
     // ------------------------------------------------------------------------
@@ -965,7 +965,8 @@ public class ArgsSQLStore implements ArgsStore
                         myThesis1ID, myThesis2ID,
                         myIfTrueRelevance, myIfFalseRelevance, ArgumentsUserId.BOGUS);
                 RelatedThesis myPremise = new RelatedThesis(
-                        myThesis1ID, mySummary, ThesisOpinion.BELIEVE_FALSE, myRelation, myOwnerID);
+                        new OpinionatedThesis(myThesis1ID, mySummary, ThesisOpinion.BELIEVE_FALSE, myOwnerID),
+                        myRelation);
                 myReturnValue.add(myPremise);
             }
         } catch (SQLException anException)

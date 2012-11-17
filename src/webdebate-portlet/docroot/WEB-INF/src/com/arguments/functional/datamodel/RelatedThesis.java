@@ -7,7 +7,7 @@ public class RelatedThesis
     private final OpinionatedThesis theThesis;
 
     // ------------------------------------------------------------------------
-    public RelatedThesis(
+    private RelatedThesis(
             ThesisId aThesisID,
             ThesisText aSummary,
             ThesisOpinion aOpinion,

@@ -150,10 +150,10 @@ public class ArgsSQLStore implements ArgsStore
         ArgsDB myQuery = ArgsQuery.SELECT_THESIS_ALL.ps();
         ResultSet myResult = myQuery.executeQuery();
 
-        List<OpinionatedThesis> myNeutralTheses = parseNeutralTheses(myResult);
+        List<Thesis> myNeutralTheses = parseNeutralTheses(myResult);
         List<OpinionatedThesis> myOpinionatedTheses = new ArrayList<>();
         
-        for (OpinionatedThesis myNeutralThesis: myNeutralTheses)
+        for (Thesis myNeutralThesis: myNeutralTheses)
         {
             OpinionatedThesis myOpinionatedThesis =
                     getOpinionatedThesis(myNeutralThesis, aPerspective);
@@ -1031,15 +1031,15 @@ public class ArgsSQLStore implements ArgsStore
     // ------------------------------------------------------------------------
     private static Thesis parseThesis(ResultSet aResultSet)
     {
-        List<OpinionatedThesis> myTheses = parseNeutralTheses(aResultSet);
+        List<Thesis> myTheses = parseNeutralTheses(aResultSet);
         assert myTheses.size() == 1;
         return myTheses.get(0);
     }
 
     // ------------------------------------------------------------------------
-    private static List<OpinionatedThesis> parseNeutralTheses(ResultSet aResultSet)
+    private static List<Thesis> parseNeutralTheses(ResultSet aResultSet)
     {
-        List<OpinionatedThesis> myTheses = new ArrayList<>();
+        List<Thesis> myTheses = new ArrayList<>();
         try
         {
             while (aResultSet.next())
@@ -1047,10 +1047,9 @@ public class ArgsSQLStore implements ArgsStore
                 ThesisId mySourceID = getThesisId(aResultSet, ArgsDB.Thesis.ID.c);
                 ThesisText mySummary = getThesisText(aResultSet, ArgsDB.Thesis.SUMMARY.c);
                 ArgumentsUserId myOwnerID = getUserId(aResultSet, ArgsDB.Thesis.OWNER_ID.c);
-                ThesisOpinion myOpinion = ThesisOpinion.NEUTRAL_OPINION;
                 assert mySourceID != null;
-                OpinionatedThesis myThesis = new OpinionatedThesis(
-                        mySourceID, mySummary, myOpinion, myOwnerID);
+                Thesis myThesis = new Thesis(
+                        mySourceID, mySummary, myOwnerID);
                 myTheses.add(myThesis);
             }
         } catch (SQLException anException)

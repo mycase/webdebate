@@ -12,7 +12,7 @@ public class OpinionatedThesis extends Thesis
     {
         super(aThesisID, aSummary, anOwnerID);
         theOpinion = aOpinion;
-    }
+  }
 
     // ------------------------------------------------------------------------
     public ThesisOpinion getOpinion()

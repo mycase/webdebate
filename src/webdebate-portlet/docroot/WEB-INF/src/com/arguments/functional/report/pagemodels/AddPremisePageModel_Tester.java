@@ -24,7 +24,10 @@ public class AddPremisePageModel_Tester
         OpinionatedThesis myThesis =
                 new OpinionatedThesis(ThesisId.ONE,
                 new ThesisText("da summary"),
-                ThesisOpinion.BELIEVE_FALSE, ArgumentsUserId.TEST2);
+                ThesisOpinion.BELIEVE_FALSE,
+                //new OwnedPerspective(new PerspectiveName("worldbank"),
+                //        ArgumentsUserId.TEST2),
+                ArgumentsUserId.TEST2);
         ProtocolMap myProtocolMap = ArgsRequestKeyAsString.getProtocolMap();
         AddPremisePageModel myPage = new AddPremisePageModel(myThesis, myProtocolMap);
         assertEquals("100", myPage.theIfTrueRelevanceFormValue);

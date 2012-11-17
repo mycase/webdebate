@@ -5,6 +5,7 @@ package com.arguments.functional.report;
 
 import java.util.Comparator;
 
+import com.arguments.functional.datamodel.OpinionatedThesis;
 import com.arguments.functional.datamodel.RelatedThesis;
 import com.arguments.functional.datamodel.ThesisOpinion;
 import com.arguments.support.Logger;
@@ -13,7 +14,7 @@ import com.arguments.support.Logger;
  * @author mirleau
  *
  */
-public class ArgumentStrengthComparator implements Comparator<RelatedThesis>
+public class ArgumentStrengthComparator implements Comparator<RelatedThesis<OpinionatedThesis>>
 {
     private final ThesisOpinion theTargetOpinion;
     
@@ -28,7 +29,7 @@ public class ArgumentStrengthComparator implements Comparator<RelatedThesis>
      * @see java.util.Comparator#compare(java.lang.Object, java.lang.Object)
      */
     @Override
-    public int compare(RelatedThesis aO1, RelatedThesis aO2)
+    public int compare(RelatedThesis<OpinionatedThesis> aO1, RelatedThesis<OpinionatedThesis> aO2)
     {
         ThesisOpinion myImplied1 =
                 RelatedThesis.getImpliedBelief(aO1.getThesis().getOpinion(), aO1.getRelation());

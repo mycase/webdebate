@@ -8,6 +8,7 @@ import org.junit.Test;
 import com.arguments.functional.datamodel.ArgsState;
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.datamodel.ArgumentsUserId;
+import com.arguments.functional.datamodel.OpinionatedThesis;
 import com.arguments.functional.datamodel.PerspectiveId;
 import com.arguments.functional.datamodel.RelatedThesis;
 import com.arguments.functional.datamodel.RelationId;
@@ -43,9 +44,9 @@ public class ThesisFocusPage_Tester
                 new ArgsState(ThesisId.Da156, RelationId.BONE, PerspectiveId.getThesisOwner()));
         ThesisFocusData myData = ThesisFocusPage.getData(myRequest);
 
-        List<RelatedThesis> myPremises = myData
+        List<RelatedThesis<OpinionatedThesis>> myPremises = myData
                 .getPremisesSortedByStrength();
-        for (RelatedThesis myPremise : myPremises)
+        for (RelatedThesis<OpinionatedThesis> myPremise : myPremises)
         {
             // TODO: Assert on implied belief ordering
             // System.out.println("Summary: " + myPremise.getSummary());

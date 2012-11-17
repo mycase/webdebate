@@ -347,8 +347,8 @@ public class ArgsSQLStore implements ArgsStore
         Container<Thesis> myReturnValue = new Container<>(aThesis);
         if (aDepth == 0)
             return myReturnValue;
-        List<RelatedThesis> myPremises = ArgsSQLStore.getPremises(aThesis.getID());
-        for (RelatedThesis myPremise : myPremises)
+        List<RelatedThesis<OpinionatedThesis>> myPremises = ArgsSQLStore.getPremises(aThesis.getID());
+        for (RelatedThesis<OpinionatedThesis> myPremise : myPremises)
             myReturnValue.add(selectPremiseTree(myPremise.getThesis(), aDepth - 1));
         return myReturnValue;
     }
@@ -435,7 +435,7 @@ public class ArgsSQLStore implements ArgsStore
             ResultSet myPremiseResult = myQuery.executeQuery();
             while (myPremiseResult.next())
             {
-                RelatedThesis myPremise = getRelatedThesis(myPremiseResult, aPerspective);
+                RelatedThesis<OpinionatedThesis> myPremise = getRelatedThesis(myPremiseResult, aPerspective);
                 myReturnValue.addPremise(myPremise);
             }
             
@@ -445,7 +445,7 @@ public class ArgsSQLStore implements ArgsStore
 
             while (myDeductionResult.next())
             {
-                RelatedThesis myPremise = getRelatedThesis2(myDeductionResult, aPerspective);
+                RelatedThesis<OpinionatedThesis> myPremise = getRelatedThesis2(myDeductionResult, aPerspective);
                 myReturnValue.addConclusion(myPremise);
             }
         }
@@ -800,7 +800,7 @@ public class ArgsSQLStore implements ArgsStore
     }
     
     // ------------------------------------------------------------------------
-    private static RelatedThesis getRelatedThesis(
+    private static RelatedThesis<OpinionatedThesis> getRelatedThesis(
             ResultSet aResultSet,
             Perspective aPerspective)
             throws SQLException
@@ -816,13 +816,13 @@ public class ArgsSQLStore implements ArgsStore
         Relation myRelation = new Relation(myRelationID,
                 myThesis1ID, myThesis2ID,
                 myIfTrueRelevance, myIfFalseRelevance, ArgumentsUserId.BOGUS);
-        return new RelatedThesis(
+        return new RelatedThesis<>(
                 new OpinionatedThesis(myThesis1ID, mySummary, myOpinion, myOwnerID),
                 myRelation);
     }
     
     // ------------------------------------------------------------------------
-    private static RelatedThesis getRelatedThesis2(
+    private static RelatedThesis<OpinionatedThesis> getRelatedThesis2(
             ResultSet aResultSet,
             Perspective aPerspective)
             throws SQLException
@@ -838,7 +838,7 @@ public class ArgsSQLStore implements ArgsStore
         Relation myRelation = new Relation(myRelationID,
                 myThesis1ID, myThesis2ID, myIfTrueRelevance, myIfFalseRelevance,
                 ArgumentsUserId.BOGUS);
-        return new RelatedThesis(
+        return new RelatedThesis<>(
                 new OpinionatedThesis(myThesis2ID, mySummary, myOpinion, myOwnerID),
                 myRelation);
     }
@@ -943,9 +943,9 @@ public class ArgsSQLStore implements ArgsStore
     }
 
     // ------------------------------------------------------------------------
-    private static List<RelatedThesis> getPremises(ThesisId aThesisId)
+    private static List<RelatedThesis<OpinionatedThesis>> getPremises(ThesisId aThesisId)
     {
-        List<RelatedThesis> myReturnValue = new ArrayList<>();
+        List<RelatedThesis<OpinionatedThesis>> myReturnValue = new ArrayList<>();
         ArgsDB myQuery = ArgsQuery.SELECT_PREMISE.ps();
         myQuery.setThesisId(1, aThesisId);
         ResultSet myPremiseResult = myQuery.executeQuery();
@@ -964,7 +964,7 @@ public class ArgsSQLStore implements ArgsStore
                 Relation myRelation = new Relation(myRelationID,
                         myThesis1ID, myThesis2ID,
                         myIfTrueRelevance, myIfFalseRelevance, ArgumentsUserId.BOGUS);
-                RelatedThesis myPremise = new RelatedThesis(
+                RelatedThesis<OpinionatedThesis> myPremise = new RelatedThesis<>(
                         new OpinionatedThesis(myThesis1ID, mySummary, ThesisOpinion.BELIEVE_FALSE, myOwnerID),
                         myRelation);
                 myReturnValue.add(myPremise);

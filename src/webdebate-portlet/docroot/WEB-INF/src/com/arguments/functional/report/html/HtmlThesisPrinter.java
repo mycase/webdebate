@@ -136,7 +136,7 @@ public class HtmlThesisPrinter
     
     // ------------------------------------------------------------------------
     private String getRelatedThesesTable(
-            List<RelatedThesis> aTheses,
+            List<RelatedThesis<OpinionatedThesis>> aTheses,
             String aThesisHeader,
             String aRelevanceHeader)
     {
@@ -149,7 +149,7 @@ public class HtmlThesisPrinter
         myText.append("  <th class=\"otherClass\"> Owner</th>\n");
         myText.append("</tr>\n");
         
-        for (RelatedThesis myPremise : aTheses)
+        for (RelatedThesis<OpinionatedThesis> myPremise : aTheses)
         {
             myText.append(toTableRow(myPremise, theUrlContainer));
         }
@@ -182,7 +182,7 @@ public class HtmlThesisPrinter
     }
 
     // ------------------------------------------------------------------------
-    private String toRelinkAnchor(String aRelinkURL, RelatedThesis aPremise)
+    private String toRelinkAnchor(String aRelinkURL, RelatedThesis<OpinionatedThesis> aPremise)
     {
         return "<a href=\"" + aRelinkURL + "&" +
                 theProtocol.get(ArgsRequestKey.RELATION_ID) +"=" + aPremise.getRelation().getID() + "\"> relink</a>";
@@ -224,7 +224,7 @@ public class HtmlThesisPrinter
     }
     
     // ------------------------------------------------------------------------
-    private StringBuffer toTableRow(RelatedThesis aPremise, UrlContainer aRelinkURL)
+    private StringBuffer toTableRow(RelatedThesis<OpinionatedThesis> aPremise, UrlContainer aRelinkURL)
     {
         assertNotNull(aRelinkURL);
         
@@ -269,7 +269,7 @@ public class HtmlThesisPrinter
     }
 
     // ------------------------------------------------------------------------
-    private static StringBuffer relevanceText(RelatedThesis aPremise)
+    private static StringBuffer relevanceText(RelatedThesis<OpinionatedThesis> aPremise)
     {
         StringBuffer myText = new StringBuffer();
         myText.append("IfTrue:");

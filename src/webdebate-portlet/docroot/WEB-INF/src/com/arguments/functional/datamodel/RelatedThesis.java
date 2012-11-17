@@ -1,14 +1,14 @@
 package com.arguments.functional.datamodel;
 
 
-public class RelatedThesis
+public class RelatedThesis<A extends Thesis>
 {
     private final Relation theRelation;
-    private final OpinionatedThesis theThesis;
+    private final A theThesis;
 
     // ------------------------------------------------------------------------
     public RelatedThesis(
-            OpinionatedThesis aThesis,
+            A aThesis,
             Relation aRelation)
     {
         theThesis = aThesis;
@@ -16,7 +16,7 @@ public class RelatedThesis
     }
 
     // ------------------------------------------------------------------------
-    public OpinionatedThesis getThesis()
+    public A getThesis()
     {
         return theThesis;
     }

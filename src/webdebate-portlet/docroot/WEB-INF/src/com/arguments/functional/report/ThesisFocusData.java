@@ -20,8 +20,8 @@ public class ThesisFocusData
 {
     private final ThesisId theThesisId;
     private OpinionatedThesis theMainThesis;
-    private final List<RelatedThesis> thePremises = new ArrayList<>();
-    private List<RelatedThesis> theConclusions = new ArrayList<>();
+    private final List<RelatedThesis<OpinionatedThesis>> thePremises = new ArrayList<>();
+    private List<RelatedThesis<OpinionatedThesis>> theConclusions = new ArrayList<>();
     private final Perspective thePerspective;
     private boolean theMainThesisOwned;
     private boolean thePerspectiveOwned;
@@ -41,19 +41,19 @@ public class ThesisFocusData
     }
 
     // ------------------------------------------------------------------------
-    public void addPremise(RelatedThesis aPremise)
+    public void addPremise(RelatedThesis<OpinionatedThesis> aPremise)
     {
         thePremises.add(aPremise);
     }
 
     // ------------------------------------------------------------------------
-    public void addConclusion(RelatedThesis aPremise)
+    public void addConclusion(RelatedThesis<OpinionatedThesis> aPremise)
     {
         theConclusions.add(aPremise);
     }
 
     // ------------------------------------------------------------------------
-    public List<RelatedThesis> getPremises()
+    public List<RelatedThesis<OpinionatedThesis>> getPremises()
     {
         return thePremises;
     }
@@ -72,18 +72,18 @@ public class ThesisFocusData
     }
 
     // ------------------------------------------------------------------------
-    public List<RelatedThesis> getDeductions()
+    public List<RelatedThesis<OpinionatedThesis>> getDeductions()
     {
         return theConclusions;
     }
     
     // ------------------------------------------------------------------------
-    public List<RelatedThesis>
+    public List<RelatedThesis<OpinionatedThesis>>
     getPremisesSortedByStrength()
     {
         ArgumentStrengthComparator mySorter =
                 new ArgumentStrengthComparator(getMainThesis().getOpinion());
-        List<RelatedThesis> myPremises = getPremises();
+        List<RelatedThesis<OpinionatedThesis>> myPremises = getPremises();
         Collections.sort(myPremises, mySorter);
         return myPremises;
     }

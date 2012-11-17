@@ -86,10 +86,9 @@ public class RequestParser
         if (isPresent(ArgsRequestKey.NEW_THESIS_OPINION2))
             return getInsertOpinion();
 
-        if (isPresent(ArgsRequestKey.PERSPECTIVE_ID))
-            return getUpdatePerspective();
-
-        throw new AssertionError("Unknown mapconfiguration: " + theProtocolMap.keySet());
+        assertTrue("Unknown mapconfiguration: " + theProtocolMap.keySet(),
+                isPresent(ArgsRequestKey.PERSPECTIVE_ID));
+        return getUpdatePerspective();
     }
     
     // ------------------------------------------------------------------------
@@ -97,7 +96,7 @@ public class RequestParser
     {
         String myThesisId = getParameter(ArgsRequestKey.THESIS_ID);
 
-        assert myThesisId != null;
+        assertNotNull( myThesisId );
 
         return new ChangeThesis(ThesisId.parse(myThesisId));
     }
@@ -212,7 +211,7 @@ public class RequestParser
     private String getParameter(ArgsRequestKey aKey)
     {
         String myUnsafeText = theProtocolMap.get(aKey);
-        if(myUnsafeText == null) return null;
+        assertNotNull(myUnsafeText);
         String myReturnValue = getSafeText(myUnsafeText);
         return myReturnValue;
     }

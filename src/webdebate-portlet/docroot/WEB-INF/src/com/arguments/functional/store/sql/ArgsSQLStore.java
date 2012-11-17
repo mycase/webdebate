@@ -414,7 +414,7 @@ public class ArgsSQLStore implements ArgsStore
     public ThesisFocusData getThesisFocusData(
             ThesisId aMainThesisId,
             ArgumentsUserId aUserId,
-            Perspective aPerspective)
+            Perspective aPerspective, PerspectiveId aPerspective2Id)
     {
         assert aPerspective != null;
         

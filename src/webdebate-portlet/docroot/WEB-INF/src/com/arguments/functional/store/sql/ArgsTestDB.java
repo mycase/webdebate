@@ -192,7 +192,7 @@ public class ArgsTestDB implements ArgsStore
     // ------------------------------------------------------------------------
     @Override
     public ThesisFocusData getThesisFocusData(ThesisId aMainThesisId,
-            ArgumentsUserId aUserId, Perspective aPerspective)
+            ArgumentsUserId aUserId, Perspective aPerspective, PerspectiveId aPerspective2Id)
     {
         return null;
     }

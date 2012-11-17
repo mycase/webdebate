@@ -7,6 +7,7 @@ import com.arguments.functional.datamodel.ArgsReadOnlyState;
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.datamodel.OpinionatedThesis;
 import com.arguments.functional.datamodel.Perspective;
+import com.arguments.functional.datamodel.PerspectiveId;
 import com.arguments.functional.datamodel.Relation;
 import com.arguments.functional.datamodel.RelationId;
 import com.arguments.functional.datamodel.ThesisId;
@@ -40,6 +41,12 @@ public class ArgsStatefulRequest3
     public UrlContainer getUrlContainer()
     {
         return theRequest.getUrlContainer();
+    }
+
+    // ------------------------------------------------------------------------
+    public PerspectiveId getPerspective2Id()
+    {
+        return theRequest.getPerspective2Id();
     }
 
     // ------------------------------------------------------------------------

@@ -6,6 +6,7 @@ package com.arguments.functional.requeststate;
 import static org.junit.Assert.*;
 
 import com.arguments.functional.datamodel.ArgumentsUser;
+import com.arguments.functional.datamodel.PerspectiveId;
 import com.arguments.functional.datamodel.RelationId;
 import com.arguments.functional.report.html.UrlContainer;
 import com.arguments.support.Logger;
@@ -19,7 +20,7 @@ public class ArgsRenderDirective
     private final ArgumentsUser theUser;
     private final UrlContainer theUrlContainer;
     private final RelationId theRelationId;
-    private final RelationId thePerspective2Id;
+    private final PerspectiveId thePerspective2Id;
 
     // ------------------------------------------------------------------------
     public ArgsRenderDirective(
@@ -35,7 +36,7 @@ public class ArgsRenderDirective
         Logger.log("New arguments request: " + aProtocolMap + "\nUser: " + theUser);
         
         theRelationId = RelationId.parseRelationId(aProtocolMap.get(ArgsRequestKey.RELATION_ID));
-        thePerspective2Id = RelationId.parseRelationId(aProtocolMap.get(ArgsRequestKey.PERSPECTIVE2_ID));
+        thePerspective2Id = PerspectiveId.parsePerspectiveId(aProtocolMap.get(ArgsRequestKey.PERSPECTIVE2_ID));
     }
     
     // ------------------------------------------------------------------------
@@ -53,7 +54,7 @@ public class ArgsRenderDirective
     }
     
     // ------------------------------------------------------------------------
-    RelationId getPerspective2Id()
+    PerspectiveId getPerspective2Id()
     {
         return thePerspective2Id;
     }

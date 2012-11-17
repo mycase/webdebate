@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.datamodel.Perspective;
+import com.arguments.functional.datamodel.PerspectiveId;
 import com.arguments.functional.datamodel.ThesisId;
 import com.arguments.functional.report.ThesisFocusData;
 import com.arguments.functional.requeststate.ArgsStatefulRequest3;
@@ -23,6 +24,7 @@ public class ThesisFocusPage
     private final Perspective thePerspective;
     private final ThesisId theThesisId;
     private final UrlContainer theUrlContainer;
+    private final PerspectiveId thePerspective2Id;
     
     // ------------------------------------------------------------------------
     public static String getHtmlBody(
@@ -62,6 +64,7 @@ public class ThesisFocusPage
         theThesisId = aRequest.getState().getThesisId();
         theUrlContainer = aRequest.getUrlContainer();
         thePerspective = aRequest.getState().getPerspective();
+        thePerspective2Id = aRequest.getPerspective2Id();
     }
 
     // ------------------------------------------------------------------------
@@ -87,6 +90,6 @@ public class ThesisFocusPage
     {
         assertNotNull(theThesisId);
         return TheArgsStore.i().getThesisFocusData(
-                theThesisId, theAppUser, thePerspective);
+                theThesisId, theAppUser, thePerspective, thePerspective2Id);
     }
 }

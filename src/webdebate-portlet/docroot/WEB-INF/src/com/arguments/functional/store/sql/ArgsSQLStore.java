@@ -348,8 +348,8 @@ public class ArgsSQLStore implements ArgsStore
         if (aDepth == 0)
             return myReturnValue;
         List<RelatedThesis> myPremises = ArgsSQLStore.getPremises(aThesis.getID());
-        for (Thesis myPremise : myPremises)
-            myReturnValue.add(selectPremiseTree(myPremise, aDepth - 1));
+        for (RelatedThesis myPremise : myPremises)
+            myReturnValue.add(selectPremiseTree(myPremise.getThesis(), aDepth - 1));
         return myReturnValue;
     }
 

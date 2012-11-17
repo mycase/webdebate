@@ -1,9 +1,10 @@
 package com.arguments.functional.datamodel;
 
 
-public class RelatedThesis extends OpinionatedThesis
+public class RelatedThesis
 {
-    private Relation theRelation;
+    private final Relation theRelation;
+    private final OpinionatedThesis theThesis;
 
     // ------------------------------------------------------------------------
     public RelatedThesis(
@@ -13,10 +14,16 @@ public class RelatedThesis extends OpinionatedThesis
             Relation aRelation,
             ArgumentsUserId anOwnerID)
     {
-        super(aThesisID, aSummary, aOpinion, anOwnerID);
+        theThesis = new OpinionatedThesis(aThesisID, aSummary, aOpinion, anOwnerID);
         theRelation = aRelation;
     }
 
+    // ------------------------------------------------------------------------
+    public OpinionatedThesis getThesis()
+    {
+        return theThesis;
+    }
+    
     // ------------------------------------------------------------------------
     public Relevance getIfTrueRelevance()
     {
@@ -30,9 +37,6 @@ public class RelatedThesis extends OpinionatedThesis
     }
     
     // ------------------------------------------------------------------------
-    /**
-     * @return theRelation
-     */
     public Relation getRelation()
     {
         return theRelation;
@@ -49,5 +53,23 @@ public class RelatedThesis extends OpinionatedThesis
             myRelevance = aRelation.getIfFalseRelevance();
         myNewMinusOneToOne = Math.abs(anOpinion.getMinusOneToOne())*myRelevance.getMinusOneToOne();
         return ThesisOpinion.minusOneToOne(myNewMinusOneToOne);
+    }
+
+    // ------------------------------------------------------------------------
+    public ThesisId getID()
+    {
+        return theThesis.getID();
+    }
+
+    // ------------------------------------------------------------------------
+    public ArgumentsUser getOwner()
+    {
+        return theThesis.getOwner();
+    }
+
+    // ------------------------------------------------------------------------
+    public ThesisOpinion getOpinion()
+    {
+        return theThesis.getOpinion();
     }
 }

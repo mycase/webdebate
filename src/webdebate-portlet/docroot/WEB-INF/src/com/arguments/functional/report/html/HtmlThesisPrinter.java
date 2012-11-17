@@ -233,8 +233,8 @@ public class HtmlThesisPrinter
                 + toFocusAnchor(aPremise.getID()) + ", "
                 + toRelinkAnchor(aRelinkURL.getEditLinkUrl(), aPremise) + "</td>\n"                
                 );
-        myText.append("  <td class=\"" + cssClassByOpinion(aPremise) + "\">"
-                + getIDWithSummary(aPremise)+"</td>\n");
+        myText.append("  <td class=\"" + cssClassByOpinion(aPremise.getThesis()) + "\">"
+                + getIDWithSummary(aPremise.getThesis())+"</td>\n");
         myText.append("  <td class=\"otherClass\">" + relevanceText(aPremise)
                 + "</td>\n");
         myText.append("  <td>" + aPremise.getOwner().getScreenName() + "</td>\n");

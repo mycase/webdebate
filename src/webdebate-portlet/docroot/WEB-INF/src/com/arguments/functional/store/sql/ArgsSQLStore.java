@@ -948,7 +948,6 @@ public class ArgsSQLStore implements ArgsStore
         ThesisId myThesis1ID = getThesisId(aResultSet, ArgsDB.Relation.THESIS_1_ID.c);
         ThesisId myThesis2ID = getThesisId(aResultSet, ArgsDB.Relation.THESIS_2_ID.c);
         ThesisText mySummary = getThesisText(aResultSet, ArgsDB.Thesis.SUMMARY.c);
-        ThesisOpinion myOpinion = aPerspective.getOpinion(myThesis2ID);
         Relevance myIfTrueRelevance = selectIfTrueRelevance(aResultSet);
         Relevance myIfFalseRelevance = selectIfFalseRelevance(aResultSet);
         ArgumentsUserId myOwnerID = getUserId(aResultSet, ArgsDB.OWNER_ID_);
@@ -956,9 +955,14 @@ public class ArgsSQLStore implements ArgsStore
         Relation myRelation = new Relation(myRelationID,
                 myThesis1ID, myThesis2ID, myIfTrueRelevance, myIfFalseRelevance,
                 ArgumentsUserId.BOGUS);
-        return new RelatedThesis<>(
-                new OpinionatedThesis(myThesis2ID, mySummary, myOpinion, aPerspective, myOwnerID),
-                myRelation);
+        
+        OpinionatedThesis myThesis = 
+                new OpinionatedThesis(myThesis2ID, mySummary, myOwnerID);
+        
+        ThesisOpinion myOpinion = aPerspective.getOpinion(myThesis2ID);
+        myThesis.add(aPerspective, myOpinion);
+        
+        return new RelatedThesis<>(myThesis, myRelation);
     }
 
     // ------------------------------------------------------------------------

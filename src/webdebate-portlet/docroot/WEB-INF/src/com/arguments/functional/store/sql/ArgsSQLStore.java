@@ -421,7 +421,7 @@ public class ArgsSQLStore implements ArgsStore
         Perspective myPerspective = aPerspectives.get(0);
         
         ThesisFocusData myReturnValue =
-                new ThesisFocusData(aMainThesisId, myPerspective);
+                new ThesisFocusData(aMainThesisId, aPerspectives);
 
         try
         {

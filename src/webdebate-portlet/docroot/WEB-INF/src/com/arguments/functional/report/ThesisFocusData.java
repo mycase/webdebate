@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.TreeSet;
 
+import com.arguments.functional.datamodel.MPerspective;
 import com.arguments.functional.datamodel.OpinionatedThesis;
 import com.arguments.functional.datamodel.Perspective;
 import com.arguments.functional.datamodel.PerspectiveThesisOpinion;
@@ -22,12 +23,12 @@ public class ThesisFocusData
     private OpinionatedThesis theMainThesis;
     private final List<RelatedThesis<OpinionatedThesis>> thePremises = new ArrayList<>();
     private List<RelatedThesis<OpinionatedThesis>> theConclusions = new ArrayList<>();
-    private final Perspective thePerspective;
+    private final MPerspective thePerspective;
     private boolean theMainThesisOwned;
     private boolean thePerspectiveOwned;
 
     // ------------------------------------------------------------------------
-    public ThesisFocusData(ThesisId aMainThesisId, Perspective aPerspective)
+    public ThesisFocusData(ThesisId aMainThesisId, MPerspective aPerspective)
     {
         theThesisId = aMainThesisId;
         thePerspective = aPerspective;
@@ -89,7 +90,7 @@ public class ThesisFocusData
     }
     
     // ------------------------------------------------------------------------
-    public Perspective getPerspective()
+    public MPerspective getPerspective()
     {
         return thePerspective;
     }

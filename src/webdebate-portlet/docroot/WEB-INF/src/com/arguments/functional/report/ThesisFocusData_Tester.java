@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 
 import com.arguments.functional.datamodel.ArgsReadOnlyState;
 import com.arguments.functional.datamodel.ArgumentsUser;
+import com.arguments.functional.datamodel.MPerspective;
 import com.arguments.functional.datamodel.Perspective;
 import com.arguments.functional.datamodel.PerspectiveThesisOpinion;
 import com.arguments.functional.datamodel.ThesisId;
@@ -43,7 +44,7 @@ public class ThesisFocusData_Tester
         assertEquals( myState.getThesisId(), myThesisId);
         
         Perspective myPers1 = myUser1.getDefaultPerspective();
-        ThesisFocusData myData = new ThesisFocusData(myThesisId, myPers1);
+        ThesisFocusData myData = new ThesisFocusData(myThesisId, new MPerspective(myPers1));
         Collection<PerspectiveThesisOpinion> myOpTheses = myData.getDifferentPerspectives();
         assertNotNull(myOpTheses);
         assertEquals(7, myOpTheses.size());

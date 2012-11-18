@@ -10,7 +10,6 @@ import java.util.TreeSet;
 
 import com.arguments.functional.datamodel.MPerspective;
 import com.arguments.functional.datamodel.OpinionatedThesis;
-import com.arguments.functional.datamodel.Perspective;
 import com.arguments.functional.datamodel.PerspectiveThesisOpinion;
 import com.arguments.functional.datamodel.RelatedThesis;
 import com.arguments.functional.datamodel.ThesisId;

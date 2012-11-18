@@ -43,9 +43,42 @@ public class ArgsSQLStore implements ArgsStore
     // ------------------------------------------------------------------------
     public ArgsSQLStore()
     {
-        // empty
+        PatchId myMaxPatch = selectMaxPatch();
+        executePatchesHigherThan(myMaxPatch);
     }
 
+    private static Patcher[] myPatches = new Patcher[]{
+        new Patcher(){
+
+            @Override
+            public void execute()
+            {
+                patch0();
+            }}
+    };
+    
+    // ------------------------------------------------------------------------
+    public static void executePatchesHigherThan(PatchId aI)
+    {
+        for (int i = aI.getLongID() +1; i< myPatches.length; i++)
+        {
+            Logger.logAlways("Executing db patch " + i);
+            myPatches[i].execute();
+            ArgsQuery.INSERT_PATCH.ps()
+                .setPatchId(1, new PatchId(i))
+                .executeUpdate();
+        }
+    }
+
+    // ------------------------------------------------------------------------
+    public static void patch0()
+    {
+        ArgsQuery.PATCH_0a.ps().executeUpdate();
+        ArgsQuery.PATCH_0b.ps().executeUpdate();
+
+    }
+
+    
     // ------------------------------------------------------------------------
     @Override
     public ArgumentsUser selectUserById(ArgumentsUserId aUserId)
@@ -402,12 +435,37 @@ public class ArgsSQLStore implements ArgsStore
     public List<PerspectiveThesisOpinion> selectAllOpinionsByThesis(ThesisId aThesisId)
     {
         ArgsDB myQuery =
-                ArgsQuery.SELECT_ALL_OPINIONS_BY_THESIS_ID.ps();
+                ArgsQuery.SELECT_ALL_OPINIONS_BY_THESIS_ID_.ps();
         myQuery.setThesisId(1, aThesisId);
         myQuery.setLevel(2, 0.5);
         myQuery.setThesisId(3, aThesisId);
         
         return staticSelectThesisOpinion(myQuery);
+    }
+
+    // ------------------------------------------------------------------------
+    private PatchId selectMaxPatch()
+    {
+        ResultSet myResult;
+        try
+        {
+        myResult =
+                ArgsQuery.SELECT_PATCH.ps().executeQuery();
+        }
+        catch(ArgsSQLStoreException anException)
+        {
+            return new PatchId(-1);
+        }
+        
+        try
+        {
+            while(myResult.next())
+                return getPatchId(myResult, ArgsDB.Patch.ID.c);
+            throw new ArgsSQLStoreException("Empty patch set.");
+        } catch (SQLException anException)
+        {
+            throw new ArgsSQLStoreException(anException);
+        }
     }
 
     // ------------------------------------------------------------------------
@@ -529,13 +587,46 @@ public class ArgsSQLStore implements ArgsStore
             DBColumn aColumn)
     {
         ResultSet myResult = aQuery.executeQuery();
+        return getLong(myResult, aColumn);
+    }
 
+    // ------------------------------------------------------------------------
+    protected static Integer getInteger(
+            ArgsDB aQuery,
+            DBColumn aColumn)
+    {
+        ResultSet myResult = aQuery.executeQuery();
+        return getInteger(myResult, aColumn);
+    }
+
+    // ------------------------------------------------------------------------
+    protected static Long getLong(
+            ResultSet myResult,
+            DBColumn aColumn)
+    {
         try
         {
             boolean myHasRow = myResult.next();
             if (!myHasRow)
                 return null;
             return myResult.getLong(aColumn.getName());
+        } catch (SQLException anException)
+        {
+            throw new ArgsSQLStoreException(anException);
+        }
+    }
+
+    // ------------------------------------------------------------------------
+    protected static Integer getInteger(
+            ResultSet myResult,
+            DBColumn aColumn)
+    {
+        try
+        {
+            boolean myHasRow = myResult.next();
+            if (!myHasRow)
+                return null;
+            return myResult.getInt(aColumn.getName());
         } catch (SQLException anException)
         {
             throw new ArgsSQLStoreException(anException);
@@ -551,6 +642,17 @@ public class ArgsSQLStore implements ArgsStore
         if (myLongId == null)
             return null;
         return new ThesisOpinionId(myLongId);
+    }
+
+    // ------------------------------------------------------------------------
+    protected static PatchId getPatchId(
+            ArgsDB aQuery,
+            DBColumn aColumn)
+    {
+        Integer myLongId = getInteger(aQuery, aColumn);
+        if (myLongId == null)
+            return null;
+        return new PatchId(myLongId);
     }
 
     // ------------------------------------------------------------------------
@@ -765,6 +867,13 @@ public class ArgsSQLStore implements ArgsStore
             throws SQLException
     {
         return new ForeignUserId(aResultSet.getString(aColumn.getName()));
+    }
+    
+    // ------------------------------------------------------------------------
+    private static PatchId getPatchId(ResultSet aResultSet, DBColumn aColumn)
+            throws SQLException
+    {
+        return new PatchId(aResultSet.getInt(aColumn.getName()));
     }
     
     // ------------------------------------------------------------------------

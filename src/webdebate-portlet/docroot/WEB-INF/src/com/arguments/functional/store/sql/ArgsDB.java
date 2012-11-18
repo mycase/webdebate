@@ -25,6 +25,7 @@ import com.arguments.support.EmailAddress;
 import com.arguments.support.Logger;
 import com.arguments.support.ScreenName;
 import com.arguments.support.sql.DBColumn;
+import com.mysql.jdbc.exceptions.MySQLSyntaxErrorException;
 
 
 /**
@@ -37,6 +38,27 @@ class ArgsDB
     private final ArgsQuery theFixedQuery;
     private final PreparedStatement theQuery;
     private final Map<Integer, Object> theSqlArgumentMap = new HashMap<>();
+
+    public enum Patch
+    {
+        ID("ID");
+        
+        public static final String t = "Patch";
+        public final DBColumn c;
+        public final String f;
+        
+        private Patch(String aName)
+        {
+            c = new DBColumn(aName, t);
+            f = c.getLongName();
+        }
+        
+        @Override
+        public String toString()
+        {
+            return c.getName();
+        }
+    }
 
     public enum Opinion
     {
@@ -260,7 +282,7 @@ class ArgsDB
         SELECT_OPINION_BY_ID(SELECT, "*", FROM, Opinion.t, WHERE, Opinion.ID, "= ?"),
         SELECT_OPINION_BY_THESIS_PERSPECTIVE_ID1(SELECT, "*", FROM, Opinion.t, WHERE, Opinion.THESIS_ID, "= ?",
                 AND, Opinion.PERSPECTIVE_ID1, "= ?"),
-        SELECT_ALL_OPINIONS_BY_THESIS_ID(SELECT,
+        SELECT_ALL_OPINIONS_BY_THESIS_ID_(SELECT,
                 "0", AS, Opinion.ID, ",",
                 "?", AS, Opinion.THESIS_ID, ",",
                 Perspective.ID.c.getLongName(), AS, Opinion.PERSPECTIVE_ID1, ",",
@@ -269,6 +291,7 @@ class ArgsDB
                 ON, Perspective.ID.c.getLongName(), "=", Opinion.PERSPECTIVE_ID1,
                 AND, Opinion.THESIS_ID ," = ?",
                 AND, Perspective.TYPE, " = 1"),
+        SELECT_PATCH(SELECT, "MAX(", Patch.ID, ")", AS, Patch.ID,FROM, Patch.t),
         SELECT_PERSPECTIVE_BY_NAME(SELECT, "*", FROM, Perspective.t, WHERE, Perspective.NAME , " = ? "),
         SELECT_PERSPECTIVE_BY_NAME_USERID1(SELECT, "*", FROM, Perspective.t, WHERE, Perspective.NAME , " = ? ", AND,
                 Perspective.OWNER_ID, " = ?"),
@@ -300,7 +323,13 @@ class ArgsDB
                 UPDATE_USER_SET_FOREIGN_ID(UPDATE, User.t, SET, User.CONTAINER_ID, "= ?", WHERE, User.ID, "= ?"),
                 UPDATE_USER_SET_SCREEN_NAME(UPDATE, User.t, SET, User.SCREEN_NAME, "= ?", WHERE, User.ID, "= ?"),
                 UPDATE_USER_SET_EMAIL(UPDATE, User.t, SET, User.EMAIL, "= ?", WHERE, User.ID, "= ?"),
-        ; /* @formatter:on */
+        PATCH_0a("DROP TABLE IF EXISTS Patch"),
+        PATCH_0b("CREATE TABLE Patch ("+
+                "ID int(10) NOT NULL,"+
+                "PRIMARY KEY  (ID)" +
+                 ") ENGINE=MyISAM DEFAULT CHARSET=latin1;"),
+        INSERT_PATCH(INSERT_INTO, Patch.t, VALUES, "(?)"),
+                ; /* @formatter:on */
         private final String theText;
 
         
@@ -370,8 +399,13 @@ class ArgsDB
         {
             return executeQueryNoCatch();
         }
+        catch (MySQLSyntaxErrorException anException)
+        {
+            throw new ArgsSQLStoreException(anException);
+        }
         catch (SQLException anException)
         {
+            System.err.println(anException.getClass());
             if (aCount != 0)
             {
                 Logger.logAlways("Failed query, aCount = " + aCount +
@@ -410,6 +444,13 @@ class ArgsDB
     ArgsDB setThesisId(int aKey, ThesisId aValue)
     {
         setLong(aKey, aValue.getLongID());
+        return this;
+    }
+    
+    // ------------------------------------------------------------------------
+    ArgsDB setPatchId(int aKey, PatchId aValue)
+    {
+        setInt(aKey, aValue.getLongID());
         return this;
     }
     

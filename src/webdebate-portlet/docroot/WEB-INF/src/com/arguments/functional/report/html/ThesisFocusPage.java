@@ -7,7 +7,6 @@ import static org.junit.Assert.*;
 
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.datamodel.MPerspective;
-import com.arguments.functional.datamodel.Perspective;
 import com.arguments.functional.datamodel.PerspectiveId;
 import com.arguments.functional.datamodel.ThesisId;
 import com.arguments.functional.report.ThesisFocusData;

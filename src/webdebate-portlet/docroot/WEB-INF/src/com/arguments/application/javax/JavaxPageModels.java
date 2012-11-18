@@ -10,7 +10,6 @@ import com.arguments.functional.report.html.UrlContainer;
 import com.arguments.functional.report.pagemodels.AddOpinionPageModel;
 import com.arguments.functional.report.pagemodels.AddPremisePageModel;
 import com.arguments.functional.report.pagemodels.AddThesisPageModel;
-import com.arguments.functional.report.pagemodels.ChangePerspectivePageModel;
 import com.arguments.functional.report.pagemodels.EditLinkPageModel;
 import com.arguments.functional.report.pagemodels.EditThesisPageModel;
 import com.arguments.functional.report.pagemodels.GotoThesisPageModel;
@@ -52,14 +51,6 @@ public class JavaxPageModels
     {
         ArgsJspRenderRequest myRequest = getRequest(aRenderRequest);
         return PageModelFactory.getAddThesisPage(myRequest);
-    }
-
-    // ------------------------------------------------------------------------
-    public static ChangePerspectivePageModel getChangePerspectivePage(
-            RenderRequest aRenderRequest)
-    {
-        ArgsJspRenderRequest myRequest = getRequest(aRenderRequest);
-        return PageModelFactory.getChangePerspectivePage(myRequest);
     }
 
     // ------------------------------------------------------------------------

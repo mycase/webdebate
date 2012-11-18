@@ -93,7 +93,7 @@ public class ArgsTestDB implements ArgsStore
     
     // ------------------------------------------------------------------------
     @Override
-    public List<OpinionatedThesis> getAllTheses(Perspective aPerspective)
+    public List<OpinionatedThesis> getAllTheses(MPerspective aPerspective)
     {
         return null;
     }

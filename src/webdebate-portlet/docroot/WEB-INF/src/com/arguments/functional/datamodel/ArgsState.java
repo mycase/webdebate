@@ -32,9 +32,6 @@ public class ArgsState implements ArgsReadOnlyState
     }
 
     // ------------------------------------------------------------------------
-    /**
-     * @return theThesisId
-     */
     @Override
     public ThesisId getThesisId()
     {
@@ -42,9 +39,6 @@ public class ArgsState implements ArgsReadOnlyState
     }
 
     // ------------------------------------------------------------------------
-    /**
-     * @param aNewThesisId the thesisId to set
-     */
     public void setThesisId(ThesisId aNewThesisId)
     {
         theThesisId = aNewThesisId;
@@ -59,9 +53,6 @@ public class ArgsState implements ArgsReadOnlyState
     }
 
     // ------------------------------------------------------------------------
-    /**
-     * @return
-     */
     @Override
     public StateChange getStateChange()
     {
@@ -78,16 +69,26 @@ public class ArgsState implements ArgsReadOnlyState
     
     // ------------------------------------------------------------------------
     @Override
-    public Perspective getPerspective()
+    public MPerspective getPerspectives()
     {
         assert thePerspectiveId != null;
-
+        MPerspective myReturnValue = new MPerspective();
+        
         if(thePerspectiveId.equals(PerspectiveId.getThesisOwner()))
-            //throw new AssertionError("Deprecated PerspectiveId: " + thePerspectiveId);
-            return new ThesisOwnerPerspective();
+        {
+            myReturnValue.add(new ThesisOwnerPerspective());
+        }
         if(thePerspectiveId.equals(PerspectiveId.VOLATILE))
             throw new AssertionError("Deprecated PerspectiveId: " + thePerspectiveId);
-        return TheArgsStore.i().getPerspective(thePerspectiveId);
+        myReturnValue.add(TheArgsStore.i().getPerspective(thePerspectiveId));
+        
+        //Perspective myOther = TheArgsStore.i().getPerspective(PerspectiveId.P4);
+        //myReturnValue.add(myOther);
+        return myReturnValue;
+
+        
+        
+        
     }
     
     // ------------------------------------------------------------------------

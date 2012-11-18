@@ -216,8 +216,8 @@ public class ArgsStatefulRequest_Tester
         PerspectiveId myOutPerspectiveId2 = myState2.getPerspectiveId();
         assert myOutPerspectiveId2.equals(myPerspectiveId2);
 
-        Perspective myPerspective1 = myState1.getPerspective();
-        Perspective myPerspective2 = myState2.getPerspective();
+        Perspective myPerspective1 = myState1.getPerspectives().get(0);
+        Perspective myPerspective2 = myState2.getPerspectives().get(0);
 
         assert !myPerspective1.equals(myPerspective2);
 

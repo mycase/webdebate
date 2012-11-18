@@ -21,7 +21,7 @@ import com.arguments.functional.store.TheArgsStore;
 public class ThesisFocusPage
 {
     private final ArgumentsUser theAppUser;
-    private final MPerspective thePerspectives = new MPerspective();
+    private final MPerspective thePerspectives;
     private final ThesisId theThesisId;
     private final UrlContainer theUrlContainer;
     
@@ -62,12 +62,11 @@ public class ThesisFocusPage
         theAppUser = aRequest.getUser();
         theThesisId = aRequest.getState().getThesisId();
         theUrlContainer = aRequest.getUrlContainer();
-        thePerspectives.add(aRequest.getState().getPerspective());
+        thePerspectives = new MPerspective();
+        thePerspectives.addAll(aRequest.getState().getPerspectives());
         PerspectiveId myPId2 = aRequest.getPerspective2Id();
         if (myPId2 != null)
             thePerspectives.add(TheArgsStore.i().getPerspective(myPId2));
-        //Perspective myOther = TheArgsStore.i().getPerspective(new PerspectiveId(6L));
-        //thePerspectives.add(myOther);
     }
 
     // ------------------------------------------------------------------------

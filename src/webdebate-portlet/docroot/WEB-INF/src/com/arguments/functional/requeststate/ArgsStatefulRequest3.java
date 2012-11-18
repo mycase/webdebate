@@ -6,7 +6,6 @@ package com.arguments.functional.requeststate;
 import com.arguments.functional.datamodel.ArgsReadOnlyState;
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.datamodel.OpinionatedThesis;
-import com.arguments.functional.datamodel.Perspective;
 import com.arguments.functional.datamodel.PerspectiveId;
 import com.arguments.functional.datamodel.Relation;
 import com.arguments.functional.datamodel.RelationId;
@@ -77,13 +76,4 @@ public class ArgsStatefulRequest3
                             getUser().getDefaultPerspective());
         return myThesis;
     }
-
-    // ------------------------------------------------------------------------
-    public String getPerspectiveIdText()
-    {
-        ArgsReadOnlyState myState = getState();
-        Perspective myPerspective = myState.getPerspective();
-        return myPerspective.getIdString();
-    }
-
 }

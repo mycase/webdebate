@@ -47,7 +47,7 @@ public class InsertPremise implements Command
         ThesisId myPremiseId = TheArgsStore.i(theAppUser).newPremise(
                 mySId, thePremiseText,
                 theIfTruePremiseRelevance, theIfFalsePremiseRelevance);
-        Perspective myPerspective = aState.getPerspective();
+        Perspective myPerspective = aState.getPerspectives().get(0);
         if (! myPerspective.isWritable())
             throw new ArgumentsException("User " + theAppUser + "can't write with this perspective: " + myPerspective);
         if (!myPerspective.getOwner().equals(theAppUser))

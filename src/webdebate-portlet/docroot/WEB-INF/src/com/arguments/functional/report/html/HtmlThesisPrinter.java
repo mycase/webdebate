@@ -8,7 +8,6 @@ import java.util.List;
 import com.arguments.functional.datamodel.MPerspective;
 import com.arguments.functional.datamodel.OpinionatedThesis;
 import com.arguments.functional.datamodel.OwnedPerspective;
-import com.arguments.functional.datamodel.Perspective;
 import com.arguments.functional.datamodel.PerspectiveThesisOpinion;
 import com.arguments.functional.datamodel.RelatedThesis;
 import com.arguments.functional.datamodel.Thesis;
@@ -47,7 +46,7 @@ public class HtmlThesisPrinter
     public String thesisListToInternalHtml(ListThesesData aData)
     {
         theText = new StringBuffer();
-        thePerspectives = new MPerspective(aData.getPerspective());
+        setPerspectives(aData.getPerspective());
         
         printPerspectives();
         theText.append("<h1> All theses </h1>\n");
@@ -86,7 +85,7 @@ public class HtmlThesisPrinter
     {
         theText = new StringBuffer();
         OpinionatedThesis myMainThesis = aThesisFocusData.getMainThesis();
-        thePerspectives = aThesisFocusData.getPerspectives();
+        setPerspectives(aThesisFocusData.getPerspectives());
         assertEquals (myMainThesis.getPerspectives().size(), thePerspectives.size());
         printPerspectives();
         theText.append("<h1>Focus thesis: </h1>\n");
@@ -127,6 +126,12 @@ public class HtmlThesisPrinter
         return theText.toString();
     }
 
+    // ------------------------------------------------------------------------
+    private void setPerspectives(MPerspective aPerspectives)
+    {
+        thePerspectives = aPerspectives;
+    }
+    
     // ------------------------------------------------------------------------
     private void printPerspectives()
     {
@@ -303,10 +308,12 @@ public class HtmlThesisPrinter
         myText.append("  <td class=\"otherClass\"> "
                 + toFocusAnchor(aThesis.getID()) + "</td>\n");
         for (int i = 0; i< thePerspectives.size(); i++)
-            myText.append("<td id=\"relatedpers\" class=\"" + cssClassByOpinion(aThesis) + "\">" +
-                    aThesis.getOpinions().get(i).getPercentage()+"%" +
+        {
+            ThesisOpinion myOpinion = aThesis.getOpinions().get(i);
+            myText.append("<td id=\"relatedpers\" class=\"" + cssClassByOpinion(myOpinion) + "\">" +
+                    myOpinion.getPercentage()+"%" +
                     "</td>");
-        
+        }
         myText.append("  <td class=\"" + cssClassByOpinion(aThesis) + "\">"
                 + getIDWithSummary(aThesis) + "</td>\n");
         myText.append("  <td>" + aThesis.getOwner().getScreenName() + "</td>\n");

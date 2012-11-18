@@ -46,15 +46,6 @@ public class PageModelFactory
     }
 
     // ------------------------------------------------------------------------
-    public static ChangePerspectivePageModel getChangePerspectivePage(
-            ArgsJspRenderRequest aRenderRequest)
-    {
-        ArgsStatefulRequest3 myRequest = aRenderRequest.storeGet();
-
-        return new ChangePerspectivePageModel(myRequest, theProtocol);
-    }
-
-    // ------------------------------------------------------------------------
     public static EditThesisPageModel getEditThesisPage(
             ArgsJspRenderRequest aRenderRequest)
     {

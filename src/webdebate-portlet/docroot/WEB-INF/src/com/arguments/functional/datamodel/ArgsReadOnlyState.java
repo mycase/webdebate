@@ -22,7 +22,7 @@ public interface ArgsReadOnlyState
     public abstract RelationId getLinkId();
 
     // ------------------------------------------------------------------------
-    public abstract Perspective getPerspective();
+    public abstract MPerspective getPerspectives();
 
     // ------------------------------------------------------------------------
     public abstract PerspectiveId getPerspectiveId();

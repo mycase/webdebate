@@ -168,18 +168,6 @@ public class PageModel_Tester
 
     // ------------------------------------------------------------------------
     @Test
-    public void changePerspective() throws FileNotFoundException
-    {
-        ArgsJspRenderRequest myRequest = getRequest("007_Change_Perspective.json");
-        ChangePerspectivePageModel myPageModel = PageModelFactory.getChangePerspectivePage(myRequest);
-        assertNotNull(myPageModel.thePerspectiveIdFormLabel);
-        assertNotNull(myPageModel.thePerspectiveIdFormName);
-        assertNotNull(myPageModel.thePerspectiveIdFormValue);
-        assertFalse( myPageModel.thePerspectiveIdFormValue.startsWith("Fixed") );
-    }
-
-    // ------------------------------------------------------------------------
-    @Test
     public void newThesis() throws FileNotFoundException
     {
         ArgsJspRenderRequest myRequest = getRequest("008_New_Thesis.json");

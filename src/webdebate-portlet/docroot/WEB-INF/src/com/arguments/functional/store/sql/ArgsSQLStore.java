@@ -179,7 +179,7 @@ public class ArgsSQLStore implements ArgsStore
 
     // ------------------------------------------------------------------------
     @Override
-    public List<OpinionatedThesis> getAllTheses(Perspective aPerspective)
+    public List<OpinionatedThesis> getAllTheses(MPerspective aPerspective)
     {
         ArgsDB myQuery = ArgsQuery.SELECT_THESIS_ALL.ps();
         ResultSet myResult = myQuery.executeQuery();
@@ -190,7 +190,7 @@ public class ArgsSQLStore implements ArgsStore
         for (Thesis myNeutralThesis: myNeutralTheses)
         {
             OpinionatedThesis myOpinionatedThesis =
-                    getOpinionatedThesis(myNeutralThesis, new MPerspective(aPerspective));
+                    getOpinionatedThesis(myNeutralThesis, aPerspective);
             myOpinionatedTheses.add(myOpinionatedThesis);
         }
         

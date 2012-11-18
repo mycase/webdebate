@@ -5,8 +5,8 @@ package com.arguments.functional.report;
 
 import java.util.List;
 
+import com.arguments.functional.datamodel.MPerspective;
 import com.arguments.functional.datamodel.OpinionatedThesis;
-import com.arguments.functional.datamodel.Perspective;
 
 /**
  * @author mirleau
@@ -15,20 +15,20 @@ import com.arguments.functional.datamodel.Perspective;
 public class ListThesesData
 {
     private final List<OpinionatedThesis> theTheses;
-    private final Perspective thePerspective;
+    private final MPerspective thePerspectives;
 
     // ------------------------------------------------------------------------
     public ListThesesData(List<OpinionatedThesis> aTheses,
-            Perspective aPerspective)
+            MPerspective aPerspective)
     {
         theTheses = aTheses;
-        thePerspective = aPerspective;
+        thePerspectives = aPerspective;
     }
     
     // ------------------------------------------------------------------------
-    public Perspective getPerspective()
+    public MPerspective getPerspective()
     {
-        return thePerspective;
+        return thePerspectives;
     }
     
     // ------------------------------------------------------------------------

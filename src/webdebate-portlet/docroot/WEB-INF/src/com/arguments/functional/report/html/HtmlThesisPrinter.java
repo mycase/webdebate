@@ -28,7 +28,9 @@ public class HtmlThesisPrinter
     
     private final UrlContainer theUrlContainer;
     private final ProtocolMap theProtocol;
-    
+    private MPerspective thePerspectives;
+    private StringBuffer theText;
+
     // ------------------------------------------------------------------------
     /**
      * @param aUser
@@ -42,69 +44,99 @@ public class HtmlThesisPrinter
     }
 
     // ------------------------------------------------------------------------
+    public String thesisListToInternalHtml(ListThesesData aData)
+    {
+        theText = new StringBuffer();
+        thePerspectives = new MPerspective(aData.getPerspective());
+        
+        printPerspectives();
+        theText.append("<h1> All theses </h1>\n");
+        theText.append("<table>\n");
+        theText.append("<tr>\n");
+        theText.append("  <th class=\"otherClass\"> Operations      </th>\n");
+        for (int i = 0; i < thePerspectives.size(); i++)
+            theText.append("<th class=\"otherClass\"> P"+(i+1)+"</th>");
+        theText.append("  <th class=\"otherClass\"> Thesis </th>\n");
+        theText.append("  <th class=\"otherClass\"> Owner </th>\n");
+        theText.append("</tr>\n");
+
+        for (OpinionatedThesis myThesis : aData.getTheses())
+        {
+            theText.append(toTableRow(myThesis));
+        }
+        theText.append("</table>\n");
+
+        return theText.toString();
+    }
+    // ------------------------------------------------------------------------
     public String focusPageToHtmlPage(ThesisFocusData aThesisFocusData)
     {
-        StringBuffer myText = new StringBuffer();
-        myText.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n"
+        StringBuffer myText1 = new StringBuffer();
+        myText1.append("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\">\n"
                 + "<html><head><title>Argument Viewer</title></head>");
-        myText.append("<body>");
-        myText.append(focusPageToInternalHtml(aThesisFocusData));
-        myText.append("</body>");
+        myText1.append("<body>");
+        myText1.append(focusPageToInternalHtml(aThesisFocusData));
+        myText1.append("</body>");
 
-        return myText.toString();
+        return myText1.toString();
     }
 
-    private MPerspective thePerspectives;
     // ------------------------------------------------------------------------
     public String focusPageToInternalHtml(ThesisFocusData aThesisFocusData)
     {
-        StringBuffer myText = new StringBuffer();
+        theText = new StringBuffer();
         OpinionatedThesis myMainThesis = aThesisFocusData.getMainThesis();
-        thePerspectives = aThesisFocusData.getPerspective();
+        thePerspectives = aThesisFocusData.getPerspectives();
         assertEquals (myMainThesis.getPerspectives().size(), thePerspectives.size());
-        myText.append("<ul>");
-
-        for (int i = 0; i < thePerspectives.size(); i++)
-            myText.append("<li>Perspective "+(i+1)+": " + thePerspectives.get(i)+"</li>");
-        myText.append("</ul>");
-        myText.append("<h1>Focus thesis: </h1>\n");
-        myText.append("<table id=\"mainfocustable\"><tr>");
-        myText.append(toHtml(myMainThesis));
-        myText.append("</tr></table>");
+        printPerspectives();
+        theText.append("<h1>Focus thesis: </h1>\n");
+        theText.append("<table id=\"mainfocustable\"><tr>");
+        theText.append(mainThesisToHtml(myMainThesis));
+        theText.append("</tr></table>");
         if (aThesisFocusData.getMainThesisOwned())
         {
-            myText.append("<a href=\"" + theUrlContainer.getEditThesisUrl() + "\">edit</a>");
+            theText.append("<a href=\"" + theUrlContainer.getEditThesisUrl() + "\">edit</a>");
         }
         else
         {
-            myText.append("Owner: " + aThesisFocusData.getMainThesis().getOwner().getScreenName());
+            theText.append("Owner: " + aThesisFocusData.getMainThesis().getOwner().getScreenName());
         }
         if (aThesisFocusData.getPerspectiveOwned())
         {
-            myText.append(", <a href=\"" + theUrlContainer.getAddPremiseUrl() + "\">add premise</a>");
-            myText.append(", <a href=\"" + theUrlContainer.getAddOpinionUrl() + "\">set your opinion</a>");
+            theText.append(", <a href=\"" + theUrlContainer.getAddPremiseUrl() + "\">add premise</a>");
+            theText.append(", <a href=\"" + theUrlContainer.getAddOpinionUrl() + "\">set your opinion</a>");
         }
 
-        myText.append("\n");
+        theText.append("\n");
 
-        myText.append("<h1>Reasons for this to be true or not: </h1>\n");
+        theText.append("<h1>Reasons for this to be true or not: </h1>\n");
 
-        myText.append(getRelatedThesesTable(aThesisFocusData.getPremisesSortedByStrength(),
+        theText.append(getRelatedThesesTable(aThesisFocusData.getPremisesSortedByStrength(),
                 "Premise", "Relevance of premise for focus"));
 
-        myText.append("<h1>Possible consequences: </h1>\n");
-        myText.append(getRelatedThesesTable(aThesisFocusData.getDeductions(),
+        theText.append("<h1>Possible consequences: </h1>\n");
+        theText.append(getRelatedThesesTable(aThesisFocusData.getDeductions(),
                 "Consequence", "Relevance of focus for consequence"));
 
-        myText.append("<h1>Tree view: </h1>\n");
-        myText.append(getThesisTreeString(aThesisFocusData.getMainThesis()));
+        theText.append("<h1>Tree view: </h1>\n");
+        theText.append(getThesisTreeString(aThesisFocusData.getMainThesis()));
         
-        myText.append("<h1>Different perspectives: </h1>\n");
-        myText.append(getPerspectivesTable(aThesisFocusData.getDifferentPerspectives()));
+        theText.append("<h1>Different perspectives: </h1>\n");
+        theText.append(getPerspectivesTable(aThesisFocusData.getDifferentPerspectives()));
         
-        return myText.toString();
+        return theText.toString();
     }
 
+    // ------------------------------------------------------------------------
+    private void printPerspectives()
+    {
+        theText.append("<ul>");
+
+        for (int i = 0; i < thePerspectives.size(); i++)
+            theText.append("<li>Perspective "+(i+1)+": " + thePerspectives.get(i)+"</li>");
+        theText.append("</ul>");
+    }
+    
     // ------------------------------------------------------------------------
     String getThesisTreeString(Thesis aThesis)
     {
@@ -155,7 +187,7 @@ public class HtmlThesisPrinter
         myText.append("<tr>\n");
         myText.append("  <th class=\"otherClass\">Operations     </th>\n");
         for (int i=0; i<thePerspectives.size(); i++)
-            myText.append("<th class=\"otherClass\">" + (i+1) + "</th>\n");
+            myText.append("<th class=\"otherClass\"> P" + (i+1) + "</th>\n");
         myText.append("  <th class=\"otherClass\">"+aThesisHeader+"</th>\n");
         myText.append("  <th class=\"otherClass\">"+aRelevanceHeader+"</th>\n");
         myText.append("  <th class=\"otherClass\"> Owner</th>\n");
@@ -219,16 +251,16 @@ public class HtmlThesisPrinter
     }
 
     // ------------------------------------------------------------------------
-    private static StringBuffer toHtml(OpinionatedThesis aThesis)
+    private static StringBuffer mainThesisToHtml(OpinionatedThesis aThesis)
     {
         assertNotNull(aThesis);
         StringBuffer myText = new StringBuffer();
 
-        //myText.append("<div id=\"mainfocus\" class=\"" + cssClassByOpinion(aThesis)
-        //        + "\">" + getIDWithSummary(aThesis) + "</div>\n");
         for (ThesisOpinion myOpinion : aThesis.getOpinions())
             myText.append("<td><div id=\"mainfocuspers\" class=\"" + cssClassByOpinion(myOpinion)
-                 + "\">" + "X" + "</div></td>\n");
+                 + "\">"
+                 + myOpinion.getPercentage()+"%"
+                 + "</div></td>\n");
         myText.append("<td><div id=\"mainfocus\" class=\"" + cssClassByOpinion(aThesis.getOpinion())
                 + "\">" + getIDWithSummary(aThesis) + "</div></td>\n");
         
@@ -238,8 +270,7 @@ public class HtmlThesisPrinter
     // ------------------------------------------------------------------------
     private static String getIDWithSummary(OpinionatedThesis aThesis)
     {
-        return aThesis.getID() + " -- "
-                + aThesis.getSummary() + " ("+aThesis.getOpinion().getPercentage()+"%)";
+        return aThesis.getID() + " -- " + aThesis.getSummary();
     }
     
     // ------------------------------------------------------------------------
@@ -252,8 +283,10 @@ public class HtmlThesisPrinter
                 + toFocusAnchor(aPremise.getID()) + ", "
                 + toRelinkAnchor(aRelinkURL.getEditLinkUrl(), aPremise) + "</td>\n"                
                 );
-        for (Perspective myPerspective : thePerspectives)
-            myText.append("<td>X</td>");
+        for (int i = 0; i< thePerspectives.size(); i++)
+            myText.append("<td id=\"relatedpers\" class=\"" + cssClassByOpinion(aPremise.getThesis()) + "\">" +
+                    aPremise.getThesis().getOpinions().get(i).getPercentage()+"%" +
+            		"</td>");
         myText.append("  <td class=\"" + cssClassByOpinion(aPremise.getThesis()) + "\">"
                 + getIDWithSummary(aPremise.getThesis())+"</td>\n");
         myText.append("  <td class=\"otherClass\">" + relevanceText(aPremise)
@@ -269,6 +302,11 @@ public class HtmlThesisPrinter
         StringBuffer myText = new StringBuffer("<tr>\n");
         myText.append("  <td class=\"otherClass\"> "
                 + toFocusAnchor(aThesis.getID()) + "</td>\n");
+        for (int i = 0; i< thePerspectives.size(); i++)
+            myText.append("<td id=\"relatedpers\" class=\"" + cssClassByOpinion(aThesis) + "\">" +
+                    aThesis.getOpinions().get(i).getPercentage()+"%" +
+                    "</td>");
+        
         myText.append("  <td class=\"" + cssClassByOpinion(aThesis) + "\">"
                 + getIDWithSummary(aThesis) + "</td>\n");
         myText.append("  <td>" + aThesis.getOwner().getScreenName() + "</td>\n");
@@ -303,29 +341,4 @@ public class HtmlThesisPrinter
         return myText;
     }
 
-    // ------------------------------------------------------------------------
-    /**
-     * @param aData
-     * @return
-     */
-    public String thesisListToInternalHtml(ListThesesData aData)
-    {
-        StringBuffer myText = new StringBuffer();
-        myText.append("Perspective: " + aData.getPerspective());
-        myText.append("<h1> All theses </h1>\n");
-        myText.append("<table>\n");
-        myText.append("<tr>\n");
-        myText.append("  <th class=\"otherClass\"> Operations      </th>\n");
-        myText.append("  <th class=\"otherClass\"> Thesis </th>\n");
-        myText.append("  <th class=\"otherClass\"> Owner </th>\n");
-        myText.append("</tr>\n");
-
-        for (OpinionatedThesis myThesis : aData.getTheses())
-        {
-            myText.append(toTableRow(myThesis));
-        }
-        myText.append("</table>\n");
-
-        return myText.toString();
-    }
 }

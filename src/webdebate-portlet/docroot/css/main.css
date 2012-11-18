@@ -1,9 +1,13 @@
 #mainfocus{padding:5px 5px;font-size:1.5em;text-align:center;}
 #mainfocuspers{font-size:1.5em;text-align:center;}
-#mainfocuspers.believeStyle{color:green;background-color:green;}
-#mainfocuspers.dontKnowStyle{color:white;background-color:white;}
-#mainfocuspers.dontBelieveStyle{color:red;background-color:red;}
 
+#mainfocuspers.believeStyle{color:white;background-color:green;}
+#mainfocuspers.dontKnowStyle{color:black;background-color:white;}
+#mainfocuspers.dontBelieveStyle{color:white;background-color:red;}
+
+#relatedpers.believeStyle{color:white;background-color:green;}
+#relatedpers.dontKnowStyle{color:black;background-color:white;}
+#relatedpers.dontBelieveStyle{color:white;background-color:red;}
 
 #mainfocustable{horizontal-align:right;vertical-align:centre;}
 

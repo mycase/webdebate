@@ -89,7 +89,7 @@ public class ThesisFocusData
     }
     
     // ------------------------------------------------------------------------
-    public MPerspective getPerspective()
+    public MPerspective getPerspectives()
     {
         return thePerspective;
     }

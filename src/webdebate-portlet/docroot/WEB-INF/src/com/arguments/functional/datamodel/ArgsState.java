@@ -17,7 +17,7 @@ public class ArgsState implements ArgsReadOnlyState
 {
     private ThesisId theThesisId;
     private RelationId theRelationId;
-    private MPerspectiveId thePerspectiveId;
+    private MPerspectiveId thePerspectiveIds;
     
     // ------------------------------------------------------------------------
     public ArgsState(
@@ -37,7 +37,7 @@ public class ArgsState implements ArgsReadOnlyState
         theThesisId = aThesistId;
         theRelationId = aRelationId;
         assertNotNull(aPerspectiveId);
-        thePerspectiveId = aPerspectiveId;
+        thePerspectiveIds = aPerspectiveId;
     }
 
     // ------------------------------------------------------------------------
@@ -58,14 +58,14 @@ public class ArgsState implements ArgsReadOnlyState
     {
         assert aPerspectiveId != null;
         
-        thePerspectiveId = new MPerspectiveId(aPerspectiveId);
+        thePerspectiveIds = new MPerspectiveId(aPerspectiveId);
     }
 
     // ------------------------------------------------------------------------
     @Override
     public StateChange getStateChange()
     {
-        return new StateChange(theThesisId, theRelationId, thePerspectiveId);
+        return new StateChange(theThesisId, theRelationId, thePerspectiveIds);
     }
     
     // ------------------------------------------------------------------------
@@ -80,32 +80,35 @@ public class ArgsState implements ArgsReadOnlyState
     @Override
     public MPerspective getPerspectives()
     {
-        PerspectiveId myPerspectiveId = thePerspectiveId.get(0);
-        assert myPerspectiveId != null;
         MPerspective myReturnValue = new MPerspective();
+        for (PerspectiveId myPerspectiveId : thePerspectiveIds)
+            myReturnValue.add(getPerspective(myPerspectiveId));
+        
+        return myReturnValue;
+    }
+    
+    // ------------------------------------------------------------------------
+    public Perspective getPerspective(PerspectiveId myPerspectiveId)
+    {
+        assert myPerspectiveId != null;
         
         if(myPerspectiveId.equals(PerspectiveId.getThesisOwner()))
         {
-            myReturnValue.add(new ThesisOwnerPerspective());
+            return new ThesisOwnerPerspective();
         }
         if(myPerspectiveId.equals(PerspectiveId.VOLATILE))
             throw new AssertionError("Deprecated PerspectiveId: " + myPerspectiveId);
-        myReturnValue.add(TheArgsStore.i().getPerspective(myPerspectiveId));
-        
-        return myReturnValue;
+        return TheArgsStore.i().getPerspective(myPerspectiveId);
     }
     
     // ------------------------------------------------------------------------
     @Override
     public PerspectiveId getPerspectiveId()
     {
-        return thePerspectiveId.get(0);
+        return thePerspectiveIds.get(0);
     }
     
     // ------------------------------------------------------------------------
-    /**
-     * @param aStateChange
-     */
     public void mergeStateChange(StateChange aStateChange)
     {
         Logger.log("Merge State: " + aStateChange);
@@ -117,6 +120,6 @@ public class ArgsState implements ArgsReadOnlyState
             theRelationId = aStateChange.getRelationId();
             
         if (aStateChange.getPerspectiveId() != null)
-            thePerspectiveId = new MPerspectiveId(aStateChange.getPerspectiveId());
+            thePerspectiveIds = new MPerspectiveId(aStateChange.getPerspectiveId());
     }
 }

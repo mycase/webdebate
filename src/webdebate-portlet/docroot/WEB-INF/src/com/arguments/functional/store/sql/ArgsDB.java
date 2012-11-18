@@ -274,7 +274,7 @@ class ArgsDB
         INSERT_PERSPECTIVE(INSERT_INTO, Perspective.t, VALUES, "( 0, ?, 1, ?)"),
         INSERT_RELATION(INSERT_INTO, Relation.t, VALUES, "( 0, ?, ?, NULL, ?, ?, ?)"),
         INSERT_STATE1_(INSERT_INTO, State.t, VALUES, "( ?, ?)"),
-        INSERT_ACTIVE_PERSPECTIVE(INSERT_INTO, ActivePerspectives.t, VALUES, "( 0, ?, ?)"),
+        INSERT_ACTIVE_PERSPECTIVE_(INSERT_INTO, ActivePerspectives.t, VALUES, "( 0, ?, ?)"),
         INSERT_THESIS(INSERT_INTO, Thesis.t, VALUES, "( 0, ?, NULL, ?)"),
         INSERT_USER(INSERT_INTO, User.t, VALUES, "( 0, ?, ?, ?)"),
         LOCK_OPINION_WRITE(LOCK_TABLE, Opinion.t, WRITE),

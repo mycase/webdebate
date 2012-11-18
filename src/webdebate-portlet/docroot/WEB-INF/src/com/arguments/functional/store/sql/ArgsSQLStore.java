@@ -584,9 +584,22 @@ public class ArgsSQLStore implements ArgsStore
                 executeUpdate();
         assert myNrRows == 1;
         
-        myNrRows = ArgsQuery.INSERT_ACTIVE_PERSPECTIVE.ps().
+        insertActivePerspectiveId_(aState.getPerspectiveId(), aUser);
+    }
+
+    // ------------------------------------------------------------------------
+    @Override
+    public void insertActivePerspectiveId(PerspectiveId aPId, ArgumentsUserId aUser)
+    {
+        insertActivePerspectiveId_(aPId, aUser);
+    }
+    
+    // ------------------------------------------------------------------------
+    public static void insertActivePerspectiveId_(PerspectiveId aPId, ArgumentsUserId aUser)
+    {
+        int myNrRows = ArgsQuery.INSERT_ACTIVE_PERSPECTIVE_.ps().
                 setUserId(1, aUser).
-                setPerspectiveId(2, aState.getPerspectiveId()).
+                setPerspectiveId(2, aPId).
                 executeUpdate();
         assert myNrRows == 1;
     }

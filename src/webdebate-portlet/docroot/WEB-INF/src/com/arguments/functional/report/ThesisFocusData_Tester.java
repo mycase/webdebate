@@ -9,9 +9,12 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 import com.arguments.functional.datamodel.ArgsReadOnlyState;
+import com.arguments.functional.datamodel.ArgsState;
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.datamodel.MPerspective;
+import com.arguments.functional.datamodel.MPerspectiveId;
 import com.arguments.functional.datamodel.Perspective;
+import com.arguments.functional.datamodel.PerspectiveId;
 import com.arguments.functional.datamodel.PerspectiveThesisOpinion;
 import com.arguments.functional.datamodel.ThesisId;
 import com.arguments.functional.requeststate.ArgsStatefulRequest_Tester;
@@ -31,6 +34,35 @@ public class ThesisFocusData_Tester
         TheArgsStore.i().deleteTestObjects();
     }
 
+    // ------------------------------------------------------------------------
+    @Test
+    public void twoActivePerspectives1()
+    {
+        ArgumentsUser myUser1 = getTestUser1();
+        // TheArgsStore.i(myUser1).insertActivePerspectiveId(PerspectiveId.P3, myUser1);
+        ThesisId myThesisId = ArgsStatefulRequest_Tester.insertOpinion();
+        TheArgsStore.i(myUser1).insertActivePerspectiveId(PerspectiveId.P3, myUser1);
+
+        ArgsReadOnlyState myState = myUser1.getState(); 
+        assertEquals( myState.getThesisId(), myThesisId);
+        
+        Perspective myPers1 = myUser1.getDefaultPerspective();
+        ThesisFocusData myData = new ThesisFocusData(myThesisId, new MPerspective(myPers1));
+
+    }
+
+    // ------------------------------------------------------------------------
+    @Test
+    public void twoActivePerspectives2()
+    {
+        ArgumentsUser myUser1 = getTestUser1();
+        TheArgsStore.i(myUser1).insertActivePerspectiveId(PerspectiveId.P1, myUser1);
+        TheArgsStore.i(myUser1).insertActivePerspectiveId(PerspectiveId.P3, myUser1);
+        ArgsState myState = TheArgsStore.i().selectState(myUser1);
+        MPerspective myPerspectives = myState.getPerspectives();
+        assert myPerspectives.size() == 3;
+    }
+    
     // ------------------------------------------------------------------------
     @Test
     public void differentPerspectives()

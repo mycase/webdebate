@@ -16,6 +16,8 @@ import com.arguments.support.ScreenName;
  */
 public interface ArgsStore
 {
+    // ------------------------------------------------------------------------
+    public abstract void insertActivePerspectiveId(PerspectiveId aPId, ArgumentsUserId aUser);
 
     // ------------------------------------------------------------------------
     public abstract ArgumentsUser selectUserById(ArgumentsUserId aUserId);

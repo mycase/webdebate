@@ -21,9 +21,7 @@ import com.arguments.functional.store.TheArgsStore;
 public class HtmlThesisPrinter_Tester
 {
     private ByteArrayOutputStream theBaos;
-    private ByteArrayOutputStream theErrBaos;
     private PrintStream theOut;
-    private PrintStream theErrOut;
 
     // ------------------------------------------------------------------------
     @Before
@@ -37,9 +35,7 @@ public class HtmlThesisPrinter_Tester
     public void setPrintStream()
     {
         theBaos = new ByteArrayOutputStream();
-        theErrBaos = new ByteArrayOutputStream();
         theOut = new PrintStream(theBaos);
-        theErrOut = new PrintStream(theErrBaos);
     }
 
     // ------------------------------------------------------------------------

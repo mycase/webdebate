@@ -448,7 +448,7 @@ public class ArgsSQLStore implements ArgsStore
     }
 
     // ------------------------------------------------------------------------
-    private PatchId selectMaxPatch()
+    private static PatchId selectMaxPatch()
     {
         ResultSet myResult;
         try

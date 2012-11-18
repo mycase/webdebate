@@ -251,7 +251,7 @@ class ArgsDB
     final static DBColumn COUNT = new DBColumn("count");
     final static DBColumn LEVEL_ = new DBColumn("Level");
     final static DBColumn RELATION_ID = new DBColumn("RelationID");
-    final static DBColumn PERSPECTIVE_ID = new DBColumn("PerspectiveID");
+    final static DBColumn PERSPECTIVE_ID_ = new DBColumn("PerspectiveID");
     final static DBColumn OWNER_ID_ = new DBColumn("OwnerID");
 
     public enum ArgsQuery

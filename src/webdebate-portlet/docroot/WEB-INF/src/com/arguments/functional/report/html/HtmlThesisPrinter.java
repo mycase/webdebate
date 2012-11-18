@@ -8,6 +8,7 @@ import java.util.List;
 import com.arguments.functional.datamodel.MPerspective;
 import com.arguments.functional.datamodel.OpinionatedThesis;
 import com.arguments.functional.datamodel.OwnedPerspective;
+import com.arguments.functional.datamodel.Perspective;
 import com.arguments.functional.datamodel.PerspectiveThesisOpinion;
 import com.arguments.functional.datamodel.RelatedThesis;
 import com.arguments.functional.datamodel.Thesis;
@@ -153,6 +154,8 @@ public class HtmlThesisPrinter
         myText.append("<table>\n");
         myText.append("<tr>\n");
         myText.append("  <th class=\"otherClass\">Operations     </th>\n");
+        for (int i=0; i<thePerspectives.size(); i++)
+            myText.append("<th class=\"otherClass\">" + (i+1) + "</th>\n");
         myText.append("  <th class=\"otherClass\">"+aThesisHeader+"</th>\n");
         myText.append("  <th class=\"otherClass\">"+aRelevanceHeader+"</th>\n");
         myText.append("  <th class=\"otherClass\"> Owner</th>\n");
@@ -249,6 +252,8 @@ public class HtmlThesisPrinter
                 + toFocusAnchor(aPremise.getID()) + ", "
                 + toRelinkAnchor(aRelinkURL.getEditLinkUrl(), aPremise) + "</td>\n"                
                 );
+        for (Perspective myPerspective : thePerspectives)
+            myText.append("<td>X</td>");
         myText.append("  <td class=\"" + cssClassByOpinion(aPremise.getThesis()) + "\">"
                 + getIDWithSummary(aPremise.getThesis())+"</td>\n");
         myText.append("  <td class=\"otherClass\">" + relevanceText(aPremise)

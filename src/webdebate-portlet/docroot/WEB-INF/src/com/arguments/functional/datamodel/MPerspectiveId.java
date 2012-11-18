@@ -20,7 +20,15 @@ public class MPerspectiveId extends ArrayList<PerspectiveId>
     // ------------------------------------------------------------------------
     public MPerspectiveId(PerspectiveId aPerspective)
     {
+        //if (aPerspective != null)
         add(aPerspective);
     }
 
+    // ------------------------------------------------------------------------
+    @Override
+    public boolean add(PerspectiveId anId)
+    {
+        assert anId != null;
+        return super.add(anId);
+    }
 }

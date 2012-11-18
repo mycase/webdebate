@@ -385,6 +385,7 @@ class ArgsDB
         PATCH_2A("ALTER TABLE State DROP FOREIGN KEY fk_State_Perspective1"),
         PATCH_2B("ALTER TABLE State DROP COLUMN OpinionStrategyID, DROP INDEX fk_State_Perspective1"),
         PATCH_3("ALTER TABLE ActivePerspectives DROP INDEX UserID_UNIQUE"),
+        PATCH_4("ALTER TABLE ActivePerspectives ADD UNIQUE INDEX PRIMARY2 (UserID ASC, PerspectiveID ASC)"),
         ; /* @formatter:on */
         private final String theText;
 

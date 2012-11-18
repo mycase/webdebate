@@ -61,6 +61,9 @@ public class ArgsSQLStore implements ArgsStore
         new Patcher(){
             @Override
             public void execute(){patch3();}},
+        new Patcher(){
+            @Override
+            public void execute(){patch4();}},
     };
     
     // ------------------------------------------------------------------------
@@ -102,6 +105,12 @@ public class ArgsSQLStore implements ArgsStore
     public static void patch3()
     {
         ArgsQuery.PATCH_3.ps().executeUpdate();
+    }
+    
+    // ------------------------------------------------------------------------
+    public static void patch4()
+    {
+        ArgsQuery.PATCH_4.ps().executeUpdate();
     }
     
     // ------------------------------------------------------------------------

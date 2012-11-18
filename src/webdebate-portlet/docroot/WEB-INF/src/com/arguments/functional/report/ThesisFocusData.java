@@ -96,18 +96,6 @@ public class ThesisFocusData
     }
     
     // ------------------------------------------------------------------------
-    public int getNrOfPerspectives()
-    {
-        return thePerspectives.size();
-    }
-    
-    // ------------------------------------------------------------------------
-    public Perspective getPerspective(int i)
-    {
-        return thePerspectives.get(i);
-    }
-    
-    // ------------------------------------------------------------------------
     public boolean getMainThesisOwned()
     {
         return theMainThesisOwned;

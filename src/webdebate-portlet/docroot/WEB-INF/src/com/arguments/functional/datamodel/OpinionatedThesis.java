@@ -6,7 +6,7 @@ import java.util.List;
 public class OpinionatedThesis extends Thesis
 {
     private final List<ThesisOpinion> theOpinions = new ArrayList<>();
-    private final List<Perspective> thePerspectives = new ArrayList<>();
+    private final MPerspective thePerspectives = new MPerspective();
 
     // ------------------------------------------------------------------------
     public OpinionatedThesis(ThesisId aThesisID, ThesisText aSummary,
@@ -41,5 +41,17 @@ public class OpinionatedThesis extends Thesis
     public Perspective getPerspective()
     {
         return thePerspectives.get(0);
+    }
+
+    // ------------------------------------------------------------------------
+    public List<ThesisOpinion> getOpinions()
+    {
+        return theOpinions;
+    }
+
+    // ------------------------------------------------------------------------
+    public MPerspective getPerspectives()
+    {
+        return thePerspectives;
     }
 }

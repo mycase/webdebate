@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.util.Collection;
 import java.util.List;
+
+import com.arguments.functional.datamodel.MPerspective;
 import com.arguments.functional.datamodel.OpinionatedThesis;
 import com.arguments.functional.datamodel.OwnedPerspective;
 import com.arguments.functional.datamodel.PerspectiveThesisOpinion;
@@ -56,7 +58,10 @@ public class HtmlThesisPrinter
     {
         StringBuffer myText = new StringBuffer();
         OpinionatedThesis myMainThesis = aThesisFocusData.getMainThesis();
-        myText.append("Perspective: " + aThesisFocusData.getPerspective());
+        MPerspective myPerspectives = aThesisFocusData.getPerspective();
+        
+        for (int i = 0; i < myPerspectives.size(); i++)
+            myText.append("Perspective "+i+": " + myPerspectives.get(i));
         myText.append("<h1>Focus thesis: </h1>\n");
         myText.append("<table id=\"mainfocustable\"><tr><td>");
         myText.append(toHtml(myMainThesis));

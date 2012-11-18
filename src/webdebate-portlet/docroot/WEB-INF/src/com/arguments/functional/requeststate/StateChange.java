@@ -3,8 +3,11 @@
  */
 package com.arguments.functional.requeststate;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.arguments.functional.datamodel.ArgsState;
 import com.arguments.functional.datamodel.ArgumentsUser;
+import com.arguments.functional.datamodel.MPerspectiveId;
 import com.arguments.functional.datamodel.PerspectiveId;
 import com.arguments.functional.datamodel.RelationId;
 import com.arguments.functional.datamodel.ThesisId;
@@ -21,13 +24,23 @@ public class StateChange
     private final boolean theHasChange;
     private final ThesisId theThesisId;
     private final RelationId theRelationId;
-    private final PerspectiveId thePerspectiveId;
+    private final MPerspectiveId thePerspectiveId;
     
     // ------------------------------------------------------------------------
     public StateChange(
             ThesisId aThesisId,
             RelationId aRelationId,
             PerspectiveId aPerspectiveId)
+    {
+        this(aThesisId, aRelationId, getMPerspectiveId(aPerspectiveId));
+    }
+    
+    
+    // ------------------------------------------------------------------------
+    public StateChange(
+            ThesisId aThesisId,
+            RelationId aRelationId,
+            MPerspectiveId aPerspectiveId)
     {
         theThesisId = aThesisId;
         theRelationId = aRelationId;
@@ -36,7 +49,8 @@ public class StateChange
         theHasChange = (theThesisId != null) || (theRelationId != null) || (thePerspectiveId != null);
 
         theStateString = theThesisId +","+theRelationId+
-                ","+(thePerspectiveId == null?null:thePerspectiveId.getLongID());
+                ","+(thePerspectiveId == null?null:
+                    StringUtils.join(thePerspectiveId, ","));
     }
     
     // ------------------------------------------------------------------------
@@ -45,8 +59,13 @@ public class StateChange
         this(
             ThesisId.parse(aRequestMap.get(ArgsRequestKey.THESIS_ID)),
             null,
-            PerspectiveId.parsePerspectiveId(aRequestMap.get(ArgsRequestKey.PERSPECTIVE_ID))
-            );
+            PerspectiveId.parsePerspectiveId(aRequestMap.get(ArgsRequestKey.PERSPECTIVE_ID)));
+    }
+
+    // ------------------------------------------------------------------------
+    private static MPerspectiveId getMPerspectiveId(PerspectiveId aPerspectiveId)
+    {
+        return aPerspectiveId == null ? null : new MPerspectiveId(aPerspectiveId);
     }
 
     // ------------------------------------------------------------------------
@@ -85,6 +104,6 @@ public class StateChange
     // ------------------------------------------------------------------------
     public PerspectiveId getPerspectiveId()
     {
-        return thePerspectiveId;
+        return thePerspectiveId == null? null:thePerspectiveId.get(0);
     }
 }

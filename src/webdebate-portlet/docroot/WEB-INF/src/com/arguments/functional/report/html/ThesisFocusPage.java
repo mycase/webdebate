@@ -5,11 +5,8 @@ package com.arguments.functional.report.html;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.arguments.functional.datamodel.ArgumentsUser;
-import com.arguments.functional.datamodel.Perspective;
+import com.arguments.functional.datamodel.MPerspective;
 import com.arguments.functional.datamodel.PerspectiveId;
 import com.arguments.functional.datamodel.ThesisId;
 import com.arguments.functional.report.ThesisFocusData;
@@ -24,7 +21,7 @@ import com.arguments.functional.store.TheArgsStore;
 public class ThesisFocusPage
 {
     private final ArgumentsUser theAppUser;
-    private final List<Perspective> thePerspectives = new ArrayList<>();
+    private final MPerspective thePerspectives = new MPerspective();
     private final ThesisId theThesisId;
     private final UrlContainer theUrlContainer;
     

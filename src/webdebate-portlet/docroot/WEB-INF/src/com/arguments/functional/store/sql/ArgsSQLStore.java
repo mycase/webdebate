@@ -13,6 +13,7 @@ import com.arguments.functional.datamodel.ArgsStore;
 import com.arguments.functional.datamodel.ArgumentsException;
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.datamodel.ArgumentsUserId;
+import com.arguments.functional.datamodel.MPerspective;
 import com.arguments.functional.datamodel.OwnedPerspective;
 import com.arguments.functional.datamodel.ForeignUserId;
 import com.arguments.functional.datamodel.Perspective;
@@ -87,7 +88,7 @@ public class ArgsSQLStore implements ArgsStore
             ThesisId aThesisId,
             Perspective aPerspective)
     {
-        return getOpinionatedThesis(aThesisId, aPerspective);
+        return getOpinionatedThesis(aThesisId, new MPerspective(aPerspective));
     }
 
     // ------------------------------------------------------------------------
@@ -156,7 +157,7 @@ public class ArgsSQLStore implements ArgsStore
         for (Thesis myNeutralThesis: myNeutralTheses)
         {
             OpinionatedThesis myOpinionatedThesis =
-                    getOpinionatedThesis(myNeutralThesis, aPerspective);
+                    getOpinionatedThesis(myNeutralThesis, new MPerspective(aPerspective));
             myOpinionatedTheses.add(myOpinionatedThesis);
         }
         
@@ -414,7 +415,7 @@ public class ArgsSQLStore implements ArgsStore
     public ThesisFocusData getThesisFocusData(
             ThesisId aMainThesisId,
             ArgumentsUserId aUserId,
-            List<Perspective> aPerspectives)
+            MPerspective aPerspectives)
     {
         Perspective myPerspective = aPerspectives.get(0);
         assert myPerspective != null;
@@ -425,7 +426,7 @@ public class ArgsSQLStore implements ArgsStore
         try
         {
             OpinionatedThesis myThesis =
-                    getOpinionatedThesis(aMainThesisId, myPerspective);
+                    getOpinionatedThesis(aMainThesisId, aPerspectives);
             myReturnValue.setMainThesis(myThesis);
             myReturnValue.setMainThesisOwned(myThesis.getOwnerID().equals(aUserId));
             ArgumentsUserId myPerspectiveOwner = myPerspective.getOwner();
@@ -983,7 +984,7 @@ public class ArgsSQLStore implements ArgsStore
     // ------------------------------------------------------------------------
     private static OpinionatedThesis getOpinionatedThesis(
             ThesisId aThesisId,
-            Perspective aPerspective)
+            MPerspective aPerspective)
     {
         assert aPerspective != null;
         
@@ -1003,9 +1004,9 @@ public class ArgsSQLStore implements ArgsStore
     // ------------------------------------------------------------------------
     private static OpinionatedThesis getOpinionThesis(
             ResultSet aResultSet,
-            Perspective aPerspective)
+            MPerspective aPerspectives)
     {
-        assert aPerspective != null;
+        assert aPerspectives.size() > 0;
 
         int myMiddleCount = 0;
         OpinionatedThesis myThesis = null;
@@ -1016,11 +1017,14 @@ public class ArgsSQLStore implements ArgsStore
                 myMiddleCount += 1;
                 ThesisId mySourceID = getThesisId(aResultSet, ArgsDB.Thesis.ID.c);
                 ThesisText mySummary = getThesisText(aResultSet, ArgsDB.Thesis.SUMMARY.c);
-                ThesisOpinion myOpinion = aPerspective.getOpinion(mySourceID);
                 ArgumentsUserId myOwnerID = getUserId(aResultSet, ArgsDB.Thesis.OWNER_ID.c);
-                assert mySourceID != null;
-                myThesis = new OpinionatedThesis(mySourceID, mySummary,
-                        myOpinion, aPerspective, myOwnerID);
+                myThesis = new OpinionatedThesis(mySourceID, mySummary, myOwnerID);
+                for (Perspective myPerspective:aPerspectives)
+                {
+                    ThesisOpinion myOpinion = myPerspective.getOpinion(mySourceID);
+                    assert mySourceID != null;
+                    myThesis.add(myPerspective, myOpinion);
+                }
             }
         } catch (SQLException anException)
         {

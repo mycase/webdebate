@@ -12,6 +12,7 @@ import com.arguments.functional.datamodel.ArgsStore;
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.datamodel.ArgumentsUserId;
 import com.arguments.functional.datamodel.ForeignUserId;
+import com.arguments.functional.datamodel.MPerspective;
 import com.arguments.functional.datamodel.OpinionatedThesis;
 import com.arguments.functional.datamodel.OwnedPerspective;
 import com.arguments.functional.datamodel.Perspective;
@@ -192,7 +193,7 @@ public class ArgsTestDB implements ArgsStore
     // ------------------------------------------------------------------------
     @Override
     public ThesisFocusData getThesisFocusData(ThesisId aMainThesisId,
-            ArgumentsUserId aUserId, List<Perspective> aPerspectives)
+            ArgumentsUserId aUserId, MPerspective aPerspectives)
     {
         return null;
     }

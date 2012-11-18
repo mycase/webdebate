@@ -85,10 +85,6 @@ public class ArgsState implements ArgsReadOnlyState
         //Perspective myOther = TheArgsStore.i().getPerspective(PerspectiveId.P4);
         //myReturnValue.add(myOther);
         return myReturnValue;
-
-        
-        
-        
     }
     
     // ------------------------------------------------------------------------

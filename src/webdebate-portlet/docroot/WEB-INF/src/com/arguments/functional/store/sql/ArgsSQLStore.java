@@ -507,7 +507,7 @@ public class ArgsSQLStore implements ArgsStore
             while (myDeductionResult.next())
             {
                 RelatedThesis<OpinionatedThesis> myPremise =
-                        getRelatedThesis2(myDeductionResult, myPerspective);
+                        getRelatedThesis2(myDeductionResult, aPerspectives);
                 myReturnValue.addConclusion(myPremise);
             }
         }
@@ -942,7 +942,7 @@ public class ArgsSQLStore implements ArgsStore
     // ------------------------------------------------------------------------
     private static RelatedThesis<OpinionatedThesis> getRelatedThesis2(
             ResultSet aResultSet,
-            Perspective aPerspective)
+            MPerspective aPerspectives)
             throws SQLException
     {
         ThesisId myThesis1ID = getThesisId(aResultSet, ArgsDB.Relation.THESIS_1_ID.c);
@@ -959,8 +959,11 @@ public class ArgsSQLStore implements ArgsStore
         OpinionatedThesis myThesis = 
                 new OpinionatedThesis(myThesis2ID, mySummary, myOwnerID);
         
-        ThesisOpinion myOpinion = aPerspective.getOpinion(myThesis2ID);
-        myThesis.add(aPerspective, myOpinion);
+        for(Perspective myPerspective:aPerspectives)
+        {
+            ThesisOpinion myOpinion = myPerspective.getOpinion(myThesis2ID);
+            myThesis.add(myPerspective, myOpinion);
+        }
         
         return new RelatedThesis<>(myThesis, myRelation);
     }

@@ -358,9 +358,9 @@ class ArgsDB
                 "  PerspectiveID INT(10) NOT NULL ,\n" + 
                 "  PRIMARY KEY (ID) ,\n" + 
                 "  INDEX fk_ActivePerspectives_Perspective1 (PerspectiveID ASC) ,\n" + 
-                "  CONSTRAINT fk_ActivePerspectives_Perspective1\n" + 
                 "  INDEX fk_ActivePerspectives_User1 (UserID ASC) ,\n" + 
                 "  UNIQUE INDEX UserID_UNIQUE (UserID ASC) ,\n" +
+                "  CONSTRAINT fk_ActivePerspectives_Perspective1\n" + 
                 "    FOREIGN KEY (PerspectiveID )\n" + 
                 "    REFERENCES Perspective (ID )\n" + 
                 "    ON DELETE NO ACTION\n" + 

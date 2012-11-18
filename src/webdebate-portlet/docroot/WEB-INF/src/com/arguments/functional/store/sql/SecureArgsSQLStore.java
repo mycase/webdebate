@@ -48,15 +48,22 @@ public class SecureArgsSQLStore extends ArgsSQLStore implements ArgsWriteStore
     public void updateState(ArgsReadOnlyState aState)
     {
         Logger.log("Update state");
-        ArgsDB myQuery = ArgsQuery.UPDATE_STATE1.ps();
-        myQuery.setThesisId(1, aState.getThesisId());
-        myQuery.setPerspectiveId(2, aState.getPerspectiveId());
-        myQuery.setUserId(3, theLoginUser);
-        int myNrRows = myQuery.executeUpdate();
+        ArgsDB myQuery1 = ArgsQuery.UPDATE_STATE1_.ps();
+        myQuery1.setThesisId(1, aState.getThesisId());
+        myQuery1.setUserId(2, theLoginUser);
+        int myNrRows = myQuery1.executeUpdate();
         assert myNrRows < 2;
-        if (myNrRows == 1)
+        if (myNrRows == 0)
+        {
+            insertState(aState, theLoginUser);
             return;
-        insertState(aState, theLoginUser);
+        }
+            
+        ArgsDB myQuery2 = ArgsQuery.UPDATE_ACTIVE_PERSPECTIVE.ps();
+        myQuery2.setPerspectiveId(1, aState.getPerspectiveId());
+        myQuery2.setUserId(2, theLoginUser);
+        myNrRows = myQuery2.executeUpdate();
+        assert myNrRows == 1;
     }
 
     // ------------------------------------------------------------------------

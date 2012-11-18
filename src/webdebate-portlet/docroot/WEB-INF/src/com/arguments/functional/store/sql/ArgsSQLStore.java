@@ -51,9 +51,12 @@ public class ArgsSQLStore implements ArgsStore
         new Patcher(){
             @Override
             public void execute(){patch0();}},
-        new Patcher(){
-            @Override
-            public void execute(){patch1();}}
+            new Patcher(){
+                @Override
+                public void execute(){patch1();}},
+            new Patcher(){
+                @Override
+                public void execute(){patch2();}},
     };
     
     // ------------------------------------------------------------------------
@@ -81,6 +84,12 @@ public class ArgsSQLStore implements ArgsStore
     {
         ArgsQuery.PATCH_1A.ps().executeUpdate();
         ArgsQuery.PATCH_1B.ps().executeUpdate();
+    }
+    
+    public static void patch2()
+    {
+        ArgsQuery.PATCH_2A.ps().executeUpdate();
+        ArgsQuery.PATCH_2B.ps().executeUpdate();
     }
     
     // ------------------------------------------------------------------------
@@ -548,10 +557,15 @@ public class ArgsSQLStore implements ArgsStore
     protected static void insertState(ArgsReadOnlyState aState, ArgumentsUserId aUser)
     {
         assert ! aState.getPerspectiveId().equals(PerspectiveId.VOLATILE);
-        int myNrRows = ArgsQuery.INSERT_STATE1.ps().
+        int myNrRows = ArgsQuery.INSERT_STATE1_.ps().
                 setUserId(1, aUser).
                 setThesisId(2, aState.getThesisId()).
-                setPerspectiveId(3, aState.getPerspectiveId()).
+                executeUpdate();
+        assert myNrRows == 1;
+        
+        myNrRows = ArgsQuery.INSERT_ACTIVE_PERSPECTIVE.ps().
+                setUserId(1, aUser).
+                setPerspectiveId(2, aState.getPerspectiveId()).
                 executeUpdate();
         assert myNrRows == 1;
     }
@@ -675,26 +689,46 @@ public class ArgsSQLStore implements ArgsStore
     // ------------------------------------------------------------------------
     private static ArgsState selectStateNull(ArgumentsUserId aUser)
     {
-        ArgsDB myQuery = ArgsQuery.SELECT_STATE_BY_USERID.ps();
-        myQuery.setUserId(1, aUser);
-        return getState(myQuery);
+        ArgsDB myQuery1 = ArgsQuery.SELECT_STATE_BY_USERID.ps()
+                .setUserId(1, aUser);
+        
+        ThesisId myThesisId = getThesisId(myQuery1);
+        if(myThesisId == null) return null;
+        
+        ArgsDB myQuery2 = ArgsQuery.SELECT_ACTIVE_PERSPECTIVE_BY_USERID.ps()
+                .setUserId(1, aUser);
+        
+        PerspectiveId myPerspectiveId = getPerspectiveId(myQuery2);
+        
+        ArgsState myState = new ArgsState(myThesisId, RelationId.BONE, myPerspectiveId);
+        
+        return myState;
     }
     
     // ------------------------------------------------------------------------
-    private static ArgsState getState(
-            ArgsDB aQuery)
+    private static ThesisId getThesisId(ArgsDB aQuery)
     {
         DBColumn myColumn = ArgsDB.State.THESIS_ID.c;
         Long myLongId = getLong(aQuery, myColumn);
         
         if (myLongId == null) return null;
 
-        PerspectiveId myPerspectiveId = new PerspectiveId(
-                getLong(aQuery, ArgsDB.State.OPINION_STRATEGY_ID.c));
         ThesisId myThesisId = new ThesisId(myLongId);
         
-        ArgsState myState = new ArgsState(myThesisId, RelationId.BONE, myPerspectiveId);
-        return myState;
+        return myThesisId;
+    }
+
+    // ------------------------------------------------------------------------
+    private static PerspectiveId getPerspectiveId(ArgsDB aQuery)
+    {
+        DBColumn myColumn = ArgsDB.ActivePerspectives.PERSPECTIVE_ID.c;
+        Long myLongId = getLong(aQuery, myColumn);
+        
+        if (myLongId == null) return null;
+
+        PerspectiveId myId = new PerspectiveId(myLongId);
+        
+        return myId;
     }
 
     // ------------------------------------------------------------------------
@@ -703,7 +737,8 @@ public class ArgsSQLStore implements ArgsStore
         ArgsQuery.DELETE_RELATIONS_BY_USERID.ps().setUserId(1, aUserId).executeUpdate();
         for (PerspectiveId myPerspectiveId: selectPerspectives(aUserId))
             ArgsQuery.DELETE_OPINIONS_BY_PERSPECTIVEID.ps().setPerspectiveId(1, myPerspectiveId).executeUpdate();
-        ArgsQuery.DELETE_STATE_BY_USERID.ps().setUserId(1, aUserId).executeUpdate();
+        ArgsQuery.DELETE_STATE_BY_USERID_.ps().setUserId(1, aUserId).executeUpdate();
+        ArgsQuery.DELETE_ACTIVE_PERSPECTIVE_BY_USERID.ps().setUserId(1, aUserId).executeUpdate();
         ArgsQuery.DELETE_THESES_BY_USERID.ps().setUserId(1, aUserId).executeUpdate();
         ArgsQuery.DELETE_PERSPECTIVES_BY_USERID.ps().setUserId(1, aUserId).executeUpdate();
     }

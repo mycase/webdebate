@@ -138,8 +138,7 @@ class ArgsDB
     public enum State
     {
         USER_ID("UserID"), // OWNER_ID
-        THESIS_ID("StatementID"),
-        OPINION_STRATEGY_ID("OpinionStrategyID");
+        THESIS_ID("StatementID");
         
         public static final String t = "State";
         public final DBColumn c;
@@ -259,7 +258,9 @@ class ArgsDB
         /* @formatter:off */
         DELETE_OPINIONS_BY_PERSPECTIVEID(DELETE_FROM, Opinion.t, WHERE, Opinion.PERSPECTIVE_ID1, "= ?"),
         DELETE_RELATIONS_BY_USERID(DELETE_FROM, Relation.t, WHERE, Relation.OWNER_ID , "= ?"),
-        DELETE_STATE_BY_USERID(DELETE_FROM, State.t, WHERE, State.USER_ID, "= ?"),
+        DELETE_STATE_BY_USERID_(DELETE_FROM, State.t, WHERE, State.USER_ID, "= ?"),
+        DELETE_ACTIVE_PERSPECTIVE_BY_USERID(DELETE_FROM, ActivePerspectives.t,
+                WHERE, ActivePerspectives.USER_ID, "= ?"),
         DELETE_THESES_BY_USERID(DELETE_FROM, Thesis.t, WHERE, Thesis.OWNER_ID, "= ?"),
         DELETE_PERSPECTIVES_BY_USERID(DELETE_FROM, Perspective.t, WHERE, Perspective.OWNER_ID, "= ?"),
 
@@ -272,7 +273,8 @@ class ArgsDB
         INSERT_OPINION1(INSERT_INTO, Opinion.t, VALUES, "(0, ?, ?, ?)"),
         INSERT_PERSPECTIVE(INSERT_INTO, Perspective.t, VALUES, "( 0, ?, 1, ?)"),
         INSERT_RELATION(INSERT_INTO, Relation.t, VALUES, "( 0, ?, ?, NULL, ?, ?, ?)"),
-        INSERT_STATE1(INSERT_INTO, State.t, VALUES, "( ?, ?, ?)"),
+        INSERT_STATE1_(INSERT_INTO, State.t, VALUES, "( ?, ?)"),
+        INSERT_ACTIVE_PERSPECTIVE(INSERT_INTO, ActivePerspectives.t, VALUES, "( 0, ?, ?)"),
         INSERT_THESIS(INSERT_INTO, Thesis.t, VALUES, "( 0, ?, NULL, ?)"),
         INSERT_USER(INSERT_INTO, User.t, VALUES, "( 0, ?, ?, ?)"),
         LOCK_OPINION_WRITE(LOCK_TABLE, Opinion.t, WRITE),
@@ -320,6 +322,7 @@ class ArgsDB
                 Perspective.OWNER_ID, " = ?"),
         SELECT_PERSPECTIVE_BY_USERID1(SELECT, "*", FROM, Perspective.t, WHERE, Perspective.OWNER_ID, " = ?"),
         SELECT_PERSPECTIVE_BY_ID(SELECT, "*", FROM, Perspective.t, WHERE, Perspective.ID , " = ? "),
+        SELECT_ACTIVE_PERSPECTIVE_BY_USERID(SELECT, "*", FROM, ActivePerspectives.t, WHERE, ActivePerspectives.USER_ID, "= ?"),
         SELECT_STATE_BY_USERID(SELECT, "*", FROM, State.t, WHERE, State.USER_ID, "= ?"),
         SELECT_LAST_TEST_THESIS(SELECT, "*", FROM, Thesis.t, WHERE, Thesis.OWNER_ID, "= 2", "ORDER BY", Thesis.ID, "DESC LIMIT 1"),
         SELECT_LAST_TEST_RELATION(SELECT, "*", FROM, Relation.t, WHERE, Relation.OWNER_ID, "= 2", "ORDER BY", Relation.ID, "DESC LIMIT 1"),
@@ -334,12 +337,17 @@ class ArgsDB
                         Relation.THESIS_2_ID, "= ?",
                     WHERE,
                         Relation.ID, "=?", AND, Relation.OWNER_ID, "= ?"),
-        UPDATE_STATE1(
+        UPDATE_STATE1_(
                 UPDATE, State.t,
                     SET,
-                        State.THESIS_ID, "= ?,",
-                        State.OPINION_STRATEGY_ID, " = ?",
+                        State.THESIS_ID, "= ?",
                     WHERE, State.USER_ID, "= ?"),
+        UPDATE_ACTIVE_PERSPECTIVE(
+                            UPDATE, ActivePerspectives.t,
+                                SET,
+                                    ActivePerspectives.PERSPECTIVE_ID, "= ?",
+                                WHERE, ActivePerspectives.USER_ID, "= ?"),
+
         UPDATE_THESIS(UPDATE, Thesis.t, SET, Thesis.SUMMARY, "= ?", WHERE, Thesis.ID, "=?", AND, Thesis.OWNER_ID, "= ?"),
         UPDATE_OPINION_BY_THESIS_PERSPECTIVE1(UPDATE, Opinion.t, SET, Opinion.LEVEL, "= ?", WHERE, Opinion.THESIS_ID, "= ?",
                 AND, Opinion.PERSPECTIVE_ID1, "= ?"),
@@ -373,7 +381,9 @@ class ArgsDB
                 "ENGINE = InnoDB\n" + 
                 "DEFAULT CHARACTER SET = latin1\n" + 
                 "COLLATE = latin1_swedish_ci\n"),
-                PATCH_1B("insert into ActivePerspectives select 0, UserID, OpinionStrategyID from State;")
+                PATCH_1B("insert into ActivePerspectives select 0, UserID, OpinionStrategyID from State;"),
+                PATCH_2A("ALTER TABLE State DROP FOREIGN KEY fk_State_Perspective1"),
+                PATCH_2B("ALTER TABLE State DROP COLUMN OpinionStrategyID, DROP INDEX fk_State_Perspective1"),
                 ; /* @formatter:on */
         private final String theText;
 

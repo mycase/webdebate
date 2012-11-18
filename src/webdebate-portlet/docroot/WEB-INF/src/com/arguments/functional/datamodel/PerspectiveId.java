@@ -3,6 +3,8 @@
  */
 package com.arguments.functional.datamodel;
 
+import static org.junit.Assert.*;
+
 import com.arguments.functional.store.TheArgsStore;
 
 /**
@@ -22,6 +24,7 @@ public class PerspectiveId
     // ------------------------------------------------------------------------
     public PerspectiveId(Long anID)
     {
+        assertNotNull(anID);
         theID = anID;
     }
     
@@ -44,6 +47,7 @@ public class PerspectiveId
     {
         if (THESIS_OWNER2 == null)
             THESIS_OWNER2 = TheArgsStore.i().getThesisOwnerPerspective();
+        assert THESIS_OWNER2 != null;
         return THESIS_OWNER2;
     }
     
@@ -72,6 +76,7 @@ public class PerspectiveId
     {
         if (anOther == null) return false;
         if (!(anOther instanceof PerspectiveId)) return false;
+        assertNotNull(theID);
         return theID.equals(((PerspectiveId)anOther).theID);
     }
     

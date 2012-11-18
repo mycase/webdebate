@@ -14,6 +14,7 @@ import com.arguments.functional.datamodel.ArgumentsException;
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.datamodel.ArgumentsUserId;
 import com.arguments.functional.datamodel.MPerspective;
+import com.arguments.functional.datamodel.MPerspectiveId;
 import com.arguments.functional.datamodel.OwnedPerspective;
 import com.arguments.functional.datamodel.ForeignUserId;
 import com.arguments.functional.datamodel.Perspective;
@@ -695,10 +696,10 @@ public class ArgsSQLStore implements ArgsStore
         ThesisId myThesisId = getThesisId(myQuery1);
         if(myThesisId == null) return null;
         
-        ArgsDB myQuery2 = ArgsQuery.SELECT_ACTIVE_PERSPECTIVE_BY_USERID.ps()
-                .setUserId(1, aUser);
+        ResultSet myQuery2 = ArgsQuery.SELECT_ACTIVE_PERSPECTIVE_BY_USERID.ps()
+                .setUserId(1, aUser).executeQuery();
         
-        PerspectiveId myPerspectiveId = getPerspectiveId(myQuery2);
+        MPerspectiveId myPerspectiveId = getPerspectiveId(myQuery2);
         
         ArgsState myState = new ArgsState(myThesisId, RelationId.BONE, myPerspectiveId);
         
@@ -719,16 +720,26 @@ public class ArgsSQLStore implements ArgsStore
     }
 
     // ------------------------------------------------------------------------
-    private static PerspectiveId getPerspectiveId(ArgsDB aQuery)
+    private static MPerspectiveId getPerspectiveId(ResultSet aQuery)
     {
         DBColumn myColumn = ArgsDB.ActivePerspectives.PERSPECTIVE_ID.c;
-        Long myLongId = getLong(aQuery, myColumn);
-        
-        if (myLongId == null) return null;
 
-        PerspectiveId myId = new PerspectiveId(myLongId);
+        MPerspectiveId myReturnValue = new MPerspectiveId();
+        try
+        {
+            while(aQuery.next())
+            {
+                Long myLongId = aQuery.getLong(myColumn.getName());
+                PerspectiveId myId = new PerspectiveId(myLongId);
+                myReturnValue.add(myId);
+            }
+        } catch (SQLException anException)
+        {
+            throw new ArgsSQLStoreException(anException);
+        }
         
-        return myId;
+        assertTrue( myReturnValue.size() > 0);
+        return myReturnValue;
     }
 
     // ------------------------------------------------------------------------
@@ -1307,7 +1318,9 @@ public class ArgsSQLStore implements ArgsStore
     {
         PerspectiveId myPerspective = getDefaultPerspective(aUser);
         assert myPerspective.isWritable();
-        ArgsState myState = new ArgsState(ThesisId.ONE, RelationId.BONE, myPerspective);
+        ArgsState myState =
+                new ArgsState(ThesisId.ONE, RelationId.BONE,
+                        new MPerspectiveId(myPerspective));
         return myState;
     }
 

@@ -158,6 +158,29 @@ class ArgsDB
         }
     }
 
+    public enum ActivePerspectives
+    {
+        ID("ID"),
+        USER_ID("UserID"),
+        PERSPECTIVE_ID("PerspectiveID");
+        
+        public static final String t = "ActivePerspectives";
+        public final DBColumn c;
+        public final String f;
+
+        private ActivePerspectives(String aName)
+        {
+            c = new DBColumn(aName, t);
+            f = c.getLongName();
+        }
+        
+        @Override
+        public String toString()
+        {
+            return c.getName();
+        }
+    }
+
     public enum Thesis
     {
         ID("ID"),
@@ -323,16 +346,35 @@ class ArgsDB
                 UPDATE_USER_SET_FOREIGN_ID(UPDATE, User.t, SET, User.CONTAINER_ID, "= ?", WHERE, User.ID, "= ?"),
                 UPDATE_USER_SET_SCREEN_NAME(UPDATE, User.t, SET, User.SCREEN_NAME, "= ?", WHERE, User.ID, "= ?"),
                 UPDATE_USER_SET_EMAIL(UPDATE, User.t, SET, User.EMAIL, "= ?", WHERE, User.ID, "= ?"),
-        PATCH_0a("DROP TABLE IF EXISTS Patch"),
-        PATCH_0b("CREATE TABLE Patch ("+
+        PATCH_0A("DROP TABLE IF EXISTS Patch"),
+        PATCH_0B("CREATE TABLE Patch ("+
                 "ID int(10) NOT NULL,"+
                 "PRIMARY KEY  (ID)" +
                  ") ENGINE=MyISAM DEFAULT CHARSET=latin1;"),
         INSERT_PATCH(INSERT_INTO, Patch.t, VALUES, "(?)"),
+        PATCH_1A("CREATE  TABLE IF NOT EXISTS ActivePerspectives (\n" + 
+                "  ID INT(10) NOT NULL AUTO_INCREMENT,\n" + 
+                "  UserID INT(10) NOT NULL ,\n" + 
+                "  PerspectiveID INT(10) NOT NULL ,\n" + 
+                "  PRIMARY KEY (ID) ,\n" + 
+                "  INDEX fk_ActivePerspectives_Perspective1 (PerspectiveID ASC) ,\n" + 
+                "  CONSTRAINT fk_ActivePerspectives_Perspective1\n" + 
+                "    FOREIGN KEY (PerspectiveID )\n" + 
+                "    REFERENCES Perspective (ID )\n" + 
+                "    ON DELETE NO ACTION\n" + 
+                "    ON UPDATE NO ACTION,\n" + 
+                "  CONSTRAINT fk_ActivePerspectives_User1\n" + 
+                "    FOREIGN KEY (UserID )\n" + 
+                "    REFERENCES User (ID )\n" + 
+                "    ON DELETE NO ACTION\n" + 
+                "    ON UPDATE NO ACTION)\n" + 
+                "ENGINE = InnoDB\n" + 
+                "DEFAULT CHARACTER SET = latin1\n" + 
+                "COLLATE = latin1_swedish_ci\n"),
+                PATCH_1B("insert into ActivePerspectives select 0, UserID, OpinionStrategyID from State;")
                 ; /* @formatter:on */
         private final String theText;
 
-        
         // ------------------------------------------------------------------------
         /**
          * @return the text

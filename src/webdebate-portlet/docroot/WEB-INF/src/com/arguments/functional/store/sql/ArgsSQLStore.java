@@ -49,12 +49,11 @@ public class ArgsSQLStore implements ArgsStore
 
     private static Patcher[] myPatches = new Patcher[]{
         new Patcher(){
-
             @Override
-            public void execute()
-            {
-                patch0();
-            }}
+            public void execute(){patch0();}},
+        new Patcher(){
+            @Override
+            public void execute(){patch1();}}
     };
     
     // ------------------------------------------------------------------------
@@ -73,11 +72,16 @@ public class ArgsSQLStore implements ArgsStore
     // ------------------------------------------------------------------------
     public static void patch0()
     {
-        ArgsQuery.PATCH_0a.ps().executeUpdate();
-        ArgsQuery.PATCH_0b.ps().executeUpdate();
+        ArgsQuery.PATCH_0A.ps().executeUpdate();
+        ArgsQuery.PATCH_0B.ps().executeUpdate();
 
     }
 
+    public static void patch1()
+    {
+        ArgsQuery.PATCH_1A.ps().executeUpdate();
+        ArgsQuery.PATCH_1B.ps().executeUpdate();
+    }
     
     // ------------------------------------------------------------------------
     @Override

@@ -381,10 +381,11 @@ class ArgsDB
                 "ENGINE = InnoDB\n" + 
                 "DEFAULT CHARACTER SET = latin1\n" + 
                 "COLLATE = latin1_swedish_ci\n"),
-                PATCH_1B("insert into ActivePerspectives select 0, UserID, OpinionStrategyID from State;"),
-                PATCH_2A("ALTER TABLE State DROP FOREIGN KEY fk_State_Perspective1"),
-                PATCH_2B("ALTER TABLE State DROP COLUMN OpinionStrategyID, DROP INDEX fk_State_Perspective1"),
-                ; /* @formatter:on */
+        PATCH_1B("insert into ActivePerspectives select 0, UserID, OpinionStrategyID from State;"),
+        PATCH_2A("ALTER TABLE State DROP FOREIGN KEY fk_State_Perspective1"),
+        PATCH_2B("ALTER TABLE State DROP COLUMN OpinionStrategyID, DROP INDEX fk_State_Perspective1"),
+        PATCH_3("ALTER TABLE ActivePerspectives DROP INDEX UserID_UNIQUE"),
+        ; /* @formatter:on */
         private final String theText;
 
         // ------------------------------------------------------------------------

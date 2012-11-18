@@ -31,7 +31,7 @@ CREATE TABLE `ActivePerspectives` (
   KEY `fk_ActivePerspectives_User1` (`UserID`),
   CONSTRAINT `fk_ActivePerspectives_Perspective1` FOREIGN KEY (`PerspectiveID`) REFERENCES `Perspective` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_ActivePerspectives_User1` FOREIGN KEY (`UserID`) REFERENCES `User` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `ActivePerspectives` (
 
 LOCK TABLES `ActivePerspectives` WRITE;
 /*!40000 ALTER TABLE `ActivePerspectives` DISABLE KEYS */;
-INSERT INTO `ActivePerspectives` VALUES (1,1,1),(2,4,4),(3,74,780);
+INSERT INTO `ActivePerspectives` VALUES (1,1,1),(2,4,4);
 /*!40000 ALTER TABLE `ActivePerspectives` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -62,7 +62,7 @@ CREATE TABLE `Opinions` (
   KEY `fk_Opinions_Perspective1` (`UserID`),
   CONSTRAINT `fk_Opinions_Perspective1` FOREIGN KEY (`UserID`) REFERENCES `Perspective` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Opinions_Statements1` FOREIGN KEY (`StatementID`) REFERENCES `Statements` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=1202 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=595 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,7 +71,6 @@ CREATE TABLE `Opinions` (
 
 LOCK TABLES `Opinions` WRITE;
 /*!40000 ALTER TABLE `Opinions` DISABLE KEYS */;
-INSERT INTO `Opinions` VALUES (552,1,1,0.5);
 /*!40000 ALTER TABLE `Opinions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -94,7 +93,7 @@ CREATE TABLE `Patch` (
 
 LOCK TABLES `Patch` WRITE;
 /*!40000 ALTER TABLE `Patch` DISABLE KEYS */;
-INSERT INTO `Patch` VALUES (0),(1),(2);
+INSERT INTO `Patch` VALUES (0),(1),(2),(3);
 /*!40000 ALTER TABLE `Patch` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -113,7 +112,7 @@ CREATE TABLE `Perspective` (
   PRIMARY KEY (`ID`),
   KEY `fk_Perspective_User1` (`OwnerID`),
   CONSTRAINT `fk_Perspective_User1` FOREIGN KEY (`OwnerID`) REFERENCES `User` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=1546 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=560 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -122,7 +121,7 @@ CREATE TABLE `Perspective` (
 
 LOCK TABLES `Perspective` WRITE;
 /*!40000 ALTER TABLE `Perspective` DISABLE KEYS */;
-INSERT INTO `Perspective` VALUES (1,'main',1,1),(3,'main',1,3),(4,'main',1,4),(13,'thesis_owner',2,NULL),(780,'main',1,74);
+INSERT INTO `Perspective` VALUES (1,'main',1,1),(3,'main',1,3),(4,'main',1,4),(13,'thesis_owner',2,NULL);
 /*!40000 ALTER TABLE `Perspective` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -149,7 +148,7 @@ CREATE TABLE `Relation` (
   CONSTRAINT `fk_Relation_Statements` FOREIGN KEY (`Statement1ID`) REFERENCES `Statements` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Relation_Statements1` FOREIGN KEY (`Statement2ID`) REFERENCES `Statements` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Relation_User1` FOREIGN KEY (`OwnerID`) REFERENCES `User` (`ID`) ON DELETE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=288 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -208,7 +207,7 @@ CREATE TABLE `State` (
 
 LOCK TABLES `State` WRITE;
 /*!40000 ALTER TABLE `State` DISABLE KEYS */;
-INSERT INTO `State` VALUES (1,1),(4,1),(74,1);
+INSERT INTO `State` VALUES (1,1),(4,1);
 /*!40000 ALTER TABLE `State` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,7 +226,7 @@ CREATE TABLE `Statements` (
   PRIMARY KEY (`ID`),
   KEY `fk_Statements_User1` (`Owner`),
   CONSTRAINT `fk_Statements_User1` FOREIGN KEY (`Owner`) REFERENCES `User` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=692 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=604 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -256,7 +255,7 @@ CREATE TABLE `User` (
   UNIQUE KEY `email_UNIQUE` (`email`),
   UNIQUE KEY `containerId_UNIQUE` (`containerId`),
   UNIQUE KEY `screen_name__UNIQUE` (`screen_name_`)
-) ENGINE=InnoDB AUTO_INCREMENT=162 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -265,7 +264,7 @@ CREATE TABLE `User` (
 
 LOCK TABLES `User` WRITE;
 /*!40000 ALTER TABLE `User` DISABLE KEYS */;
-INSERT INTO `User` VALUES (1,'test_1@provider1.com','13302','testscreen1'),(2,'test_2@provider2.com','10002','testscreen2'),(3,'test_3@provider3.com','-1','testscreen3'),(4,'test_4@provider4.com','10004','testscreen4'),(7,'test_7@provider7.com','10007','testscreen7'),(53,'test_53@provider53.com','10053','testscreen53'),(74,'mirleau@bluewin.ch','10243','mirleau'),(161,'new@new.com','-27','newbee');
+INSERT INTO `User` VALUES (1,'test_1@provider1.com','10001','testscreen1'),(2,'test_2@provider2.com','10002','testscreen2'),(3,'test_3@provider3.com','-1','testscreen3'),(4,'test_4@provider4.com','10004','testscreen4'),(7,'test_7@provider7.com','10007','testscreen7'),(60,'new@new.com','-27','newbee');
 /*!40000 ALTER TABLE `User` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -278,4 +277,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-11-18 21:21:59
+-- Dump completed on 2012-11-18 23:26:18

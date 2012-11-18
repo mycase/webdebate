@@ -52,12 +52,15 @@ public class ArgsSQLStore implements ArgsStore
         new Patcher(){
             @Override
             public void execute(){patch0();}},
-            new Patcher(){
-                @Override
-                public void execute(){patch1();}},
-            new Patcher(){
-                @Override
-                public void execute(){patch2();}},
+        new Patcher(){
+            @Override
+            public void execute(){patch1();}},
+        new Patcher(){
+            @Override
+            public void execute(){patch2();}},
+        new Patcher(){
+            @Override
+            public void execute(){patch3();}},
     };
     
     // ------------------------------------------------------------------------
@@ -81,16 +84,24 @@ public class ArgsSQLStore implements ArgsStore
 
     }
 
+    // ------------------------------------------------------------------------
     public static void patch1()
     {
         ArgsQuery.PATCH_1A.ps().executeUpdate();
         ArgsQuery.PATCH_1B.ps().executeUpdate();
     }
     
+    // ------------------------------------------------------------------------
     public static void patch2()
     {
         ArgsQuery.PATCH_2A.ps().executeUpdate();
         ArgsQuery.PATCH_2B.ps().executeUpdate();
+    }
+    
+    // ------------------------------------------------------------------------
+    public static void patch3()
+    {
+        ArgsQuery.PATCH_3.ps().executeUpdate();
     }
     
     // ------------------------------------------------------------------------

@@ -47,7 +47,9 @@ public class ThesisFocusData_Tester
         ThesisFocusData myData = new ThesisFocusData(myThesisId, new MPerspective(myPers1));
         Collection<PerspectiveThesisOpinion> myOpTheses = myData.getDifferentPerspectives();
         assertNotNull(myOpTheses);
-        assertEquals(7, myOpTheses.size());
+        //for (PerspectiveThesisOpinion myPTO : myOpTheses)
+        //    System.out.println(myPTO.getPerspective().toString());
+        assertEquals(6, myOpTheses.size());
     }
     
     // ------------------------------------------------------------------------

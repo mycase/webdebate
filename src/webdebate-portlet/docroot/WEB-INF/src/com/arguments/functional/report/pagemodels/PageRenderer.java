@@ -3,6 +3,8 @@
  */
 package com.arguments.functional.report.pagemodels;
 
+import static org.junit.Assert.*;
+
 import com.arguments.functional.datamodel.ArgsErrorHandler;
 import com.arguments.functional.report.html.UrlContainer;
 import com.arguments.functional.requeststate.ArgsStatefulRequest3;
@@ -19,6 +21,7 @@ public abstract class PageRenderer
     // ------------------------------------------------------------------------
     public PageRenderer(ArgsErrorHandler anErrorHandler)
     {
+        assertNotNull(anErrorHandler);
         theErrorHandler = anErrorHandler;
     }
     

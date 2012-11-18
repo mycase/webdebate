@@ -88,7 +88,7 @@ public class Macro_Tester
     // ------------------------------------------------------------------------
     private class AJRRCreator implements InstanceCreator<ArgsJspRenderRequest> {
         public ArgsJspRenderRequest createInstance(Type type) {
-          return new ArgsJspRenderRequest(null, null, null, null);
+          return new ArgsJspRenderRequest(null, null, null, null, null);
         }
       }
     

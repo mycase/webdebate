@@ -22,13 +22,6 @@ public class ArgsJspRenderRequest
     private final ArgsErrorHandler theErrorHandler;
 
     // ------------------------------------------------------------------------
-    public ArgsJspRenderRequest(ArgsRequest aRequest, UrlContainer aUrlContainer,
-            CgiSource aStateInputMode, UpdateStateFlag aUpdateState)
-    {
-        this(aRequest, aUrlContainer, aStateInputMode, aUpdateState, null);
-    }
-    
-    // ------------------------------------------------------------------------
     public ArgsJspRenderRequest(
             ArgsRequest aRequest,
             UrlContainer aUrlContainer,

@@ -8,6 +8,7 @@ import static org.junit.Assert.*;
 import com.arguments.application.liferay.LiferayArgsRequestKey;
 import com.arguments.functional.command.Command;
 import com.arguments.functional.datamodel.ArgsActionRequest;
+import com.arguments.functional.datamodel.ArgsErrorHandler;
 import com.arguments.functional.datamodel.ArgsReadOnlyState;
 import com.arguments.functional.datamodel.ArgsRequest;
 import com.arguments.functional.datamodel.ArgsState;
@@ -349,9 +350,17 @@ public class ArgsStatefulRequest_Tester
         UrlContainer myContainer = new UrlContainer();
         CgiSource mySource = CgiSource.SERVLET;
         UpdateStateFlag myUpdateState = UpdateStateFlag.YES;
+        
+        ArgsErrorHandler myErrorHandler = new ArgsErrorHandler(){
 
+            @Override
+            public String handle(Throwable aException)
+            {
+                throw new AssertionError(aException);
+            }};
         ArgsJspRenderRequest myRequest = new ArgsJspRenderRequest(myRequest0,
-                myContainer, mySource, myUpdateState);
+                myContainer, mySource, myUpdateState, myErrorHandler);
+        
         return myRequest;
     }
 

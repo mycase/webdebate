@@ -53,17 +53,18 @@ public class HtmlThesisPrinter
         return myText.toString();
     }
 
+    private MPerspective thePerspectives;
     // ------------------------------------------------------------------------
     public String focusPageToInternalHtml(ThesisFocusData aThesisFocusData)
     {
         StringBuffer myText = new StringBuffer();
         OpinionatedThesis myMainThesis = aThesisFocusData.getMainThesis();
-        MPerspective myPerspectives = aThesisFocusData.getPerspective();
-        assertEquals (myMainThesis.getPerspectives().size(), myPerspectives.size());
+        thePerspectives = aThesisFocusData.getPerspective();
+        assertEquals (myMainThesis.getPerspectives().size(), thePerspectives.size());
         myText.append("<ul>");
 
-        for (int i = 0; i < myPerspectives.size(); i++)
-            myText.append("<li>Perspective "+(i+1)+": " + myPerspectives.get(i)+"</li>");
+        for (int i = 0; i < thePerspectives.size(); i++)
+            myText.append("<li>Perspective "+(i+1)+": " + thePerspectives.get(i)+"</li>");
         myText.append("</ul>");
         myText.append("<h1>Focus thesis: </h1>\n");
         myText.append("<table id=\"mainfocustable\"><tr>");
@@ -159,6 +160,7 @@ public class HtmlThesisPrinter
         
         for (RelatedThesis<OpinionatedThesis> myPremise : aTheses)
         {
+            // TODO assertEquals(myPremise.getThesis().getOpinions().size(), thePerspectives.size());
             myText.append(toTableRow(myPremise, theUrlContainer));
         }
         myText.append("</table>\n");

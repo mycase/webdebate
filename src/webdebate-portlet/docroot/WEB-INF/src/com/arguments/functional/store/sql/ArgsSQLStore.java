@@ -506,7 +506,8 @@ public class ArgsSQLStore implements ArgsStore
 
             while (myDeductionResult.next())
             {
-                RelatedThesis<OpinionatedThesis> myPremise = getRelatedThesis2(myDeductionResult, myPerspective);
+                RelatedThesis<OpinionatedThesis> myPremise =
+                        getRelatedThesis2(myDeductionResult, myPerspective);
                 myReturnValue.addConclusion(myPremise);
             }
         }
@@ -920,7 +921,6 @@ public class ArgsSQLStore implements ArgsStore
         ThesisId myThesis1ID = getThesisId(aResultSet, ArgsDB.Relation.THESIS_1_ID.c);
         ThesisId myThesis2ID = getThesisId(aResultSet, ArgsDB.Relation.THESIS_2_ID.c);
         ThesisText mySummary = getThesisText(aResultSet, ArgsDB.Thesis.SUMMARY.c);
-        ThesisOpinion myOpinion = aPerspective.getOpinion(myThesis1ID);
         Relevance myIfTrueRelevance = selectIfTrueRelevance(aResultSet);
         Relevance myIfFalseRelevance = selectIfFalseRelevance(aResultSet);
         ArgumentsUserId myOwnerID = getUserId(aResultSet, ArgsDB.OWNER_ID_);
@@ -928,9 +928,12 @@ public class ArgsSQLStore implements ArgsStore
         Relation myRelation = new Relation(myRelationID,
                 myThesis1ID, myThesis2ID,
                 myIfTrueRelevance, myIfFalseRelevance, ArgumentsUserId.BOGUS);
-        return new RelatedThesis<>(
-                new OpinionatedThesis(myThesis1ID, mySummary, myOpinion, aPerspective, myOwnerID),
-                myRelation);
+        
+        OpinionatedThesis myThesis = new OpinionatedThesis(myThesis1ID, mySummary, myOwnerID);
+        ThesisOpinion myOpinion = aPerspective.getOpinion(myThesis1ID);
+        myThesis.add(aPerspective, myOpinion);
+        
+        return new RelatedThesis<>(myThesis, myRelation);
     }
     
     // ------------------------------------------------------------------------
@@ -1094,9 +1097,9 @@ public class ArgsSQLStore implements ArgsStore
     // ------------------------------------------------------------------------
     private static OpinionatedThesis getOpinionatedThesis(
             ThesisId aThesisId,
-            MPerspective aPerspective)
+            MPerspective aPerspectives)
     {
-        assert aPerspective != null;
+        assertTrue(aPerspectives.size()>0);
         
         ArgsDB myQuery =
                 ArgsQuery.SELECT_THESIS_BY_ID.ps();
@@ -1105,7 +1108,7 @@ public class ArgsSQLStore implements ArgsStore
         ResultSet myResult = myQuery.executeQuery();
 
         OpinionatedThesis myThesis = getOpinionThesis(myResult,
-                aPerspective);
+                aPerspectives);
         assert myThesis != null : "Can't find thesis for ID = "
                 + aThesisId;
         return myThesis;

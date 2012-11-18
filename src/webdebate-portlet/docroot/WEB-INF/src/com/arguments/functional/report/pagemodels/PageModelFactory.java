@@ -3,6 +3,8 @@
  */
 package com.arguments.functional.report.pagemodels;
 
+import static org.junit.Assert.*;
+
 import com.arguments.application.TheContainerBridge;
 import com.arguments.functional.requeststate.ArgsJspRenderRequest;
 import com.arguments.functional.requeststate.ArgsStatefulRequest3;
@@ -81,6 +83,7 @@ public class PageModelFactory
     public static ThesisFocusPageModel getThesisFocusPage(
             ArgsJspRenderRequest aRenderRequest)
     {
+        assertNotNull(aRenderRequest.getErrorHandler());
         ArgsStatefulRequest3 myRequest = aRenderRequest.storeGet();
 
         return new ThesisFocusPageModel(myRequest, theProtocol, aRenderRequest.getErrorHandler());

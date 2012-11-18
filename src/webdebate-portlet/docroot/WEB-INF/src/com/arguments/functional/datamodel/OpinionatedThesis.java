@@ -10,6 +10,13 @@ public class OpinionatedThesis extends Thesis
 
     // ------------------------------------------------------------------------
     public OpinionatedThesis(ThesisId aThesisID, ThesisText aSummary,
+            ArgumentsUserId anOwnerID)
+    {
+        super(aThesisID, aSummary, anOwnerID);
+    }
+
+    // ------------------------------------------------------------------------
+    public OpinionatedThesis(ThesisId aThesisID, ThesisText aSummary,
             ThesisOpinion aOpinion, Perspective aPerspective,
             ArgumentsUserId anOwnerID)
     {

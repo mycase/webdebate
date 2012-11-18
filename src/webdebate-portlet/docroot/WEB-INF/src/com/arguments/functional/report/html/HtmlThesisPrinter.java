@@ -59,13 +59,16 @@ public class HtmlThesisPrinter
         StringBuffer myText = new StringBuffer();
         OpinionatedThesis myMainThesis = aThesisFocusData.getMainThesis();
         MPerspective myPerspectives = aThesisFocusData.getPerspective();
-        
+        assertEquals (myMainThesis.getPerspectives().size(), myPerspectives.size());
+        myText.append("<ul>");
+
         for (int i = 0; i < myPerspectives.size(); i++)
-            myText.append("Perspective "+i+": " + myPerspectives.get(i));
+            myText.append("<li>Perspective "+(i+1)+": " + myPerspectives.get(i)+"</li>");
+        myText.append("</ul>");
         myText.append("<h1>Focus thesis: </h1>\n");
-        myText.append("<table id=\"mainfocustable\"><tr><td>");
+        myText.append("<table id=\"mainfocustable\"><tr>");
         myText.append(toHtml(myMainThesis));
-        myText.append("</td></tr></table>");
+        myText.append("</tr></table>");
         if (aThesisFocusData.getMainThesisOwned())
         {
             myText.append("<a href=\"" + theUrlContainer.getEditThesisUrl() + "\">edit</a>");
@@ -216,8 +219,14 @@ public class HtmlThesisPrinter
         assertNotNull(aThesis);
         StringBuffer myText = new StringBuffer();
 
-        myText.append("<div id=\"mainfocus\" class=\"" + cssClassByOpinion(aThesis)
-                + "\">" + getIDWithSummary(aThesis) + "</div>\n");
+        //myText.append("<div id=\"mainfocus\" class=\"" + cssClassByOpinion(aThesis)
+        //        + "\">" + getIDWithSummary(aThesis) + "</div>\n");
+        for (ThesisOpinion myOpinion : aThesis.getOpinions())
+            myText.append("<td><div id=\"mainfocuspers\" class=\"" + cssClassByOpinion(myOpinion)
+                 + "\">" + "X" + "</div></td>\n");
+        myText.append("<td><div id=\"mainfocus\" class=\"" + cssClassByOpinion(aThesis.getOpinion())
+                + "\">" + getIDWithSummary(aThesis) + "</div></td>\n");
+        
         return myText;
     }
 

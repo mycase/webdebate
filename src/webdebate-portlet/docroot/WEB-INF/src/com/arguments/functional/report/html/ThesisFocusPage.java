@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.datamodel.MPerspective;
+import com.arguments.functional.datamodel.Perspective;
 import com.arguments.functional.datamodel.PerspectiveId;
 import com.arguments.functional.datamodel.ThesisId;
 import com.arguments.functional.report.ThesisFocusData;
@@ -66,6 +67,8 @@ public class ThesisFocusPage
         PerspectiveId myPId2 = aRequest.getPerspective2Id();
         if (myPId2 != null)
             thePerspectives.add(TheArgsStore.i().getPerspective(myPId2));
+        //Perspective myOther = TheArgsStore.i().getPerspective(new PerspectiveId(6L));
+        //thePerspectives.add(myOther);
     }
 
     // ------------------------------------------------------------------------

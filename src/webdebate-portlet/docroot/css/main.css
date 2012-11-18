@@ -1,8 +1,14 @@
 #mainfocus{padding:5px 5px;font-size:1.5em;text-align:center;}
+#mainfocuspers{font-size:1.5em;text-align:center;}
+#mainfocuspers.believeStyle{color:green;background-color:green;}
+#mainfocuspers.dontKnowStyle{color:white;background-color:white;}
+#mainfocuspers.dontBelieveStyle{color:red;background-color:red;}
+
+
 #mainfocustable{horizontal-align:right;vertical-align:centre;}
+
 tbody{background-color:#DDDDDD; padding:30px 30px;}
-.dontKnowStyle, .believeStyle, .dontBelieveStyle, .otherClass
-{padding:2px 3px;}
+.dontKnowStyle, .believeStyle, .dontBelieveStyle, .otherClass{padding:2px 3px;}
 .dontKnowStyle{color:black;}
 .believeStyle{color:green;}
 .dontBelieveStyle{color:red;}

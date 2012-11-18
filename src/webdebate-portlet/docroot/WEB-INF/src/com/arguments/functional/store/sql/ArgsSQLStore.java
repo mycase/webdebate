@@ -417,8 +417,8 @@ public class ArgsSQLStore implements ArgsStore
             ArgumentsUserId aUserId,
             MPerspective aPerspectives)
     {
+        assertTrue(aPerspectives.size() > 0);
         Perspective myPerspective = aPerspectives.get(0);
-        assert myPerspective != null;
         
         ThesisFocusData myReturnValue =
                 new ThesisFocusData(aMainThesisId, myPerspective);
@@ -437,7 +437,8 @@ public class ArgsSQLStore implements ArgsStore
             ResultSet myPremiseResult = myQuery.executeQuery();
             while (myPremiseResult.next())
             {
-                RelatedThesis<OpinionatedThesis> myPremise = getRelatedThesis(myPremiseResult, myPerspective);
+                RelatedThesis<OpinionatedThesis> myPremise =
+                        getRelatedThesis(myPremiseResult, myPerspective);
                 myReturnValue.addPremise(myPremise);
             }
             

@@ -160,7 +160,7 @@ public class HtmlThesisPrinter
         
         for (RelatedThesis<OpinionatedThesis> myPremise : aTheses)
         {
-            // TODO assertEquals(myPremise.getThesis().getOpinions().size(), thePerspectives.size());
+            assertEquals(myPremise.getThesis().getOpinions().size(), thePerspectives.size());
             myText.append(toTableRow(myPremise, theUrlContainer));
         }
         myText.append("</table>\n");

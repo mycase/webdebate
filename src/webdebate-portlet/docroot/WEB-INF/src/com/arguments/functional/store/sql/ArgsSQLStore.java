@@ -307,8 +307,8 @@ public class ArgsSQLStore implements ArgsStore
 
         assertNotNull( myAppUser );
 
-        assertEquals( myAppUser.getEmailAddress(), anEmailAddress);
-        assertEquals( myAppUser.getScreenName(), aScreenName);
+        //assertEquals( myAppUser.getEmailAddress(), anEmailAddress);
+        //assertEquals( myAppUser.getScreenName(), aScreenName);
         
         if (myAppUser.getEmailAddress().equals(anEmailAddress)
                 && myAppUser.getScreenName().equals(aScreenName)

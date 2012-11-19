@@ -86,7 +86,7 @@ public class Deployment
                 File myPropertiesFile = new File(myLocation);
                 if (!myPropertiesFile.exists())
                 {
-                    Logger.logAlways("Didn't find arguments properties at " + myLocation);
+                    Logger.logAlways("Didn't find webdebate properties at " + myLocation);
                 }
                 else
                 {
@@ -96,7 +96,7 @@ public class Deployment
 
             assertNotNull("Didn't find deployment properties file.", myPropertiesStream);
             
-            Logger.logAlways("Found aruments properties at " + myLocation);
+            Logger.logAlways("Found webdebate properties at " + myLocation);
             
             myDeploymentProperties.load(myPropertiesStream);
         } catch (IOException anException)

@@ -288,9 +288,10 @@ public class HtmlThesisPrinter
                 + toFocusAnchor(aPremise.getID()) + ", "
                 + toRelinkAnchor(aRelinkURL.getEditLinkUrl(), aPremise) + "</td>\n"                
                 );
-        for (int i = 0; i< thePerspectives.size(); i++)
-            myText.append("<td id=\"relatedpers\" class=\"" + cssClassByOpinion(aPremise.getThesis()) + "\">" +
-                    aPremise.getThesis().getOpinions().get(i).getPercentage()+"%" +
+        for (ThesisOpinion myOpinion:aPremise.getThesis().getOpinions())
+            myText.append("<td id=\"relatedpers\" class=\"" +
+                    cssClassByOpinion(myOpinion) + "\">" +
+                    myOpinion.getPercentage()+"%" +
             		"</td>");
         myText.append("  <td class=\"" + cssClassByOpinion(aPremise.getThesis()) + "\">"
                 + getIDWithSummary(aPremise.getThesis())+"</td>\n");

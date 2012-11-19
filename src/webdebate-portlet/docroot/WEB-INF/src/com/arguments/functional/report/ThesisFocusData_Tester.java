@@ -83,10 +83,15 @@ public class ThesisFocusData_Tester
         assert myPerspectives.size() == 2;
         ThesisFocusData myData =
                 new ThesisFocusData(ThesisId.Da13, myPerspectives);
+        
+        assert myData.getPerspectives().size() == 2;
+        
+        
         ArgsJspRenderRequest myRequest =
                 PageModel_Tester.getRequest("MakeYourCase.2012.11.19.00.33.07.renderRequest.json");
         ThesisFocusPageModel myPageModel = PageModelFactory.getThesisFocusPage(myRequest);
-
+        assert myPageModel.theHtml.contains("P1");
+        assert myPageModel.theHtml.contains("P2");
     }
     
     // ------------------------------------------------------------------------

@@ -11,7 +11,7 @@ import com.arguments.functional.datamodel.ArgsState;
  * @author mirleau
  *
  */
-public class ArgsStatefulCommand
+public final class ArgsStatefulCommand
 {
     private final Command theCommand;
     private final ArgsState theState;

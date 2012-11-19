@@ -2,6 +2,7 @@ package com.arguments.functional.requeststate;
 
 import static org.junit.Assert.*;
 
+import com.arguments.functional.command.StateChangeCommand;
 import com.arguments.functional.datamodel.ArgsReadOnlyState;
 import com.arguments.functional.datamodel.ArgsRequest;
 import com.arguments.functional.datamodel.ArgsState;
@@ -29,8 +30,7 @@ public abstract class PortalArgsBridge
     }
 
     // ------------------------------------------------------------------------
-    public ArgsStatefulRequest3 storeStateGetArgumentsRequest3(
-            ArgsJspRenderRequest aJspRequest)
+    public void execute(ArgsJspRenderRequest aJspRequest)
     {
         assureConnect();
         // ArgsRequest contains data that is simplest (least error prone)
@@ -54,21 +54,40 @@ public abstract class PortalArgsBridge
         // non-state changing directives like the linkid in case
         // a link needs to be edited:
         
-        StateChange myStateChange =
-                new StateChange(myProtocolMap);
+        StateChangeCommand myStateChange =
+                new StateChangeCommand(
+                        myProtocolMap,
+                        aJspRequest.getUpdateState(),
+                        myAppUser);
+
+        myStateChange.execute(null);
+    }
+
+    // ------------------------------------------------------------------------
+    public ArgsStatefulRequest3 storeStateGetArgumentsRequest3(
+            ArgsJspRenderRequest aJspRequest)
+    {
+        // ArgsRequest contains data that is simplest (least error prone)
+        //  to extract from a javax.RenderRequest.
+        // ArgsJspRenderRequest extends this with information encoded in
+        //   the target jsp page (which itself is addressed via the
+        //   source jsp page).
+
+        final ArgsRequest myRequest = aJspRequest.getRequest();
+        // PortletParameterMap, ServletParameterMap, ArgumentsUser
+        
+        final ArgumentsUser myAppUser = myRequest.getAppUser();
+        
+        // Depending on the jsp target, we either get the servlet
+        // or the portlet parameter map:
+        final ProtocolMap myProtocolMap = getProtocolMap(
+                myRequest, aJspRequest.getStateInputMode());
 
         ArgsRenderDirective myRenderDirective =
                 new ArgsRenderDirective(myAppUser,
                 aJspRequest.getUrlContainer(), myProtocolMap);
         // User, Urls, ChangeRelationId
 
-        // this should probably best be part of an execute method:
-        if (aJspRequest.getUpdateState() == UpdateStateFlag.YES &&
-                myStateChange.hasChange())
-        {
-            myStateChange.mergeAndStore(myAppUser);
-        }
-        
         ArgsReadOnlyState myStateAfter = 
                 TheArgsStore.i().selectState(myAppUser);
         return new ArgsStatefulRequest3(

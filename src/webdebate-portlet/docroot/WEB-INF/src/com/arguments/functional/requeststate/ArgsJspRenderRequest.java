@@ -39,6 +39,7 @@ public class ArgsJspRenderRequest
     // ------------------------------------------------------------------------
     public ArgsStatefulRequest3 storeGet()
     {
+        TheContainerBridge.i().execute(this);
         return TheContainerBridge.i().storeStateGetArgumentsRequest3(this);
     }
     

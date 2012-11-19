@@ -205,7 +205,7 @@ public class ArgsStatefulRequest_Tester
 
         ArgsReadOnlyState myState = myRequest.execute();
         StateChange aStateString = myState.getStateChange();
-        assertNotSame(null, aStateString);
+        assertNotNull(aStateString);
         ArgsState myState1_1 = TheArgsStore.i().selectState(myUser1);
 
         myState1_1.mergeStateChange(aStateString);
@@ -440,12 +440,28 @@ public class ArgsStatefulRequest_Tester
     private static ArgsStatefulCommand getUpdatePerspectiveRequest(
             PerspectiveId aPerspectiveId)
     {
-        return getUpdatePerspectiveRequest(
+        return getPerspectiveRequest(
                 ArgsRequestKey.SET_PERSPECTIVE_ID, aPerspectiveId);
     }
 
     // ------------------------------------------------------------------------
-    private static ArgsStatefulCommand getUpdatePerspectiveRequest(
+    private static ArgsStatefulCommand getAddPerspectiveRequest(
+            PerspectiveId aPerspectiveId)
+    {
+        return getPerspectiveRequest(
+                ArgsRequestKey.ADD_PERSPECTIVE_ID, aPerspectiveId);
+    }
+
+    // ------------------------------------------------------------------------
+    private static ArgsStatefulCommand getRemovePerspectiveRequest(
+            PerspectiveId aPerspectiveId)
+    {
+        return getPerspectiveRequest(
+                ArgsRequestKey.REMOVE_PERSPECTIVE_ID, aPerspectiveId);
+    }
+
+    // ------------------------------------------------------------------------
+    private static ArgsStatefulCommand getPerspectiveRequest(
             ArgsRequestKey aKey, PerspectiveId aPerspectiveId)
     {
         ArgumentsUser myAppUser = ArgumentsUser_Tester.getTestUser2();

@@ -43,7 +43,7 @@ public class ThesisFocusData_Tester
     {
         ArgumentsUser myUser1 = getTestUser2();
         // TheArgsStore.i(myUser1).insertActivePerspectiveId(PerspectiveId.P3, myUser1);
-        ThesisId myThesisId = ArgsStatefulRequest_Tester.insertOpinion();
+        ThesisId myThesisId = ArgsStatefulRequest_Tester.insertDifferentOpinions();
         TheArgsStore.i(myUser1).insertActivePerspectiveId(PerspectiveId.P3, myUser1);
 
         ArgsReadOnlyState myState = myUser1.getState(); 
@@ -100,7 +100,7 @@ public class ThesisFocusData_Tester
         ArgumentsUser myUser1 = getTestUser2();
         // User 1 creates a thesis, User 1 and User 2 insert opinions:
         // User 1 focusses on this thesis.
-        ThesisId myThesisId = ArgsStatefulRequest_Tester.insertOpinion();
+        ThesisId myThesisId = ArgsStatefulRequest_Tester.insertDifferentOpinions();
 
         ArgsReadOnlyState myState = myUser1.getState(); 
         assertEquals( myState.getThesisId(), myThesisId);

@@ -42,7 +42,7 @@ public class UpdateThesis implements Command
     public void execute(ArgsState aState)
     {
         ThesisId mySId = aState.getThesisId();
-        PerspectiveId myPerspective = aState.getPerspectiveId();
+        PerspectiveId myPerspective = aState.getFirstPerspectiveId();
         assertTrue("Non writable: " + myPerspective, myPerspective.isWritable());
 
         TheArgsStore.i(theUser).setThesisInfo(

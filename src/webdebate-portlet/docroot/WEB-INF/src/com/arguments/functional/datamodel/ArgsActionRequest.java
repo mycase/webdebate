@@ -45,8 +45,8 @@ public class ArgsActionRequest extends ArgsRequest
     public void execute()
     {
         Logger.log("\n======= ArgsActionRequest.execute() ===========\n");
-
         PortalArgsBridge.assureConnect();
+
         getCommand().execute();
     }
 

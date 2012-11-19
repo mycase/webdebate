@@ -63,7 +63,7 @@ public class ArgsStatefulRequest_Tester
     @Test
     public void testInsertOpinion()
     {
-        insertOpinion();
+        insertDifferentOpinions();
     }
 
     // ------------------------------------------------------------------------
@@ -136,7 +136,7 @@ public class ArgsStatefulRequest_Tester
         ArgumentsUser myAppUser = TheArgsStore.i().selectUserById(
                 ArgumentsUserId.TEST2);
         ArgsReadOnlyState myState = TheArgsStore.i().selectState(myAppUser);
-        assertNotSame(myState.getPerspectiveId(),
+        assertNotSame(myState.getFirstPerspectiveId(),
                 PerspectiveId.getThesisOwner());
         assertEquals(ArgumentsUser_Tester.getMailAddress(2),
                 myAppUser.getEmailAddress());
@@ -187,9 +187,10 @@ public class ArgsStatefulRequest_Tester
 
     // ------------------------------------------------------------------------
     @Test
-    public void testUpdatePerspective() throws NumberFormatException
+    public void testSwitchPerspective()
     {
-        ThesisId myThesisId = insertOpinion();
+        // user1 and user2 have different opinions about a newly inserted thesis:
+        ThesisId myThesisId = insertDifferentOpinions();
 
         ArgumentsUser myUser1 = ArgumentsUser_Tester.getTestUser2();
         ArgumentsUser myUser2 = ArgumentsUser_Tester.getTestUser7();
@@ -198,39 +199,89 @@ public class ArgsStatefulRequest_Tester
         PerspectiveId myPerspectiveId1 = myUser1.getDefaultPerspective();
         PerspectiveId myPerspectiveId2 = myUser2.getDefaultPerspective();
 
-        ArgsReadOnlyState myState1 = TheArgsStore.i().selectState(myUser1);
-        assertEquals(myPerspectiveId1, myState1.getPerspectiveId());
+        // User1 will switch from persp1 to persp0:
+        
+        ArgsReadOnlyState myState1_0a = TheArgsStore.i().selectState(myUser1);
+        assertEquals(myPerspectiveId1, myState1_0a.getFirstPerspectiveId());
+        
+        ArgsStatefulCommand myRequest =
+                getSwitchPerspectiveRequest(myPerspectiveId0);
 
-        ArgsStatefulCommand myRequest = getUpdatePerspectiveRequest(myPerspectiveId0);
+        // The unsaved state after:
+        ArgsReadOnlyState myState1_1 = myRequest.execute();
+        // The persisted state should not have changed:
+        ArgsState myState1_0b = TheArgsStore.i().selectState(myUser1);
+        assertEquals(myState1_0a, myState1_0b);
 
-        ArgsReadOnlyState myState = myRequest.execute();
-        StateChange aStateString = myState.getStateChange();
-        assertNotNull(aStateString);
-        ArgsState myState1_1 = TheArgsStore.i().selectState(myUser1);
+        // Persist the state change:
+        StateChange myStateChange = myState1_1.getStateChange();
+        assertNotNull(myStateChange);
 
-        myState1_1.mergeStateChange(aStateString);
-        TheArgsStore.i(myUser1).updateState(myState1_1);
+        myState1_0b.mergeStateChange(myStateChange);
+        TheArgsStore.i(myUser1).updateState(myState1_0b);
+        
+        // User2 still has his default perspective:
+        ArgsReadOnlyState myState2 = TheArgsStore.i().selectState(myUser2);
+        PerspectiveId myOutPerspectiveId2 = myState2.getFirstPerspectiveId();
+        assertEquals( myOutPerspectiveId2, myPerspectiveId2);
 
-        ArgsReadOnlyState myState2 = TheArgsStore.i().selectState(
-                ArgumentsUser_Tester.getTestUser7());
-        PerspectiveId myOutPerspectiveId2 = myState2.getPerspectiveId();
-        assert myOutPerspectiveId2.equals(myPerspectiveId2);
+        // The two users' default perspectives:
+        Perspective myPerspective1 = myState1_0a.getFirstPerspective();
+        Perspective myPerspective2 = myState2.getFirstPerspective();
 
-        Perspective myPerspective1 = myState1.getPerspectives().get(0);
-        Perspective myPerspective2 = myState2.getPerspectives().get(0);
+        assertNotSame(myPerspective1, myPerspective2);
 
-        assert !myPerspective1.equals(myPerspective2);
-
+        // The two corresponding opinions are unequal, because user1 inserted
+        // an opinion:
         OpinionatedThesis myThesis1 = TheArgsStore.i().getThesis(myThesisId,
                 myPerspective1);
 
         OpinionatedThesis myThesis2 = TheArgsStore.i().getThesis(myThesisId,
                 myPerspective2);
 
-        assert !myThesis1.getOpinion().equals(myThesis2.getOpinion()) : "Equal: "
-                + myThesis1.getOpinion() + ", " + myThesis2.getOpinion();
         assertNotSame(myThesis1.getOpinion(), myThesis2.getOpinion());
     }
+
+    // ------------------------------------------------------------------------
+    @Test
+    public void testAddPerspective()
+    {
+        // user1 and user2 have different opinions about a newly inserted thesis:
+        ThesisId myThesisId = insertDifferentOpinions();
+
+        ArgumentsUser myUser1 = ArgumentsUser_Tester.getTestUser2();
+
+        PerspectiveId myPerspectiveId0 = PerspectiveId.getThesisOwner();
+        PerspectiveId myPerspectiveId1 = myUser1.getDefaultPerspective();
+
+        // User1 will switch from persp1 to persp0:
+        
+        ArgsReadOnlyState myState1_0a = TheArgsStore.i().selectState(myUser1);
+        assertEquals(myPerspectiveId1, myState1_0a.getFirstPerspectiveId());
+        
+        ArgsJspRequest myRequest =
+                getAddPerspectiveRequest(myPerspectiveId0);
+        myRequest.executeAndGetRenderRequest();
+
+        // Re-read the state:
+        ArgsState myState1_2 = TheArgsStore.i().selectState(myUser1);
+        assertNotSame(myState1_0a, myState1_2);
+        
+        assertEquals(2, myState1_2.getPerspectives().size());
+        
+        // Now remove the first perspective:
+        
+        ArgsJspRequest myRequest2 =
+                getRemovePerspectiveRequest(myPerspectiveId0);
+        myRequest2.executeAndGetRenderRequest();
+
+        // Re-read the state:
+        ArgsState myState1_3 = TheArgsStore.i().selectState(myUser1);
+        assertNotSame(myState1_0a, myState1_3);
+        
+        assertEquals(1, myState1_3.getPerspectives().size());
+        
+}
 
     // ------------------------------------------------------------------------
     @Test
@@ -330,8 +381,17 @@ public class ArgsStatefulRequest_Tester
             ArgumentsUser aUser,
             PerspectiveId aPerspectiveId)
     {
+        return getJspRequest(aUser, aPerspectiveId, ArgsRequestKey.PERSPECTIVE2_ID);
+    }
+    
+    // ------------------------------------------------------------------------
+    private static ArgsJspRequest getJspRequest(
+            ArgumentsUser aUser,
+            PerspectiveId aPerspectiveId,
+            ArgsRequestKey aKey)
+    {
         ServletParameterMap mySParameterMap0 = new ServletParameterMap();
-        mySParameterMap0.put(LiferayArgsRequestKey.s(ArgsRequestKey.PERSPECTIVE2_ID),
+        mySParameterMap0.put(LiferayArgsRequestKey.s(aKey),
                 new String[] { "" + aPerspectiveId });
 
         return getServletRenderRequest(aUser, mySParameterMap0);
@@ -339,7 +399,8 @@ public class ArgsStatefulRequest_Tester
 
     
     // ------------------------------------------------------------------------
-    private static ArgsJspRequest getServletRenderRequest(ArgumentsUser aUser,
+    private static ArgsJspRequest getServletRenderRequest(
+            ArgumentsUser aUser,
             ServletParameterMap aSParameterMap0)
     {
         PortletParameterMap myPParameterMap0 = new PortletParameterMap();
@@ -375,7 +436,7 @@ public class ArgsStatefulRequest_Tester
         long myNrOfThesesBefore = TheArgsStore.i().getNrOfTheses();
         long myNrOfOpinionsBefore = TheArgsStore.i().getNrOfOpinions();
         ArgsReadOnlyState myState = myRequest.execute();
-        assert myState.getPerspectiveId().isWritable();
+        assert myState.getFirstPerspectiveId().isWritable();
         TheArgsStore.i(ArgumentsUser_Tester.getTestUser2())
                 .updateState(myState);
         long myNrOfThesesAfter = TheArgsStore.i().getNrOfTheses();
@@ -387,14 +448,15 @@ public class ArgsStatefulRequest_Tester
     }
 
     // ------------------------------------------------------------------------
-    public static ThesisId insertOpinion()
+    public static ThesisId insertDifferentOpinions()
     {
         return insertOpinion(ArgumentsUser_Tester.getTestUser2(),
                 ArgumentsUser_Tester.getTestUser7());
     }
 
     // ------------------------------------------------------------------------
-    private static ThesisId insertOpinion(ArgumentsUser aUser1,
+    private static ThesisId insertOpinion(
+            ArgumentsUser aUser1,
             ArgumentsUser aUser2)
     {
 
@@ -437,7 +499,7 @@ public class ArgsStatefulRequest_Tester
     }
 
     // ------------------------------------------------------------------------
-    private static ArgsStatefulCommand getUpdatePerspectiveRequest(
+    private static ArgsStatefulCommand getSwitchPerspectiveRequest(
             PerspectiveId aPerspectiveId)
     {
         return getPerspectiveRequest(
@@ -445,19 +507,28 @@ public class ArgsStatefulRequest_Tester
     }
 
     // ------------------------------------------------------------------------
-    private static ArgsStatefulCommand getAddPerspectiveRequest(
+    private static ArgsJspRequest getAddPerspectiveRequest(
             PerspectiveId aPerspectiveId)
     {
-        return getPerspectiveRequest(
+        return getJspPerspectiveRequest(
                 ArgsRequestKey.ADD_PERSPECTIVE_ID, aPerspectiveId);
     }
 
     // ------------------------------------------------------------------------
-    private static ArgsStatefulCommand getRemovePerspectiveRequest(
+    private static ArgsJspRequest getRemovePerspectiveRequest(
             PerspectiveId aPerspectiveId)
     {
-        return getPerspectiveRequest(
+        return getJspPerspectiveRequest(
                 ArgsRequestKey.REMOVE_PERSPECTIVE_ID, aPerspectiveId);
+    }
+
+    // ------------------------------------------------------------------------
+    private static ArgsJspRequest getJspPerspectiveRequest(
+            ArgsRequestKey aKey, PerspectiveId aPerspectiveId)
+    {
+        ArgumentsUser myAppUser = ArgumentsUser_Tester.getTestUser2();
+
+        return getJspRequest(myAppUser, aPerspectiveId, aKey);
     }
 
     // ------------------------------------------------------------------------

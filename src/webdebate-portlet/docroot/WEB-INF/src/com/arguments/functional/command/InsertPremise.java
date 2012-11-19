@@ -42,7 +42,7 @@ public class InsertPremise implements Command
     @Override
     public void execute(ArgsState aState)
     {
-        assert ! aState.getPerspectiveId().equals(PerspectiveId.getThesisOwner());
+        assert ! aState.getFirstPerspectiveId().equals(PerspectiveId.getThesisOwner());
         ThesisId mySId = aState.getThesisId();
         ThesisId myPremiseId = TheArgsStore.i(theAppUser).newPremise(
                 mySId, thePremiseText,

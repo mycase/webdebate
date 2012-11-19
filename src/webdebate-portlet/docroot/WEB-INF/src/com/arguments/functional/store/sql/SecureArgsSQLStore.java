@@ -37,7 +37,7 @@ public class SecureArgsSQLStore extends ArgsSQLStore implements ArgsWriteStore
         theLoginUser = aLoginUser;
         
         ArgsReadOnlyState myState = selectState(theLoginUser);
-        PerspectiveId myPID = myState.getPerspectiveId();
+        PerspectiveId myPID = myState.getFirstPerspectiveId();
         theWritePerspective = getPerspective(myPID);
         // Can't call checkCanWrite here, because some writes are OK, like
         // changing the active thesis.

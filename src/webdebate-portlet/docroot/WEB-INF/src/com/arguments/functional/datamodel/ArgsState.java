@@ -103,7 +103,7 @@ public class ArgsState implements ArgsReadOnlyState
     
     // ------------------------------------------------------------------------
     @Override
-    public PerspectiveId getPerspectiveId()
+    public PerspectiveId getFirstPerspectiveId()
     {
         return thePerspectiveIds.get(0);
     }
@@ -121,5 +121,61 @@ public class ArgsState implements ArgsReadOnlyState
             
         if (aStateChange.getPerspectiveId() != null)
             thePerspectiveIds = new MPerspectiveId(aStateChange.getPerspectiveId());
+    }
+
+    // ------------------------------------------------------------------------
+    @Override
+    public Perspective getFirstPerspective()
+    {
+        return getPerspective(thePerspectiveIds.get(0));
+    }
+
+    // ------------------------------------------------------------------------
+    @Override
+    public int hashCode()
+    {
+        final int prime = 31;
+        int result = 1;
+        result = prime
+                * result
+                + ((thePerspectiveIds == null) ? 0 : thePerspectiveIds
+                        .hashCode());
+        result = prime * result
+                + ((theRelationId == null) ? 0 : theRelationId.hashCode());
+        result = prime * result
+                + ((theThesisId == null) ? 0 : theThesisId.hashCode());
+        return result;
+    }
+
+    // ------------------------------------------------------------------------
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ArgsState other = (ArgsState) obj;
+        if (thePerspectiveIds == null)
+        {
+            if (other.thePerspectiveIds != null)
+                return false;
+        } else if (!thePerspectiveIds.equals(other.thePerspectiveIds))
+            return false;
+        if (theRelationId == null)
+        {
+            if (other.theRelationId != null)
+                return false;
+        } else if (!theRelationId.equals(other.theRelationId))
+            return false;
+        if (theThesisId == null)
+        {
+            if (other.theThesisId != null)
+                return false;
+        } else if (!theThesisId.equals(other.theThesisId))
+            return false;
+        return true;
     }
 }

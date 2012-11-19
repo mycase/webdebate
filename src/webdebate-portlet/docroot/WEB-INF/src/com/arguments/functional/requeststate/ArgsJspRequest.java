@@ -41,8 +41,8 @@ public class ArgsJspRequest
     public ArgsStatefulRenderRequest executeAndGetRenderRequest()
     {
         Logger.log("\n======= ArgsJspRequest.execute() ===========\n");
-
         PortalArgsBridge.assureConnect();
+
         Command myCommand = RequestParser.parseCommand(this);
         myCommand.execute(null);
         return RequestParser.fetchStatefulRenderRequest(this);

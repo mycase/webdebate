@@ -578,14 +578,14 @@ public class ArgsSQLStore implements ArgsStore
     // ------------------------------------------------------------------------
     protected static void insertState(ArgsReadOnlyState aState, ArgumentsUserId aUser)
     {
-        assert ! aState.getPerspectiveId().equals(PerspectiveId.VOLATILE);
+        assert ! aState.getFirstPerspectiveId().equals(PerspectiveId.VOLATILE);
         int myNrRows = ArgsQuery.INSERT_STATE1_.ps().
                 setUserId(1, aUser).
                 setThesisId(2, aState.getThesisId()).
                 executeUpdate();
         assert myNrRows == 1;
         
-        insertActivePerspectiveId_(aState.getPerspectiveId(), aUser);
+        insertActivePerspectiveId_(aState.getFirstPerspectiveId(), aUser);
     }
 
     // ------------------------------------------------------------------------

@@ -43,16 +43,16 @@ public class InsertThesis implements Command
     public void execute(ArgsState aState)
     {
         ArgsReadOnlyState myState = theAppUser.getState();
-        assertTrue( aState.getPerspectiveId().isWritable());
+        assertTrue( aState.getFirstPerspectiveId().isWritable());
         
-        PerspectiveId myPerspective = myState.getPerspectiveId();
+        PerspectiveId myPerspective = myState.getFirstPerspectiveId();
         assertTrue( myPerspective.isWritable());
-        assertTrue( aState.getPerspectiveId().isWritable());
+        assertTrue( aState.getFirstPerspectiveId().isWritable());
         ThesisId myNewThesisId = TheArgsStore.i(theAppUser).addThesis(
                 theNewThesisText,
                 theThesisOpinion);
-        assertTrue( aState.getPerspectiveId().isWritable());
+        assertTrue( aState.getFirstPerspectiveId().isWritable());
         aState.setThesisId(myNewThesisId);
-        assertTrue( aState.getPerspectiveId().isWritable());
+        assertTrue( aState.getFirstPerspectiveId().isWritable());
     }
 }

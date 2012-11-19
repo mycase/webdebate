@@ -511,7 +511,8 @@ public class ArgsSQLStore implements ArgsStore
             MPerspective aPerspectives)
     {
         assertTrue(aPerspectives.size() > 0);
-        Perspective myPerspective = aPerspectives.get(0);
+        assertNotNull(aUserId);
+        Perspective myFirstPerspective = aPerspectives.get(0);
         
         ThesisFocusData myReturnValue =
                 new ThesisFocusData(aMainThesisId, aPerspectives);
@@ -522,9 +523,8 @@ public class ArgsSQLStore implements ArgsStore
                     getOpinionatedThesis(aMainThesisId, aPerspectives);
             myReturnValue.setMainThesis(myThesis);
             myReturnValue.setMainThesisOwned(myThesis.getOwnerID().equals(aUserId));
-            ArgumentsUserId myPerspectiveOwner = myPerspective.getOwner();
-            assertNotNull(aUserId);
-            myReturnValue.setPerspectiveOwned(aUserId.equals(myPerspectiveOwner));
+            ArgumentsUserId myFirstPerspectiveOwner = myFirstPerspective.getOwner();
+            myReturnValue.setFirstPerspectiveOwned(aUserId.equals(myFirstPerspectiveOwner));
             ArgsDB myQuery = ArgsQuery.SELECT_PREMISE.ps();
             myQuery.setThesisId(1, aMainThesisId);
             ResultSet myPremiseResult = myQuery.executeQuery();

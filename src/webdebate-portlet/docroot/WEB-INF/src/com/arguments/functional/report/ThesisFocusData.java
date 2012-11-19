@@ -24,7 +24,7 @@ public class ThesisFocusData
     private List<RelatedThesis<OpinionatedThesis>> theConclusions = new ArrayList<>();
     private final MPerspective thePerspectives;
     private boolean theMainThesisOwned;
-    private boolean thePerspectiveOwned;
+    private boolean theFirstPerspectiveOwned;
 
     // ------------------------------------------------------------------------
     public ThesisFocusData(ThesisId aMainThesisId, MPerspective aPerspective)
@@ -101,9 +101,9 @@ public class ThesisFocusData
     }
 
     // ------------------------------------------------------------------------
-    public boolean getPerspectiveOwned()
+    public boolean getFirstPerspectiveOwned()
     {
-        return thePerspectiveOwned;
+        return theFirstPerspectiveOwned;
     }
 
     // ------------------------------------------------------------------------
@@ -113,9 +113,9 @@ public class ThesisFocusData
     }
     
     // ------------------------------------------------------------------------
-    public void setPerspectiveOwned(boolean aValue)
+    public void setFirstPerspectiveOwned(boolean aValue)
     {
-        thePerspectiveOwned = aValue;
+        theFirstPerspectiveOwned = aValue;
     }
     
     // ------------------------------------------------------------------------

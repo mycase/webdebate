@@ -31,9 +31,6 @@ public class HtmlThesisPrinter
     private StringBuffer theText;
 
     // ------------------------------------------------------------------------
-    /**
-     * @param aUser
-     */
     public HtmlThesisPrinter(UrlContainer aUrlContainer, ProtocolMap aProtocol)
     {
         assertNotNull(aUrlContainer);
@@ -100,7 +97,7 @@ public class HtmlThesisPrinter
         {
             theText.append("Owner: " + aThesisFocusData.getMainThesis().getOwner().getScreenName());
         }
-        if (aThesisFocusData.getPerspectiveOwned())
+        if (aThesisFocusData.getFirstPerspectiveOwned())
         {
             theText.append(", <a href=\"" + theUrlContainer.getAddPremiseUrl() + "\">add premise</a>");
             theText.append(", <a href=\"" + theUrlContainer.getAddOpinionUrl() + "\">set your opinion</a>");

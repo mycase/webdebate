@@ -4,6 +4,7 @@
 package com.arguments.functional.requeststate;
 
 import com.arguments.application.TheContainerBridge;
+import com.arguments.functional.command.Command;
 import com.arguments.functional.datamodel.ArgsErrorHandler;
 import com.arguments.functional.datamodel.ArgsRequest;
 import com.arguments.functional.report.html.UrlContainer;
@@ -37,10 +38,11 @@ public class ArgsJspRenderRequest
     }
 
     // ------------------------------------------------------------------------
-    public ArgsStatefulRequest3 storeGet()
+    public ArgsStatefulRequest3 executeAndGetRenderRequest()
     {
-        TheContainerBridge.i().execute(this);
-        return TheContainerBridge.i().storeStateGetArgumentsRequest3(this);
+        Command myCommand = TheContainerBridge.i().parseCommand(this);
+        myCommand.execute(null);
+        return TheContainerBridge.i().fetchStatefulRenderRequest(this);
     }
     
     // ------------------------------------------------------------------------

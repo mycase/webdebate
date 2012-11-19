@@ -23,7 +23,7 @@ public class PageModelFactory
     public static AddOpinionPageModel getAddOpinionPage(
             ArgsJspRenderRequest aRenderRequest)
     {
-        ArgsStatefulRequest3 myRequest = aRenderRequest.storeGet();
+        ArgsStatefulRequest3 myRequest = aRenderRequest.executeAndGetRenderRequest();
 
         return new AddOpinionPageModel(myRequest, theProtocol);
     }
@@ -32,7 +32,7 @@ public class PageModelFactory
     public static AddPremisePageModel getAddPremisePage(
             ArgsJspRenderRequest aRenderRequest)
     {
-        ArgsStatefulRequest3 myRequest = aRenderRequest.storeGet();
+        ArgsStatefulRequest3 myRequest = aRenderRequest.executeAndGetRenderRequest();
         
         return new AddPremisePageModel(myRequest, theProtocol);
     }
@@ -41,7 +41,7 @@ public class PageModelFactory
     public static AddThesisPageModel getAddThesisPage(
             ArgsJspRenderRequest aRenderRequest)
     {
-        aRenderRequest.storeGet();
+        aRenderRequest.executeAndGetRenderRequest();
         return new AddThesisPageModel(theProtocol);
     }
 
@@ -49,7 +49,7 @@ public class PageModelFactory
     public static EditThesisPageModel getEditThesisPage(
             ArgsJspRenderRequest aRenderRequest)
     {
-        ArgsStatefulRequest3 myRequest = aRenderRequest.storeGet();
+        ArgsStatefulRequest3 myRequest = aRenderRequest.executeAndGetRenderRequest();
         return new EditThesisPageModel(myRequest, theProtocol);
     }
 
@@ -57,7 +57,7 @@ public class PageModelFactory
     public static GotoThesisPageModel getGotoThesisPage(
             ArgsJspRenderRequest aRenderRequest)
     {
-        aRenderRequest.storeGet();
+        aRenderRequest.executeAndGetRenderRequest();
         return new GotoThesisPageModel(theProtocol);
     }
     
@@ -65,7 +65,7 @@ public class PageModelFactory
     public static ListThesesPageModel getListThesesPage(
             ArgsJspRenderRequest aRenderRequest)
     {
-        ArgsStatefulRequest3 myRequest = aRenderRequest.storeGet();
+        ArgsStatefulRequest3 myRequest = aRenderRequest.executeAndGetRenderRequest();
 
         return new ListThesesPageModel(myRequest, theProtocol, aRenderRequest.getErrorHandler());
     }
@@ -75,7 +75,7 @@ public class PageModelFactory
             ArgsJspRenderRequest aRenderRequest)
     {
         assertNotNull(aRenderRequest.getErrorHandler());
-        ArgsStatefulRequest3 myRequest = aRenderRequest.storeGet();
+        ArgsStatefulRequest3 myRequest = aRenderRequest.executeAndGetRenderRequest();
 
         return new ThesisFocusPageModel(myRequest, theProtocol, aRenderRequest.getErrorHandler());
     }
@@ -84,7 +84,7 @@ public class PageModelFactory
     public static EditLinkPageModel getEditLinkPage(
             ArgsJspRenderRequest aRenderRequest)
     {
-        ArgsStatefulRequest3 myRequest = aRenderRequest.storeGet();
+        ArgsStatefulRequest3 myRequest = aRenderRequest.executeAndGetRenderRequest();
 
         return new EditLinkPageModel(myRequest,  theProtocol);
     }

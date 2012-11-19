@@ -2,6 +2,7 @@ package com.arguments.functional.requeststate;
 
 import static org.junit.Assert.*;
 
+import com.arguments.functional.command.Command;
 import com.arguments.functional.command.StateChangeCommand;
 import com.arguments.functional.datamodel.ArgsReadOnlyState;
 import com.arguments.functional.datamodel.ArgsRequest;
@@ -30,7 +31,7 @@ public abstract class PortalArgsBridge
     }
 
     // ------------------------------------------------------------------------
-    public void execute(ArgsJspRenderRequest aJspRequest)
+    public Command parseCommand(ArgsJspRenderRequest aJspRequest)
     {
         assureConnect();
         // ArgsRequest contains data that is simplest (least error prone)
@@ -54,17 +55,17 @@ public abstract class PortalArgsBridge
         // non-state changing directives like the linkid in case
         // a link needs to be edited:
         
-        StateChangeCommand myStateChange =
+        Command myCommand =
                 new StateChangeCommand(
                         myProtocolMap,
                         aJspRequest.getUpdateState(),
                         myAppUser);
 
-        myStateChange.execute(null);
+        return myCommand;
     }
 
     // ------------------------------------------------------------------------
-    public ArgsStatefulRequest3 storeStateGetArgumentsRequest3(
+    public ArgsStatefulRequest3 fetchStatefulRenderRequest(
             ArgsJspRenderRequest aJspRequest)
     {
         // ArgsRequest contains data that is simplest (least error prone)

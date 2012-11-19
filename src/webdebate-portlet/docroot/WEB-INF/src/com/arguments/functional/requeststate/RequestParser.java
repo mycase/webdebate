@@ -87,7 +87,7 @@ public class RequestParser
             return getInsertOpinion();
 
         assertTrue("Unknown mapconfiguration: " + theProtocolMap.keySet(),
-                isPresent(ArgsRequestKey.PERSPECTIVE_ID));
+                isPresent(ArgsRequestKey.SET_PERSPECTIVE_ID));
         return getUpdatePerspective();
     }
     
@@ -130,7 +130,7 @@ public class RequestParser
     // ------------------------------------------------------------------------
     private ChangePerspective getUpdatePerspective()
     {
-        String myPerspectiveId = getParameter(ArgsRequestKey.PERSPECTIVE_ID);
+        String myPerspectiveId = getParameter(ArgsRequestKey.SET_PERSPECTIVE_ID);
 
         assertNotNull( myPerspectiveId );
 

@@ -205,10 +205,26 @@ public class HtmlThesisPrinter
     }
     
     // ------------------------------------------------------------------------
-    private String toPerspectiveAnchor(OwnedPerspective aPerspective)
+    private String toSetPerspectiveAnchor(OwnedPerspective aPerspective)
     {
         return "<a href=\"focus?"+
-                theProtocol.get(ArgsRequestKey.PERSPECTIVE_ID)+"="
+                theProtocol.get(ArgsRequestKey.SET_PERSPECTIVE_ID)+"="
+                + aPerspective.getIdString() + "\"> "+aPerspective+"</a>";
+    }
+
+    // ------------------------------------------------------------------------
+    private String toAddPerspectiveAnchor(OwnedPerspective aPerspective)
+    {
+        return "<a href=\"focus?"+
+                theProtocol.get(ArgsRequestKey.ADD_PERSPECTIVE_ID)+"="
+                + aPerspective.getIdString() + "\"> "+aPerspective+"</a>";
+    }
+
+    // ------------------------------------------------------------------------
+    private String toRemovePerspectiveAnchor(OwnedPerspective aPerspective)
+    {
+        return "<a href=\"focus?"+
+                theProtocol.get(ArgsRequestKey.REMOVE_PERSPECTIVE_ID)+"="
                 + aPerspective.getIdString() + "\"> "+aPerspective+"</a>";
     }
 
@@ -325,7 +341,7 @@ public class HtmlThesisPrinter
     {
         StringBuffer myText = new StringBuffer("<tr>\n");
         myText.append("  <td class=\"otherClass\"> "
-                + toPerspectiveAnchor(anOpinion.getPerspective()) + "</td>\n");
+                + toSetPerspectiveAnchor(anOpinion.getPerspective()) + "</td>\n");
         myText.append("  <td class=\"" + cssClassByOpinion(anOpinion) + "\">"
                 + anOpinion.toString() + "</td>\n");
         myText.append("</tr>\n");

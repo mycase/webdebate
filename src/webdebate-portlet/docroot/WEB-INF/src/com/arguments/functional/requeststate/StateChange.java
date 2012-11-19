@@ -59,7 +59,7 @@ public class StateChange
         this(
             ThesisId.parse(aRequestMap.get(ArgsRequestKey.THESIS_ID)),
             null,
-            PerspectiveId.parsePerspectiveId(aRequestMap.get(ArgsRequestKey.PERSPECTIVE_ID)));
+            PerspectiveId.parsePerspectiveId(aRequestMap.get(ArgsRequestKey.SET_PERSPECTIVE_ID)));
     }
 
     // ------------------------------------------------------------------------

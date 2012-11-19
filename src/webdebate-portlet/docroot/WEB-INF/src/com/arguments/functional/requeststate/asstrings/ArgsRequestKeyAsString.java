@@ -37,7 +37,9 @@ public class ArgsRequestKeyAsString{
         theEnum2String.put(ArgsRequestKey.PREMISE_IF_TRUE_WEIGHT, "premiseIfTrueWeight");
         theEnum2String.put(ArgsRequestKey.PREMISE_IF_FALSE_WEIGHT, "premiseIfFalseWeight");
         theEnum2String.put(ArgsRequestKey.PREMISE_OPINION, "premiseOpinion");
-        theEnum2String.put(ArgsRequestKey.PERSPECTIVE_ID, "perspectiveId");
+        theEnum2String.put(ArgsRequestKey.SET_PERSPECTIVE_ID, "perspectiveId");
+        theEnum2String.put(ArgsRequestKey.ADD_PERSPECTIVE_ID, "addPerspectiveId");
+        theEnum2String.put(ArgsRequestKey.REMOVE_PERSPECTIVE_ID, "removePerspectiveId");
         theEnum2String.put(ArgsRequestKey.PERSPECTIVE2_ID, "perspective2Id");
 
         theString2Enum = CollectionTransforms.invert(theEnum2String);

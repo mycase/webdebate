@@ -264,7 +264,7 @@ public class ArgsStatefulRequest_Tester
 
         PortletParameterMap myPParameterMap1 = new PortletParameterMap();
         myPParameterMap1.put(
-                LiferayArgsRequestKey.s(ArgsRequestKey.PERSPECTIVE_ID),
+                LiferayArgsRequestKey.s(ArgsRequestKey.SET_PERSPECTIVE_ID),
                 new String[] { myPerspectiveId1.getIdString() });
         ServletParameterMap mySParameterMap1 = new ServletParameterMap();
 
@@ -440,10 +440,18 @@ public class ArgsStatefulRequest_Tester
     private static ArgsStatefulCommand getUpdatePerspectiveRequest(
             PerspectiveId aPerspectiveId)
     {
+        return getUpdatePerspectiveRequest(
+                ArgsRequestKey.SET_PERSPECTIVE_ID, aPerspectiveId);
+    }
+
+    // ------------------------------------------------------------------------
+    private static ArgsStatefulCommand getUpdatePerspectiveRequest(
+            ArgsRequestKey aKey, PerspectiveId aPerspectiveId)
+    {
         ArgumentsUser myAppUser = ArgumentsUser_Tester.getTestUser2();
 
         ProtocolMap myRequestMap = new ProtocolMap();
-        myRequestMap.put(ArgsRequestKey.PERSPECTIVE_ID,
+        myRequestMap.put(aKey,
                 "" + aPerspectiveId.getIdString());
 
         Command myRequest1 = RequestParser.getCommand(myAppUser, myRequestMap);

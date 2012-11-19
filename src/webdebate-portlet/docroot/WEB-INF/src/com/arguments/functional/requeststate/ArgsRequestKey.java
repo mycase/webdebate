@@ -7,7 +7,9 @@ package com.arguments.functional.requeststate;
 public enum ArgsRequestKey{
     THESIS_ID,
     RELATION_ID,
-    PERSPECTIVE_ID,
+    SET_PERSPECTIVE_ID,
+    ADD_PERSPECTIVE_ID,
+    REMOVE_PERSPECTIVE_ID,
     PERSPECTIVE2_ID,
     NEW_IF_TRUE_PERCENTAGE_RELEVANCE,
     NEW_IF_FALSE_PERCENTAGE_RELEVANCE,

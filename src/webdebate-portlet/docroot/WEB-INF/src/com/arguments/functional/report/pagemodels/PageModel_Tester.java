@@ -75,7 +75,7 @@ public class PageModel_Tester
     
     // ------------------------------------------------------------------------
     @Test
-    public void directWebEntry() throws FileNotFoundException
+    public void directWebEntry()
     {
         ArgsJspRenderRequest myRequest = getRequest("001_Direct_Cgi_Focus.json");
         ThesisFocusPageModel myPageModel = PageModelFactory.getThesisFocusPage(myRequest);
@@ -84,7 +84,7 @@ public class PageModel_Tester
 
     // ------------------------------------------------------------------------
     @Test
-    public void directWebEntryNoDBConnection() throws FileNotFoundException
+    public void directWebEntryNoDBConnection()
     {
         TheArgsStore.setDB(new ArgsTestDB(TheArgsStore.i()));
         ArgsJspRenderRequest myRequest = getRequest("001_Direct_Cgi_Focus.json");
@@ -94,7 +94,7 @@ public class PageModel_Tester
 
     // ------------------------------------------------------------------------
     @Test
-    public void addPremise() throws FileNotFoundException
+    public void addPremise()
     {
         ArgsJspRenderRequest myRequest = getRequest("002_Add_Premise.json");
         AddPremisePageModel myPageModel = PageModelFactory.getAddPremisePage(myRequest);
@@ -115,7 +115,7 @@ public class PageModel_Tester
 
     // ------------------------------------------------------------------------
     @Test
-    public void editLink() throws FileNotFoundException
+    public void editLink()
     {
         ArgsJspRenderRequest myRequest = getRequest("003_Edit_Link.json");
         EditLinkPageModel myPageModel = PageModelFactory.getEditLinkPage(myRequest);
@@ -137,7 +137,7 @@ public class PageModel_Tester
 
     // ------------------------------------------------------------------------
     @Test
-    public void listTheses() throws FileNotFoundException
+    public void listTheses()
     {
         ArgsJspRenderRequest myRequest = getRequest("004_List_Theses.json");
         ListThesesPageModel myPageModel = PageModelFactory.getListThesesPage(myRequest);
@@ -146,7 +146,7 @@ public class PageModel_Tester
 
     // ------------------------------------------------------------------------
     @Test
-    public void gotoThesis() throws FileNotFoundException
+    public void gotoThesis()
     {
         ArgsJspRenderRequest myRequest = getRequest("005_Goto_Thesis.json");
         GotoThesisPageModel myPageModel = PageModelFactory.getGotoThesisPage(myRequest);
@@ -155,7 +155,7 @@ public class PageModel_Tester
 
     // ------------------------------------------------------------------------
     @Test
-    public void editThesis() throws FileNotFoundException
+    public void editThesis()
     {
         ArgsJspRenderRequest myRequest = getRequest("006_Edit_Thesis.json");
         EditThesisPageModel myPageModel = PageModelFactory.getEditThesisPage(myRequest);
@@ -168,7 +168,7 @@ public class PageModel_Tester
 
     // ------------------------------------------------------------------------
     @Test
-    public void newThesis() throws FileNotFoundException
+    public void newThesis()
     {
         ArgsJspRenderRequest myRequest = getRequest("008_New_Thesis.json");
         AddThesisPageModel myPageModel = PageModelFactory.getAddThesisPage(myRequest);
@@ -180,7 +180,7 @@ public class PageModel_Tester
 
     // ------------------------------------------------------------------------
     @Test
-    public void newOpinion() throws FileNotFoundException
+    public void newOpinion()
     {
         ArgsJspRenderRequest myRequest = getRequest("009_Add_Opinion.json");
         AddOpinionPageModel myPageModel = PageModelFactory.getAddOpinionPage(myRequest);
@@ -194,16 +194,22 @@ public class PageModel_Tester
     // private
     // ------------------------------------------------------------------------
     public static ArgsJspRenderRequest getRequest(String aShortFileName)
-            throws FileNotFoundException
     {
         Gson myGson = new GsonBuilder()
         .registerTypeAdapter(ArgsErrorHandler.class,
                 new PageModel_Tester().new ErrorHandlerCreator())
         .create();
 
-        BufferedReader myReader = new BufferedReader(new FileReader(
-                Deployment.i().theWebinfPath + 
-                        "testdata/" + aShortFileName));
+        BufferedReader myReader;
+        try
+        {
+            myReader = new BufferedReader(new FileReader(
+                    Deployment.i().theWebinfPath + 
+                            "testdata/" + aShortFileName));
+        } catch (FileNotFoundException anException)
+        {
+            throw new AssertionError(anException);
+        }
 
         ArgsJspRenderRequest myRequest = myGson.fromJson(myReader, ArgsJspRenderRequest.class);
         return myRequest;

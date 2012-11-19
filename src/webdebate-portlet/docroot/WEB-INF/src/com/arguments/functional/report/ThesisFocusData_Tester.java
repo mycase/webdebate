@@ -17,6 +17,10 @@ import com.arguments.functional.datamodel.Perspective;
 import com.arguments.functional.datamodel.PerspectiveId;
 import com.arguments.functional.datamodel.PerspectiveThesisOpinion;
 import com.arguments.functional.datamodel.ThesisId;
+import com.arguments.functional.report.pagemodels.PageModelFactory;
+import com.arguments.functional.report.pagemodels.PageModel_Tester;
+import com.arguments.functional.report.pagemodels.ThesisFocusPageModel;
+import com.arguments.functional.requeststate.ArgsJspRenderRequest;
 import com.arguments.functional.requeststate.ArgsStatefulRequest_Tester;
 import com.arguments.functional.store.TheArgsStore;
 import com.arguments.functional.store.TheArgsStore_Tester;
@@ -38,7 +42,7 @@ public class ThesisFocusData_Tester
     @Test
     public void twoActivePerspectives1()
     {
-        ArgumentsUser myUser1 = getTestUser1();
+        ArgumentsUser myUser1 = getTestUser2();
         // TheArgsStore.i(myUser1).insertActivePerspectiveId(PerspectiveId.P3, myUser1);
         ThesisId myThesisId = ArgsStatefulRequest_Tester.insertOpinion();
         TheArgsStore.i(myUser1).insertActivePerspectiveId(PerspectiveId.P3, myUser1);
@@ -56,18 +60,40 @@ public class ThesisFocusData_Tester
     public void twoActivePerspectives2()
     {
         ArgumentsUser myUser1 = getTestUser1();
-        TheArgsStore.i(myUser1).insertActivePerspectiveId(PerspectiveId.P1, myUser1);
         TheArgsStore.i(myUser1).insertActivePerspectiveId(PerspectiveId.P3, myUser1);
         ArgsState myState = TheArgsStore.i().selectState(myUser1);
         MPerspective myPerspectives = myState.getPerspectives();
-        assert myPerspectives.size() == 3;
+        assert myPerspectives.size() == 2;
+        ThesisFocusData myData =
+                new ThesisFocusData(ThesisId.Da13, myPerspectives);
+        ArgsJspRenderRequest myRequest =
+                PageModel_Tester.getRequest("001_Direct_Cgi_Focus.json");
+        ThesisFocusPageModel myPageModel = PageModelFactory.getThesisFocusPage(myRequest);
+
+    }
+    
+    // ------------------------------------------------------------------------
+    @Test
+    public void twoActivePerspectives3()
+    {
+        ArgumentsUser myUser1 = getTestUser1();
+        TheArgsStore.i(myUser1).insertActivePerspectiveId(PerspectiveId.P3, myUser1);
+        ArgsState myState = TheArgsStore.i().selectState(myUser1);
+        MPerspective myPerspectives = myState.getPerspectives();
+        assert myPerspectives.size() == 2;
+        ThesisFocusData myData =
+                new ThesisFocusData(ThesisId.Da13, myPerspectives);
+        ArgsJspRenderRequest myRequest =
+                PageModel_Tester.getRequest("MakeYourCase.2012.11.19.00.33.07.renderRequest.json");
+        ThesisFocusPageModel myPageModel = PageModelFactory.getThesisFocusPage(myRequest);
+
     }
     
     // ------------------------------------------------------------------------
     @Test
     public void differentPerspectives()
     {
-        ArgumentsUser myUser1 = getTestUser1();
+        ArgumentsUser myUser1 = getTestUser2();
         // User 1 creates a thesis, User 1 and User 2 insert opinions:
         // User 1 focusses on this thesis.
         ThesisId myThesisId = ArgsStatefulRequest_Tester.insertOpinion();
@@ -86,6 +112,12 @@ public class ThesisFocusData_Tester
     
     // ------------------------------------------------------------------------
     private static ArgumentsUser getTestUser1()
+    {
+        return TheArgsStore_Tester.getTestUser1();
+    }
+
+    // ------------------------------------------------------------------------
+    private static ArgumentsUser getTestUser2()
     {
         return TheArgsStore_Tester.getTestUser2();
     }

@@ -425,6 +425,7 @@ public class ArgsSQLStore implements ArgsStore
     @Override
     public void deleteTestObjects()
     {
+        deleteNonDefaultPerspectives();
         deleteUserData(ArgumentsUserId.TEST7);
         deleteUserData(ArgumentsUserId.TEST2);
         ArgumentsUserId myNewUserId =
@@ -785,6 +786,13 @@ public class ArgsSQLStore implements ArgsStore
         ArgsQuery.DELETE_ACTIVE_PERSPECTIVE_BY_USERID.ps().setUserId(1, aUserId).executeUpdate();
         ArgsQuery.DELETE_THESES_BY_USERID.ps().setUserId(1, aUserId).executeUpdate();
         ArgsQuery.DELETE_PERSPECTIVES_BY_USERID.ps().setUserId(1, aUserId).executeUpdate();
+    }
+    
+        
+    // ------------------------------------------------------------------------
+    private static void deleteNonDefaultPerspectives()
+    {
+        ArgsQuery.DELETE_NON_DEFAULT_ACTIVE_PERSPECTIVES.ps().executeUpdate();
     }
     
     // ------------------------------------------------------------------------

@@ -112,6 +112,15 @@ public class TheArgsStore_Tester
     }
 
     // ------------------------------------------------------------------------
+    public static ArgumentsUser getTestUser1()
+    {
+        ArgumentsUser myReturnValue =
+                TheArgsStore.i().selectUserById(ArgumentsUserId.ONE);
+        assertEquals( myReturnValue.getEmailAddress(), ArgumentsUser_Tester.getMailAddress(1));
+        return myReturnValue;
+    }
+
+    // ------------------------------------------------------------------------
     public static ArgumentsUser getTestUser2()
     {
         ArgumentsUser myReturnValue =

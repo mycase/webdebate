@@ -258,6 +258,8 @@ class ArgsDB
         /* @formatter:off */
         DELETE_OPINIONS_BY_PERSPECTIVEID(DELETE_FROM, Opinion.t, WHERE, Opinion.PERSPECTIVE_ID1, "= ?"),
         DELETE_RELATIONS_BY_USERID(DELETE_FROM, Relation.t, WHERE, Relation.OWNER_ID , "= ?"),
+        DELETE_NON_DEFAULT_ACTIVE_PERSPECTIVES(DELETE_FROM, ActivePerspectives.t, WHERE,
+                ActivePerspectives.USER_ID, " != ", ActivePerspectives.PERSPECTIVE_ID),
         DELETE_STATE_BY_USERID_(DELETE_FROM, State.t, WHERE, State.USER_ID, "= ?"),
         DELETE_ACTIVE_PERSPECTIVE_BY_USERID(DELETE_FROM, ActivePerspectives.t,
                 WHERE, ActivePerspectives.USER_ID, "= ?"),

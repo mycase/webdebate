@@ -58,12 +58,19 @@ public class SecureArgsSQLStore extends ArgsSQLStore implements ArgsWriteStore
             insertState(aState, theLoginUser);
             return;
         }
-            
-        ArgsDB myQuery2 = ArgsQuery.UPDATE_ACTIVE_PERSPECTIVE.ps();
-        myQuery2.setPerspectiveId(1, aState.getPerspectiveId());
-        myQuery2.setUserId(2, theLoginUser);
-        myNrRows = myQuery2.executeUpdate();
-        assert myNrRows == 1;
+        
+        ArgsQuery.DELETE_ACTIVE_PERSPECTIVE_BY_USERID
+            .ps().setUserId(1, theLoginUser).executeUpdate();
+        
+        // System.err.println("Ps" + aState.getPerspectives().size());
+        for(PerspectiveId myPId:aState.getPerspectives())
+        {
+            ArgsDB myQuery2 = ArgsQuery.INSERT_ACTIVE_PERSPECTIVE_.ps();
+            myQuery2.setUserId(1, theLoginUser);
+            myQuery2.setPerspectiveId(2, myPId);
+            myNrRows = myQuery2.executeUpdate();
+            assert myNrRows == 1: "Nr of rows affected: " + myNrRows + myQuery2;
+        }
     }
 
     // ------------------------------------------------------------------------

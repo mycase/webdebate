@@ -12,7 +12,7 @@ import org.junit.Test;
 import com.arguments.Deployment;
 import com.arguments.functional.datamodel.ArgsErrorHandler;
 import com.arguments.functional.datamodel.ArgumentsException;
-import com.arguments.functional.requeststate.ArgsJspRenderRequest;
+import com.arguments.functional.requeststate.ArgsJspRequest;
 import com.arguments.functional.store.TheArgsStore;
 import com.arguments.functional.store.sql.ArgsSQLStore;
 import com.arguments.functional.store.sql.ArgsTestDB;
@@ -77,7 +77,7 @@ public class PageModel_Tester
     @Test
     public void directWebEntry()
     {
-        ArgsJspRenderRequest myRequest = getRequest("001_Direct_Cgi_Focus.json");
+        ArgsJspRequest myRequest = getRequest("001_Direct_Cgi_Focus.json");
         ThesisFocusPageModel myPageModel = PageModelFactory.getThesisFocusPage(myRequest);
         assertNotNull( myPageModel.theHtml);
     }
@@ -87,7 +87,7 @@ public class PageModel_Tester
     public void directWebEntryNoDBConnection()
     {
         TheArgsStore.setDB(new ArgsTestDB(TheArgsStore.i()));
-        ArgsJspRenderRequest myRequest = getRequest("001_Direct_Cgi_Focus.json");
+        ArgsJspRequest myRequest = getRequest("001_Direct_Cgi_Focus.json");
         ThesisFocusPageModel myPageModel = PageModelFactory.getThesisFocusPage(myRequest);
         assertNotNull( myPageModel.theHtml);
     }
@@ -96,7 +96,7 @@ public class PageModel_Tester
     @Test
     public void addPremise()
     {
-        ArgsJspRenderRequest myRequest = getRequest("002_Add_Premise.json");
+        ArgsJspRequest myRequest = getRequest("002_Add_Premise.json");
         AddPremisePageModel myPageModel = PageModelFactory.getAddPremisePage(myRequest);
         assertNotNull(myPageModel.theIfFalseRelevanceFormLabel);
         assertNotNull(myPageModel.theIfFalseRelevanceFormName);
@@ -117,7 +117,7 @@ public class PageModel_Tester
     @Test
     public void editLink()
     {
-        ArgsJspRenderRequest myRequest = getRequest("003_Edit_Link.json");
+        ArgsJspRequest myRequest = getRequest("003_Edit_Link.json");
         EditLinkPageModel myPageModel = PageModelFactory.getEditLinkPage(myRequest);
         assertNotNull( myPageModel.theIfFalseRelevanceFormLabel);
         assertNotNull( myPageModel.theIfFalseRelevanceFormName);
@@ -139,7 +139,7 @@ public class PageModel_Tester
     @Test
     public void listTheses()
     {
-        ArgsJspRenderRequest myRequest = getRequest("004_List_Theses.json");
+        ArgsJspRequest myRequest = getRequest("004_List_Theses.json");
         ListThesesPageModel myPageModel = PageModelFactory.getListThesesPage(myRequest);
         assertNotNull( myPageModel.theHtml);
     }
@@ -148,7 +148,7 @@ public class PageModel_Tester
     @Test
     public void gotoThesis()
     {
-        ArgsJspRenderRequest myRequest = getRequest("005_Goto_Thesis.json");
+        ArgsJspRequest myRequest = getRequest("005_Goto_Thesis.json");
         GotoThesisPageModel myPageModel = PageModelFactory.getGotoThesisPage(myRequest);
         assertNotNull( myPageModel.theThesisIdFormName);
     }
@@ -157,7 +157,7 @@ public class PageModel_Tester
     @Test
     public void editThesis()
     {
-        ArgsJspRenderRequest myRequest = getRequest("006_Edit_Thesis.json");
+        ArgsJspRequest myRequest = getRequest("006_Edit_Thesis.json");
         EditThesisPageModel myPageModel = PageModelFactory.getEditThesisPage(myRequest);
         assertNotNull( myPageModel.theThesisOpinionFormLabel);
         assertNotNull( myPageModel.theThesisOpinionFormName);
@@ -170,7 +170,7 @@ public class PageModel_Tester
     @Test
     public void newThesis()
     {
-        ArgsJspRenderRequest myRequest = getRequest("008_New_Thesis.json");
+        ArgsJspRequest myRequest = getRequest("008_New_Thesis.json");
         AddThesisPageModel myPageModel = PageModelFactory.getAddThesisPage(myRequest);
         assertNotNull( myPageModel.theThesisOpinionFormLabel);
         assertNotNull( myPageModel.theThesisOpinionFormName);
@@ -182,7 +182,7 @@ public class PageModel_Tester
     @Test
     public void newOpinion()
     {
-        ArgsJspRenderRequest myRequest = getRequest("009_Add_Opinion.json");
+        ArgsJspRequest myRequest = getRequest("009_Add_Opinion.json");
         AddOpinionPageModel myPageModel = PageModelFactory.getAddOpinionPage(myRequest);
         assertNotNull( myPageModel.theFormLabel);
         assertNotNull( myPageModel.theFormName);
@@ -193,7 +193,7 @@ public class PageModel_Tester
     // ------------------------------------------------------------------------
     // private
     // ------------------------------------------------------------------------
-    public static ArgsJspRenderRequest getRequest(String aShortFileName)
+    public static ArgsJspRequest getRequest(String aShortFileName)
     {
         Gson myGson = new GsonBuilder()
         .registerTypeAdapter(ArgsErrorHandler.class,
@@ -211,7 +211,7 @@ public class PageModel_Tester
             throw new AssertionError(anException);
         }
 
-        ArgsJspRenderRequest myRequest = myGson.fromJson(myReader, ArgsJspRenderRequest.class);
+        ArgsJspRequest myRequest = myGson.fromJson(myReader, ArgsJspRequest.class);
         return myRequest;
     }
 }

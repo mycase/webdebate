@@ -6,7 +6,7 @@ package com.arguments.functional.report.pagemodels;
 import com.arguments.functional.datamodel.ArgsErrorHandler;
 import com.arguments.functional.report.html.ListThesesPage;
 import com.arguments.functional.report.html.UrlContainer;
-import com.arguments.functional.requeststate.ArgsStatefulRequest3;
+import com.arguments.functional.requeststate.ArgsStatefulRenderRequest;
 import com.arguments.functional.requeststate.ProtocolMap;
 
 /**
@@ -19,7 +19,7 @@ public class ListThesesPageModel extends PageRenderer
     
     // ------------------------------------------------------------------------
     public ListThesesPageModel(
-            ArgsStatefulRequest3 aRequest,
+            ArgsStatefulRenderRequest aRequest,
             ProtocolMap aTheprotocolmap,
             ArgsErrorHandler anErrorHandler)
     {
@@ -29,7 +29,7 @@ public class ListThesesPageModel extends PageRenderer
     
     // ------------------------------------------------------------------------
     protected String noCatchHtml(
-            ArgsStatefulRequest3 aRequest, ProtocolMap aProtocolMap,
+            ArgsStatefulRenderRequest aRequest, ProtocolMap aProtocolMap,
             UrlContainer aUrlContainer)
     {
         return ListThesesPage.getInternalHtml(aRequest, aProtocolMap);

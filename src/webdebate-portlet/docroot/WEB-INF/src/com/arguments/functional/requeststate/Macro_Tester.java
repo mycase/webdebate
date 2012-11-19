@@ -57,18 +57,18 @@ public class Macro_Tester
     }
 
     // ------------------------------------------------------------------------
-    static ArgsJspRenderRequest getRenderRequest(String aShortFileName)
+    static ArgsJspRequest getRenderRequest(String aShortFileName)
     {
         AJRRCreator myInstantiator1 = new Macro_Tester().new AJRRCreator();
         ErrorHandlerCreator myInstantiator2 = new Macro_Tester().new ErrorHandlerCreator();
         Gson myGson = new GsonBuilder()
-            .registerTypeAdapter(ArgsJspRenderRequest.class, myInstantiator1)
+            .registerTypeAdapter(ArgsJspRequest.class, myInstantiator1)
             .registerTypeAdapter(ArgsErrorHandler.class, myInstantiator2)
             .create();
 
         BufferedReader myReader = getReader(aShortFileName);
 
-        ArgsJspRenderRequest myRequest = myGson.fromJson(myReader, ArgsJspRenderRequest.class);
+        ArgsJspRequest myRequest = myGson.fromJson(myReader, ArgsJspRequest.class);
         return myRequest;
     }
 
@@ -86,9 +86,9 @@ public class Macro_Tester
       }
     
     // ------------------------------------------------------------------------
-    private class AJRRCreator implements InstanceCreator<ArgsJspRenderRequest> {
-        public ArgsJspRenderRequest createInstance(Type type) {
-          return new ArgsJspRenderRequest(null, null, null, null, null);
+    private class AJRRCreator implements InstanceCreator<ArgsJspRequest> {
+        public ArgsJspRequest createInstance(Type type) {
+          return new ArgsJspRequest(null, null, null, null, null);
         }
       }
     

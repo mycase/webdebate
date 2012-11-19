@@ -14,8 +14,8 @@ import com.arguments.functional.datamodel.RelatedThesis;
 import com.arguments.functional.datamodel.RelationId;
 import com.arguments.functional.datamodel.ThesisId;
 import com.arguments.functional.report.ThesisFocusData;
-import com.arguments.functional.requeststate.ArgsRenderDirective;
-import com.arguments.functional.requeststate.ArgsStatefulRequest3;
+import com.arguments.functional.requeststate.ArgsRenderRequest;
+import com.arguments.functional.requeststate.ArgsStatefulRenderRequest;
 import com.arguments.functional.requeststate.ProtocolMap;
 import com.arguments.functional.store.TheArgsStore;
 
@@ -37,10 +37,10 @@ public class ThesisFocusPage_Tester
         ArgumentsUser myAppUser = TheArgsStore.i()
                 .selectUserById(ArgumentsUserId.TEST2);
 
-        ArgsRenderDirective myRequest1 = new ArgsRenderDirective(
+        ArgsRenderRequest myRequest1 = new ArgsRenderRequest(
                 myAppUser, new ProtocolMap());
 
-        ArgsStatefulRequest3 myRequest = new ArgsStatefulRequest3(myRequest1,
+        ArgsStatefulRenderRequest myRequest = new ArgsStatefulRenderRequest(myRequest1,
                 new ArgsState(ThesisId.Da156, RelationId.BONE, PerspectiveId.getThesisOwner()));
         ThesisFocusData myData = ThesisFocusPage.getData(myRequest);
 

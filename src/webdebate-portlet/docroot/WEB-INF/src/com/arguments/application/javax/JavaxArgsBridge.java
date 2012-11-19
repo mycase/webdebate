@@ -11,7 +11,7 @@ import com.arguments.functional.datamodel.ArgsErrorHandler;
 import com.arguments.functional.datamodel.ArgsRequest;
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.report.html.UrlContainer;
-import com.arguments.functional.requeststate.ArgsJspRenderRequest;
+import com.arguments.functional.requeststate.ArgsJspRequest;
 import com.arguments.functional.requeststate.PortalArgsBridge;
 import com.arguments.functional.requeststate.ProtocolMap;
 import com.arguments.functional.store.TheArgsStore;
@@ -28,7 +28,7 @@ public abstract class JavaxArgsBridge extends PortalArgsBridge
     }
     
     // ------------------------------------------------------------------------
-    public static ArgsJspRenderRequest getArgsRenderRequest(
+    public static ArgsJspRequest getArgsRenderRequest(
             RenderRequest aRequest,
             UrlContainer aUrlContainer,
             UpdateStateFlag anUpdateState)
@@ -40,8 +40,8 @@ public abstract class JavaxArgsBridge extends PortalArgsBridge
                 TheContainerBridge.i().newErrorHandler(
                         aRequest, myArgsRequest.getAppUser());
         
-        final ArgsJspRenderRequest myRequest =
-                new ArgsJspRenderRequest(
+        final ArgsJspRequest myRequest =
+                new ArgsJspRequest(
                         myArgsRequest, aUrlContainer,
                         CgiSource.SERVLET, anUpdateState, myErrorHandler);
         

@@ -17,13 +17,13 @@ import com.arguments.functional.store.TheArgsStore;
  * @author mirleau
  *
  */
-public class ArgsStatefulRequest3
+public class ArgsStatefulRenderRequest
 {
-    private final ArgsRenderDirective theRequest;
+    private final ArgsRenderRequest theRequest;
     private final ArgsReadOnlyState theState;
     
     // ------------------------------------------------------------------------
-    public ArgsStatefulRequest3(ArgsRenderDirective aRequest, ArgsReadOnlyState aState)
+    public ArgsStatefulRenderRequest(ArgsRenderRequest aRequest, ArgsReadOnlyState aState)
     {
         theRequest = aRequest;
         theState = aState;

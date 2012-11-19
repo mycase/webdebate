@@ -10,7 +10,7 @@ import com.arguments.functional.datamodel.MPerspective;
 import com.arguments.functional.datamodel.PerspectiveId;
 import com.arguments.functional.datamodel.ThesisId;
 import com.arguments.functional.report.ThesisFocusData;
-import com.arguments.functional.requeststate.ArgsStatefulRequest3;
+import com.arguments.functional.requeststate.ArgsStatefulRenderRequest;
 import com.arguments.functional.requeststate.ProtocolMap;
 import com.arguments.functional.store.TheArgsStore;
 
@@ -27,7 +27,7 @@ public class ThesisFocusPage
     
     // ------------------------------------------------------------------------
     public static String getHtmlBody(
-            ArgsStatefulRequest3 aRequest,
+            ArgsStatefulRenderRequest aRequest,
             ProtocolMap aProtocolMap)
     {
         final ThesisFocusPage theThesisFocusPage =
@@ -37,7 +37,7 @@ public class ThesisFocusPage
     }
 
     // ------------------------------------------------------------------------
-    static ThesisFocusData getData(ArgsStatefulRequest3 aRequest)
+    static ThesisFocusData getData(ArgsStatefulRenderRequest aRequest)
     {
         final ThesisFocusPage theThesisFocusPage =
                 new ThesisFocusPage(aRequest);
@@ -47,7 +47,7 @@ public class ThesisFocusPage
 
     // ------------------------------------------------------------------------
     public static String getInternalHtml(
-            ArgsStatefulRequest3 aRequest,
+            ArgsStatefulRenderRequest aRequest,
             ProtocolMap aProtocolMap)
     {
         final ThesisFocusPage theThesisFocusPage =
@@ -57,7 +57,7 @@ public class ThesisFocusPage
     }
 
     // ------------------------------------------------------------------------
-    private ThesisFocusPage(ArgsStatefulRequest3 aRequest)
+    private ThesisFocusPage(ArgsStatefulRenderRequest aRequest)
     {
         theAppUser = aRequest.getUser();
         theThesisId = aRequest.getState().getThesisId();

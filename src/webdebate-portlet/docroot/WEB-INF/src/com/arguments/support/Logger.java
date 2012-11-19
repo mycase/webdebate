@@ -8,7 +8,7 @@ import java.util.Date;
 
 import com.arguments.application.liferay.LiferayErrorHandler;
 import com.arguments.functional.datamodel.ArgsRequest;
-import com.arguments.functional.requeststate.ArgsJspRenderRequest;
+import com.arguments.functional.requeststate.ArgsJspRequest;
 import com.google.gson.ExclusionStrategy;
 import com.google.gson.FieldAttributes;
 import com.google.gson.Gson;
@@ -65,7 +65,7 @@ public class Logger
     }
 
     // ------------------------------------------------------------------------
-    public static void logRender(ArgsJspRenderRequest aRequest)
+    public static void logRender(ArgsJspRequest aRequest)
     {
         String myJsonString = prettyString(aRequest);
      

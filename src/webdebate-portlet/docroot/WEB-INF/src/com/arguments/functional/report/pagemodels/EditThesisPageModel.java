@@ -6,7 +6,7 @@ package com.arguments.functional.report.pagemodels;
 import com.arguments.functional.datamodel.OpinionatedThesis;
 import com.arguments.functional.datamodel.ThesisOpinion;
 import com.arguments.functional.requeststate.ArgsRequestKey;
-import com.arguments.functional.requeststate.ArgsStatefulRequest3;
+import com.arguments.functional.requeststate.ArgsStatefulRenderRequest;
 import com.arguments.functional.requeststate.ProtocolMap;
 
 /**
@@ -24,7 +24,7 @@ public class EditThesisPageModel
     
     // ------------------------------------------------------------------------
     public EditThesisPageModel(
-            ArgsStatefulRequest3 aRequest,
+            ArgsStatefulRenderRequest aRequest,
             ProtocolMap aTheprotocolmap)
     {
         OpinionatedThesis myThesis = aRequest.getActiveThesis();

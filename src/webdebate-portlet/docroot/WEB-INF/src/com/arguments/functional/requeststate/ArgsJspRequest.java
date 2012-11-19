@@ -3,18 +3,18 @@
  */
 package com.arguments.functional.requeststate;
 
-import com.arguments.application.TheContainerBridge;
 import com.arguments.functional.command.Command;
 import com.arguments.functional.datamodel.ArgsErrorHandler;
 import com.arguments.functional.datamodel.ArgsRequest;
 import com.arguments.functional.report.html.UrlContainer;
 import com.arguments.functional.requeststate.PortalArgsBridge.CgiSource;
 import com.arguments.functional.requeststate.PortalArgsBridge.UpdateStateFlag;
+import com.arguments.support.Logger;
 
 /**
  * @author  mirleau
  */
-public class ArgsJspRenderRequest
+public class ArgsJspRequest
 {
     private final ArgsRequest theRequest;
     private final UrlContainer theUrlContainer;
@@ -23,7 +23,7 @@ public class ArgsJspRenderRequest
     private final ArgsErrorHandler theErrorHandler;
 
     // ------------------------------------------------------------------------
-    public ArgsJspRenderRequest(
+    public ArgsJspRequest(
             ArgsRequest aRequest,
             UrlContainer aUrlContainer,
             CgiSource aStateInputMode,
@@ -38,11 +38,14 @@ public class ArgsJspRenderRequest
     }
 
     // ------------------------------------------------------------------------
-    public ArgsStatefulRequest3 executeAndGetRenderRequest()
+    public ArgsStatefulRenderRequest executeAndGetRenderRequest()
     {
-        Command myCommand = TheContainerBridge.i().parseCommand(this);
+        Logger.log("\n======= ArgsJspRequest.execute() ===========\n");
+
+        PortalArgsBridge.assureConnect();
+        Command myCommand = RequestParser.parseCommand(this);
         myCommand.execute(null);
-        return TheContainerBridge.i().fetchStatefulRenderRequest(this);
+        return RequestParser.fetchStatefulRenderRequest(this);
     }
     
     // ------------------------------------------------------------------------

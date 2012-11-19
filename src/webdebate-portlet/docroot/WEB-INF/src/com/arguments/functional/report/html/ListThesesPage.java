@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 import com.arguments.functional.datamodel.MPerspective;
 import com.arguments.functional.datamodel.ThesisId;
 import com.arguments.functional.report.ListThesesData;
-import com.arguments.functional.requeststate.ArgsStatefulRequest3;
+import com.arguments.functional.requeststate.ArgsStatefulRenderRequest;
 import com.arguments.functional.requeststate.ProtocolMap;
 import com.arguments.functional.store.TheArgsStore;
 
@@ -19,11 +19,11 @@ import com.arguments.functional.store.TheArgsStore;
 public class ListThesesPage
 {
     private final ThesisId theThesisId;
-    private final ArgsStatefulRequest3 theRequest;
+    private final ArgsStatefulRenderRequest theRequest;
     private final MPerspective thePerspectives;
     
     // ------------------------------------------------------------------------
-    public static String getInternalHtml(ArgsStatefulRequest3 myRequest, ProtocolMap aProtocolMap)
+    public static String getInternalHtml(ArgsStatefulRenderRequest myRequest, ProtocolMap aProtocolMap)
     {
         final ListThesesPage thePage =
                 new ListThesesPage(myRequest);
@@ -35,7 +35,7 @@ public class ListThesesPage
     /**
      * @param aRequest
      */
-    private ListThesesPage(ArgsStatefulRequest3 aRequest)
+    private ListThesesPage(ArgsStatefulRenderRequest aRequest)
     {
         super();
         theRequest = aRequest;

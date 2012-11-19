@@ -254,7 +254,7 @@ public class ArgsStatefulRequest_Tester
         ThesisId myThesisId = insertThesis();
 
         // User2 focuses on User1's thesis
-        ArgsJspRenderRequest myRequest = getThesisRenderRequest(myUser2,
+        ArgsJspRequest myRequest = getThesisRenderRequest(myUser2,
                 myThesisId);
 
         PageModelFactory.getThesisFocusPage(myRequest);
@@ -306,14 +306,14 @@ public class ArgsStatefulRequest_Tester
         PerspectiveId myPerspectiveId = PerspectiveId.P4;
 
         // User2 focuses on User1's thesis
-        ArgsJspRenderRequest myRequest = getPerspective2RenderRequest(myUser2,
+        ArgsJspRequest myRequest = getPerspective2RenderRequest(myUser2,
                 myPerspectiveId);
 
         PageModelFactory.getThesisFocusPage(myRequest);
     }
     
     // ------------------------------------------------------------------------
-    private static ArgsJspRenderRequest getThesisRenderRequest(
+    private static ArgsJspRequest getThesisRenderRequest(
             ArgumentsUser aUser,
             ThesisId aThesisId)
     {
@@ -326,7 +326,7 @@ public class ArgsStatefulRequest_Tester
 
     
     // ------------------------------------------------------------------------
-    private static ArgsJspRenderRequest getPerspective2RenderRequest(
+    private static ArgsJspRequest getPerspective2RenderRequest(
             ArgumentsUser aUser,
             PerspectiveId aPerspectiveId)
     {
@@ -339,7 +339,7 @@ public class ArgsStatefulRequest_Tester
 
     
     // ------------------------------------------------------------------------
-    private static ArgsJspRenderRequest getServletRenderRequest(ArgumentsUser aUser,
+    private static ArgsJspRequest getServletRenderRequest(ArgumentsUser aUser,
             ServletParameterMap aSParameterMap0)
     {
         PortletParameterMap myPParameterMap0 = new PortletParameterMap();
@@ -358,7 +358,7 @@ public class ArgsStatefulRequest_Tester
             {
                 throw new AssertionError(aException);
             }};
-        ArgsJspRenderRequest myRequest = new ArgsJspRenderRequest(myRequest0,
+        ArgsJspRequest myRequest = new ArgsJspRequest(myRequest0,
                 myContainer, mySource, myUpdateState, myErrorHandler);
         
         return myRequest;

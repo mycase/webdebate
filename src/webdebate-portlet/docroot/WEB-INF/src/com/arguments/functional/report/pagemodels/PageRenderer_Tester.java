@@ -8,7 +8,7 @@ import org.junit.Test;
 import com.arguments.functional.datamodel.ArgsErrorHandler;
 import com.arguments.functional.report.ThesisNotOwnedException;
 import com.arguments.functional.report.html.UrlContainer;
-import com.arguments.functional.requeststate.ArgsStatefulRequest3;
+import com.arguments.functional.requeststate.ArgsStatefulRenderRequest;
 import com.arguments.functional.requeststate.ProtocolMap;
 
 /**
@@ -33,7 +33,7 @@ public class PageRenderer_Tester
         PageRenderer myRenderer = new PageRenderer(myHandler){
 
             @Override
-            protected String noCatchHtml(ArgsStatefulRequest3 aRequest,
+            protected String noCatchHtml(ArgsStatefulRenderRequest aRequest,
                     ProtocolMap aProtocolmap, UrlContainer aAnUrlContainer)
             {
                 throw new ThesisNotOwnedException("bla");

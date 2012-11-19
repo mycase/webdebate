@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 
 import com.arguments.functional.datamodel.ArgsErrorHandler;
 import com.arguments.functional.report.html.UrlContainer;
-import com.arguments.functional.requeststate.ArgsStatefulRequest3;
+import com.arguments.functional.requeststate.ArgsStatefulRenderRequest;
 import com.arguments.functional.requeststate.ProtocolMap;
 
 /**
@@ -27,7 +27,7 @@ public abstract class PageRenderer
     
     // ------------------------------------------------------------------------
     public String catchHtml(
-            ArgsStatefulRequest3 aRequest,
+            ArgsStatefulRenderRequest aRequest,
             ProtocolMap aProtocolmap,
             UrlContainer aUrlContainer
             )
@@ -44,7 +44,7 @@ public abstract class PageRenderer
     
     // ------------------------------------------------------------------------
     protected abstract String noCatchHtml(
-            ArgsStatefulRequest3 aRequest,
+            ArgsStatefulRenderRequest aRequest,
             ProtocolMap aProtocolmap,
             UrlContainer aAnUrlContainer);
 }

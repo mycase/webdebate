@@ -20,8 +20,8 @@ import com.arguments.functional.datamodel.ThesisId;
 import com.arguments.functional.report.html.ListThesesPage;
 import com.arguments.functional.report.html.ThesisFocusPage;
 import com.arguments.functional.report.html.UrlContainer;
-import com.arguments.functional.requeststate.ArgsRenderDirective;
-import com.arguments.functional.requeststate.ArgsStatefulRequest3;
+import com.arguments.functional.requeststate.ArgsRenderRequest;
+import com.arguments.functional.requeststate.ArgsStatefulRenderRequest;
 import com.arguments.functional.requeststate.ProtocolMap;
 import com.arguments.functional.store.TheArgsStore;
 
@@ -68,10 +68,10 @@ public class ArgsRequestKeyAsString_Tester
         ArgumentsUser myAppUser = TheArgsStore.i()
                 .selectUserById(ArgumentsUserId.TEST2);
 
-        ArgsRenderDirective myRequest1 = new ArgsRenderDirective(
+        ArgsRenderRequest myRequest1 = new ArgsRenderRequest(
                 myAppUser, new UrlContainer(), new ProtocolMap());
 
-        ArgsStatefulRequest3 myRequest = new ArgsStatefulRequest3(myRequest1,
+        ArgsStatefulRenderRequest myRequest = new ArgsStatefulRenderRequest(myRequest1,
                 new ArgsState(ThesisId.Da13, RelationId.BONE, PerspectiveId.getThesisOwner()));
         String myHtml = ThesisFocusPage.getHtmlBody(myRequest,
                 ArgsRequestKeyAsString.getProtocolMap());
@@ -90,10 +90,10 @@ public class ArgsRequestKeyAsString_Tester
         ArgumentsUser myAppUser = TheArgsStore.i()
                 .selectUserById(ArgumentsUserId.TEST2);
 
-        ArgsRenderDirective myRequest1 = new ArgsRenderDirective(
+        ArgsRenderRequest myRequest1 = new ArgsRenderRequest(
                 myAppUser, new UrlContainer(), new ProtocolMap());
 
-        ArgsStatefulRequest3 myRequest = new ArgsStatefulRequest3(myRequest1,
+        ArgsStatefulRenderRequest myRequest = new ArgsStatefulRenderRequest(myRequest1,
                 new ArgsState(ThesisId.Da13, RelationId.BONE, PerspectiveId.getThesisOwner()));
         String myHtml = ThesisFocusPage.getHtmlBody(myRequest,
                 ArgsRequestKeyAsString.getProtocolMap());
@@ -112,11 +112,11 @@ public class ArgsRequestKeyAsString_Tester
         ArgumentsUser myAppUser = TheArgsStore.i()
                 .selectUserById(ArgumentsUserId.TEST2);
 
-        ArgsRenderDirective myRequest1 = new ArgsRenderDirective(
+        ArgsRenderRequest myRequest1 = new ArgsRenderRequest(
                 myAppUser,
                 new ProtocolMap());
 
-        ArgsStatefulRequest3 myRequest = new ArgsStatefulRequest3(myRequest1,
+        ArgsStatefulRenderRequest myRequest = new ArgsStatefulRenderRequest(myRequest1,
                 new ArgsState(ThesisId.Da13, RelationId.BONE, PerspectiveId.getThesisOwner()));
         String myHtml = ListThesesPage.getInternalHtml(
                 myRequest, ArgsRequestKeyAsString.getProtocolMap());

@@ -19,7 +19,7 @@ import com.arguments.functional.datamodel.ThesisId;
 import com.arguments.functional.report.pagemodels.PageModelFactory;
 import com.arguments.functional.report.pagemodels.PageModel_Tester;
 import com.arguments.functional.report.pagemodels.ThesisFocusPageModel;
-import com.arguments.functional.requeststate.ArgsJspRenderRequest;
+import com.arguments.functional.requeststate.ArgsJspRequest;
 import com.arguments.functional.requeststate.ArgsStatefulRequest_Tester;
 import com.arguments.functional.store.TheArgsStore;
 import com.arguments.functional.store.TheArgsStore_Tester;
@@ -65,7 +65,7 @@ public class ThesisFocusData_Tester
         assert myPerspectives.size() == 2;
         ThesisFocusData myData =
                 new ThesisFocusData(ThesisId.Da13, myPerspectives);
-        ArgsJspRenderRequest myRequest =
+        ArgsJspRequest myRequest =
                 PageModel_Tester.getRequest("001_Direct_Cgi_Focus.json");
         ThesisFocusPageModel myPageModel = PageModelFactory.getThesisFocusPage(myRequest);
 
@@ -86,7 +86,7 @@ public class ThesisFocusData_Tester
         assert myData.getPerspectives().size() == 2;
         
         
-        ArgsJspRenderRequest myRequest =
+        ArgsJspRequest myRequest =
                 PageModel_Tester.getRequest("MakeYourCase.2012.11.19.00.33.07.renderRequest.json");
         ThesisFocusPageModel myPageModel = PageModelFactory.getThesisFocusPage(myRequest);
         assert myPageModel.theHtml.contains("P1");

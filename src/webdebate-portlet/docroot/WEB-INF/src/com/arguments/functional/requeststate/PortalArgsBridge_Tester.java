@@ -113,7 +113,7 @@ public class PortalArgsBridge_Tester
     @Test
     public void testMenuClickToFocus()
     {
-        ArgsJspRenderRequest myRequest =
+        ArgsJspRequest myRequest =
                 Macro_Tester.getRenderRequest("MakeYourCase.2012.11.15.22.08.54.renderRequest.json");
         
         PageModelFactory.getThesisFocusPage(myRequest);

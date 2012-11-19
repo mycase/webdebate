@@ -5,14 +5,18 @@ package com.arguments.functional.requeststate;
 
 import static org.junit.Assert.*;
 
+import com.arguments.application.TheContainerBridge;
 import com.arguments.functional.command.ChangeThesis;
 import com.arguments.functional.command.InsertOpinion;
 import com.arguments.functional.command.InsertPremise;
 import com.arguments.functional.command.Command;
 import com.arguments.functional.command.InsertThesis;
+import com.arguments.functional.command.StateChangeCommand;
 import com.arguments.functional.command.UpdateLink;
 import com.arguments.functional.command.ChangePerspective;
 import com.arguments.functional.command.UpdateThesis;
+import com.arguments.functional.datamodel.ArgsReadOnlyState;
+import com.arguments.functional.datamodel.ArgsRequest;
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.datamodel.PerspectiveId;
 import com.arguments.functional.datamodel.RelationId;
@@ -20,6 +24,9 @@ import com.arguments.functional.datamodel.Relevance;
 import com.arguments.functional.datamodel.ThesisId;
 import com.arguments.functional.datamodel.ThesisOpinion;
 import com.arguments.functional.datamodel.ThesisText;
+import com.arguments.functional.requeststate.PortalArgsBridge.CgiSource;
+import com.arguments.functional.store.TheArgsStore;
+import com.arguments.support.CgiParameterMap;
 
 /**
  * @author mirleau
@@ -55,7 +62,84 @@ public class RequestParser
 
         return myCommand2;
     }
+    
+    // ------------------------------------------------------------------------
+    public static Command parseCommand(ArgsJspRequest aJspRequest)
+    {
+        // ArgsRequest contains data that is simplest (least error prone)
+        //  to extract from a javax.RenderRequest.
+        // ArgsJspRenderRequest extends this with information encoded in
+        //   the target jsp page (which itself is addressed via the
+        //   source jsp page).
 
+        final ArgsRequest myRequest = aJspRequest.getRequest();
+        // PortletParameterMap, ServletParameterMap, ArgumentsUser
+        
+        final ArgumentsUser myAppUser = myRequest.getAppUser();
+        
+        // Depending on the jsp target, we either get the servlet
+        // or the portlet parameter map:
+        final ProtocolMap myProtocolMap = getProtocolMap(
+                myRequest, aJspRequest.getStateInputMode());
+
+        // From that protocolmap, we extract the actual information
+        // needed, being a possible state change, and
+        // non-state changing directives like the linkid in case
+        // a link needs to be edited:
+        
+        Command myCommand =
+                new StateChangeCommand(
+                        myProtocolMap,
+                        aJspRequest.getUpdateState(),
+                        myAppUser);
+
+        return myCommand;
+    }
+
+    // ------------------------------------------------------------------------
+    public static ArgsStatefulRenderRequest fetchStatefulRenderRequest(
+            ArgsJspRequest aJspRequest)
+    {
+        // ArgsRequest contains data that is simplest (least error prone)
+        //  to extract from a javax.RenderRequest.
+        // ArgsJspRenderRequest extends this with information encoded in
+        //   the target jsp page (which itself is addressed via the
+        //   source jsp page).
+
+        final ArgsRequest myRequest = aJspRequest.getRequest();
+        // PortletParameterMap, ServletParameterMap, ArgumentsUser
+        
+        final ArgumentsUser myAppUser = myRequest.getAppUser();
+        
+        // Depending on the jsp target, we either get the servlet
+        // or the portlet parameter map:
+        final ProtocolMap myProtocolMap = getProtocolMap(
+                myRequest, aJspRequest.getStateInputMode());
+
+        ArgsRenderRequest myRenderDirective =
+                new ArgsRenderRequest(myAppUser,
+                aJspRequest.getUrlContainer(), myProtocolMap);
+        // User, Urls, ChangeRelationId
+
+        ArgsReadOnlyState myStateAfter = 
+                TheArgsStore.i().selectState(myAppUser);
+        return new ArgsStatefulRenderRequest(
+                myRenderDirective, myStateAfter);
+    }
+    
+    // ------------------------------------------------------------------------
+    private static ProtocolMap getProtocolMap(ArgsRequest aRequest,
+            final CgiSource aCgiSource)
+    {
+        final CgiParameterMap myParameterMap = aRequest
+                .getCgiParameterMap(aCgiSource);
+
+        assertNotNull(myParameterMap);
+        final ProtocolMap myProtocolMap =
+                TheContainerBridge.i().getProtocolMap(myParameterMap);
+        return myProtocolMap;
+    }
+    
     // ------------------------------------------------------------------------
     private RequestParser(
             ArgumentsUser anAppUser,

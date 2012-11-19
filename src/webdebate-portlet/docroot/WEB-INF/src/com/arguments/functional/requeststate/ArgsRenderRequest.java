@@ -15,7 +15,7 @@ import com.arguments.support.Logger;
  * @author mirleau
  *
  */
-public class ArgsRenderDirective
+public class ArgsRenderRequest
 {
     private final ArgumentsUser theUser;
     private final UrlContainer theUrlContainer;
@@ -23,7 +23,7 @@ public class ArgsRenderDirective
     private final PerspectiveId thePerspective2Id;
 
     // ------------------------------------------------------------------------
-    public ArgsRenderDirective(
+    public ArgsRenderRequest(
             ArgumentsUser anAppUser,
             UrlContainer aUrlContainer,
             ProtocolMap aProtocolMap)
@@ -40,7 +40,7 @@ public class ArgsRenderDirective
     }
     
     // ------------------------------------------------------------------------
-    public ArgsRenderDirective(
+    public ArgsRenderRequest(
             ArgumentsUser anAppUser,
             ProtocolMap aMap)
     {

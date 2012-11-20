@@ -341,7 +341,7 @@ public class HtmlThesisPrinter
     {
         StringBuffer myText = new StringBuffer("<tr>\n");
         myText.append("  <td class=\"otherClass\"> "
-                + toSetPerspectiveAnchor(anOpinion.getPerspective()) + "</td>\n");
+                + toAddPerspectiveAnchor(anOpinion.getPerspective()) + "</td>\n");
         myText.append("  <td class=\"" + cssClassByOpinion(anOpinion) + "\">"
                 + anOpinion.toString() + "</td>\n");
         myText.append("</tr>\n");

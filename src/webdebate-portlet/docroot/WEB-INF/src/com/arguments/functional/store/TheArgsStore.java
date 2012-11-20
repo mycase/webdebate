@@ -17,12 +17,13 @@ public class TheArgsStore
 {
     // This instance can be used for reading, but not for writing since
     // it doesn't know who's writing.
-    private static ArgsStore theInstance =
-            new ArgsSQLStore();
+    private static ArgsStore theInstance;
 
     // ------------------------------------------------------------------------
     public static ArgsStore i()
     {
+        if (theInstance == null)
+            theInstance = new ArgsSQLStore();
         return theInstance;
     }
 

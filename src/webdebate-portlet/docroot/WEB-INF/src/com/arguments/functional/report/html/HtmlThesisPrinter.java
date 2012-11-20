@@ -8,6 +8,7 @@ import java.util.List;
 import com.arguments.functional.datamodel.MPerspective;
 import com.arguments.functional.datamodel.OpinionatedThesis;
 import com.arguments.functional.datamodel.OwnedPerspective;
+import com.arguments.functional.datamodel.Perspective;
 import com.arguments.functional.datamodel.PerspectiveThesisOpinion;
 import com.arguments.functional.datamodel.RelatedThesis;
 import com.arguments.functional.datamodel.Thesis;
@@ -135,7 +136,14 @@ public class HtmlThesisPrinter
         theText.append("<ul>");
 
         for (int i = 0; i < thePerspectives.size(); i++)
-            theText.append("<li>Perspective "+(i+1)+": " + thePerspectives.get(i)+"</li>");
+        {
+            theText.append(
+                    "<li>" +
+                    "Perspective "+(i+1)+": " + thePerspectives.get(i));
+            if (thePerspectives.size() > 1)
+                theText.append(toRemovePerspectiveAnchor(thePerspectives.get(i)));
+            theText.append("</li>");
+        }
         theText.append("</ul>");
     }
     
@@ -221,11 +229,11 @@ public class HtmlThesisPrinter
     }
 
     // ------------------------------------------------------------------------
-    private String toRemovePerspectiveAnchor(OwnedPerspective aPerspective)
+    private String toRemovePerspectiveAnchor(Perspective aPerspective)
     {
         return "<a href=\"focus?"+
                 theProtocol.get(ArgsRequestKey.REMOVE_PERSPECTIVE_ID)+"="
-                + aPerspective.getIdString() + "\"> "+aPerspective+"</a>";
+                + aPerspective.getIdString() + "\"> remove </a>";
     }
 
     // ------------------------------------------------------------------------
@@ -348,7 +356,7 @@ public class HtmlThesisPrinter
         return myText;
     }
 
-    // ------------------------------------------------------------------------
+     // ------------------------------------------------------------------------
     private static StringBuffer relevanceText(RelatedThesis<OpinionatedThesis> aPremise)
     {
         StringBuffer myText = new StringBuffer();

@@ -259,16 +259,11 @@ public class ArgsTestDB implements ArgsStore
         return null;
     }
 
-    
     // ------------------------------------------------------------------------
-    /* (non-Javadoc)
-     * @see com.arguments.functional.datamodel.ArgsStore#insertActivePerspectiveId(com.arguments.functional.datamodel.PerspectiveId, com.arguments.functional.datamodel.ArgumentsUserId)
-     */
     @Override
     public void insertActivePerspectiveId(PerspectiveId aPId,
             ArgumentsUserId aUser)
     {
-        // TODO Auto-generated method stub
         
     }
 }

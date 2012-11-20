@@ -65,7 +65,7 @@ public class ArgsState implements ArgsReadOnlyState
     @Override
     public StateChange getStateChange()
     {
-        return new StateChange(theThesisId, theRelationId, thePerspectiveIds);
+        return new StateChange(theThesisId, theRelationId, thePerspectiveIds, null, null);
     }
     
     // ------------------------------------------------------------------------

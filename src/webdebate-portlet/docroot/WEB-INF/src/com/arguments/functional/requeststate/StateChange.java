@@ -24,15 +24,19 @@ public class StateChange
     private final boolean theHasChange;
     private final ThesisId theThesisId;
     private final RelationId theRelationId;
-    private final MPerspectiveId thePerspectiveId;
+    private final MPerspectiveId theSetPerspectiveIds;
+    private final PerspectiveId theAddPerspectiveId;
+    private final PerspectiveId theRemovePerspectiveId;
     
     // ------------------------------------------------------------------------
     public StateChange(
             ThesisId aThesisId,
             RelationId aRelationId,
-            PerspectiveId aPerspectiveId)
+            PerspectiveId aSetPerspectiveId,
+            PerspectiveId anAddPerspectiveId,
+            PerspectiveId aRemovePerspectiveId)
     {
-        this(aThesisId, aRelationId, getMPerspectiveId(aPerspectiveId));
+        this(aThesisId, aRelationId, getMPerspectiveId(aSetPerspectiveId), anAddPerspectiveId, aRemovePerspectiveId);
     }
     
     
@@ -40,17 +44,24 @@ public class StateChange
     public StateChange(
             ThesisId aThesisId,
             RelationId aRelationId,
-            MPerspectiveId aPerspectiveId)
+            MPerspectiveId aPerspectiveIds,
+            PerspectiveId anAddPerspectiveId,
+            PerspectiveId aRemovePerspectiveId)
     {
         theThesisId = aThesisId;
         theRelationId = aRelationId;
-        thePerspectiveId = aPerspectiveId;
-
-        theHasChange = (theThesisId != null) || (theRelationId != null) || (thePerspectiveId != null);
+        theSetPerspectiveIds = aPerspectiveIds;
+        theAddPerspectiveId = anAddPerspectiveId;
+        theRemovePerspectiveId = aRemovePerspectiveId;
+        
+        theHasChange =
+                (theThesisId != null) ||
+                (theRelationId != null) || (theSetPerspectiveIds != null) ||
+                (theAddPerspectiveId != null) || (theRemovePerspectiveId != null);
 
         theStateString = theThesisId +","+theRelationId+
-                ","+(thePerspectiveId == null?null:
-                    StringUtils.join(thePerspectiveId, ","));
+                ","+(theSetPerspectiveIds == null?null:
+                    StringUtils.join(theSetPerspectiveIds, ",") + "," + theAddPerspectiveId + "," + theRemovePerspectiveId);
     }
     
     // ------------------------------------------------------------------------
@@ -59,7 +70,10 @@ public class StateChange
         this(
             ThesisId.parse(aRequestMap.get(ArgsRequestKey.THESIS_ID)),
             null,
-            PerspectiveId.parsePerspectiveId(aRequestMap.get(ArgsRequestKey.SET_PERSPECTIVE_ID)));
+            PerspectiveId.parsePerspectiveId(aRequestMap.get(ArgsRequestKey.SET_PERSPECTIVE_ID)),
+            PerspectiveId.parsePerspectiveId(aRequestMap.get(ArgsRequestKey.ADD_PERSPECTIVE_ID)),
+            PerspectiveId.parsePerspectiveId(aRequestMap.get(ArgsRequestKey.REMOVE_PERSPECTIVE_ID))
+            );
     }
 
     // ------------------------------------------------------------------------
@@ -104,6 +118,6 @@ public class StateChange
     // ------------------------------------------------------------------------
     public PerspectiveId getPerspectiveId()
     {
-        return thePerspectiveId == null? null:thePerspectiveId.get(0);
+        return theSetPerspectiveIds == null? null:theSetPerspectiveIds.get(0);
     }
 }

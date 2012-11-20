@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 
 import com.arguments.application.liferay.LiferayArgsRequestKey;
 import com.arguments.functional.command.Command;
+import com.arguments.functional.command.StateChangeCommand;
 import com.arguments.functional.datamodel.ArgsActionRequest;
 import com.arguments.functional.datamodel.ArgsErrorHandler;
 import com.arguments.functional.datamodel.ArgsReadOnlyState;
@@ -57,9 +58,6 @@ public class ArgsStatefulRequest_Tester
     }
 
     // ------------------------------------------------------------------------
-    /**
-     * Tests the creation of a thesis
-     */
     @Test
     public void testInsertOpinion()
     {
@@ -261,6 +259,9 @@ public class ArgsStatefulRequest_Tester
         
         ArgsJspRequest myRequest =
                 getAddPerspectiveRequest(myPerspectiveId0);
+        StateChangeCommand mySCC = (StateChangeCommand) RequestParser.parseCommand(myRequest);
+        
+        assertTrue(mySCC.hasChange());
         myRequest.executeAndGetRenderRequest();
 
         // Re-read the state:
@@ -392,7 +393,7 @@ public class ArgsStatefulRequest_Tester
     {
         ServletParameterMap mySParameterMap0 = new ServletParameterMap();
         mySParameterMap0.put(LiferayArgsRequestKey.s(aKey),
-                new String[] { "" + aPerspectiveId });
+                new String[] { "" + aPerspectiveId.getLongID() });
 
         return getServletRenderRequest(aUser, mySParameterMap0);
     }

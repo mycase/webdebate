@@ -120,4 +120,16 @@ public class StateChange
     {
         return theSetPerspectiveIds == null? null:theSetPerspectiveIds.get(0);
     }
+
+    // ------------------------------------------------------------------------
+    public PerspectiveId getAddPerspectiveId()
+    {
+        return theAddPerspectiveId;
+    }
+
+    // ------------------------------------------------------------------------
+    public PerspectiveId getRemovePerspectiveId()
+    {
+        return theRemovePerspectiveId;
+    }
 }

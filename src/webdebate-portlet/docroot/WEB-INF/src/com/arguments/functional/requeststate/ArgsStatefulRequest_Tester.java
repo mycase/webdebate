@@ -252,7 +252,7 @@ public class ArgsStatefulRequest_Tester
         PerspectiveId myPerspectiveId0 = PerspectiveId.getThesisOwner();
         PerspectiveId myPerspectiveId1 = myUser1.getDefaultPerspective();
 
-        // User1 will switch from persp1 to persp0:
+        // User1 will add persp1 to persp0:
         
         ArgsReadOnlyState myState1_0a = TheArgsStore.i().selectState(myUser1);
         assertEquals(myPerspectiveId1, myState1_0a.getFirstPerspectiveId());
@@ -262,6 +262,7 @@ public class ArgsStatefulRequest_Tester
         StateChangeCommand mySCC = (StateChangeCommand) RequestParser.parseCommand(myRequest);
         
         assertTrue(mySCC.hasChange());
+        
         myRequest.executeAndGetRenderRequest();
 
         // Re-read the state:

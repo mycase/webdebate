@@ -287,8 +287,7 @@ public class HtmlThesisPrinter
                  + "\">"
                  + myOpinion.getPercentage()+"%"
                  + "</div></td>\n");
-        myText.append("<td><div id=\"mainfocus\" class=\"" + cssClassByOpinion(aThesis.getOpinion())
-                + "\">" + getIDWithSummary(aThesis) + "</div></td>\n");
+        myText.append("<td><div id=\"mainfocus\" >" + getIDWithSummary(aThesis) + "</div></td>\n");
         
         return myText;
     }
@@ -314,8 +313,7 @@ public class HtmlThesisPrinter
                     cssClassByOpinion(myOpinion) + "\">" +
                     myOpinion.getPercentage()+"%" +
             		"</td>");
-        myText.append("  <td class=\"" + cssClassByOpinion(aPremise.getThesis()) + "\">"
-                + getIDWithSummary(aPremise.getThesis())+"</td>\n");
+        myText.append("  <td>" + getIDWithSummary(aPremise.getThesis())+"</td>\n");
         myText.append("  <td class=\"otherClass\">" + relevanceText(aPremise)
                 + "</td>\n");
         myText.append("  <td>" + aPremise.getOwner().getScreenName() + "</td>\n");
@@ -336,7 +334,7 @@ public class HtmlThesisPrinter
                     myOpinion.getPercentage()+"%" +
                     "</td>");
         }
-        myText.append("  <td class=\"" + cssClassByOpinion(aThesis) + "\">"
+        myText.append("  <td>"
                 + getIDWithSummary(aThesis) + "</td>\n");
         myText.append("  <td>" + aThesis.getOwner().getScreenName() + "</td>\n");
         myText.append("</tr>\n");

@@ -50,6 +50,8 @@ public class OwnedPerspective extends Perspective
     {
         if (theOwnerId.getLongId() == 0)
             return theName.toString();
+        if (theName.equals(PerspectiveName.DEFAULT))
+            return getOwner().getScreenName() + "'s perspective";
         return theName + "(" + getOwner().getScreenName()+ ")";
     }
 

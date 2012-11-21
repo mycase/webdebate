@@ -21,6 +21,10 @@
     <portlet:param name="jspPage" value="/jsp/addThesis.jsp" />
 </portlet:renderURL>
 
+<portlet:renderURL var="myAddPerspectiveURL">
+    <portlet:param name="jspPage" value="/jsp/addPerspective.jsp" />
+</portlet:renderURL>
+
 <portlet:renderURL var="myEditThesisURL">
     <portlet:param name="jspPage" value="/jsp/editThesis.jsp" />
 </portlet:renderURL>
@@ -73,6 +77,8 @@
  <a href="<%= myGotoThesisURL %>">Goto</a></li>
 <li>
  <a href="<%= myAllThesesURL %>">All Theses</a></li>
+<li>
+ <a href="<%= myAddPerspectiveURL %>">New perspective</a></li>
 <li>
  <a href="<%= myHelpURL %>">Help</a></li>
 </ul>

@@ -8,6 +8,7 @@ import javax.portlet.RenderRequest;
 import com.arguments.application.TheContainerBridge;
 import com.arguments.functional.report.html.UrlContainer;
 import com.arguments.functional.report.pagemodels.AddOpinionPageModel;
+import com.arguments.functional.report.pagemodels.AddPerspectivePageModel;
 import com.arguments.functional.report.pagemodels.AddPremisePageModel;
 import com.arguments.functional.report.pagemodels.AddThesisPageModel;
 import com.arguments.functional.report.pagemodels.EditLinkPageModel;
@@ -51,6 +52,14 @@ public class JavaxPageModels
     {
         ArgsJspRequest myRequest = getRequest(aRenderRequest);
         return PageModelFactory.getAddThesisPage(myRequest);
+    }
+
+    // ------------------------------------------------------------------------
+    public static AddPerspectivePageModel getAddPerspectivePage(
+            RenderRequest aRenderRequest)
+    {
+        ArgsJspRequest myRequest = getRequest(aRenderRequest);
+        return PageModelFactory.getAddPerspectivePage(myRequest);
     }
 
     // ------------------------------------------------------------------------

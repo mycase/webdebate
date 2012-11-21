@@ -233,7 +233,7 @@ public class HtmlThesisPrinter
     {
         return "<a href=\"focus?"+
                 theProtocol.get(ArgsRequestKey.REMOVE_PERSPECTIVE_ID)+"="
-                + aPerspective.getIdString() + "\"> remove </a>";
+                + aPerspective.getIdString() + "\"> remove from view</a>";
     }
 
     // ------------------------------------------------------------------------

@@ -156,6 +156,16 @@ public class ArgsStatefulRequest_Tester
     }
 
     // ------------------------------------------------------------------------
+    @Test
+    public void defaultPerspectiveName()
+    {
+        ArgumentsUser myUser1 = ArgumentsUser_Tester.getTestUser2();
+        Perspective myPerspective = myUser1.getDefaultPerspective();
+        String myTestName = myPerspective.toString();
+        assertTrue(myTestName.startsWith(myUser1.getScreenName().toString()));
+    }
+    
+    // ------------------------------------------------------------------------
     /**
      * Tests the insertion and modification of a premise
      */

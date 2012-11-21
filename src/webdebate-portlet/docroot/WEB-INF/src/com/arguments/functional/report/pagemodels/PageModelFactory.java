@@ -38,6 +38,14 @@ public class PageModelFactory
     }
 
     // ------------------------------------------------------------------------
+    public static AddPerspectivePageModel getAddPerspectivePage(
+            ArgsJspRequest aRenderRequest)
+    {
+        aRenderRequest.executeAndGetRenderRequest();
+        return new AddPerspectivePageModel(theProtocol);
+    }
+
+    // ------------------------------------------------------------------------
     public static AddThesisPageModel getAddThesisPage(
             ArgsJspRequest aRenderRequest)
     {

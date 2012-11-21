@@ -64,6 +64,9 @@ public class ArgsSQLStore implements ArgsStore
         new Patcher(){
             @Override
             public void execute(){patch4();}},
+        new Patcher(){
+            @Override
+            public void execute(){patch5();}},
     };
     
     // ------------------------------------------------------------------------
@@ -111,6 +114,12 @@ public class ArgsSQLStore implements ArgsStore
     public static void patch4()
     {
         ArgsQuery.PATCH_4.ps().executeUpdate();
+    }
+    
+    // ------------------------------------------------------------------------
+    public static void patch5()
+    {
+        ArgsQuery.PATCH_5.ps().executeUpdate();
     }
     
     // ------------------------------------------------------------------------
@@ -232,9 +241,6 @@ public class ArgsSQLStore implements ArgsStore
     }
 
     // ------------------------------------------------------------------------
-    /**
-     * @return
-     */
     @Override
     public long getNrOfTheses()
     {
@@ -253,6 +259,27 @@ public class ArgsSQLStore implements ArgsStore
         }
 
         return myNrOfTheses;
+    }
+
+    // ------------------------------------------------------------------------
+    @Override
+    public long getNrOfPerspectives()
+    {
+        ResultSet myResult = ArgsQuery.COUNT_ALL_PERSPECTIVES.ps()
+                .executeQuery();
+
+        Integer myNrOfPerspectives;
+        try
+        {
+            boolean myHasRow = myResult.next();
+            assertTrue( myHasRow);
+            myNrOfPerspectives = getInt(myResult, ArgsDB.NR_OF_PERSPECTIVES);
+        } catch (SQLException anException)
+        {
+            throw new ArgsSQLStoreException(anException);
+        }
+
+        return myNrOfPerspectives;
     }
 
     // ------------------------------------------------------------------------
@@ -444,6 +471,14 @@ public class ArgsSQLStore implements ArgsStore
         return getThesisId(ArgsQuery.SELECT_LAST_TEST_THESIS.ps(),
                 ArgsDB.Thesis.ID.c);
     }
+
+    // ------------------------------------------------------------------------
+    @Override
+    public PerspectiveId selectLastTestPerspectiveId()
+    {
+        return getPerspectiveId(ArgsQuery.SELECT_LAST_TEST_PERSPECTIVE.ps(),
+                ArgsDB.Perspective.ID.c);
+    }
     
     // ------------------------------------------------------------------------
     @Override
@@ -633,6 +668,16 @@ public class ArgsSQLStore implements ArgsStore
         Long myLongId = getLong(aQuery, aColumn);
         if (myLongId == null) return null;
         return new ThesisId(myLongId);
+    }
+
+    // ------------------------------------------------------------------------
+    protected static PerspectiveId getPerspectiveId(
+            ArgsDB aQuery,
+            DBColumn aColumn)
+    {
+        Long myLongId = getLong(aQuery, aColumn);
+        if (myLongId == null) return null;
+        return new PerspectiveId(myLongId);
     }
 
     // ------------------------------------------------------------------------

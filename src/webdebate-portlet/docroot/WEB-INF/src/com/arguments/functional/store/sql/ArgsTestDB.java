@@ -262,4 +262,18 @@ public class ArgsTestDB implements ArgsStore
     {
         
     }
+    
+    // ------------------------------------------------------------------------
+    @Override
+    public long getNrOfPerspectives()
+    {
+        return 0;
+    }
+    
+    // ------------------------------------------------------------------------
+    @Override
+    public PerspectiveId selectLastTestPerspectiveId()
+    {
+        return null;
+    }
 }

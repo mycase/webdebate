@@ -244,9 +244,11 @@ class ArgsDB
     final static String SET = "SET";
     final static String AS = "AS";
     final static String LOCK_TABLE = "LOCK TABLE";
+    final static String ORDER_BY = "ORDER BY";
     
     final static DBColumn NR_OF_OPINIONS = new DBColumn("NrOfOpinions");
     final static DBColumn NR_OF_THESES = new DBColumn("NrOfTheses");
+    final static DBColumn NR_OF_PERSPECTIVES = new DBColumn("NrOfPerspectives");
     final static DBColumn COUNT = new DBColumn("count");
     final static DBColumn LEVEL_ = new DBColumn("Level");
     final static DBColumn RELATION_ID = new DBColumn("RelationID");
@@ -269,6 +271,7 @@ class ArgsDB
         DELETE_USER_BY_ID(DELETE_FROM, User.t, WHERE, User.ID, "= ?"),
 
         COUNT_ALL_THESES1(SELECT, "count(*)", AS, NR_OF_THESES, FROM, Thesis.t),
+        COUNT_ALL_PERSPECTIVES(SELECT, "count(*)", AS, NR_OF_PERSPECTIVES, FROM, Perspective.t),
         COUNT_ALL_OPINIONS(SELECT, "count(*)", AS, NR_OF_OPINIONS, FROM, Opinion.t),
         COUNT_OPINION_BY_THESIS_PESPECTIVE(SELECT, "count(*)", AS, NR_OF_OPINIONS, FROM, Opinion.t,
                 WHERE, Opinion.THESIS_ID, "= ?",AND, Opinion.PERSPECTIVE_ID1, "= ?"),
@@ -280,9 +283,11 @@ class ArgsDB
         INSERT_THESIS(INSERT_INTO, Thesis.t, VALUES, "( 0, ?, NULL, ?)"),
         INSERT_USER(INSERT_INTO, User.t, VALUES, "( 0, ?, ?, ?)"),
         LOCK_OPINION_WRITE(LOCK_TABLE, Opinion.t, WRITE),
+        LOCK_PERSPECTIVE_WRITE(LOCK_TABLE, Perspective.t, WRITE),
         LOCK_THESIS_WRITE(LOCK_TABLE, Thesis.t, WRITE),
         LOCK_USER_WRITE(LOCK_TABLE, User.t, WRITE),
         MAX_OPINION_ID(SELECT, "max(", Opinion.ID, ")", AS, COUNT, FROM, Opinion.t),
+        MAX_PERSPECTIVE_ID(SELECT, "max(", Perspective.ID,")", AS, COUNT, FROM, Perspective.t),
         MAX_THESIS_ID(SELECT, "max(", Thesis.ID,")", AS, COUNT, FROM, Thesis.t),
         MAX_USER_ID(SELECT, "max(", User.ID, ")", AS, COUNT, FROM, User.t),
         SELECT_CONCLUSION(
@@ -324,10 +329,12 @@ class ArgsDB
                 Perspective.OWNER_ID, " = ?"),
         SELECT_PERSPECTIVE_BY_USERID1(SELECT, "*", FROM, Perspective.t, WHERE, Perspective.OWNER_ID, " = ?"),
         SELECT_PERSPECTIVE_BY_ID(SELECT, "*", FROM, Perspective.t, WHERE, Perspective.ID , " = ? "),
-        SELECT_ACTIVE_PERSPECTIVE_BY_USERID(SELECT, "*", FROM, ActivePerspectives.t, WHERE, ActivePerspectives.USER_ID, "= ?"),
+        SELECT_ACTIVE_PERSPECTIVE_BY_USERID(SELECT, "*", FROM, ActivePerspectives.t, WHERE, ActivePerspectives.USER_ID, "= ?", 
+                ORDER_BY, ActivePerspectives.ID),
         SELECT_STATE_BY_USERID(SELECT, "*", FROM, State.t, WHERE, State.USER_ID, "= ?"),
-        SELECT_LAST_TEST_THESIS(SELECT, "*", FROM, Thesis.t, WHERE, Thesis.OWNER_ID, "= 2", "ORDER BY", Thesis.ID, "DESC LIMIT 1"),
-        SELECT_LAST_TEST_RELATION(SELECT, "*", FROM, Relation.t, WHERE, Relation.OWNER_ID, "= 2", "ORDER BY", Relation.ID, "DESC LIMIT 1"),
+        SELECT_LAST_TEST_PERSPECTIVE(SELECT, "*", FROM, Perspective.t, WHERE, Perspective.OWNER_ID, "= 2", ORDER_BY, Perspective.ID, "DESC LIMIT 1"),
+        SELECT_LAST_TEST_THESIS(SELECT, "*", FROM, Thesis.t, WHERE, Thesis.OWNER_ID, "= 2", ORDER_BY, Thesis.ID, "DESC LIMIT 1"),
+        SELECT_LAST_TEST_RELATION(SELECT, "*", FROM, Relation.t, WHERE, Relation.OWNER_ID, "= 2", ORDER_BY, Relation.ID, "DESC LIMIT 1"),
         SELECT_THESIS_BY_ID(SELECT, "*", FROM, Thesis.t, WHERE, Thesis.ID, "= ?"),
         SELECT_THESIS_ALL(SELECT, "*", FROM, Thesis.t),
         UNLOCK_TABLES("UNLOCK TABLES"),
@@ -388,6 +395,7 @@ class ArgsDB
         PATCH_2B("ALTER TABLE State DROP COLUMN OpinionStrategyID, DROP INDEX fk_State_Perspective1"),
         PATCH_3("ALTER TABLE ActivePerspectives DROP INDEX UserID_UNIQUE"),
         PATCH_4("ALTER TABLE ActivePerspectives ADD UNIQUE INDEX PRIMARY2 (UserID ASC, PerspectiveID ASC)"),
+        PATCH_5("ALTER TABLE Perspective ADD UNIQUE INDEX Unique_Name_Owner (Name ASC, OwnerID ASC)" ),
         ; /* @formatter:on */
         private final String theText;
 

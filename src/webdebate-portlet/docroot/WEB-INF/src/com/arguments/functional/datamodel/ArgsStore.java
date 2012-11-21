@@ -44,6 +44,9 @@ public interface ArgsStore
 
     // ------------------------------------------------------------------------
     public abstract long getNrOfOpinions();
+    
+    // ------------------------------------------------------------------------
+    public abstract long getNrOfPerspectives();
 
     // ------------------------------------------------------------------------
     public abstract ArgsState selectState(ArgumentsUserId aUser);
@@ -63,6 +66,9 @@ public interface ArgsStore
 
     // ------------------------------------------------------------------------
     public abstract ThesisId selectLastTestThesisId();
+
+    // ------------------------------------------------------------------------
+    public abstract PerspectiveId selectLastTestPerspectiveId();
 
     // ------------------------------------------------------------------------
     public abstract RelationId selectLastTestRelationId();

@@ -10,6 +10,7 @@ import com.arguments.functional.datamodel.ArgsWriteStore;
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.datamodel.Perspective;
 import com.arguments.functional.datamodel.PerspectiveId;
+import com.arguments.functional.datamodel.PerspectiveName;
 import com.arguments.functional.datamodel.RelationId;
 import com.arguments.functional.datamodel.Relevance;
 import com.arguments.functional.datamodel.ThesisId;
@@ -120,9 +121,20 @@ public class SecureArgsSQLStore extends ArgsSQLStore implements ArgsWriteStore
             ThesisText aThesisText,
             ThesisOpinion aThesisOpinion)
     {
-        return addThesis2(aThesisText, aThesisOpinion);
+        checkCanWrite();
+        ThesisId myThesisId = newThesis(aThesisText);
+        insertThesisOpinion(myThesisId, aThesisOpinion);
+        return myThesisId;
     }
 
+    // ------------------------------------------------------------------------
+    @Override
+    public PerspectiveId addPerspective(PerspectiveName aNewPerspectiveName)
+    {
+        checkCanWrite();
+        return newPerspective(aNewPerspectiveName);
+    }
+    
     // ------------------------------------------------------------------------
     @Override
     public ThesisId newPremise(
@@ -188,17 +200,6 @@ public class SecureArgsSQLStore extends ArgsSQLStore implements ArgsWriteStore
     }
 
     // ------------------------------------------------------------------------
-    private ThesisId addThesis2(
-            ThesisText aNewThesisText,
-            ThesisOpinion aThesisOpinion)
-    {
-        checkCanWrite();
-        ThesisId myThesisId = newThesis(aNewThesisText);
-        insertThesisOpinion(myThesisId, aThesisOpinion);
-        return myThesisId;
-    }
-
-    // ------------------------------------------------------------------------
     private void setLinkInfo2(
             RelationId aRelationId,
             Relevance anIfTrueNewRelevance,
@@ -233,6 +234,22 @@ public class SecureArgsSQLStore extends ArgsSQLStore implements ArgsWriteStore
                 ArgsDB.COUNT);
         ArgsQuery.UNLOCK_TABLES.ps().executeQuery();
         return myThesisId;
+    }
+
+    // ------------------------------------------------------------------------
+    private PerspectiveId newPerspective(PerspectiveName aPerspectiveName)
+    {
+        ArgsQuery.LOCK_PERSPECTIVE_WRITE.ps().executeQuery();
+        ArgsDB myQuery = ArgsQuery.INSERT_PERSPECTIVE.ps();
+        myQuery.setPerspectiveName(1, aPerspectiveName);
+        myQuery.setUserId(2, theLoginUser);
+        int myNrOfRowsAffected = myQuery.executeUpdate();
+        assert myNrOfRowsAffected == 1;
+
+        PerspectiveId myPerspectiveId = getPerspectiveId(ArgsQuery.MAX_PERSPECTIVE_ID.ps(),
+                ArgsDB.COUNT);
+        ArgsQuery.UNLOCK_TABLES.ps().executeQuery();
+        return myPerspectiveId;
     }
 
     // ------------------------------------------------------------------------
@@ -282,5 +299,4 @@ public class SecureArgsSQLStore extends ArgsSQLStore implements ArgsWriteStore
                 theWritePerspective);
         }
     }
-    
 }

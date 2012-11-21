@@ -34,6 +34,7 @@ import com.arguments.functional.report.html.UrlContainer;
 import com.arguments.functional.report.pagemodels.PageModelFactory;
 import com.arguments.functional.requeststate.PortalArgsBridge.CgiSource;
 import com.arguments.functional.requeststate.PortalArgsBridge.UpdateStateFlag;
+import com.arguments.functional.store.StoreException;
 import com.arguments.functional.store.TheArgsStore;
 import com.arguments.support.PortletParameterMap;
 import com.arguments.support.ServletParameterMap;
@@ -450,6 +451,43 @@ public class ArgsStatefulRequest_Tester
     }
 
     // ------------------------------------------------------------------------
+    @Test
+    public void insertPerspective()
+    {
+        insertPerspective(ArgumentsUser_Tester.getTestUser2(), "World Bank");
+        insertPerspective(ArgumentsUser_Tester.getTestUser2(), "IMF");
+        insertPerspective(ArgumentsUser_Tester.getTestUser7(), "World Bank");
+        try
+        {
+            insertPerspective(ArgumentsUser_Tester.getTestUser2(), "World Bank");
+        }
+        catch(StoreException anException)
+        {
+            return; // Can't insert second perspective with same name
+        }
+        throw new AssertionError("No exception thrown");
+    }
+    
+    // ------------------------------------------------------------------------
+    /**
+     * insert a perspective
+     */
+    public static PerspectiveId insertPerspective(ArgumentsUser anOwner, String aName)
+    {
+        ArgsStatefulCommand myRequest = getInsertPerspectiveCommand(
+                anOwner, aName);
+
+        long myNrOfPerspectivesBefore = TheArgsStore.i().getNrOfPerspectives();
+        ArgsReadOnlyState myState = myRequest.execute();
+        assert myState.getFirstPerspectiveId().isWritable();
+        TheArgsStore.i(anOwner).updateState(myState);
+        long myNrOfPerspectivesAfter = TheArgsStore.i().getNrOfPerspectives();
+        assert myNrOfPerspectivesAfter == myNrOfPerspectivesBefore + 1;
+        PerspectiveId myPerspectiveId = TheArgsStore.i().selectLastTestPerspectiveId();
+        return myPerspectiveId;
+    }
+
+    // ------------------------------------------------------------------------
     public static ThesisId insertDifferentOpinions()
     {
         return insertOpinion(ArgumentsUser_Tester.getTestUser2(),
@@ -560,6 +598,20 @@ public class ArgsStatefulRequest_Tester
         myRequestMap
                 .put(ArgsRequestKey.NEW_THESIS_TEXT, "This thesis is true.");
         myRequestMap.put(ArgsRequestKey.NEW_THESIS_OPINION, "" + anOpinion);
+
+        Command myRequest = RequestParser.getCommand(myAppUser, myRequestMap);
+
+        return new ArgsStatefulCommand(myRequest, new ArgsState(ThesisId.ONE,
+                RelationId.BONE, myAppUser.getDefaultPerspective()));
+    }
+
+    // ------------------------------------------------------------------------
+    private static ArgsStatefulCommand getInsertPerspectiveCommand(
+            ArgumentsUser myAppUser, String aName)
+    {
+        ProtocolMap myRequestMap = new ProtocolMap();
+        myRequestMap
+                .put(ArgsRequestKey.NEW_PERSPECTIVE_NAME, aName);
 
         Command myRequest = RequestParser.getCommand(myAppUser, myRequestMap);
 

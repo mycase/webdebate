@@ -8,6 +8,7 @@ import static org.junit.Assert.*;
 import com.arguments.application.TheContainerBridge;
 import com.arguments.functional.command.ChangeThesis;
 import com.arguments.functional.command.InsertOpinion;
+import com.arguments.functional.command.InsertPerspective;
 import com.arguments.functional.command.InsertPremise;
 import com.arguments.functional.command.Command;
 import com.arguments.functional.command.InsertThesis;
@@ -19,6 +20,7 @@ import com.arguments.functional.datamodel.ArgsReadOnlyState;
 import com.arguments.functional.datamodel.ArgsRequest;
 import com.arguments.functional.datamodel.ArgumentsUser;
 import com.arguments.functional.datamodel.PerspectiveId;
+import com.arguments.functional.datamodel.PerspectiveName;
 import com.arguments.functional.datamodel.RelationId;
 import com.arguments.functional.datamodel.Relevance;
 import com.arguments.functional.datamodel.ThesisId;
@@ -161,6 +163,9 @@ public class RequestParser
         if (isPresent(ArgsRequestKey.NEW_THESIS_TEXT))
             return getInsertThesis();
 
+        if (isPresent(ArgsRequestKey.NEW_PERSPECTIVE_NAME))
+            return getInsertPerspective();
+
         if (isPresent(ArgsRequestKey.NEW_IF_TRUE_PERCENTAGE_RELEVANCE))
             return getUpdateLink();
         
@@ -234,6 +239,15 @@ public class RequestParser
     }
     
     // ------------------------------------------------------------------------
+    private InsertPerspective getInsertPerspective()
+    {
+        String myNewPerspectiveName = getParameter(ArgsRequestKey.NEW_PERSPECTIVE_NAME);
+
+        return new InsertPerspective(
+                new PerspectiveName(myNewPerspectiveName), theUser);
+    }
+    
+    // ------------------------------------------------------------------------
     private UpdateLink getUpdateLink()
     {
         String myLinkIdText = getParameter(ArgsRequestKey.RELATION_ID);
@@ -295,7 +309,8 @@ public class RequestParser
     private String getParameter(ArgsRequestKey aKey)
     {
         String myUnsafeText = theProtocolMap.get(aKey);
-        assertNotNull(myUnsafeText);
+        assertNotNull("Can't find value for key: " + aKey + " in protocol map with keys: " +
+        theProtocolMap.keySet(), myUnsafeText);
         String myReturnValue = getSafeText(myUnsafeText);
         return myReturnValue;
     }

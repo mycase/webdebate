@@ -18,6 +18,10 @@ public interface ArgsWriteStore extends ArgsStore
             ThesisOpinion aThesisOpinion);
 
     // ------------------------------------------------------------------------
+    public abstract PerspectiveId addPerspective(
+            PerspectiveName aNewPerspectiveName);
+
+    // ------------------------------------------------------------------------
     public abstract void setThesisOpinion(
             ThesisId aThesisId,
             ThesisOpinion aPremiseOpinion);

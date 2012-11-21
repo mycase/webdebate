@@ -28,6 +28,7 @@ public class ArgsRequestKeyAsString{
         theEnum2String.put(ArgsRequestKey.NEW_IF_FALSE_PERCENTAGE_RELEVANCE, "newIfFalseRelevance");
         theEnum2String.put(ArgsRequestKey.NEW_LINK_SOURCE_ID, "newLinkSourceId");
         theEnum2String.put(ArgsRequestKey.NEW_LINK_TARGET_ID, "newLinkTargetId");
+        theEnum2String.put(ArgsRequestKey.NEW_PERSPECTIVE_TEXT, "newPerspectiveText");
         theEnum2String.put(ArgsRequestKey.NEW_THESIS_TEXT, "newThesisText");
         theEnum2String.put(ArgsRequestKey.NEW_THESIS_OPINION, "newThesisOpinion");
         theEnum2String.put(ArgsRequestKey.NEW_THESIS_OPINION2, "newThesisOpinion2");

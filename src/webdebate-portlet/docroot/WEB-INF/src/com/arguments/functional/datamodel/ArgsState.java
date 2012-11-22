@@ -123,10 +123,12 @@ public class ArgsState implements ArgsReadOnlyState
             thePerspectiveIds = new MPerspectiveId(aStateChange.getPerspectiveId());
 
         if (aStateChange.getAddPerspectiveId() != null)
-            thePerspectiveIds.add(aStateChange.getAddPerspectiveId());
+            if (!thePerspectiveIds.contains(aStateChange.getAddPerspectiveId()))
+                thePerspectiveIds.add(aStateChange.getAddPerspectiveId());
         
         if (aStateChange.getRemovePerspectiveId() != null)
-            thePerspectiveIds.remove(aStateChange.getRemovePerspectiveId());
+            if (thePerspectiveIds.contains(aStateChange.getRemovePerspectiveId()))
+                thePerspectiveIds.remove(aStateChange.getRemovePerspectiveId());
     }
 
     // ------------------------------------------------------------------------

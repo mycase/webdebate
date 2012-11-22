@@ -282,18 +282,28 @@ public class ArgsStatefulRequest_Tester
         
         assertEquals(2, myState1_2.getPerspectives().size());
         
+        // adding a second time should have no effect:
+        
+        myRequest.executeAndGetRenderRequest();
+        ArgsState myState1_3 = TheArgsStore.i().selectState(myUser1);
+        assertNotSame(myState1_0a, myState1_3);
+        assertEquals(2, myState1_3.getPerspectives().size());
+        
         // Now remove the first perspective:
         
         ArgsJspRequest myRequest2 =
                 getRemovePerspectiveRequest(myPerspectiveId0);
-        myRequest2.executeAndGetRenderRequest();
 
-        // Re-read the state:
-        ArgsState myState1_3 = TheArgsStore.i().selectState(myUser1);
-        assertNotSame(myState1_0a, myState1_3);
+        myRequest2.executeAndGetRenderRequest();
+        ArgsState myState1_4 = TheArgsStore.i().selectState(myUser1);
+        assertNotSame(myState1_0a, myState1_4);
+        assertEquals(1, myState1_4.getPerspectives().size());
         
-        assertEquals(1, myState1_3.getPerspectives().size());
-        
+        // try second time:
+        myRequest2.executeAndGetRenderRequest();
+        ArgsState myState1_5 = TheArgsStore.i().selectState(myUser1);
+        assertNotSame(myState1_0a, myState1_5);
+        assertEquals(1, myState1_5.getPerspectives().size());
 }
 
     // ------------------------------------------------------------------------

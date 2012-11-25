@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 5.5.25a, for Linux (i686)
 --
--- Host: localhost    Database: testarguments
+-- Host: localhost    Database: demoarguments
 -- ------------------------------------------------------
 -- Server version	5.5.25a
 
@@ -32,7 +32,7 @@ CREATE TABLE `ActivePerspectives` (
   KEY `fk_ActivePerspectives_User1` (`UserID`),
   CONSTRAINT `fk_ActivePerspectives_Perspective1` FOREIGN KEY (`PerspectiveID`) REFERENCES `Perspective` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_ActivePerspectives_User1` FOREIGN KEY (`UserID`) REFERENCES `User` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=265 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=291 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `ActivePerspectives` (
 
 LOCK TABLES `ActivePerspectives` WRITE;
 /*!40000 ALTER TABLE `ActivePerspectives` DISABLE KEYS */;
-INSERT INTO `ActivePerspectives` VALUES (264,66,676),(263,67,677);
+INSERT INTO `ActivePerspectives` VALUES (281,66,676),(282,66,677),(290,67,676),(289,67,677);
 /*!40000 ALTER TABLE `ActivePerspectives` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -63,7 +63,7 @@ CREATE TABLE `Opinions` (
   KEY `fk_Opinions_Perspective1` (`UserID`),
   CONSTRAINT `fk_Opinions_Perspective1` FOREIGN KEY (`UserID`) REFERENCES `Perspective` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Opinions_Statements1` FOREIGN KEY (`StatementID`) REFERENCES `Statements` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=679 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=686 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -72,7 +72,7 @@ CREATE TABLE `Opinions` (
 
 LOCK TABLES `Opinions` WRITE;
 /*!40000 ALTER TABLE `Opinions` DISABLE KEYS */;
-INSERT INTO `Opinions` VALUES (678,669,676,1);
+INSERT INTO `Opinions` VALUES (678,669,676,1),(679,664,677,0),(680,669,677,1),(681,664,676,1),(682,670,677,0),(683,670,676,0),(684,671,676,1),(685,671,677,1);
 /*!40000 ALTER TABLE `Opinions` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -151,7 +151,7 @@ CREATE TABLE `Relation` (
   CONSTRAINT `fk_Relation_Statements` FOREIGN KEY (`Statement1ID`) REFERENCES `Statements` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Relation_Statements1` FOREIGN KEY (`Statement2ID`) REFERENCES `Statements` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_Relation_User1` FOREIGN KEY (`OwnerID`) REFERENCES `User` (`ID`) ON DELETE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=304 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=306 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -160,7 +160,7 @@ CREATE TABLE `Relation` (
 
 LOCK TABLES `Relation` WRITE;
 /*!40000 ALTER TABLE `Relation` DISABLE KEYS */;
-INSERT INTO `Relation` VALUES (303,669,664,NULL,0.3,66,0);
+INSERT INTO `Relation` VALUES (303,669,664,NULL,0.3,66,0),(304,670,664,NULL,-0.5,67,0.5),(305,671,670,NULL,-1,66,0);
 /*!40000 ALTER TABLE `Relation` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -210,7 +210,7 @@ CREATE TABLE `State` (
 
 LOCK TABLES `State` WRITE;
 /*!40000 ALTER TABLE `State` DISABLE KEYS */;
-INSERT INTO `State` VALUES (66,664),(67,664);
+INSERT INTO `State` VALUES (67,664),(66,670);
 /*!40000 ALTER TABLE `State` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -229,7 +229,7 @@ CREATE TABLE `Statements` (
   PRIMARY KEY (`ID`),
   KEY `fk_Statements_User1` (`Owner`),
   CONSTRAINT `fk_Statements_User1` FOREIGN KEY (`Owner`) REFERENCES `User` (`ID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=670 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=672 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -238,7 +238,7 @@ CREATE TABLE `Statements` (
 
 LOCK TABLES `Statements` WRITE;
 /*!40000 ALTER TABLE `Statements` DISABLE KEYS */;
-INSERT INTO `Statements` VALUES (664,'Charles Darwin was a eugenicist',NULL,66),(669,'Some of Charles Darwin\'s relatives were Eugenicists.',NULL,66);
+INSERT INTO `Statements` VALUES (664,'Charles Darwin was a eugenicist',NULL,66),(669,'Some of Charles Darwin\'s relatives were Eugenicists.',NULL,66),(670,'Charles Darwin never said \"Survival of the fittest\"',NULL,67),(671,'second and third line from the bottom of page 89\r\nhere:\r\nhttp://darwin-online.org.uk/converted/pdf/1868_Variation_F877.2.pdf',NULL,66);
 /*!40000 ALTER TABLE `Statements` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -280,4 +280,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-11-24 13:30:30
+-- Dump completed on 2012-11-25 11:49:57

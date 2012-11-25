@@ -2,6 +2,7 @@
 .project
 .classpath
 .settings*
+doc/images*
 src/webdebate-portlet/docroot/WEB-INF/classes*
 src/webdebate-portlet/docroot/css/.sass-cache/*
 *~

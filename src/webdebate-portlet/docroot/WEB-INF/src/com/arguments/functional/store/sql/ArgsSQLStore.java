@@ -48,7 +48,7 @@ public class ArgsSQLStore implements ArgsStore
         executePatchesHigherThan(myMaxPatch);
     }
 
-    private static Patcher[] myPatches = new Patcher[]{
+    private static Patcher[] thePatches = new Patcher[]{
         new Patcher(){
             @Override
             public void execute(){patch0();}},
@@ -72,10 +72,10 @@ public class ArgsSQLStore implements ArgsStore
     // ------------------------------------------------------------------------
     public static void executePatchesHigherThan(PatchId aI)
     {
-        for (int i = aI.getLongID() +1; i< myPatches.length; i++)
+        for (int i = aI.getLongID() +1; i< thePatches.length; i++)
         {
             Logger.logAlways("Executing db patch " + i);
-            myPatches[i].execute();
+            thePatches[i].execute();
             ArgsQuery.INSERT_PATCH.ps()
                 .setPatchId(1, new PatchId(i))
                 .executeUpdate();

@@ -69,6 +69,7 @@ public class Deployment
         theDbUserName = myDeploymentProperties.getProperty("dbUserName");
         theDbPassword = myDeploymentProperties.getProperty("dbPassword");
         assertNotNull(theDbUrl);
+        Logger.logAlways("host: " + theDbUrl + ", name = " + theDbName);
     }
     
     // ------------------------------------------------------------------------
